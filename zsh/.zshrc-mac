@@ -1,0 +1,291 @@
+# -*- mode: shell-script -*-
+################################################################################
+#### zsh settings for Mac
+#### ====================
+#### 
+################################################################################
+
+
+################################################################################
+### Path and environment
+################################################################################
+
+
+fpath=($HOME/.zsh-prompts /usr/local/share/zsh-completions /usr/share/zsh/site-functions /usr/share/zsh/4.3.9/functions)
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
+LC_ALL='en_US.UTF-8'
+LANG='en_US.UTF-8'
+LC_CTYPE=C
+
+if [[ $platform == "macmini" ]]; then
+    export PATH="$HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/ruby/1.9.2-p180/bin:/usr/local/Cellar/git/1.7.3.4/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+    DISPLAY=:0
+else
+    export PATH="$HOME/bin:/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p125/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.7.8/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+fi
+
+
+################################################################################
+### Functions and aliases
+################################################################################
+
+
+alias bemacs='emacs -nw -f cjp-erc-bitlbee'
+alias fget='get_flash_videos'
+
+## iPlayer
+
+alias gi=get_iplayer
+alias gig='get_iplayer -g'
+
+## git
+
+alias git-backup='cd ~/ && tar cjvf ~/Documents/Reference/Backups/git-backup-`date "+%Y%m%d%H%M"`.tbz .git'
+alias gits='git st | less'
+
+# View current wording directory in Emacs Dired window
+alias cde='emacsclient -e "(dired \"$(pwd)\")" && osascript -e "tell application \"Emacs\" to activate" 2>/dev/null'
+
+## Suffix aliases
+alias -s flv='open -a Movist.app'
+alias -s avi='open -a Movist.app'
+alias -s mp4='open -a Movist.app'
+alias -s mov='open -a Movist.app'
+alias -s m4v='open -a Movist.app'
+alias -s pdf='open -a Preview.app'
+alias -s jpg='open -a Preview.app'
+alias -s png='open -a Preview.app'
+alias -s htm='open -a Google\ Chrome.app'
+alias -s html='open -a Google\ Chrome.app'
+alias -s txt=e
+
+## gpg
+
+cjp_gpg_key=BAD246F9
+
+_start-gpg-agent () {
+    time=${1:-'1200'}                # 1200 seconds, 20 minutes
+    eval $(gpg-agent -q --daemon --write-env-file "$HOME/.gpg-agent-info" \
+        --default-cache-ttl "$time" --pinentry-program /usr/local/bin/pinentry \
+        --max-cache-ttl 86400)      # 24 hours
+    source "$HOME/.zshrc"           # Update environment variables
+}
+
+kill-gpg-agent () {
+    printf "Killing gpg agents... "
+    killall gpg-agent
+    ps aux | grep -i gpg | grep -v grep
+    printf "done.\n"
+}
+
+inform-emacs-gpg-agent () {
+    agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
+    emacsclient -e "(setenv \"GPG_AGENT_INFO\" \"$agent_id\")"
+}
+
+start-gpg-agent () {
+    time=${1:-'20'}             # Request key cache time in minutes
+    time_sec=$(($time * 60))
+    _start-gpg-agent "$time_sec" && inform-emacs-gpg-agent
+    starter_file="/tmp/gpg-agent-starter"
+    sig_starter_file="$starter_file.gpg"
+    gpg_key=${1:-"$cjp_gpg_key"}
+    touch "$starter_file"
+    if [[ -f "$sig_starter_file" ]]; then
+        rm "$sig_starter_file"
+    fi
+    gpg -esr "$gpg_key" -o "$sig_starter_file" "$starter_file"
+    if [[ -f "$starter_file" ]]; then
+        rm "$starter_file"
+    fi
+    gpg -d -o "$starter_file" "$sig_starter_file"
+    if [[ -f "$starter_file" ]]; then
+        rm "$starter_file"
+    fi
+    if [[ -f "$sig_starter_file" ]]; then
+        rm "$sig_starter_file"
+    fi
+}
+
+## Miscellaneous
+
+finder () {
+    z $@ && open .
+}
+
+gen-cal-year () {
+    year=${1:-$(date '+%Y')}
+    pcal -b all -S -P a4 -t Times-Bold/24 -d Times-Bold/14 -F Monday ${year} \
+        | ps2pdf - ${year}a.pdf &&
+    pdfcrop --margins 10 ${year}a.pdf ${year}.pdf &&
+    rm ${year}a.pdf
+}
+
+youtube-rss () {
+    printf "http://www.youtube.com/rss/user/$1/videos.rss\n" | tee >(pbcopy)
+}
+
+# Format 'show SxxExx.avi' filename nicely
+nice_titles () {
+    if [[ -f ".DS_Store" ]]; then
+        rm .DS_Store
+    fi
+    rename 's/\.(?!avi|mkv)/ /g' "$@"
+    rename 's/^(.+)([Ss]\d{1,2}[Ee]\d{1,2}(-\d{1,2})?)(.+\.(avi|mkv))/$2 $1 $4/' "$@"
+    rename 's/ +/ /g' "$@"
+    rename -f 's/s(\d{1,2})e(\d{1,2})/S$1E$2/' "$@"
+}
+
+# Move files in directory $1 up a level, remove empty directory
+move_up () {
+    if [[ -d "$1" ]]; then
+        cd "$1" && mv * ../ && cd ../
+        find . -type d -empty -print0 | xargs -0I'{}' rm -r {}
+    fi
+}
+
+# Generates base64 random password (remove -m flag for other symbols)
+ranpwd () {
+    cat /dev/random | guuencode -m - | head -n 2 | tail -n 1
+}
+
+# Quicklook a file
+alias ql='qlmanage -p 2>/dev/null'
+
+# Eject disc drive
+alias maceject='drutil eject'
+
+# Perhaps these commands are easier to remember?
+alias maccopy=pbcopy
+alias macpaste=pbpaste
+
+# Open file with default text editor
+alias macedit='open -t'
+
+# Aliases for video files
+alias vlc='open -a VLC'
+alias movist='open -a Movist'
+alias qtime='open -a Quicktime\ Player'
+
+# Open a man page in Preview, nicely formatted
+macman () {
+    man -t "${1}" | open -f -a /Applications/Preview.app
+}
+
+# Quit application(s)
+macquit () {
+    for app in $*; do
+        osascript -e 'quit app "'$app'"' 2>/dev/null
+    done
+}
+
+# Re-launch application(s)
+macrelaunch () {
+    for app in $*; do
+        osascript -e 'quit app "'$app'"' 2>/dev/null;
+        sleep 2;
+        open -a $app
+    done
+}
+
+# Search with spotlight
+macfind() {
+    mdfind -live "$1"
+}
+
+# Mount a .dmg file; specify downloaded_file.dmg
+macmount() {
+    hdiutil mount "$1"
+}
+
+# Unmount a drive; Specify the drive name as it appears in Finder (no '.dmg')
+macunmount() {
+    for drive in "$@"; do
+        hdiutil detach "/Volumes/$drive"
+    done
+}
+
+# Serve current directory as web page on port 8080
+macserve() {
+    python -m SimpleHTTPServer 8080
+}
+
+macsleep() {
+    osascript -e 'tell application "System Events" to sleep' > /dev/null 2>&1
+}
+
+macrestart() {
+    sudo shutdown -r now
+}
+
+macshutdown() {
+    sudo shutdown -h now
+}
+
+# Print almost any document as a PDF
+# (if it has a correctly defined MIME type)
+macprintpdf() {
+    cupsfilter "$1" > "$1.pdf"
+}
+
+# Markdown syntax: insert 4 spaces at the start of each line
+reddit() {
+    pbpaste | sed 's/^/    /g' | pbcopy
+}
+
+# Encrypt clipboard contents
+encclipboard() {
+    pbpaste | gpg -ea | pbcopy
+}
+
+# Decrypt clipboard contents
+decclipboard() {
+    pbpaste | gpg -d | pbcopy
+}
+
+# Sign plaintext in clipboard. Useful for email messages, etc.
+gpgsign() {
+    pbpaste | gpg --clearsign | pbcopy
+}
+
+
+################################################################################
+### Final setup
+################################################################################
+
+
+if [[ $platform == "macmini" ]]; then
+    starttmux
+fi
+
+## Prompt
+
+# Was using http://aperiodic.net/phil/prompt/prompt.txt
+source ~/.zsh-prompts/prompt_chris1_setup
+
+## gpg agent
+
+if [[ -f "$HOME/.gpg-agent-info" ]]; then
+    source "$HOME/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    GPG_TTY=$(tty)
+    export GPG_TTY
+fi
+
+## fasd
+
+eval "$(fasd --init auto)"
+
+# Defaults
+alias f='fasd -f'        # file
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+
+alias j='fasd_cd -d'
+alias ji='fasd_cd -id'
+alias o='fasd -fe open'
+alias od='fasd -ide open'
+alias oi='fasd -iae open'
