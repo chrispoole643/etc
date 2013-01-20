@@ -185,9 +185,6 @@ source "$HOME/.zsh-history-substring-search.zsh"
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 
-## fasd
-eval "$(fasd --init auto)"
-
 
 ################################################################################
 ### Platform-dependent functions and aliases

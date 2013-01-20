@@ -97,7 +97,7 @@ _start-gpg-agent () {
 ## tmux
 
 _starttmux () {
-    tmux new -d -s "$tmux_name" -n zsh \; neww -d -n ssh \; neww -d -n backup \; attach
+    tmux new -d -s "$tmux_name" -n - \; neww -d -n - \; neww -d -n - \; attach
 }
 
 ## Miscellaneous

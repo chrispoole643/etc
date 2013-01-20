@@ -53,8 +53,8 @@ _start-gpg-agent () {
 ## tmux
 
 _starttmux () {
-    tmux new -d -s main -n main \; splitw -h 'zsh -c htop' \; splitw -v \; selectp -t1 
+    tmux new -d -s main -n - \; splitw -h 'zsh -c htop' \; splitw -v \; selectp -t1 
     tmux neww -n citm 'zsh -c "ssh citm"' \; splitw -h \; selectp -t1 
     tmux neww -n backup \; splitw -h \; selectp -t1 
-    tmux neww -n blueGEN \; splitw -h \; selectp -t1 \; selectw -t1 \; attach
+    tmux neww -n - \; splitw -h \; selectp -t1 \; selectw -t1 \; attach
 }
