@@ -12,12 +12,13 @@
 ################################################################################
 
 
+alias gi=get_iplayer
+alias gig='get_iplayer -g'
+alias fget='get_flash_videos'
+alias gits='git st | less'
 alias kill-ssh-keys='ssh-add -D'
-
 alias femacs='emacs -Q -nw'
-
 alias zz="source $HOME/.zshrc"
-
 alias e='emacsclient'
 alias diffs='diff -s'
 alias ll="ls -lh"
@@ -26,8 +27,18 @@ alias lsd='gls -1 -X --group-directories-first'
 alias div='dirs -v'
 alias getip='curl ifconfig.me'
 alias get='curl -C - -OL'
-
 alias st=starttmux
+
+# Defaults
+alias f='fasd -f'        # file
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+
+alias j='fasd_cd -d'
+alias ji='fasd_cd -id'
 
 # Return a list of all sub-directories (recursively), together with how many
 # files each one contains. Sort to put directories with the most files at the
@@ -36,24 +47,64 @@ alias filesindirs='find . -type d | while read dir; do; echo "$dir" : $(find "$d
 
 
 ################################################################################
+### Variables
+################################################################################
+
+tmux_name=main
+
+
+
+################################################################################
 ### Functions
 ################################################################################
 
 
-## tmux
+## gpg
 
-_starttmux () {
-    name=${1:='main'}
-    tmux new -d -s "$name" -n zsh \; neww -d -n ssh \; neww -d -n backup \; attach
+kill-gpg-agent () {
+    printf "Killing gpg agents... "
+    killall gpg-agent
+    ps aux | grep -i gpg | grep -v grep
+    printf "done.\n"
 }
 
+inform-emacs-gpg-agent () {
+    agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
+    emacsclient -e "(setenv \"GPG_AGENT_INFO\" \"$agent_id\")"
+}
+
+start-gpg-agent () {
+    time=${1:-'20'}             # Request key cache time in minutes
+    time_sec=$(($time * 60))
+    _start-gpg-agent "$time_sec" && inform-emacs-gpg-agent
+    starter_file="/tmp/gpg-agent-starter"
+    sig_starter_file="$starter_file.gpg"
+    gpg_key=${1:-"$cjp_gpg_key"}
+    touch "$starter_file"
+    if [[ -f "$sig_starter_file" ]]; then
+        rm "$sig_starter_file"
+    fi
+    gpg -esr "$gpg_key" -o "$sig_starter_file" "$starter_file"
+    if [[ -f "$starter_file" ]]; then
+        rm "$starter_file"
+    fi
+    gpg -d -o "$starter_file" "$sig_starter_file"
+    if [[ -f "$starter_file" ]]; then
+        rm "$starter_file"
+    fi
+    if [[ -f "$sig_starter_file" ]]; then
+        rm "$sig_starter_file"
+    fi
+}
+
+## tmux
+
 starttmux () {
-    name=${1:='main'}
     # If we're not in tmux, and session exists
-    if $(tmux has -t "$name" > /dev/null 2>&1) && [[ "$TMUX" == "" ]]; then
-        tmux attach -d -t "$name"
+    if $(tmux has -t "$tmux_name" > /dev/null 2>&1) && [[ "$TMUX" == "" ]]; then
+        tmux attach -d -t "$tmux_name"
     elif [[ "$TMUX" == "" ]]; then
-        _starttmux "$name"
+        _starttmux "$tmux_name"
     fi
 }
 
@@ -193,3 +244,22 @@ bz22xz () {
         fi
     done
 }
+
+
+################################################################################
+### Final setup
+################################################################################
+
+
+## Prompt
+
+source ~/.zsh-prompts/prompt_chris1_setup
+
+## gpg agent
+
+if [[ -f "$HOME/.gpg-agent-info" ]]; then
+    source "$HOME/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    GPG_TTY=$(tty)
+    export GPG_TTY
+fi

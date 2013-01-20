@@ -1,6 +1,6 @@
 # -*- mode: shell-script -*-
 ################################################################################
-#### zsh settings for linux
+#### zsh settings for Linux
 #### ======================
 #### 
 ################################################################################
@@ -15,16 +15,32 @@ export PATH="/home/chrispoole/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/
 
 
 ################################################################################
-### Functions and aliases
+### Aliases
 ################################################################################
 
 
 alias open=gnome-open
 alias cde='emacsclient -e "(dired \"$(pwd)\")"'
 
-## gpg
+alias o='fasd -fe gnome-open'
+alias od='fasd -ide gnome-open'
+alias oi='fasd -iae gnome-open'
+
+
+################################################################################
+### Variables
+################################################################################
+
 
 cjp_gpg_key=1DE85A0C
+
+
+################################################################################
+### Functions
+################################################################################
+
+
+## gpg
 
 _start-gpg-agent () {
     time=${1:-'1200'}                # 1200 seconds, 20 minutes
@@ -34,41 +50,7 @@ _start-gpg-agent () {
     source "$HOME/.zshrc"           # Update environment variables
 }
 
-kill-gpg-agent () {
-    printf "Killing gpg agents... "
-    killall gpg-agent
-    ps aux | grep -i gpg | grep -v grep
-    printf "done.\n"
-}
-
-inform-emacs-gpg-agent () {
-    agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
-    emacsclient -e "(setenv \"GPG_AGENT_INFO\" \"$agent_id\")"
-}
-
-start-gpg-agent () {
-    time=${1:-'20'}             # Request key cache time in minutes
-    time_sec=$(($time * 60))
-    _start-gpg-agent "$time_sec" && inform-emacs-gpg-agent
-    starter_file="/tmp/gpg-agent-starter"
-    sig_starter_file="$starter_file.gpg"
-    gpg_key=${1:-"$cjp_gpg_key"}
-    touch "$starter_file"
-    if [[ -f "$sig_starter_file" ]]; then
-        rm "$sig_starter_file"
-    fi
-    gpg -esr "$gpg_key" -o "$sig_starter_file" "$starter_file"
-    if [[ -f "$starter_file" ]]; then
-        rm "$starter_file"
-    fi
-    gpg -d -o "$starter_file" "$sig_starter_file"
-    if [[ -f "$starter_file" ]]; then
-        rm "$starter_file"
-    fi
-    if [[ -f "$sig_starter_file" ]]; then
-        rm "$sig_starter_file"
-    fi
-}
+## tmux
 
 _starttmux () {
     tmux new -d -s main -n main \; splitw -h 'zsh -c htop' \; splitw -v \; selectp -t1 
@@ -76,31 +58,3 @@ _starttmux () {
     tmux neww -n backup \; splitw -h \; selectp -t1 
     tmux neww -n blueGEN \; splitw -h \; selectp -t1 \; selectw -t1 \; attach
 }
-
-
-################################################################################
-### Final setup
-################################################################################
-
-
-## fasd
-
-eval "$(fasd --init auto)"
-
-# Defaults
-alias f='fasd -f'        # file
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-
-alias j='fasd_cd -d'
-alias ji='fasd_cd -id'
-alias o='fasd -fe gnome-open'
-alias od='fasd -ide gnome-open'
-alias oi='fasd -iae gnome-open'
-
-## Prompt
-
-source ~/.zsh-prompts/prompt_chris1_setup

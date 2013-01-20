@@ -26,22 +26,11 @@ fi
 
 
 ################################################################################
-### Functions and aliases
+### Aliases
 ################################################################################
 
 
 alias bemacs='emacs -nw -f cjp-erc-bitlbee'
-alias fget='get_flash_videos'
-
-## iPlayer
-
-alias gi=get_iplayer
-alias gig='get_iplayer -g'
-
-## git
-
-alias git-backup='cd ~/ && tar cjvf ~/Documents/Reference/Backups/git-backup-`date "+%Y%m%d%H%M"`.tbz .git'
-alias gits='git st | less'
 
 # View current wording directory in Emacs Dired window
 alias cde='emacsclient -e "(dired \"$(pwd)\")" && osascript -e "tell application \"Emacs\" to activate" 2>/dev/null'
@@ -59,9 +48,43 @@ alias -s htm='open -a Google\ Chrome.app'
 alias -s html='open -a Google\ Chrome.app'
 alias -s txt=e
 
-## gpg
+# Quicklook a file
+alias ql='qlmanage -p 2>/dev/null'
+
+# Eject disc drive
+alias maceject='drutil eject'
+
+# Perhaps these commands are easier to remember?
+alias maccopy=pbcopy
+alias macpaste=pbpaste
+
+# Open file with default text editor
+alias macedit='open -t'
+
+# Aliases for video files
+alias vlc='open -a VLC'
+alias movist='open -a Movist'
+alias qtime='open -a Quicktime\ Player'
+
+alias o='fasd -fe open'
+alias od='fasd -ide open'
+alias oi='fasd -iae open'
+
+
+################################################################################
+### Variables
+################################################################################
+
 
 cjp_gpg_key=BAD246F9
+
+
+################################################################################
+### Functions
+################################################################################
+
+
+## gpg
 
 _start-gpg-agent () {
     time=${1:-'1200'}                # 1200 seconds, 20 minutes
@@ -71,40 +94,10 @@ _start-gpg-agent () {
     source "$HOME/.zshrc"           # Update environment variables
 }
 
-kill-gpg-agent () {
-    printf "Killing gpg agents... "
-    killall gpg-agent
-    ps aux | grep -i gpg | grep -v grep
-    printf "done.\n"
-}
+## tmux
 
-inform-emacs-gpg-agent () {
-    agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
-    emacsclient -e "(setenv \"GPG_AGENT_INFO\" \"$agent_id\")"
-}
-
-start-gpg-agent () {
-    time=${1:-'20'}             # Request key cache time in minutes
-    time_sec=$(($time * 60))
-    _start-gpg-agent "$time_sec" && inform-emacs-gpg-agent
-    starter_file="/tmp/gpg-agent-starter"
-    sig_starter_file="$starter_file.gpg"
-    gpg_key=${1:-"$cjp_gpg_key"}
-    touch "$starter_file"
-    if [[ -f "$sig_starter_file" ]]; then
-        rm "$sig_starter_file"
-    fi
-    gpg -esr "$gpg_key" -o "$sig_starter_file" "$starter_file"
-    if [[ -f "$starter_file" ]]; then
-        rm "$starter_file"
-    fi
-    gpg -d -o "$starter_file" "$sig_starter_file"
-    if [[ -f "$starter_file" ]]; then
-        rm "$starter_file"
-    fi
-    if [[ -f "$sig_starter_file" ]]; then
-        rm "$sig_starter_file"
-    fi
+_starttmux () {
+    tmux new -d -s "$tmux_name" -n zsh \; neww -d -n ssh \; neww -d -n backup \; attach
 }
 
 ## Miscellaneous
@@ -148,24 +141,6 @@ move_up () {
 ranpwd () {
     cat /dev/random | guuencode -m - | head -n 2 | tail -n 1
 }
-
-# Quicklook a file
-alias ql='qlmanage -p 2>/dev/null'
-
-# Eject disc drive
-alias maceject='drutil eject'
-
-# Perhaps these commands are easier to remember?
-alias maccopy=pbcopy
-alias macpaste=pbpaste
-
-# Open file with default text editor
-alias macedit='open -t'
-
-# Aliases for video files
-alias vlc='open -a VLC'
-alias movist='open -a Movist'
-alias qtime='open -a Quicktime\ Player'
 
 # Open a man page in Preview, nicely formatted
 macman () {
@@ -247,45 +222,3 @@ decclipboard() {
 gpgsign() {
     pbpaste | gpg --clearsign | pbcopy
 }
-
-
-################################################################################
-### Final setup
-################################################################################
-
-
-if [[ $platform == "macmini" ]]; then
-    starttmux
-fi
-
-## Prompt
-
-# Was using http://aperiodic.net/phil/prompt/prompt.txt
-source "$HOME/.zsh-prompts/prompt_chris1_setup"
-
-## gpg agent
-
-if [[ -f "$HOME/.gpg-agent-info" ]]; then
-    source "$HOME/.gpg-agent-info"
-    export GPG_AGENT_INFO
-    GPG_TTY=$(tty)
-    export GPG_TTY
-fi
-
-## fasd
-
-eval "$(fasd --init auto)"
-
-# Defaults
-alias f='fasd -f'        # file
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-
-alias j='fasd_cd -d'
-alias ji='fasd_cd -id'
-alias o='fasd -fe open'
-alias od='fasd -ide open'
-alias oi='fasd -iae open'

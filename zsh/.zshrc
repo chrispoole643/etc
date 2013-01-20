@@ -14,7 +14,7 @@
 export PAGER=less
 export EDITOR='emacsclient'
 
-HISTFILE=~/.zhistory
+HISTFILE="$HOME/.zhistory"
 HISTSIZE=3000
 SAVEHIST=3000
 
@@ -179,30 +179,36 @@ zstyle ':completion:*' auto-description 'specify: %d'
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.zsh-highlighters"
 
-source ~/.zsh-syntax-highlighting.zsh
-source ~/.zsh-history-substring-search.zsh
+source "$HOME/.zsh-syntax-highlighting.zsh"
+source "$HOME/.zsh-history-substring-search.zsh"
 
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 
+## fasd
+eval "$(fasd --init auto)"
+
 
 ################################################################################
-### Platform detection
+### Platform-dependent functions and aliases
 ################################################################################
 
 
 if [ ${OSTYPE%%.*} = "darwin10" ]; then
-    if [ -f ~/.macmini ]; then
+    if [ -f "$HOME/.macmini" ]; then
         platform="macmini"
     fi
-    source ~/.zshrc-mac
+    source "$HOME/.zshrc-mac"
 elif [ "$OSTYPE" = "linux-gnu" ]; then
     platform="linux"
-    source ~/.zshrc-linux
+    source "$HOME/.zshrc-linux"
 fi
 
 ## Load functions common to mac and linux
+if [ -f "$HOME/.zshrc-common" ]; then
+    . "$HOME/.zshrc-common"
+fi
 
-if [ -f ~/.common-functions ]; then
-    . ~/.common-functions
+if [[ $platform == "macmini" ]]; then
+    starttmux
 fi
