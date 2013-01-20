@@ -361,8 +361,9 @@ the kill ring."
 (defun gtd-clean-project-name (project-name)
   "Return PROJECT-NAAME with `/' turned into `_'. Currently does
 nothing, just returns PROJECT-NAME."
-  ;; (replace-regexp-in-string "[/:]" "_" project-name)
-  project-name)
+  (replace-regexp-in-string "[/:]" "_" project-name)
+  ;; project-name
+  )
 
 (defun gtd-get-project-name ()
   "Return cleaned project name on current line."

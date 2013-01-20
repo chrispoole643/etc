@@ -372,4 +372,5 @@ word is always capitalized."
   "Set frame font (either FONT or by default `Menlo') to SIZE."
   (interactive "sFont size: ")
   (if (>= emacs-major-version 23)
-      (set-frame-font (concat (or font "Menlo") "-" size))))
+      (set-frame-font (concat (or font (if macosxp "Menlo" "Monospace"))
+                              "-" size))))
