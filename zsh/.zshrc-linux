@@ -20,6 +20,7 @@ export PATH="/home/chrispoole/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/
 
 
 alias open=gnome-open
+alias cde='emacsclient -e "(dired \"$(pwd)\")"'
 
 ## gpg
 
@@ -69,50 +70,12 @@ start-gpg-agent () {
     fi
 }
 
-# ## Pacman aliases
-
-# # sudo pacman -Syu by typing pacup (sudo must be installed and configured first)
-# alias pacup="sudo pacman -Syu"
-
-# # sudo pacman -S by typing pac
-# alias pac="sudo pacman -S"
-
-# alias pacrem="sudo pacman -Rsn"
-
-# alias pacinfo="pacman -Si"
-
-# alias pacclean="sudo pacman -Sc"
-
-# ## Yaourt aliases
-
-# # sudo yaourt -S by typing yrt
-# alias yac="yaourt -S --aur"
-
-# alias yacrem="yaourt -Rsn --aur"
-
-# alias yacinfo="yaourt -Si --aur"
-
-# alias yacup="yaourt -Syu --aur"
-
-# pacstore () {
-#     pacman -Qqe | grep -v "$(pacman -Qmq)" >| ~/Documents/Reference/pkglist-arch
-# }
-
-# # also quite useful
-# pacsearch () {
-# 		echo "Local packages:"
-# 		pacman -Qs "$1"
-# 		echo "Remote packages:"
-# 		pacman -Ss "$1"
-# }
-
-# # also quite useful
-# yacsearch () {
-#     echo "Local packages:"
-#     yaourt --aur -Qs $1
-#     echo "Remote packages:"
-#     yaourt --aur -Ss $1
-# }
+_starttmux () {
+    tmux new -d -s main -n main \; splitw -h 'zsh -c htop' \; splitw -v \; selectp -t1 
+    tmux neww -n citm 'zsh -c "ssh citm"' \; splitw -h \; selectp -t1 
+    tmux neww -n backup \; splitw -h \; selectp -t1 
+    tmux neww -n blueGEN \; splitw -h \; selectp -t1 \; selectw -t1 \; attach
+}
 
 
 ################################################################################
@@ -132,9 +95,9 @@ alias d='fasd -d'        # directory
 alias sd='fasd -sid'     # interactive directory selection
 alias sf='fasd -sif'     # interactive file selection
 
-alias j='fasd_cd -id'
+alias j='fasd_cd -d'
 alias ji='fasd_cd -id'
-alias o='fasd -ife gnome-open'
+alias o='fasd -fe gnome-open'
 alias od='fasd -ide gnome-open'
 alias oi='fasd -iae gnome-open'
 

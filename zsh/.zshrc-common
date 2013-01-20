@@ -1,0 +1,195 @@
+# -*- mode: shell-script -*-
+################################################################################
+#### Common functions and aliases
+#### ============================
+####
+#### Functions and aliases that work on mac and linux machines
+################################################################################
+
+
+################################################################################
+### Aliases
+################################################################################
+
+
+alias kill-ssh-keys='ssh-add -D'
+
+alias femacs='emacs -Q -nw'
+
+alias zz="source $HOME/.zshrc"
+
+alias e='emacsclient'
+alias diffs='diff -s'
+alias ll="ls -lh"
+alias la="ls -a1"
+alias lsd='gls -1 -X --group-directories-first'
+alias div='dirs -v'
+alias getip='curl ifconfig.me'
+alias get='curl -C - -OL'
+
+alias st=starttmux
+
+# Return a list of all sub-directories (recursively), together with how many
+# files each one contains. Sort to put directories with the most files at the
+# bottom
+alias filesindirs='find . -type d | while read dir; do; echo "$dir" : $(find "$dir" -type f | wc -l); done | sort -k2 -t ":" -n'
+
+
+################################################################################
+### Functions
+################################################################################
+
+
+## tmux
+
+_starttmux () {
+    name=${1:='main'}
+    tmux new -d -s "$name" -n zsh \; neww -d -n ssh \; neww -d -n backup \; attach
+}
+
+starttmux () {
+    name=${1:='main'}
+    # If we're not in tmux, and session exists
+    if $(tmux has -t "$name" > /dev/null 2>&1) && [[ "$TMUX" == "" ]]; then
+        tmux attach -d -t "$name"
+    elif [[ "$TMUX" == "" ]]; then
+        _starttmux "$name"
+    fi
+}
+
+tc () {
+    bufnum=${1:-'0'}
+    tmux showb -b"$bufnum" | pbcopy
+    if [[ "$TMUX" == "" ]]; then
+        tmux attach
+    fi
+}
+
+## Miscellaneous
+
+getfiles () {
+    curl -SL "$2" | grep -Eoh "\"[^\"]+?\.$1\"" | uniq | \
+        xargs -n1 -P2 curl -C - -LO
+}
+
+# Find options in man pages quickly
+gman () {
+    3=${3:-'0'}
+    man -- $1 | col -bx | if [[ $2 == "" ]]; then
+        grep -Em2 -- "^ +$1"
+    else
+        if [[ $3 -lt 0 ]]; then
+            grep -C${3#-} -- $2
+        else
+            grep -A$3 -- $2
+        fi | more
+    fi
+}
+
+# Symmetric encryption
+cencrypt () {
+    for i in "$@"; do
+        if [ -d "$i" ]; then
+            tar cf - "$i" | gpg -c -z9 --cipher-algo AES256 --compress-algo bzip2 \
+                -o ${i%/##}.tar.gpg && ls -lh "$i"* && srm -rDi ${i%/##}
+        elif [ -f "$i" ]; then
+            gpg -c -z9 --cipher-algo AES256 --compress-algo bzip2 \
+                -o ${i}.gpg "$i" && ls -lh "$i"* && srm -Di "$i"
+        else
+            echo "$i" is not a valid file or directory.
+        fi
+    done
+}
+
+# Encrypt file or folder to myself, tarring folders
+encrypt () {
+    for i in "$@"; do
+        if [ -d "$i" ]; then
+            # Strip following '/'
+            tar cf - "$i" | gpg -er "$cjp_gpg_key" -z9 -o ${i%/##}.tar.gpg && du -hs ${i%/##}* && srm -rDi ${i%/##}
+        elif [ -f "$i" ]; then
+            gpg -er "$cjp_gpg_key" -z9 -o ${i}.gpg "$i" && ls -lh "$i"* && srm -Di "$i"
+        else
+            echo "$i" is not a valid file or directory.
+        fi
+    done
+}
+
+# Encrypt and sign file or folder to myself, tarring folders
+sencrypt () {
+    for i in "$@"; do
+        if [ -d "$i" ]; then
+            # Strip following '/'
+            tar cf - "$i" | gpg -esr "$cjp_gpg_key" -z9 -o ${i%/##}.tar.gpg && du -hs ${i%/##}* && srm -rDi ${i%/##}
+        elif [ -f "$i" ]; then
+            gpg -esr "$cjp_gpg_key" -z9 -o ${i}.gpg "$i" && ls -lh "$i"* && srm -Di "$i"
+        else
+            echo "$i" is not a valid file or directory.
+        fi
+    done
+}
+
+# Decrypts file or folder that has been encrypted with previous method
+decrypt () {
+    for i in "$@"; do
+        if [[ ${i#*.} = "tar.gpg" ]]; then
+            gpg -d "$i" | tar xf - && du -hs ${i%%.*}* && rm -i "$i"
+        elif [ -f "$i" ]; then
+            gpg -o ${i%.gpg} -d "$i" && ls -lh ${i%.gpg}* && rm -i "$i" # Output without .gpg extension
+        else
+            echo "$i" is not a valid file or directory.
+        fi
+    done
+}
+
+# Useful if md5 program not available. Easier syntax for sha1
+omd5 () {
+    echo -n "$1" | openssl dgst -md5
+}
+
+osha1 () {
+    echo -n "$1" | openssl dgst -sha1
+}
+
+# Unzip to a directory
+unzipdir () {
+    unzip -d ${1%.zip} "$1"
+}
+
+# Handy!
+xtr () {
+    for file in "$@"; do
+        if [ -f "$file" ] ; then
+            case "$file" in
+                *.tar.bz2)   tar xvjf "$file"    ;;
+                *.tar.gz)    tar xvzf "$file"    ;;
+                *.tar.xz)    tar xvJf "$file"    ;;
+                *.tar)       tar xvf "$file"     ;;
+                *.tbz2)      tar xvjf "$file"    ;;
+                *.tbz)       tar xvjf "$file"    ;;
+                *.tgz)       tar xvzf "$file"    ;;
+                *.bz2)       bunzip2 "$file"     ;;
+                *.rar)       rar x "$file"       ;;
+                *.gz)        gunzip "$file"      ;;
+                *.xz)        unxz "$file"        ;;
+                *.zip)       unzipdir "$file"    ;;
+                *.Z)         uncompress "$file"  ;;
+                *.7z)        7z x "$file"        ;;
+                *.gpg)       decrypt "$file"     ;;
+                *)           echo "don't know how to extract '$file'..." ;;
+            esac
+        else
+            echo "'$file' is not a valid file!"
+        fi
+    done
+}
+
+bz22xz () {
+    for file in "$@"; do
+        if [ -f "$file" ] ; then
+            bunzip2 -c "$file" | xz -c -9 > ${file%.bz2}.xz
+        else
+            echo "'$file' is not a valid file!"
+        fi
+    done
+}

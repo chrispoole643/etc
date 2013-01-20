@@ -200,7 +200,7 @@ macmount() {
 
 # Unmount a drive; Specify the drive name as it appears in Finder (no '.dmg')
 macunmount() {
-    for drive in "$@"; do
+    for drive in $@; do
         hdiutil detach "/Volumes/$drive"
     done
 }
@@ -261,7 +261,7 @@ fi
 ## Prompt
 
 # Was using http://aperiodic.net/phil/prompt/prompt.txt
-source ~/.zsh-prompts/prompt_chris1_setup
+source "$HOME/.zsh-prompts/prompt_chris1_setup"
 
 ## gpg agent
 
