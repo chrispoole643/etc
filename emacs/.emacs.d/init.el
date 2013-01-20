@@ -1,4 +1,3 @@
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;; Emacs Configuration
 ;;;;; ===================
@@ -16,8 +15,10 @@
 
 ;;; Bootstrap with my library functions (`cjp-library' contains
 ;;; `cjp-get-dir-structure-in')
-(load-file (concat user-emacs-directory "lisp/cjp-library-private.elc"))
-(load-file (concat user-emacs-directory "lisp/cjp-library.elc"))
+(let ((file (concat user-emacs-directory "lisp/cjp-library-private.elc")))
+  (if (file-exists-p file) (load-file file)))
+(let ((file (concat user-emacs-directory "lisp/cjp-library.elc")))
+  (if (file-exists-p file) (load-file file)))
 
 ;;; Add lisp directory tree to load-path
 (setq load-path (append (cjp-get-dir-structure-in "lisp")
@@ -25,7 +26,7 @@
 
 ;;; Load all my settings, as well as contributed functions
 (load-library "library-contributed")
-(load-library "cjp-settings-private")
+(if macosxp (load-library "cjp-settings-private"))
 (load-library "cjp-settings")
 (load-library "cjp-faces")
 
@@ -44,7 +45,7 @@
 (when (display-graphic-p)
   (with-temp-buffer
     (python-mode)
-    (insert "import os, math, time, numpy, scipy")
+    (insert "import os, math, time")
     (python-send-buffer))
   (run-python nil t)
   (save-window-excursion (eshell)))
