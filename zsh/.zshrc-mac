@@ -96,8 +96,9 @@ _start-gpg-agent () {
 
 ## tmux
 
-_starttmux () {
-    tmux new -d -s "$tmux_name" -n - \; neww -d -n - \; neww -d -n - \; attach
+_start-tmux () {
+    tmux new -d -s "$tmux_name" -n - \; neww -d -n - \; neww -d -n - \; attach \;
+    source-file "$HOME/.tmux.conf-mac"
 }
 
 ## Miscellaneous

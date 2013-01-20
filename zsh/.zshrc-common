@@ -31,7 +31,7 @@ alias lsd='gls -1 -X --group-directories-first'
 alias div='dirs -v'
 alias getip='curl ifconfig.me'
 alias get='curl -C - -OL'
-alias st=starttmux
+alias st=start-tmux
 
 # Defaults
 alias f='fasd -f'        # file
@@ -103,12 +103,12 @@ start-gpg-agent () {
 
 ## tmux
 
-starttmux () {
+start-tmux () {
     # If we're not in tmux, and session exists
     if $(tmux has -t "$tmux_name" > /dev/null 2>&1) && [[ "$TMUX" == "" ]]; then
         tmux attach -d -t "$tmux_name"
     elif [[ "$TMUX" == "" ]]; then
-        _starttmux "$tmux_name"
+        _start-tmux "$tmux_name"
     fi
 }
 

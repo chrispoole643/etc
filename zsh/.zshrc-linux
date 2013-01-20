@@ -52,7 +52,7 @@ _start-gpg-agent () {
 
 ## tmux
 
-_starttmux () {
+_start-tmux () {
     tmux new -d -s main -n - \; splitw -h 'zsh -c htop' \; splitw -v \; selectp -t1 
     tmux neww -n citm 'zsh -c "ssh citm"' \; splitw -h \; selectp -t1 
     tmux neww -n backup \; splitw -h \; selectp -t1 
