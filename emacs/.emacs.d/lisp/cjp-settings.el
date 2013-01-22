@@ -555,7 +555,10 @@
 ;;; and guile. (See info doc.)
 ;;; To install geiser, extract its tarball to geiser directory, then:
 ;;; mkdir build && cd build && ../configure && make all
-(load (cjp-emacs-structure-dir "geiser/build/elisp/geiser-load" "lisp"))
+(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
+                                                       "lisp"))
+                        load-path))
+(require 'geiser-install)
 (setq geiser-active-implementations '(racket)
       geiser-repl-history-filename (cjp-emacs-structure-dir ".geiser-history")
       geiser-repl-autodoc-p nil
