@@ -4,7 +4,7 @@
 ;;;;;
 ;;;;; Generic and Mac.
 ;;;;;
-;;;;; Version: 20110729
+;;;;; Version: 20130128
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -74,7 +74,6 @@
 ;;; I often hit C-x s by mistaken when I want C-x C-s, so bind it to the same
 ;;; command
 (global-set-key (kbd "C-x s") 'save-buffer)
-
 
 ;;; Backward kill word is used so often that this is useful, but kill-region is
 ;;; still needed, so move to C-x C-k
@@ -146,6 +145,9 @@
 (global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
 (global-set-key (kbd "<C-f16>") (lambda () (interactive) (cjp-set-frame-uni)))
 
+;;; Unbind keys
+(global-unset-key (kbd "C-z")) ; Usually suspend-frame. Annoying.
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;; Mac
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -186,12 +188,28 @@
   (global-set-key (kbd "<f1>") 'make-frame)
   (global-set-key (kbd "<C-f1>") 'next-frame)
   (global-set-key (kbd "<C-M-f1>") 'delete-frame)
-
   (global-set-key (kbd "<C-s-f12>") 'gtd-functions)
-)                                       ; Ugly I know, but helps with VC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Unbind keys
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Outline-minor-mode key map
+  (define-prefix-command 'cm-map nil "Outline-")
 
-(global-unset-key (kbd "C-z"))          ; Usually suspend-frame. Annoying.
+  (define-key cm-map "q" 'hide-sublevels) ; Hide everything but the top-level headings
+  (define-key cm-map "t" 'hide-body)      ; Hide everything but headings (all body lines)
+  (define-key cm-map "o" 'hide-other)     ; Hide other branches
+  (define-key cm-map "c" 'hide-entry)     ; Hide this entry's body
+  (define-key cm-map "l" 'hide-leaves)    ; Hide body lines in this entry and sub-entries
+  (define-key cm-map "d" 'hide-subtree)   ; Hide everything in this entry and sub-entries
+
+  (define-key cm-map "a" 'show-all)       ; Show (expand) everything
+  (define-key cm-map "e" 'show-entry)     ; Show this heading's body
+  (define-key cm-map "i" 'show-children)  ; Show this heading's immediate child sub-headings
+  (define-key cm-map "k" 'show-branches)  ; Show all sub-headings under this heading
+  (define-key cm-map "s" 'show-subtree)   ; Show (expand) everything in this heading & below
+
+  (define-key cm-map "u" 'outline-up-heading)               ; Up
+  (define-key cm-map "n" 'outline-next-visible-heading)     ; Next
+  (define-key cm-map "p" 'outline-previous-visible-heading) ; Previous
+  (define-key cm-map "f" 'outline-forward-same-level)       ; Forward - same level
+  (define-key cm-map "b" 'outline-backward-same-level)      ; Backward - same level
+  (global-set-key (kbd "C-c C-c") cm-map)
+  ) ; Ugly I know, but helps with VC
