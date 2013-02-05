@@ -31,6 +31,7 @@ alias lsd='gls -1 -X --group-directories-first'
 alias div='dirs -v'
 alias getip='curl ifconfig.me'
 alias get='curl -C - -OL'
+alias calc='emacs -Q -nw -f full-calc'
 alias st=start-tmux
 
 # Defaults
