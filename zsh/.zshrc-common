@@ -225,7 +225,7 @@ xtr () {
                 *.tbz)       tar xvjf "$file"    ;;
                 *.tgz)       tar xvzf "$file"    ;;
                 *.bz2)       bunzip2 "$file"     ;;
-                *.rar)       rar x "$file"       ;;
+                *.rar)       unrar x "$file"     ;;
                 *.gz)        gunzip "$file"      ;;
                 *.xz)        unxz "$file"        ;;
                 *.zip)       unzipdir "$file"    ;;
