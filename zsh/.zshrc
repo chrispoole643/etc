@@ -14,7 +14,7 @@
 export PAGER=less
 export EDITOR='emacsclient'
 
-HISTFILE="$HOME/.zhistory"
+HISTFILE="$HOME/.dotfiles/zsh/.zhistory"
 HISTSIZE=3000
 SAVEHIST=3000
 
@@ -24,7 +24,7 @@ SAVEHIST=3000
 ################################################################################
 
 
-zstyle :compinstall filename '$HOME/.zshrc'
+zstyle :compinstall filename '$HOME/.dotfiles/zsh/.zshrc'
 # Tab completion, etc.
 autoload -Uz compinit promptinit
 compinit -u
@@ -84,7 +84,7 @@ bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 ## Completion settings
 
 # cache completions (useful for apt/dpkg package completions)
-zstyle ':completion:*' use-cache onzstyle ':completion:*' cache-path $HOME/.zsh/cache
+zstyle ':completion:*' use-cache onzstyle ':completion:*' cache-path $HOME/.dotfiles/zsh/cache
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31" # code completion
@@ -177,10 +177,10 @@ zstyle ':completion:*' auto-description 'specify: %d'
 
 ## Add-ons
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.zsh-highlighters"
+ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.dotfiles/zsh/.zsh-highlighters"
 
-source "$HOME/.zsh-syntax-highlighting.zsh"
-source "$HOME/.zsh-history-substring-search.zsh"
+source "$HOME/.dotfiles/zsh/.zsh-syntax-highlighting.zsh"
+source "$HOME/.dotfiles/zsh/.zsh-history-substring-search.zsh"
 
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
@@ -192,9 +192,7 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 
 
 if [ ${OSTYPE%%.*} = "darwin10" ]; then
-    if [ -f "$HOME/.macmini" ]; then
-        platform="macmini"
-    fi
+    platform="mac"
     source "$HOME/.zshrc-mac"
 elif [ "$OSTYPE" = "linux-gnu" ]; then
     platform="linux"
@@ -204,8 +202,4 @@ fi
 ## Load functions common to mac and linux
 if [ -f "$HOME/.zshrc-common" ]; then
     . "$HOME/.zshrc-common"
-fi
-
-if [[ $platform == "macmini" ]]; then
-    starttmux
 fi
