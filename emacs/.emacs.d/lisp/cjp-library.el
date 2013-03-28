@@ -1,12 +1,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;; Library Functions
-;;;;; =================
-;;;;;
-;;;;; Version: 20110505
+;;;; Library Functions
+;;;; =================
+;;;;
+;;;; Version: 20110505
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Window sizing
+;;; Window sizing
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun cjp-window-setup (pane-number)
@@ -72,7 +72,7 @@ two or three panes."
     (set-frame-width (selected-frame) 86)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Dired
+;;; Dired
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun cjp-dired-directoryp ()
@@ -82,7 +82,7 @@ directory."
   (file-directory-p (dired-file-name-at-point)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Open with external program
+;;; Open with external program
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun cjp-guess-open-file-external (program &rest args)
@@ -111,7 +111,7 @@ If in a dired buffer, open file at point."
       (error "File %s doesn't exist" file)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; ispell
+;;; ispell
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq cjp-code-buffer-list '(python-mode lisp-interaction-mode emacs-lisp-mode
@@ -130,7 +130,7 @@ only. Else, run ispell as usual."
         (t (ispell))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Miscellaneous
+;;; Miscellaneous
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun cjp-search-elisp-docs (topic)
@@ -343,7 +343,7 @@ too."
   "View the current buffer using the default web browser. Works
 with bzipped HTML files too."
   (interactive)
-  (let ((file (buffer-file-name))) 
+  (let ((file (buffer-file-name)))
     (with-temp-buffer
       (insert-file-contents file)
       (browse-url-of-region (point-min) (point-max)))))

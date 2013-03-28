@@ -1,36 +1,36 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;; Emacs Keybindings
-;;;;; =================
-;;;;;
-;;;;; Generic and Mac.
-;;;;;
-;;;;; Version: 20130128
+;;;; Emacs Keybindings
+;;;; =================
+;;;;
+;;;; Generic and Mac.
+;;;;
+;;;; Version: 20130128
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Generic
+;;; Generic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; iedit
+;; iedit
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
 
 (global-set-key (kbd "C-M-g") 'magit-status)
 
-;;; Swap these round from usual; I find it more logical
+;; Swap these round from usual; I find it more logical
 (global-set-key (kbd "C-x +") 'what-cursor-position)
 (global-set-key (kbd "C-x =") 'balance-windows)
 
-;;; Sets current frame or window to width of 80 characters
+;; Sets current frame or window to width of 80 characters
 (global-set-key (kbd "C-x W") 'fix-horizontal-size)
 
 (global-set-key (kbd "C-c s") 'dictionary-lookup-definition)
 (global-set-key (kbd "C-c S") 'dictionary-search)
 (global-set-key (kbd "C-c m") 'dictionary-match-words)
 
-;;; Rebind keys, including backups to old command. M-x doesn't work with same
-;;; keys on all systems, so bind to C-x X-m too (And C-c for good measure, in
-;;; case your finger slips)
+;; Rebind keys, including backups to old command. M-x doesn't work with same
+;; keys on all systems, so bind to C-x X-m too (And C-c for good measure, in
+;; case your finger slips)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "C-x m") 'smex)
 (global-set-key (kbd "C-x C-m") 'smex)
@@ -47,50 +47,50 @@
 (global-set-key (kbd "M-/") 'undo-tree-redo)
 (global-set-key (kbd "C-M-/") 'undo-tree-visualize)
 
-;;; Default keybindings of C-c <left> and C-c <right> are annoying to type if
-;;; going back more than one or two window configurations.
+;; Default keybindings of C-c <left> and C-c <right> are annoying to type if
+;; going back more than one or two window configurations.
 (global-set-key (kbd "C-<left>") 'winner-undo)
 (global-set-key (kbd "C-<right>") 'winner-redo)
 
-;;; Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had
-;;; to be undefined before it could be made to run windmove-left.
+;; Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had
+;; to be undefined before it could be made to run windmove-left.
 (define-key undo-tree-map (kbd "C-x u") nil)
 (global-set-key (kbd "C-x o") 'other-window)
 
-;;; Get rid of `find-file-read-only' and replace it with something more useful.
+;; Get rid of `find-file-read-only' and replace it with something more useful.
 (global-set-key (kbd "C-x C-r") 'ido-recentf-open)
- 
-;;; I like M-g for goto-line
+
+;; I like M-g for goto-line
 (global-set-key (kbd "M-g") 'goto-line)
 
-;;; Spell word at point (Usually M-$)
+;; Spell word at point (Usually M-$)
 (global-set-key (kbd "M-s") 'ispell-word)
 (global-set-key (kbd "M-S") 'dictionary-lookup-definition)
 
-;;; I often use dired mode; this prevents mistakes if quickly typing usual
-;;; shortcut of C-x d
+;; I often use dired mode; this prevents mistakes if quickly typing usual
+;; shortcut of C-x d
 (global-set-key (kbd "C-x C-d") 'ido-dired)
 
-;;; I often hit C-x s by mistaken when I want C-x C-s, so bind it to the same
-;;; command
+;; I often hit C-x s by mistaken when I want C-x C-s, so bind it to the same
+;; command
 (global-set-key (kbd "C-x s") 'save-buffer)
 
-;;; Backward kill word is used so often that this is useful, but kill-region is
-;;; still needed, so move to C-x C-k
+;; Backward kill word is used so often that this is useful, but kill-region is
+;; still needed, so move to C-x C-k
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "C-c C-k") 'kill-region)
 ;; (global-set-key (kbd "C-#") 'kill-region)
 
-;;; Since re-mapped C-w to backward-kill-word, and moved cut option to C-\,
-;;; should move copy command too (M-w -> M-\). Re-map old M-\ -> M-w
+;; Since re-mapped C-w to backward-kill-word, and moved cut option to C-\,
+;; should move copy command too (M-w -> M-\). Re-map old M-\ -> M-w
 ;; (global-set-key (kbd "M-w") 'delete-horizontal-space)
 ;; (global-set-key (kbd "M-\\") 'kill-ring-save)
 ;; (global-set-key (kbd "M-#") 'kill-ring-save)
 
-;;; M-/ is used often to expand words as a basic tab completion, so map command
-;;; to somewhere easier to press quickly, M-o (previously undefined), or M-i if
-;;; I miss 'o' with my fingers.  M-/ also now bound to undo-tree-redo.
+;; M-/ is used often to expand words as a basic tab completion, so map command
+;; to somewhere easier to press quickly, M-o (previously undefined), or M-i if
+;; I miss 'o' with my fingers.  M-/ also now bound to undo-tree-redo.
 (global-set-key (kbd "M-o") 'dabbrev-expand)
 (global-set-key (kbd "M-i") 'dabbrev-expand)
 
@@ -98,22 +98,22 @@
 (global-set-key (kbd "C-\"") 'other-window)
 (global-set-key (kbd "C-x B") 'ido-switch-buffer-other-window)
 
-;;; C-h h is usually view-hello-file. Forget it, and use handy C-h C-h to lookup
-;;; stuff in info docs.
+;; C-h h is usually view-hello-file. Forget it, and use handy C-h C-h to lookup
+;; stuff in info docs.
 (global-set-key (kbd "C-h h") 'help-for-help)
 (global-set-key (kbd "C-h C-h") 'cjp-lookup-thing-at-point)
 (global-set-key (kbd "C-h C-u") 'cjp-load-url-w3m)
 
-;;; Open the current buffer with privileges given by `sudo'
+;; Open the current buffer with privileges given by `sudo'
 (global-set-key (kbd "C-x C-V") 'find-alternative-file-with-sudo)
 
-;;; Type ( and have Emacs add the ) and put point in middle
+;; Type ( and have Emacs add the ) and put point in middle
 ;; (setq skeleton-pair t)
 ;; (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
 ;; (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
 ;; (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
 
-;;; Goto points in current buffer really quickly
+;; Goto points in current buffer really quickly
 (global-set-key (kbd "§") 'ace-jump-char-mode)
 (global-set-key (kbd "M-§") 'ace-jump-word-mode)
 (global-set-key (kbd "C-§") 'ace-jump-line-mode)
@@ -145,15 +145,15 @@
 (global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
 (global-set-key (kbd "<C-f16>") (lambda () (interactive) (cjp-set-frame-uni)))
 
-;;; Unbind keys
+;; Unbind keys
 (global-unset-key (kbd "C-z")) ; Usually suspend-frame. Annoying.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Mac
+;;; Mac
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when macosxp
-  
+
   ;; Set cmd-H to hide Emacs and cmd-shift-h to hide others, as usual in Mac OS
   ;; X. Usually bound to mark-paragraph
   (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
@@ -165,7 +165,7 @@
   (define-key dired-mode-map (kbd "e") 'cjp-mac-textedit-file)
   (define-key dired-mode-map (kbd "q") 'cjp-mac-quicklook-file)
   (define-key dired-mode-map (kbd "C-M-t") 'cjp-mac-open-terminal)
-  
+
   (global-set-key (kbd "<f1>") 'make-frame)
   (global-set-key (kbd "<C-f1>") 'ns-next-frame)
   (global-set-key (kbd "<C-M-f1>") 'delete-frame)
@@ -180,11 +180,11 @@
 )                                       ; Ugly I know, but helps with VC
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Linux
+;;; Linux
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when linuxp
-  
+
   (global-set-key (kbd "<f1>") 'make-frame)
   (global-set-key (kbd "<C-f1>") 'next-frame)
   (global-set-key (kbd "<C-M-f1>") 'delete-frame)

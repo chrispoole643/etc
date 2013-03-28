@@ -1,49 +1,49 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;;; GTD Library
-;;;;; ===========
-;;;;;
-;;;;; Functions for use with GTD methodology.
-;;;;;
-;;;;; Installation
-;;;;; ------------
-;;;;;
-;;;;; 1. Add file to load-path
-;;;;; 2. (require 'gtd)
-;;;;; 3. Bind some keys:
-;;;;;    (global-set-key (kbd "<f12>") 'gtd-inbox)
-;;;;;    (global-set-key (kbd "<C-f12>") 'gtd-select)
-;;;;;    (global-set-key (kbd "<C-M-f12>") 'gtd-functions)
-;;;;;
-;;;;; Use
-;;;;; ---
-;;;;; 
-;;;;; 1. Use gtd-update to update action lists and quadrant files after editing
-;;;;;    project files
-;;;;; 2. Use gtd-kill-all-buffers to kill open gtd-related buffers
-;;;;; 3. Use gtd-weekly-review to get a temp buffer showing a checklist of items
-;;;;;    to review
-;;;;;
-;;;;; ---
-;;;;;
-;;;;; See chrispoole.com/emacs-gtd for more.
-;;;;;
-;;;;; Version: 20110725
+;;;; GTD Library
+;;;; ===========
+;;;;
+;;;; Functions for use with GTD methodology.
+;;;;
+;;;; Installation
+;;;; ------------
+;;;;
+;;;; 1. Add file to load-path
+;;;; 2. (require 'gtd)
+;;;; 3. Bind some keys:
+;;;;    (global-set-key (kbd "<f12>") 'gtd-inbox)
+;;;;    (global-set-key (kbd "<C-f12>") 'gtd-select)
+;;;;    (global-set-key (kbd "<C-M-f12>") 'gtd-functions)
+;;;;
+;;;; Use
+;;;; ---
+;;;;
+;;;; 1. Use gtd-update to update action lists and quadrant files after editing
+;;;;    project files
+;;;; 2. Use gtd-kill-all-buffers to kill open gtd-related buffers
+;;;; 3. Use gtd-weekly-review to get a temp buffer showing a checklist of items
+;;;;    to review
+;;;;
+;;;; ---
+;;;;
+;;;; See chrispoole.com/emacs-gtd for more.
+;;;;
+;;;; Version: 20130328
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Copyright (C) 2011 Chris Poole <chris@chrispoole.com>
-;;; 
-;;; This program is free software: you can redistribute it and/or modify it
-;;; under the terms of the GNU General Public License as published by the Free
-;;; Software Foundation, either version 3 of the License, or (at your option)
-;;; any later version.
-;;; 
-;;; This program is distributed in the hope that it will be useful, but WITHOUT
-;;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-;;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-;;; more details.
-;;; 
-;;; You should have received a copy of the GNU General Public License along with
-;;; this program.  If not, see <http://www.gnu.org/licenses/>.
+;; Copyright (C) 2011--2013 Chris Poole <chris@chrispoole.com>
+;;
+;; This program is free software: you can redistribute it and/or modify it
+;; under the terms of the GNU General Public License as published by the Free
+;; Software Foundation, either version 3 of the License, or (at your option)
+;; any later version.
+;;
+;; This program is distributed in the hope that it will be useful, but WITHOUT
+;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+;; more details.
+;;
+;; You should have received a copy of the GNU General Public License along with
+;; this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 (eval-when-compile
@@ -53,7 +53,7 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Minor mode
+;;; Minor mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defvar gtd-mode-map (make-sparse-keymap)
@@ -70,7 +70,7 @@
   "Toggle GTD mode." nil " GTD" gtd-mode-map)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Menu
+;;; Menu
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun gtd-use-menu ()
@@ -82,7 +82,7 @@
   (easy-menu-add-item nil nil gtd-menu "help-menu"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Variables
+;;; Variables
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defvar gtd-no-autofill t
@@ -171,7 +171,7 @@
   "List of file extensions that can be opened in Emacs directly
   when running `gtd-show-file'.")
 
-;;; Regexen
+;; Regexen
 
 (defvar gtd-re-action "[-a-zA-Z0-9]+"
   "Regular expression matching context names.")
@@ -219,7 +219,7 @@
   aren't hidden.")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Functions
+;;; Functions
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defun gtd-location (&rest paths)
@@ -714,8 +714,8 @@ heading in the project or someday/maybe list."
       (sort-lines nil begin end)
       (save-buffer))))
 
-;;; Removed covey quadrant code, as not using it anymore. Keeping around in case
-;;; it's useful later.
+;; Removed covey quadrant code, as not using it anymore. Keeping around in case
+;; it's useful later.
 ;; (defun gtd-concat-quadrants (quad)
 ;;   "Concatenate all Covey quadrants for each action context, and
 ;; save in file QUAD."
@@ -863,7 +863,7 @@ directory first."
                        (goto-char (point-min)))))) project))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; Hooks
+;;; Hooks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (add-hook 'after-save-hook
