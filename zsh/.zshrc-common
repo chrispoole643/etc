@@ -1,20 +1,56 @@
 # -*- mode: shell-script -*-
+
 ################################################################################
-#### Common functions and aliases
-#### ============================
-####
-#### Functions and aliases that work on mac and linux machines
+### Common functions and aliases
+### ============================
+###
+### Functions and aliases that work on mac and linux machines
 ################################################################################
 
 
-## fasd
+################################################################################
+## Loading
+################################################################################
+
+
+# fasd
 eval "$(fasd --init auto)"
 
+# gpg agent
+if [[ -f "$HOME/.gpg-agent-info" ]]; then
+    printf "==> Loaded existing gpg agent.\n"
+    source "$HOME/.gpg-agent-info"
+    export GPG_AGENT_INFO
+    GPG_TTY=$(tty)
+    export GPG_TTY
+else
+    _start-gpg-agent
+fi
+
+# ssh agent
+if [[ -f "$HOME/.ssh-agent-info" ]]; then
+    printf "==> Loaded existing ssh agent.\n"
+else
+    ssh-agent >| "$HOME/.ssh-agent-info"
+fi
+eval  $(head -2 "$HOME/.ssh-agent-info")
+
 
 ################################################################################
-### Aliases
+## Aliases
 ################################################################################
 
+
+# Defaults
+alias f='fasd -f'        # file
+alias a='fasd -a'        # any
+alias s='fasd -si'       # show / search / select
+alias d='fasd -d'        # directory
+alias sd='fasd -sid'     # interactive directory selection
+alias sf='fasd -sif'     # interactive file selection
+
+alias j='fasd_cd -d'
+alias ji='fasd_cd -id'
 
 alias gi=get_iplayer
 alias gig='get_iplayer -g'
@@ -34,17 +70,6 @@ alias get='curl -C - -OL'
 alias calc='emacs -Q -nw -f full-calc'
 alias st=start-tmux
 
-# Defaults
-alias f='fasd -f'        # file
-alias a='fasd -a'        # any
-alias s='fasd -si'       # show / search / select
-alias d='fasd -d'        # directory
-alias sd='fasd -sid'     # interactive directory selection
-alias sf='fasd -sif'     # interactive file selection
-
-alias j='fasd_cd -d'
-alias ji='fasd_cd -id'
-
 # Return a list of all sub-directories (recursively), together with how many
 # files each one contains. Sort to put directories with the most files at the
 # bottom
@@ -52,20 +77,19 @@ alias filesindirs='find . -type d | while read dir; do; echo "$dir" : $(find "$d
 
 
 ################################################################################
-### Variables
+## Variables
 ################################################################################
+
 
 tmux_name=main
 
 
-
 ################################################################################
-### Functions
+## Functions
 ################################################################################
 
 
-## gpg
-
+# gpg
 kill-gpg-agent () {
     printf "Killing gpg agents... "
     killall gpg-agent
@@ -102,8 +126,7 @@ start-gpg-agent () {
     fi
 }
 
-## tmux
-
+# tmux
 start-tmux () {
     # If we're not in tmux, and session exists
     if $(tmux has -t "$tmux_name" > /dev/null 2>&1) && [[ "$TMUX" == "" ]]; then
@@ -121,8 +144,7 @@ tc () {
     fi
 }
 
-## Miscellaneous
-
+# Miscellaneous
 getfiles () {
     curl -SL "$2" | grep -Eoh "\"[^\"]+?\.$1\"" | uniq | \
         xargs -n1 -P2 curl -C - -LO
@@ -252,19 +274,9 @@ bz22xz () {
 
 
 ################################################################################
-### Final setup
+## Final setup
 ################################################################################
 
 
-## Prompt
-
-source ~/.zsh-prompts/prompt_chris1_setup
-
-## gpg agent
-
-if [[ -f "$HOME/.gpg-agent-info" ]]; then
-    source "$HOME/.gpg-agent-info"
-    export GPG_AGENT_INFO
-    GPG_TTY=$(tty)
-    export GPG_TTY
-fi
+# Prompt
+source "$HOME/.zsh-prompts/prompt_chris1_setup"

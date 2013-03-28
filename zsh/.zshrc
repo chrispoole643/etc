@@ -1,30 +1,30 @@
 ################################################################################
-#### zsh configuration
-#### =================
-####
-#### Apply common settings, load platform-specific file
+### zsh configuration
+### =================
+###
+### Apply common settings, load platform-specific file
 ################################################################################
 
 
 ################################################################################
-### Environment
+## Environment
 ################################################################################
 
 
 export PAGER=less
 export EDITOR='emacsclient'
 
-HISTFILE="$HOME/.dotfiles/zsh/.zhistory"
+HISTFILE="$HOME/.zhistory"
 HISTSIZE=3000
 SAVEHIST=3000
 
 
 ################################################################################
-### zsh setup
+## zsh setup
 ################################################################################
 
 
-zstyle :compinstall filename '$HOME/.dotfiles/zsh/.zshrc'
+zstyle :compinstall filename '$HOME/.zshrc'
 # Tab completion, etc.
 autoload -Uz compinit promptinit
 compinit -u
@@ -43,7 +43,7 @@ setopt extendedhistory	 # puts timestamps in the history
 setopt histallowclobber
 setopt histreduceblanks
 setopt multios           # now we can pipe to multiple outputs!
-setopt incappendhistory 
+setopt incappendhistory
 setopt sharehistory
 setopt nobeep            # beeps are annoying
 setopt rmstarwait        # 10 second wait if you do something that will delete everything
@@ -75,16 +75,20 @@ unsetopt bgnice          # do not nice bg commands (don't set background command
 autoload -U select-word-style
 select-word-style bash   # make word boundaries and stuff work like Bash
 
-## Key binding
+
+# Key binding
+# -----------
 
 bindkey -e                 # Emacs-style keybindings
 bindkey ' ' magic-space    # also do history expansion on space
 bindkey '^I' complete-word # complete on tab, leave expansion to _expand
 
-## Completion settings
+
+# Completion settings
+# -------------------
 
 # cache completions (useful for apt/dpkg package completions)
-zstyle ':completion:*' use-cache onzstyle ':completion:*' cache-path $HOME/.dotfiles/zsh/cache
+zstyle ':completion:*' use-cache onzstyle ':completion:*' cache-path $HOME/cache
 
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 #zstyle ':completion:*' list-colors "=(#b) #([0-9]#)*=36=31" # code completion
@@ -103,7 +107,7 @@ zstyle ':completion:*::::' completer _expand _complete _ignored _approximate
 # allow one error for every three characters typed in approximate completer
 zstyle -e ':completion:*:approximate:*' max-errors \
     'reply=( $(( ($#PREFIX+$#SUFFIX)/2 )) numeric )'
-    
+
 # insert all expansions for expand completer
 zstyle ':completion:*:expand:*' tag-order all-expansions
 #
@@ -111,7 +115,7 @@ zstyle ':completion:*:expand:*' tag-order all-expansions
 # 1. All /etc/hosts hostnames are in autocomplete
 # 2. If you have a comment in /etc/hosts like #%foobar.domain,
 #    then foobar.domain will show up in autocomplete!
-zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}') 
+zstyle ':completion:*' hosts $(awk '/^[^#]/ {print $2 $3" "$4" "$5}' /etc/hosts | grep -v ip6- && grep "^#%" /etc/hosts | awk -F% '{print $2}')
 # formatting and messages
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*:descriptions' format '%B%d%b'
@@ -161,7 +165,9 @@ zstyle ':completion:*:default' menu 'select=0'
 # generate descriptions with magic.
 zstyle ':completion:*' auto-description 'specify: %d'
 
-## Custom completion commands
+
+# Custom completion commands
+# --------------------------
 
 # # pip zsh completion start
 # function _pip_completion {
@@ -175,19 +181,21 @@ zstyle ':completion:*' auto-description 'specify: %d'
 # compctl -K _pip_completion pip
 # # pip zsh completion end
 
-## Add-ons
 
-ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.dotfiles/zsh/.zsh-highlighters"
+# Add-ons
+# -------
 
-source "$HOME/.dotfiles/zsh/.zsh-syntax-highlighting.zsh"
-source "$HOME/.dotfiles/zsh/.zsh-history-substring-search.zsh"
+ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.zsh-highlighters"
+
+source "$HOME/.zsh-syntax-highlighting.zsh"
+source "$HOME/.zsh-history-substring-search.zsh"
 
 ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
 ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 
 
 ################################################################################
-### Platform-dependent functions and aliases
+## Platform-dependent functions and aliases
 ################################################################################
 
 
@@ -199,7 +207,10 @@ elif [ "$OSTYPE" = "linux-gnu" ]; then
     source "$HOME/.zshrc-linux"
 fi
 
-## Load functions common to mac and linux
+
+# Load functions common to mac and linux
+# --------------------------------------
+
 if [ -f "$HOME/.zshrc-common" ]; then
     . "$HOME/.zshrc-common"
 fi
