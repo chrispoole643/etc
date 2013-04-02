@@ -7,21 +7,21 @@
 ;;;;
 ;;;; Installation
 ;;;; ------------
-;;;; 
+;;;;
 ;;;; Setup Auto-Complete in the usual fashion, and make sure it gets loaded for
 ;;;; python buffers. Then, place this file in your load-path, and add
-;;;; 
+;;;;
 ;;;;     (require 'ac-python)
-;;;; 
+;;;;
 ;;;; to your .emacs file (after loading Auto-Complete).
-;;;; 
+;;;;
 ;;;; Usage
 ;;;; -----
-;;;; 
+;;;;
 ;;;; Python symbols will be completed by Auto-Complete, once Emacs learns about
 ;;;; these symbols. This is the short-coming of the plugin, but it's a small
 ;;;; price to pay.
-;;;; 
+;;;;
 ;;;; To teach Emacs about symbols in imported modules, Emacs needs to execute
 ;;;; the Python source. This can be accomplished with `python-send-buffer` for
 ;;;; example, often bound to `C-c C-c`. If a python process is already running,

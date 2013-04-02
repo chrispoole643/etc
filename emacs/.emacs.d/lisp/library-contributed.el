@@ -1,12 +1,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Contributed functions
-;; =====================
-;;
-;; Useful functions from other people
+;;;; Contributed functions
+;;;; =====================
+;;;;
+;;;; Useful functions from other people
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Useful function from Steve Yegge
-;;; http://steve.yegge.googlepages.com/my-dot-emacs-file
+;; Useful function from Steve Yegge
+;; http://steve.yegge.googlepages.com/my-dot-emacs-file
 (defun move-buffer-file (dir)
   "Moves both current buffer and file it's visiting to DIR." (interactive "DNew directory: ")
   (let* ((name (buffer-name))
@@ -24,11 +24,11 @@
         (set-visited-file-name newname)
         (set-buffer-modified-p nil) t))))
 
-;;; Great frame- or window-resizing function from
-;;; http://dse.livejournal.com/67732.html. Resizes either frame or window to 80
-;;; columns. If the window can be sized to 80 columns wide, without resizing the
-;;; frame itself, it will resize the window. Otherwise, it will resize the
-;;; frame. You can use a prefix argument to specify a different column width
+;; Great frame- or window-resizing function from
+;; http://dse.livejournal.com/67732.html. Resizes either frame or window to 80
+;; columns. If the window can be sized to 80 columns wide, without resizing the
+;; frame itself, it will resize the window. Otherwise, it will resize the
+;; frame. You can use a prefix argument to specify a different column width
 (defun fix-frame-horizontal-size (width)
   "Set the frame's size to 80 (or prefix arg WIDTH) columns wide."
   (interactive "P")
@@ -52,8 +52,8 @@
        (error
 	(error "Cannot resize window or frame horizontally"))))))
 
-;;; Makes repeating align-regexp lots of times easy.
-;;; Found at http://emacswiki.org/emacs/AlignCommands
+;; Makes repeating align-regexp lots of times easy.
+;; Found at http://emacswiki.org/emacs/AlignCommands
 (defun align-repeat (start end regexp)
   "repeat alignment with respect to 
      the given regular expression"

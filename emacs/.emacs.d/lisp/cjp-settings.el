@@ -16,15 +16,12 @@
 
 (require 'smallurl)
 (require 'smooth-scrolling)
-
 (require 'htmlize)
 (require 'pydoc-info)
 (require 'cl)
 
 (load-library "regex-tool")
 (load-library "smooth-scrolling")
-(load-library "inf-ruby")
-(load-library "typing")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Unicode
@@ -115,7 +112,7 @@
 (require 'w3m-load)
 
 (setq browse-url-browser-function 'w3m-browse-url
-      w3m-default-save-directory "~/Documents/Inbox"
+      w3m-default-save-directory "~/Documents/inbox"
       w3m-use-tab nil
       w3m-use-tab-menubar nil
       w3m-key-binding "info")
@@ -253,15 +250,6 @@
       diredp-rare-priv '((background dark)
                          (:background "#FFFF00008080" :foreground "White")))
 
-;; Load after dired, in case I want it
-(require 'sunrise-commander)
-
-(setq sr-terminal-program "term")
-
-(custom-set-faces '(sr-directory-face ((t (:foreground "gray" :weight normal)))))
-(custom-set-faces '(sr-packaged-face ((t (:foreground "green")))))
-(custom-set-faces '(sr-symlink-directory-face ((t (:foreground "cyan" :slant italic)))))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CUA
 ;;; ---
@@ -302,7 +290,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'undo-tree)
-
 (global-undo-tree-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -324,22 +311,16 @@
 ;; Use sbcl
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-(require 'slime)
+;; (require 'slime)
 ;; (slime-setup)
-(slime-setup '(slime-fancy))
+;; (slime-setup '(slime-fancy))
 
 ;; auto-complete for slime
-(require 'ac-slime)
-(add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'slime-repl-mode))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; nXhtml
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (load (cjp-emacs-structure-dir "nxhtml/autostart.el" "lisp"))
+;; (require 'ac-slime)
+;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
+;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+;; (eval-after-load "auto-complete"
+;;   '(add-to-list 'ac-modes 'slime-repl-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Recent files
@@ -406,7 +387,7 @@
 
 (setq c-eldoc-includes "-I./ -I../ -I/usr/include/ -I/usr/local/include/ ")
 
-;; Make ElDoc aware of ParEdit’s most used commands (ElDoc will automatically
+;; Make ElDoc aware of ParEdit's most used commands (ElDoc will automatically
 ;; refresh the minibuffer)
 (eldoc-add-command
  'paredit-backward-delete
@@ -450,7 +431,7 @@
 ;;;
 ;;; Using python.el, not python-mode.el. The latter doesn't seem to be able to
 ;;; send the contents of a buffer to the interpreter easily, as python.el can
-;;; (with C-c C-c).
+;;;  (with C-c C-c).
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'ac-python)
@@ -502,14 +483,6 @@
       (ropemacs-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Flashcard
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (setq fc-base (cjp-emacs-structure-dir "lisp"))
-;; (setq fc-default-lang 'en)
-;; (load (cjp-emacs-structure-dir "fc" "lisp"))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Info
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -555,10 +528,10 @@
 ;; and guile. (See info doc.)
 ;; To install geiser, extract its tarball to geiser directory, then:
 ;; mkdir build && cd build && ../configure && make all
-(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
-                                                       "lisp"))
-                        load-path))
-(require 'geiser-install)
+;(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
+;                                                       "lisp"))
+;                        load-path))
+;(require 'geiser-install)
 (setq geiser-active-implementations '(racket)
       geiser-repl-history-filename (cjp-emacs-structure-dir ".geiser-history")
       geiser-repl-autodoc-p nil
@@ -586,15 +559,6 @@
   (lambda ()
     (make-local-variable 'eldoc-documentation-function)
     (setq eldoc-documentation-function 'scheme-get-current-symbol-info)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Erlang
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;; (setq erlang-root-dir "/usr/local/otp")
-;; (setq exec-path (cons "/usr/local/otp/bin" exec-path))
-;; (require 'erlang-start)
-;; (require 'erlang-flymake)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Paredit
@@ -807,10 +771,10 @@
 ;; (defvar ido-enable-replace-completing-read t
 ;;  "If t, use ido-completing-read instead of completing-read if possible.
 
-;;    Set it to nil using let in around-advice for functions where the
-;;    original completing-read is required.  For example, if a function
-;;    foo absolutely must use the original completing-read, define some
-;;    advice like this:
+;; Set it to nil using let in around-advice for functions where the
+;; original completing-read is required.  For example, if a function
+;; foo absolutely must use the original completing-read, define some
+;; advice like this:
 
 ;;    (defadvice foo (around original-completing-read-only activate)
 ;;      (let (ido-enable-replace-completing-read) ad-do-it))")
