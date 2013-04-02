@@ -374,3 +374,8 @@ word is always capitalized."
   (if (>= emacs-major-version 23)
       (set-frame-font (concat (or font (if macosxp "Menlo" "Monospace"))
                               "-" size))))
+
+(defun cjp-recompile-emacs-setup ()
+  "Force recompile the Emacs setup directory."
+  (interactive)
+  (byte-recompile-directory (cjp-emacs-structure-dir "lisp") 0 t))
