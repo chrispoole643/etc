@@ -15,8 +15,6 @@
 
 (setenv "PYTHONPATH" (cjp-get-zsh-env-var "PYTHONPATH"))
 
-(cjp-check-uni-proxy)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -31,19 +29,8 @@
 ;;; Color theme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (require 'zenburn)
-;; (require 'color-theme-solarized)
-;; (require 'color-theme-sanityinc-solarized)
-
 (when (display-graphic-p)
-  (require 'color-theme)
-  (setq color-theme-load-all-themes nil)
-  (require 'color-theme-tangotango)
-  (color-theme-tangotango))
-
-;; This used to be what I used in terminal emacs
-;; (color-theme-initialize)
-;; (color-theme-hober)
+  (load-theme 'tangotango t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
