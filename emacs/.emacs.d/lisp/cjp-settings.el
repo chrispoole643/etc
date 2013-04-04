@@ -349,7 +349,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'yasnippet)
-(yas/initialize)
+(yas-global-mode 1)
 
 ;; Store my personal snippets in ~/emacs/snippets, still load the stock ones
 (setq yas/root-directory

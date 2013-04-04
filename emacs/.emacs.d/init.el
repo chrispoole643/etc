@@ -43,9 +43,8 @@
 
 ;;; Always start a python process, for quick maths, and shell
 (when (display-graphic-p)
-  (with-temp-buffer
-    (python-mode)
-    (insert "import os, math, time")
-    (python-send-buffer))
-  (run-python nil t)
+  ;; (with-temp-buffer
+  ;;   (python-mode)
+  ;;   (insert "import os, math, time"))
+  ;; (run-python nil t)
   (save-window-excursion (eshell)))
