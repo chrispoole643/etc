@@ -1051,6 +1051,8 @@
 ;;; Themes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(setq custom-safe-themes t)
+
 (if (display-graphic-p)
   (progn (add-to-list 'custom-theme-load-path (cjp-emacs-structure-dir "themes"))
          (load-theme 'tangotango t))
