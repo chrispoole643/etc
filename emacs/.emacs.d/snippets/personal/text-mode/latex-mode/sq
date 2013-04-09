@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Square root
+# --
+\sqrt{$1} $0

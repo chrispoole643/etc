@@ -1,0 +1,25 @@
+# -*- snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# group: Licenses
+# name: MIT
+# --
+`(insert comment-start)`Copyright (c) ${1:`(format-time-string "%Y")`} ${2:`(insert user-full-name)`} <${3:`(insert user-mail-address)`}>
+`(insert comment-start)`
+`(insert comment-start)`Permission is hereby granted, free of charge, to any person obtaining a copy of
+`(insert comment-start)`this software and associated documentation files (the "Software"), to deal in
+`(insert comment-start)`the Software without restriction, including without limitation the rights to
+`(insert comment-start)`use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of
+`(insert comment-start)`the Software, and to permit persons to whom the Software is furnished to do so,
+`(insert comment-start)`subject to the following conditions:
+`(insert comment-start)`
+`(insert comment-start)`The above copyright notice and this permission notice shall be included in all
+`(insert comment-start)`copies or substantial portions of the Software.
+`(insert comment-start)`
+`(insert comment-start)`THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+`(insert comment-start)`IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS
+`(insert comment-start)`FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+`(insert comment-start)`COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
+`(insert comment-start)`IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+`(insert comment-start)`CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+$0

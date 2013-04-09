@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Matrix environment
+# --
+\begin{pmatrix}
+$>$0
+\end{pmatrix}

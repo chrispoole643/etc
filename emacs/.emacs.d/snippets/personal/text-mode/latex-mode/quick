@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Quick article
+# group: skeleton
+# --
+\documentclass[10pt,a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{nccmath}
+\usepackage{bm}
+\usepackage{mathrsfs}
+\usepackage{varioref}
+\usepackage{graphicx}
+\usepackage{dsfont}
+\usepackage{geometry}
+\usepackage{float}
+\usepackage[sort&compress]{natbib}
+\def \infint {\int^\infty_0}
+\newcommand{\ST}[1]{\mbox{\tiny{#1}}}
+\def \D {\mathrm{\,d}}
+\def \curl {\nabla\times}
+\def \P {\partial}
+\def \I {\mathrm{i}}
+\def \E {\mathrm{e}}
+\def \G {\R{G}}
+\def \SI {\R{sign}\,}
+\frenchspacing
+\begin{document}
+
+$0
+
+\end{document}

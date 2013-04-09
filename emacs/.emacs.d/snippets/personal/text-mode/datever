@@ -1,0 +1,4 @@
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: DateVer
+# --
+`(format-time-string "%Y%m%d")` $0

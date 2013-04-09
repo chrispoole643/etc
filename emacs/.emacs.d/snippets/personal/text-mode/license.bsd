@@ -1,0 +1,34 @@
+# -*- snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# group: Licenses
+# name: BSD
+# --
+`(insert comment-start)`Copyright (c) ${1:`(format-time-string "%Y")`}, ${2:`(insert user-full-name)`} <${3:`(insert user-mail-address)`}>
+`(insert comment-start)`All rights reserved.
+`(insert comment-start)`
+`(insert comment-start)`Redistribution and use in source and binary forms, with or without modification,
+`(insert comment-start)`are permitted provided that the following conditions are met:
+`(insert comment-start)`
+`(insert comment-start)`- Redistributions of source code must retain the above copyright notice, this
+`(insert comment-start)`  list of conditions and the following disclaimer.
+`(insert comment-start)`
+`(insert comment-start)`- Redistributions in binary form must reproduce the above copyright notice, this
+`(insert comment-start)`  list of conditions and the following disclaimer in the documentation and/or
+`(insert comment-start)`  other materials provided with the distribution.
+`(insert comment-start)`
+`(insert comment-start)`- Neither the name of the ${4:Organization} nor the names of its contributors may
+`(insert comment-start)`  be used to endorse or promote products derived from this software without
+`(insert comment-start)`  specific prior written permission.
+`(insert comment-start)`
+`(insert comment-start)`THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+`(insert comment-start)`ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+`(insert comment-start)`WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+`(insert comment-start)`DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+`(insert comment-start)`ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+`(insert comment-start)`(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+`(insert comment-start)`LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+`(insert comment-start)`ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+`(insert comment-start)`(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+`(insert comment-start)`SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+$0

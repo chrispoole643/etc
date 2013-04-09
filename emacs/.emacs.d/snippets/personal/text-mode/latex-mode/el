@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: RefTeX label insert
+# --
+Eqn. \ref{`(insert (reftex-reference "e" t))`}

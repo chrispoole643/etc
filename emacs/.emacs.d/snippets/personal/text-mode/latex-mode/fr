@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Frac
+# --
+\frac{$1}{$2} $0

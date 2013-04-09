@@ -1,0 +1,13 @@
+# -*- snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# group: Code Sections
+# name: Title
+# --
+`(dotimes (i 80) (insert (replace-regexp-in-string " " "" comment-start)))`
+`(dotimes (i 2) (insert (replace-regexp-in-string " " "" comment-start)))` ${1:Title}
+`(dotimes (i 2) (insert (replace-regexp-in-string " " "" comment-start)))` ${1:$(make-string (string-width text) ?\=)}
+`(dotimes (i 2) (insert (replace-regexp-in-string " " "" comment-start)))`
+`(dotimes (i 2) (insert (replace-regexp-in-string " " "" comment-start)))` ${2:Description}
+`(dotimes (i 80) (insert (replace-regexp-in-string " " "" comment-start)))`
+
+$0

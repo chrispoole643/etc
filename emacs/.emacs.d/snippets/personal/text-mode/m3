@@ -1,0 +1,10 @@
+# -*- snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# group: Code Sections
+# name: Section (no desc.)
+# --
+`(dotimes (i 80) (insert (replace-regexp-in-string " " "" comment-start)))`
+`(dotimes (i 2) (insert (replace-regexp-in-string " " "" comment-start)))` ${1:Title}
+`(dotimes (i 80) (insert (replace-regexp-in-string " " "" comment-start)))`
+
+$0

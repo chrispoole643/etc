@@ -1,0 +1,21 @@
+# -*- snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# group: Licenses
+# name: GPLv2
+# --
+`(insert comment-start)`Copyright (C) ${1:`(format-time-string "%Y")`} ${2:`(insert user-full-name)`} <${3:`(insert user-mail-address)`}>
+`(insert comment-start)`
+`(insert comment-start)`This program is free software; you can redistribute it and/or modify it under
+`(insert comment-start)`the terms of the GNU General Public License as published by the Free Software
+`(insert comment-start)`Foundation; either version 2 of the License, or (at your option) any later
+`(insert comment-start)`version.
+`(insert comment-start)`
+`(insert comment-start)`This program is distributed in the hope that it will be useful, but WITHOUT ANY
+`(insert comment-start)`WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+`(insert comment-start)`PARTICULAR PURPOSE. See the GNU General Public License for more details.
+`(insert comment-start)`
+`(insert comment-start)`You should have received a copy of the GNU General Public License along with
+`(insert comment-start)`this program; if not, write to the Free Software Foundation, Inc., 59 Temple
+`(insert comment-start)`Place, Suite 330, Boston, MA 02111-1307 USA
+
+$0

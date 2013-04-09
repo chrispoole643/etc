@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: delta H
+# --
+\delta{\cal H}

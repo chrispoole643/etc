@@ -1,0 +1,4 @@
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Date
+# --
+`(format-time-string "%d %b %Y")`

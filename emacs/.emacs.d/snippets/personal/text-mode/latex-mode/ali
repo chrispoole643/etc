@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Frac
+# --
+\begin{align}
+  $0
+\end{align}

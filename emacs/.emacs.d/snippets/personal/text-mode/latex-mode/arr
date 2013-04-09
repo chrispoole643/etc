@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Array environment
+# --
+\begin{array}
+$>$0
+\end{array}

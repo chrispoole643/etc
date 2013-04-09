@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# contributor: Chris Poole <chris@chrispoole.com>
+# name: Proof environment
+# --
+\begin{proof}
+$>$0
+\end{proof}
