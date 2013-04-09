@@ -5,20 +5,9 @@
 ;;;; Version: 20130128
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'color-theme)
-(require 'color-theme-tangotango)
-;; (require 'zenburn)
-
-(setq color-theme-load-all-themes nil)
-
 ;; Set font (Menlo default)
 (if (display-graphic-p)
     (cjp-set-font-size "10" "Monospace"))
-
-(if (display-graphic-p)
-    (color-theme-tangotango)
-  (color-theme-initialize)
-  (color-theme-hober))
 
 ;; Move scrollbars to right side of frames
 (menu-bar-right-scroll-bar)

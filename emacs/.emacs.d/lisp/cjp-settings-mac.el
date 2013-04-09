@@ -26,14 +26,6 @@
                     (browse-url-default-macosx-browser w3m-current-url)))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Color theme
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(when (display-graphic-p)
-  (add-to-list 'custom-theme-load-path (cjp-emacs-structure-dir "lisp"))
-  (load-theme 'tangotango t))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
 ;;; ------
 ;;;
@@ -70,7 +62,7 @@
 
 ;; Set font (Menlo default)
 (if (display-graphic-p)
-    (cjp-set-font-size "12"))
+    (cjp-set-font-size "10"))
 
 ;; Use default Mac OS X browser, and move to trash when deleting stuff
 (setq delete-by-moving-to-trash t
