@@ -13,7 +13,7 @@
 
 ;; Bootstrap with my library functions (`cjp-library' contains
 ;; `cjp-get-dir-structure-in')
-(let ((file (concat user-emacs-directory "lisp/cjp-library-private.elc")))
+(let ((file "/Users/Chris/Dropbox/.private-dotfiles/emacs/cjp-library-private.elc"))
   (if (file-exists-p file) (load-file file)))
 (let ((file (concat user-emacs-directory "lisp/cjp-library.elc")))
   (if (file-exists-p file) (load-file file)))
