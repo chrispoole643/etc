@@ -11,10 +11,15 @@
 
 (setq user-emacs-directory "~/.emacs.d/")
 
-;; Bootstrap with my library functions (`cjp-library' contains
-;; `cjp-get-dir-structure-in')
-(let ((file "/Users/Chris/Dropbox/.private-dotfiles/emacs/cjp-library-private.elc"))
-  (if (file-exists-p file) (load-file file)))
+;; Load private files
+(mapcar (lambda (file)
+          (let ((absfile (concat "/Users/Chris/Dropbox/.private-dotfiles/emacs/"
+                                 file)))
+            (if (file-exists-p absfile) (load-file absfile))))
+        '("cjp-library-private.elc" "cjp-settings-private.elc"))
+
+;; Bootstrap with my library functions
+;; (`cjp-library' contains `cjp-get-dir-structure-in')
 (let ((file (concat user-emacs-directory "lisp/cjp-library.elc")))
   (if (file-exists-p file) (load-file file)))
 
@@ -24,7 +29,6 @@
 
 ;; Load all my settings, as well as contributed functions
 (load-library "library-contributed")
-(if macosxp (load-library "cjp-settings-private"))
 (load-library "cjp-settings")
 (load-library "cjp-faces")
 
