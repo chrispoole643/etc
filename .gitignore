@@ -1,0 +1,9 @@
+*private*
+.htaccess
+zsh/.zhistory*
+*.elc
+emacs/.emacs.d/backup/*
+*.png
+*.xpm
+.DS_Store
+*~
