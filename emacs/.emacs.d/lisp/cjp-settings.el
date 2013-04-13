@@ -22,12 +22,16 @@
 (load-library "smooth-scrolling")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Unicode
+;;; Multiple Cursors
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default buffer-file-coding-system 'utf-8-unix)
-(set-default-coding-systems 'utf-8-unix)
-(prefer-coding-system 'utf-8-unix)
+(require 'multiple-cursors)
+
+(global-set-key (kbd "H-c H-c") 'mc/edit-lines)
+(global-set-key (kbd "H-,") 'mc/mark-previous-like-this)
+(global-set-key (kbd "H-.") 'mc/mark-next-like-this)
+(global-set-key (kbd "H-c H-,") 'mc/mark-all-like-this)
+(global-set-key (kbd "H-c H-.") 'mc/mark-all-like-this)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Redshank
@@ -912,6 +916,14 @@
 
 (require 'gtd)
 ;; (gtd-use-menu)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Unicode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq-default buffer-file-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(prefer-coding-system 'utf-8-unix)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
