@@ -3,7 +3,7 @@ input file bigperl.texi.
 
 INFO-DIR-SECTION Programming
 START-INFO-DIR-ENTRY
-* Perl: (perl-unsplit).                 Perl docs.
+* Perl: (perl).                 Perl docs.
 END-INFO-DIR-ENTRY
 
    settitle perl

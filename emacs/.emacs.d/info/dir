@@ -163,7 +163,7 @@ GNU Plotting Utilities
 
 Programming
 * ANSI Common Lisp: (ansicl).    Draft ANSI Common Lisp standard (dpANS3R).
-* Perl: (perl-unsplit).                 Perl docs.
+* Perl: (perl).                 Perl docs.
 
 GNU C library functions and macros
 * ALTWERASE: (libc)Local Modes.
