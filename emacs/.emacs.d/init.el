@@ -25,7 +25,7 @@
 (load-library "cjp-settings")
 
 ;; Load private files
-(mapcar (lambda (file)
+(mapc (lambda (file)
           (let ((absfile (concat "/Users/Chris/.private-dotfiles/emacs/"
                                  file)))
             (if (file-exists-p absfile) (load-file absfile))))
