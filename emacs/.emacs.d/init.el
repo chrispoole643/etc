@@ -26,7 +26,7 @@
 
 ;; Load private files
 (mapcar (lambda (file)
-          (let ((absfile (concat "/Users/Chris/Dropbox/.private-dotfiles/emacs/"
+          (let ((absfile (concat "/Users/Chris/.private-dotfiles/emacs/"
                                  file)))
             (if (file-exists-p absfile) (load-file absfile))))
         '("cjp-library-private.elc" "cjp-settings-private.elc"))
