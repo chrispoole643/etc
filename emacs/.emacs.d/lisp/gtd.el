@@ -30,20 +30,20 @@
 ;;;; Version: 20130328
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Copyright (C) 2011--2013 Chris Poole <chris@chrispoole.com>
-;;
-;; This program is free software: you can redistribute it and/or modify it
-;; under the terms of the GNU General Public License as published by the Free
-;; Software Foundation, either version 3 of the License, or (at your option)
-;; any later version.
-;;
-;; This program is distributed in the hope that it will be useful, but WITHOUT
-;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
-;; more details.
-;;
-;; You should have received a copy of the GNU General Public License along with
-;; this program.  If not, see <http://www.gnu.org/licenses/>.
+;;; Copyright (C) 2011--2013 Chris Poole <chris@chrispoole.com>
+;;;
+;;; This program is free software: you can redistribute it and/or modify it
+;;; under the terms of the GNU General Public License as published by the Free
+;;; Software Foundation, either version 3 of the License, or (at your option)
+;;; any later version.
+;;;
+;;; This program is distributed in the hope that it will be useful, but WITHOUT
+;;; ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+;;; FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+;;; more details.
+;;;
+;;; You should have received a copy of the GNU General Public License along with
+;;; this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
 (eval-when-compile
@@ -171,7 +171,7 @@
   "List of file extensions that can be opened in Emacs directly
   when running `gtd-show-file'.")
 
-;; Regexen
+;;; Regexen
 
 (defvar gtd-re-action "[-a-zA-Z0-9]+"
   "Regular expression matching context names.")
@@ -714,8 +714,8 @@ heading in the project or someday/maybe list."
       (sort-lines nil begin end)
       (save-buffer))))
 
-;; Removed covey quadrant code, as not using it anymore. Keeping around in case
-;; it's useful later.
+;;; Removed covey quadrant code, as not using it anymore. Keeping around in case
+;;; it's useful later.
 ;; (defun gtd-concat-quadrants (quad)
 ;;   "Concatenate all Covey quadrants for each action context, and
 ;; save in file QUAD."

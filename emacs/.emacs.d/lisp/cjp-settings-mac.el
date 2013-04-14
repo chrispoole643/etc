@@ -18,7 +18,7 @@
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use 'o' in w3m buffers to open current page in default Mac browser
+;;; Use 'o' in w3m buffers to open current page in default Mac browser
 (add-hook 'w3m-mode-hook
           (lambda () (define-key w3m-mode-map (kbd "o")
                   (lambda () (interactive)
@@ -59,38 +59,38 @@
 ;;; reddit.com/r/emacs/comments/ab5m7/whats_your_emacs_23_os_x_setup/
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Set font (Menlo default)
+;;; Set font (Menlo default)
 (if (display-graphic-p)
     (cjp-set-font-size "10"))
 
-;; Use default Mac OS X browser, and move to trash when deleting stuff
+;;; Use default Mac OS X browser, and move to trash when deleting stuff
 (setq delete-by-moving-to-trash t
       trash-directory "~/.Trash/emacs")
 
-;; Ignore .DS_Store files with ido mode
+;;; Ignore .DS_Store files with ido mode
 (add-to-list 'ido-ignore-files "\\.DS_Store")
 
-;; Resize Emacs frame on startup, and place at top-left of screen.
-;; Height for MacBook Pro 15" screen
+;;; Resize Emacs frame on startup, and place at top-left of screen.
+;;; Height for MacBook Pro 15" screen
 (if (display-graphic-p)
     (setq default-frame-alist
           (append '((left . 60) (top . 0) (width . 80) (height . 56))
                   default-frame-alist)))
 
-;; I prefer cmd key for meta
+;;; I prefer cmd key for meta
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
       mac-option-modifier 'hyper)
 
-;; In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not
-;; forward as is usual. This fixes this behaviour.
+;;; In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not
+;;; forward as is usual. This fixes this behaviour.
 (if (display-graphic-p)
     (normal-erase-is-backspace-mode 1))
 
-;; Turn off menubar if using Emacs in terminal
+;;; Turn off menubar if using Emacs in terminal
 (if (not (display-graphic-p))
     (menu-bar-mode -1))
 
-;; When dragging files onto Emacs icon in dock, don't create a new frame
+;;; When dragging files onto Emacs icon in dock, don't create a new frame
 (setq ns-pop-up-frames nil)

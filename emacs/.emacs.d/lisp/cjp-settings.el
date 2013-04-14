@@ -44,7 +44,7 @@
                      slime-repl-mode-hook) t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Workgroups
+;;; Workgroups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'workgroups)
@@ -53,20 +53,20 @@
 (setq wg-morph-on nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Expand region
+;;; Expand region
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'expand-region)
 (global-set-key (kbd "C-=") 'er/expand-region)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Elisp slime nav
+;;; Elisp slime nav
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'elisp-slime-nav)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Visual Regexp
+;;; Visual Regexp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'visual-regexp)
@@ -74,7 +74,7 @@
 (define-key global-map (kbd "C-c q") 'vr/query-replace)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Highlight Symbol
+;;; Highlight Symbol
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'highlight-symbol)
@@ -95,7 +95,7 @@
 ;;; CPerl mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; cperl-mode is preferred to perl-mode
+;;; cperl-mode is preferred to perl-mode
 (defalias 'perl-mode 'cperl-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -145,8 +145,8 @@
 ;;; IELM
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Start ielm with AC, ElDoc, and Paredit. Make it inherit local variables from
-;; the buffer it was invoked from.
+;;; Start ielm with AC, ElDoc, and Paredit. Make it inherit local variables from
+;;; the buffer it was invoked from.
 (defvar ielm-invoked-from-buffer nil)
 
 (add-hook 'ielm-mode-hook
@@ -183,8 +183,8 @@
 
 (require 'bookmark+)
 
-;; Choose a location of bookmarks file.  Save bookmarks file every time I put a
-;; new bookmark in the file (not just when Emacs quits)
+;;; Choose a location of bookmarks file.  Save bookmarks file every time I put a
+;;; new bookmark in the file (not just when Emacs quits)
 (setq bookmark-default-file (cjp-emacs-structure-dir "bookmarks")
       bookmark-save-flag 1
       bmkp-bmenu-state-file (cjp-emacs-structure-dir ".emacs-bmk-bmenu-state.el")
@@ -244,10 +244,10 @@
 ;;; Flymake
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Show error messages in minibuffer, not as a GUI menu
+;;; Show error messages in minibuffer, not as a GUI menu
 (load-library "flymake-cursor")
 
-;; Use pyflakes with flymake
+;;; Use pyflakes with flymake
 (when (load "flymake" t)
   (defun flymake-pyflakes-init ()
     (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -280,7 +280,7 @@
 ;;; Dired
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Hide and show details (`ls -l` stuff) with '(' and ')'
+;;; Hide and show details (`ls -l` stuff) with '(' and ')'
 (require 'dired-details+)
 (require 'dired+)
 (setq dired-details-hidden-string ""
@@ -289,8 +289,8 @@
                                                                ; ignore dotfiles
 (setq-default dired-omit-mode nil) ; this is buffer-local variable
 
-;; Make return key open files in another window, except if item at point is a
-;; directory, and then open in the current window.
+;;; Make return key open files in another window, except if item at point is a
+;;; directory, and then open in the current window.
 (define-key dired-mode-map (kbd "RET") (lambda ()
                                           (interactive)
                                           (if (cjp-dired-directoryp)
@@ -301,10 +301,10 @@
   "Resize dired buffer (horizontally) after toggling details."
   (fix-horizontal-size-to-buffer))      ; In cjp-library
 
-;; Don't show '..' since '^' does this; show human file sizes
+;;; Don't show '..' since '^' does this; show human file sizes
 (setq dired-listing-switches "-Alh")
 
-;; The default fonts don't look nice with Tango theme, at least to my eyes
+;;; The default fonts don't look nice with Tango theme, at least to my eyes
 (setq diredp-compressed-file-suffix '((background dark)
                                       (:foreground "Red"))
       diredp-rare-priv '((background dark)
@@ -326,11 +326,11 @@
 
 (require 'smex)
 
-;; Start smex, saving into Emacs structure
+;;; Start smex, saving into Emacs structure
 (setq smex-save-file (cjp-emacs-structure-dir ".smex-items"))
-;; Smex updates its list of possible commands when run; don't let it
+;;; Smex updates its list of possible commands when run; don't let it
 (setq smex-auto-update t)
-;; Update smex when Emacs has been idle for (default 60) seconds
+;;; Update smex when Emacs has been idle for (default 60) seconds
 (smex-auto-update)
 (smex-initialize)
 
@@ -340,8 +340,8 @@
 
 (require 'uniquify)
 
-;; Instead of <2> etc. after buffer name when opening multiple files with the
-;; same name, Change it to "name" : "directory name"
+;;; Instead of <2> etc. after buffer name when opening multiple files with the
+;;; same name, Change it to "name" : "directory name"
 (setq uniquify-buffer-name-style 'forward
       uniquify-separator ":")
 
@@ -356,11 +356,11 @@
 ;;; Winner / Windmove
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Turn on winner mode to move back and forwards between window configurations
-;; with C-c left and C-c right respectively
+;;; Turn on winner mode to move back and forwards between window configurations
+;;; with C-c left and C-c right respectively
 (winner-mode 1)
 
-;; Move to other windows with shift-(left|right|up|down)
+;;; Move to other windows with shift-(left|right|up|down)
 (when (fboundp 'windmove-default-keybindings)
       (windmove-default-keybindings))
 
@@ -368,7 +368,7 @@
 ;;; Slime
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use sbcl
+;;; Use sbcl
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
 ;; (require 'slime)
@@ -392,16 +392,16 @@
 
 (require 'recentf)
 
-;; Tramp mode messes this up, causing Emacs to IO block for a short time. (From
-;; http://www.emacswiki.org/emacs/RecentFiles)
+;;; Tramp mode messes this up, causing Emacs to IO block for a short time. (From
+;;; http://www.emacswiki.org/emacs/RecentFiles)
 (setq recentf-auto-cleanup 'never)
 
-;; 50 files ought to be enough.
+;;; 50 files ought to be enough.
 (setq recentf-save-file (cjp-emacs-structure-dir ".recentf") ; default is ~/.recentf
       recentf-max-saved-items 100
       recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$" ".*Dropbox/gtd.*"))
 
-;; Enable recent files mode.
+;;; Enable recent files mode.
 (recentf-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -411,16 +411,16 @@
 (require 'yasnippet)
 (yas-global-mode 1)
 
-;; Store my personal snippets in ~/emacs/snippets, still load the stock ones
+;;; Store my personal snippets in ~/emacs/snippets, still load the stock ones
 (setq yas/root-directory
       (append (cjp-emacs-structure-dir-map '("personal" "contributed") "snippets")
               (list (cjp-emacs-structure-dir "yasnippet/snippets" "lisp"))))
 
-;; Load snippets from all directories
+;;; Load snippets from all directories
 (mapc 'yas/load-directory yas/root-directory)
 
-;; If there are multiple snippets to choose from, use ido by default in
-;; minibuffer.
+;;; If there are multiple snippets to choose from, use ido by default in
+;;; minibuffer.
 (setq yas/prompt-functions '(yas/ido-prompt
                              yas/dropdown-prompt
                              yas/x-prompt
@@ -447,8 +447,8 @@
 
 (setq c-eldoc-includes "-I./ -I../ -I/usr/include/ -I/usr/local/include/ ")
 
-;; Make ElDoc aware of ParEdit's most used commands (ElDoc will automatically
-;; refresh the minibuffer)
+;;; Make ElDoc aware of ParEdit's most used commands (ElDoc will automatically
+;;; refresh the minibuffer)
 (eldoc-add-command
  'paredit-backward-delete
  'paredit-close-round)
@@ -475,12 +475,12 @@
       markdown-indent-on-enter nil
       markdown-enable-math t) ; Enable syntax highlighting (LaTeX)
 
-;; Webgen uses markdown syntax in .page files
+;;; Webgen uses markdown syntax in .page files
 (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode))
 
-;; Rebind tab key as yas/expand
+;;; Rebind tab key as yas/expand
 (add-hook 'markdown-mode-hook (lambda ()
                                  (local-set-key (kbd "<tab>") 'yas/expand)
                                  (outline-minor-mode 1)))
@@ -491,30 +491,30 @@
 ;;;
 ;;; Using python.el, not python-mode.el. The latter doesn't seem to be able to
 ;;; send the contents of a buffer to the interpreter easily, as python.el can
-;;;  (with C-c C-c).
+;;; (with C-c C-c).
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'ac-python)
 
-;; Use python-mode with files with these extensions
+;;; Use python-mode with files with these extensions
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 
-;; Turn on auto-complete in python shells
+;;; Turn on auto-complete in python shells
 (add-hook 'inferior-python-mode-hook (lambda () (auto-complete-mode 1)))
 
-;; Use python major mode if 'python' is in hashbang.
+;;; Use python major mode if 'python' is in hashbang.
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
-;; Use python as the python interpreter (can be changed to "ipython" in time
-;; when it works)
+;;; Use python as the python interpreter (can be changed to "ipython" in time
+;;; when it works)
 (setq python-python-command "python")
 
-;; Check files for pep8 mistakes
+;;; Check files for pep8 mistakes
 (autoload 'python-pep8 "python-pep8")
 (autoload 'pep8 "python-pep8")
 
-;; displays "\" at the end of lines that wrap
+;;; displays "\" at the end of lines that wrap
 (setq longlines-show-hard-newlines t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -584,10 +584,10 @@
 
 (setq scheme-program-name cjp-scheme-program)
 
-;; Geiser is a minor mode built on scheme-mode, supporting racket (PLT-Scheme)
-;; and guile. (See info doc.)
-;; To install geiser, extract its tarball to geiser directory, then:
-;; mkdir build && cd build && ../configure && make all
+;;; Geiser is a minor mode built on scheme-mode, supporting racket (PLT-Scheme)
+;;; and guile. (See info doc.)
+;;; To install geiser, extract its tarball to geiser directory, then:
+;;; mkdir build && cd build && ../configure && make all
 ;(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
 ;                                                       "lisp"))
 ;                        load-path))
@@ -597,7 +597,7 @@
       geiser-repl-autodoc-p nil
       geiser-mode-autodoc-p nil)
 
-;; Shamelessly stolen from info-look.el, scheme-mode
+;;; Shamelessly stolen from info-look.el, scheme-mode
 (info-lookup-maybe-add-help
  :mode 'geiser-repl-mode
  :regexp "[^()`',\" \t\n]+"
@@ -606,12 +606,12 @@
  :doc-spec '(("(r5rs)Index" nil
 	      "^[ \t]+-+ [^:]+:[ \t]*" "\\b")))
 
-;; Quack
+;;; Quack
 (require 'quack)
 (setq quack-default-program cjp-scheme-program
       quack-run-scheme-always-prompts-p nil)
 
-;; http://synthcode.com/wiki/scheme-complete
+;;; http://synthcode.com/wiki/scheme-complete
 (autoload 'scheme-smart-complete "scheme-complete" nil t)
 
 (autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
@@ -639,16 +639,16 @@
 (add-hook 'slime-mode-hook            (lambda () (paredit-mode +1)))
 (add-hook 'slime-repl-mode-hook       (lambda () (paredit-mode +1)))
 
-;; Use C-w to backwards kill words, consistent with global custom
-;; settings. Also undefine C-left and C-right, to use these with winner mode.
+;;; Use C-w to backwards kill words, consistent with global custom
+;;; settings. Also undefine C-left and C-right, to use these with winner mode.
 (add-hook 'paredit-mode-hook
           (lambda ()
             (local-set-key (kbd "C-w") 'paredit-backward-kill-word)
             (define-key paredit-mode-map (kbd "C-<left>") nil)
             (define-key paredit-mode-map (kbd "C-<right>") nil)))
 
-;; Stop SLIME's REPL from grabbing DEL,
-;; which is annoying when backspacing over a '('
+;;; Stop SLIME's REPL from grabbing DEL,
+;;; which is annoying when backspacing over a '('
 (defun override-slime-repl-bindings-with-paredit ()
   (define-key slime-repl-mode-map
     (read-kbd-macro paredit-backward-delete-key) nil))
@@ -665,27 +665,27 @@
 ;;; Tramp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use SSH in TRAMP by default
+;;; Use SSH in TRAMP by default
 (setq tramp-default-method "ssh")
 
-;; Don't make backup files when using TRAMP
+;;; Don't make backup files when using TRAMP
 (add-to-list 'backup-directory-alist
              (cons tramp-file-name-regexp nil))
 
-;; Store information here (not default ~/.emacs.d/tramp)
+;;; Store information here (not default ~/.emacs.d/tramp)
 (setq tramp-persistency-file-name (cjp-emacs-structure-dir ".tramp"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Comint
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Add current directory to mode line of shell windows
+;;; Add current directory to mode line of shell windows
 ;; (defun add-mode-line-dirtrack ()
 ;;  (add-to-list 'mode-line-buffer-identification
 ;;               '(:propertize (" " default-directory " ") face dired-directory)))
 ;; (add-hook 'shell-mode-hook 'add-mode-line-dirtrack)
 
-;; Make sure passwords not echoed in shell
+;;; Make sure passwords not echoed in shell
 (add-hook 'comint-output-filter-functions
           'comint-watch-for-password-prompt)
 
@@ -717,7 +717,7 @@
 
 (require 'org-install)
 
-;; Org-mode setup
+;;; Org-mode setup
 (setq org-agenda-ndays 7                  ; Show next 7 days in agenda
       org-deadline-warning-days 14        ; Show upcoming events 14 days prior
       org-agenda-show-all-dates t         ; Show dates even if totally free
@@ -742,12 +742,12 @@
 
 (require 'reftex)
 
-;; Load AUCTeX
+;;; Load AUCTeX
 (load "auctex.el" nil t t)
 
-;; These allow AUCTeX to parse TeX files automatically. Creates 'auto'
-;; directory with parse info for each TeX file, got annoying so disabled for
-;; now
+;;; These allow AUCTeX to parse TeX files automatically. Creates 'auto'
+;;; directory with parse info for each TeX file, got annoying so disabled for
+;;; now
 ;; (setq TeX-auto-save t)
 
 (setq TeX-parse-self t
@@ -755,13 +755,13 @@
       ;; TeX-electric-sub-and-superscript nil
       )
 
-;; Enable math mode and auto-fill when typing LaTeX, and RefTeX
+;;; Enable math mode and auto-fill when typing LaTeX, and RefTeX
 (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
 (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (add-hook 'LaTeX-mode-hook (lambda () (TeX-source-correlate-mode 1)))
 
-;; Use tex parser so that TeX commands aren't checked
+;;; Use tex parser so that TeX commands aren't checked
 (add-hook 'LaTeX-mode-hook (lambda () (setq ispell-parser 'tex)))
 
 (setq TeX-source-correlate-method 'synctex)
@@ -774,11 +774,11 @@
                                            ; \citet format
       )
 
-;; Highlight keywords from the natbib package
+;;; Highlight keywords from the natbib package
 (setq font-latex-match-reference-keywords
       '(("citet" "[{")))
 
-;; Have AUCTeX ask which is master file for multi-document TeX
+;;; Have AUCTeX ask which is master file for multi-document TeX
 (setq-default TeX-master nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -795,25 +795,25 @@
                                      ; chosen, just make a new one without
                                      ; prompting
 
-;; Ignore the .aux extensions that TeX programs create
+;;; Ignore the .aux extensions that TeX programs create
 (setq completion-ignored-extensions
       (cons "*.aux" completion-ignored-extensions))
 
-;; Order extensions by how I use them
+;;; Order extensions by how I use them
 (setq ido-file-extensions-order '(".tex" ".txt" ".md" ".py" ".sh" ".el" ".xml" ".htm"))
 
-;; Ignore files defined in variable completion-ignored-extensions
+;;; Ignore files defined in variable completion-ignored-extensions
 (setq ido-ignore-extensions t)
 
-;; Default keybinding is backspace key, but I use C-w in the non-Ido-mode
-;; minibuffers often, so this is more conventient for muscle memory
+;;; Default keybinding is backspace key, but I use C-w in the non-Ido-mode
+;;; minibuffers often, so this is more conventient for muscle memory
 (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)
 
-;; Stops Ido searching for similar-named files if I use C-x C-s to create a new
-;; file and buffer
+;;; Stops Ido searching for similar-named files if I use C-x C-s to create a new
+;;; file and buffer
 (setq ido-auto-merge-work-directories-length -1)
 
-;; Keep annoying buffers out of my face
+;;; Keep annoying buffers out of my face
 (setq ido-ignore-buffers (list (rx (or (and bos  " ")
                                        (and bos
                                             (or "*Completions*"
@@ -821,13 +821,13 @@
                                                 "*vc-diff*")
                                             eos)))))
 
-;; Allow spaces when using ido-find-file
+;;; Allow spaces when using ido-find-file
 (add-hook 'ido-make-file-list-hook
           (lambda ()
             (define-key ido-file-dir-completion-map (kbd "SPC") 'self-insert-command)))
 
-;; Use Ido for completing-read, such as describe-variable (C-h v)
-;; From http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13
+;;; Use Ido for completing-read, such as describe-variable (C-h v)
+;;; From http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13
 ;; (defvar ido-enable-replace-completing-read t
 ;;  "If t, use ido-completing-read instead of completing-read if possible.
 
@@ -839,8 +839,8 @@
 ;;    (defadvice foo (around original-completing-read-only activate)
 ;;      (let (ido-enable-replace-completing-read) ad-do-it))")
 
-;; Replace completing-read wherever possible, unless directed otherwise
-;; (defadvice completing-read
+;;; Replace completing-read wherever possible, unless directed otherwise
+;;; (defadvice completing-read
 ;;  (around use-ido-when-possible activate)
 ;;  (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
 ;;          (and (boundp 'ido-cur-list)
@@ -854,15 +854,15 @@
 ;;                                     nil require-match initial-input hist def))
 ;;        ad-do-it))))
 
-;; Don't guess filenames at all when I'm in dired; it's never what I want.
-;; Also, turn off ido-completing-read, as it messes up dired-do-rename, and
-;; probably other stuff too.
+;;; Don't guess filenames at all when I'm in dired; it's never what I want.
+;;; Also, turn off ido-completing-read, as it messes up dired-do-rename, and
+;;; probably other stuff too.
 ;; (add-hook 'dired-mode-hook
 ;;          (lambda ()
 ;;             (set (make-local-variable 'ido-use-filename-at-point) nil)
 ;;             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 
-;; python.el doesn't like ido-completing-read either
+;;; python.el doesn't like ido-completing-read either
 ;; (add-hook 'python-mode-hook
 ;;          (lambda ()
 ;;             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
@@ -871,7 +871,7 @@
 ;;; Aspell
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Found from http://www.emacswiki.org/emacs/CocoAspell
+;;; Found from http://www.emacswiki.org/emacs/CocoAspell
 (setq ispell-program-name "aspell"
       ispell-dictionary "english"
       ispell-dictionary-alist
@@ -882,23 +882,23 @@
         `((nil ,@default)
           ("english" ,@default))))
 
-;; Save personal dictionary in emacs structure
+;;; Save personal dictionary in emacs structure
 (setq ispell-personal-dictionary
       (cjp-emacs-structure-dir ".aspell-personal-dictionary"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; ibuffer
+;;; ibuffer
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Use ibuffer for my buffer menu (C-x C-b)
+;;; Use ibuffer for my buffer menu (C-x C-b)
 (defalias 'list-buffers 'ibuffer)
 
-;; ibuffer defaults to opening files with ibuffer-find-file; I prefer ido
+;;; ibuffer defaults to opening files with ibuffer-find-file; I prefer ido
 (add-hook 'ibuffer-load-hook (lambda ()
                                 (define-key ibuffer-mode-map
                                   (kbd "C-x C-f") 'ido-find-file)))
 
-;; `* !' is what dired uses to clear all marks
+;;; `* !' is what dired uses to clear all marks
 (add-hook 'ibuffer-load-hook (lambda ()
                                (define-key ibuffer-mode-map
                                  (kbd "* !") 'ibuffer-unmark-all)))
@@ -922,19 +922,19 @@
 ;;; Miscellaneous
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; A huge number forces windows to be split vertically, like C-x 3 does
+;;; A huge number forces windows to be split vertically, like C-x 3 does
 ;; (setq split-height-threshold 900)
 
 (setq tab-always-indent 'complete)
 
-;; Enable narrowing
+;;; Enable narrowing
 (put 'narrow-to-region 'disabled nil)
 
-;; If using customize, save generated elisp here, not .emacs
+;;; If using customize, save generated elisp here, not .emacs
 (setq custom-file (cjp-emacs-structure-dir ".customize.el"))
 
-;; If saving a .el file in my emacs structure, automatically byte compile it.
-;; From stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001
+;;; If saving a .el file in my emacs structure, automatically byte compile it.
+;;; From stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001
 (add-hook 'after-save-hook
           (lambda ()
              (when (string-match
@@ -943,39 +943,39 @@
                     buffer-file-name)
                (byte-compile-file buffer-file-name))))
 
-;; Put auto save files here
+;;; Put auto save files here
 (setq auto-save-list-file-prefix (cjp-emacs-structure-dir ".auto-save-list/.saves-"))
 
-;; Store tetris scores
+;;; Store tetris scores
 (setq tetris-score-file (cjp-emacs-structure-dir ".tetris-scores"))
 
-;; Make scripts executable when saved by default (chmod +x)
+;;; Make scripts executable when saved by default (chmod +x)
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-;; These functions area disabled by default for new users. I want them!
+;;; These functions area disabled by default for new users. I want them!
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
 
-;; Mode to use for the initial scratch buffer
+;;; Mode to use for the initial scratch buffer
 ;; (setq-default initial-major-mode 'python-mode)
 
-;; Word moving commands move point between CamelCaseWords
+;;; Word moving commands move point between CamelCaseWords
 (global-subword-mode 1)
 
-;; Don't always ask if I want to make a new file or buffer, just do it
+;;; Don't always ask if I want to make a new file or buffer, just do it
 (setq confirm-nonexistent-file-or-buffer nil)
 
-;; I use this function a lot so create a shortcut. M-x bc invokes it
+;;; I use this function a lot so create a shortcut. M-x bc invokes it
 (defalias 'bc 'emacs-lisp-byte-compile)
 
-;; Auto-fill mode is useful in text mode
+;;; Auto-fill mode is useful in text mode
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; Remove the "This buffer is for notes" text that shows at the top of the
-;; scratch buffer when Emacs loads
+;;; Remove the "This buffer is for notes" text that shows at the top of the
+;;; scratch buffer when Emacs loads
 (setq initial-scratch-message nil)
 
-;; Store all backup files in one folder, not all over filesystem
+;;; Store all backup files in one folder, not all over filesystem
 (setq backup-directory-alist (list (cons "." (cjp-emacs-structure-dir "backup/")))
       version-control t                 ; Use version numbers for backups
       kept-new-versions 2               ; Number of newest versions to keep
@@ -983,37 +983,37 @@
       delete-old-versions t             ; Ask to delete excess backup versions?
       backup-by-copying-when-linked t)  ; Copy linked files, don't rename
 
-;; Store all autosave files in one folder, not all over filesystem
+;;; Store all autosave files in one folder, not all over filesystem
 (add-to-list 'auto-save-file-name-transforms
              `(".*" ,(cjp-emacs-structure-dir "autosaves/") t) t)
 
-;; From
-;; emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
-;; Highlights comments like /* FIXME: do something */ in C-like (C, C++, Obj-C,
-;; etc.) languages
+;;; From
+;;; emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
+;;; Highlights comments like /* FIXME: do something */ in C-like (C, C++, Obj-C,
+;;; etc.) languages
 (add-hook 'c-mode-common-hook
           (lambda ()
             (font-lock-add-keywords nil
                                     '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
 
-;; Move mouse to top-right corner once it gets too close to cursor.  Move back
-;; once mouse moved away
+;;; Move mouse to top-right corner once it gets too close to cursor.  Move back
+;;; once mouse moved away
 (mouse-avoidance-mode 'exile)
 
-;; Forces lines longer than buffer width to overlap in a nice way. I don't
-;; think I'm too keen on it, so turned it off for the time being.
+;;; Forces lines longer than buffer width to overlap in a nice way. I don't
+;;; think I'm too keen on it, so turned it off for the time being.
 (global-visual-line-mode 0)
 
-;; Use nxml-mode for XML files
+;;; Use nxml-mode for XML files
 (add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
 
-;; When viewing pdf (for example), have it auto-revert. Useful if viewing a
-;; LaTeX document with AUCTeX
+;;; When viewing pdf (for example), have it auto-revert. Useful if viewing a
+;;; LaTeX document with AUCTeX
 (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
-;; Modifies kill line and copy line (C-x C-k and M-w) in place. If something is
-;; selected, copy/cut as usual. If nothing is selected, copy/cut the current
-;; line
+;;; Modifies kill line and copy line (C-x C-k and M-w) in place. If something is
+;;; selected, copy/cut as usual. If nothing is selected, copy/cut the current
+;;; line
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
   (interactive (if mark-active (list (region-beginning) (region-end)) (message
@@ -1027,94 +1027,94 @@
       (list (line-beginning-position)
         (line-beginning-position 2)))))
 
-;; Replace yes/no by y/n
+;;; Replace yes/no by y/n
 (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Because I know where to find the help file
+;;; Because I know where to find the help file
 (setq inhibit-splash-screen t)
 
-;; Require C-x C-c prompt. I've closed too often by accident
+;;; Require C-x C-c prompt. I've closed too often by accident
 (global-set-key (kbd "C-x C-c")
                 (lambda () (interactive)
                    (cond ((y-or-n-p "Quit? ")
                           (save-buffers-kill-emacs)))))
 
-;; Always flash for parens
+;;; Always flash for parens
 (show-paren-mode 1)
 
-;; Set mode of buffer automatically based on filename or other indications (see
-;; set-auto-mode documentation), so can quickly make a temp. buffer (like
-;; *Scratch*) called 'test.txt' to make it open in text-mode, or 'test.js' for
-;; javascript-mode, etc.
+;;; Set mode of buffer automatically based on filename or other indications (see
+;;; set-auto-mode documentation), so can quickly make a temp. buffer (like
+;;; *Scratch*) called 'test.txt' to make it open in text-mode, or 'test.js' for
+;;; javascript-mode, etc.
 (setq default-major-mode (lambda ()
      (let ((buffer-file-name (or buffer-file-name (buffer-name))))
           (set-auto-mode))))
 
-;; Open new buffers (without files or filename extensions) in markdown-mode
+;;; Open new buffers (without files or filename extensions) in markdown-mode
 (add-to-list 'auto-mode-alist '("" . markdown-mode) t)
 
-;; Open log files in text mode, for now
+;;; Open log files in text mode, for now
 (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
 
-;; Keep ispell word as M-s even when editing git commit logs
+;;; Keep ispell word as M-s even when editing git commit logs
 (add-hook 'log-edit-mode-hook
           (lambda () (define-key log-edit-mode-map (kbd "M-s") 'ispell-word)))
 
-;; I like this mode; seems to be on by default under emacs-snapshot on
-;; GNU/Linux systems
+;;; I like this mode; seems to be on by default under emacs-snapshot on
+;;; GNU/Linux systems
 (transient-mark-mode 1)
 
-;; Make the compilation window appear smallish (not half of frame as default)
+;;; Make the compilation window appear smallish (not half of frame as default)
 (setq compilation-window-height 10)
 
-;; Set default path to my inbox
+;;; Set default path to my inbox
 ;; (setq default-directory "~/Documents/Inbox/")
 
-;; True by default in Carbon Emacs. Set here for Aquamacs and other distros
+;;; True by default in Carbon Emacs. Set here for Aquamacs and other distros
 (setq x-select-enable-clipboard t)
 
-;; Remove the annoying toolbar
+;;; Remove the annoying toolbar
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 
-;; Mute annoying beep
+;;; Mute annoying beep
 (setq visible-bell t)
 
-;; Stop cursor from blinking
+;;; Stop cursor from blinking
 (blink-cursor-mode -1)
 
-;; Let emacsclient send stuff to existing Emacs process
+;;; Let emacsclient send stuff to existing Emacs process
 (if (display-graphic-p)
     (server-start))
 
-;; Don't use tabs
+;;; Don't use tabs
 (setq-default indent-tabs-mode nil)
 
-;; Set auto-fill-mode to fill to column 80
+;;; Set auto-fill-mode to fill to column 80
 (setq default-fill-column 80)
 
-;; Set tab key to two spaces
+;;; Set tab key to two spaces
 (setq-default c-basic-offset 4)
 
-;; Tab binary character in files interpreted as mod-4
+;;; Tab binary character in files interpreted as mod-4
 (setq-default tab-width 4)
 
-;; Show column number as well as line number
+;;; Show column number as well as line number
 (setq column-number-mode t)
 
-;; My prefered code indentation style
+;;; My prefered code indentation style
 (setq c-set-style "gnu")
 
-;; When double-clicking a file to open in Emacs, make sure it opens in a new
-;; window in the current frame; the default (nil) causes Emacs to create a new
-;; frame.
+;;; When double-clicking a file to open in Emacs, make sure it opens in a new
+;;; window in the current frame; the default (nil) causes Emacs to create a new
+;;; frame.
 (setq display-buffer-reuse-frames t)
 
-;; When lines wrap, `next-line' drops to the next real line, not the next
-;; visual line
+;;; When lines wrap, `next-line' drops to the next real line, not the next
+;;; visual line
 (setq line-move-visual t)
 
-;; From
-;; masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine
+;;; From
+;;; masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine
 (setq redisplay-dont-pause t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
