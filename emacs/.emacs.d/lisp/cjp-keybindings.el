@@ -12,7 +12,9 @@
 ;;; Use `C-c c` as a prefix for more complicated stuff.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-
+(mapc (lambda (arg)
+        (global-set-key (kbd (concat "C-c c " (car arg))) (cadr arg)))
+      '(("l" find-library)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Generic
