@@ -123,9 +123,9 @@
 ;;; (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
 
 ;;; Goto points in current buffer really quickly
-(global-set-key (kbd "§") 'ace-jump-char-mode)
-(global-set-key (kbd "M-§") 'ace-jump-word-mode)
-(global-set-key (kbd "C-§") 'ace-jump-line-mode)
+(global-set-key (kbd (if macosxp "§" "`")) 'ace-jump-char-mode) 
+(global-set-key (kbd (if macosxp "M-§" "M-`")) 'ace-jump-word-mode) 
+(global-set-key (kbd (if macosxp "C-§" "C-`")) 'ace-jump-line-mode) 
 
 (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
 (global-set-key (kbd "<C-f2>") 'cjp-window-setup-toggle)
