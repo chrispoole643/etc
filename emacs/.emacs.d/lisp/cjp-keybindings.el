@@ -122,11 +122,6 @@
 ;;; (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
 ;;; (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
 
-;;; Goto points in current buffer really quickly
-(global-set-key (kbd (if macosxp "§" "`")) 'ace-jump-char-mode) 
-(global-set-key (kbd (if macosxp "M-§" "M-`")) 'ace-jump-word-mode) 
-(global-set-key (kbd (if macosxp "C-§" "C-`")) 'ace-jump-line-mode) 
-
 (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
 (global-set-key (kbd "<C-f2>") 'cjp-window-setup-toggle)
 
@@ -168,6 +163,11 @@
   (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
   (global-set-key (kbd "M-H") 'ns-do-hide-others)
 
+  ;; Goto points in current buffer really quickly
+  (global-set-key (kbd "§") 'ace-jump-char-mode) 
+  (global-set-key (kbd "M-§") 'ace-jump-word-mode) 
+  (global-set-key (kbd "C-§") 'ace-jump-line-mode) 
+
   ;; Easily open files with 'open' and show directories in Finder
   (define-key dired-mode-map (kbd "o") 'cjp-mac-guess-open-file)
   (define-key dired-mode-map (kbd "C-M-f") 'cjp-mac-show-finder)
@@ -185,8 +185,7 @@
                                      (cjp-mac-open-terminal t)))
   (global-set-key (kbd "<f13>") 'cjp-mac-guess-open-file)
   (global-set-key (kbd "<f14>") 'cjp-browse-url-on-line)
-  (global-set-key (kbd "<f15>") 'cjp-find-with-google)
-)                                       ; Ugly I know, but helps with VC
+  (global-set-key (kbd "<f15>") 'cjp-find-with-google))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Linux
@@ -198,6 +197,11 @@
   (global-set-key (kbd "<C-f1>") 'next-frame)
   (global-set-key (kbd "<C-M-f1>") 'delete-frame)
   (global-set-key (kbd "<C-s-f12>") 'gtd-functions)
+
+  ;; Goto points in current buffer really quickly
+  (global-set-key (kbd "`") 'ace-jump-char-mode) 
+  (global-set-key (kbd "M-`") 'ace-jump-word-mode) 
+  (global-set-key (kbd "C-`") 'ace-jump-line-mode) 
 
   ;; Outline-minor-mode key map
   (define-prefix-command 'cm-map nil "Outline-")
@@ -220,5 +224,4 @@
   (define-key cm-map "p" 'outline-previous-visible-heading) ; Previous
   (define-key cm-map "f" 'outline-forward-same-level)       ; Forward - same level
   (define-key cm-map "b" 'outline-backward-same-level)      ; Backward - same level
-  (global-set-key (kbd "C-c C-c") cm-map)
-  ) ; Ugly I know, but helps with VC
+  (global-set-key (kbd "C-c C-c") cm-map))
