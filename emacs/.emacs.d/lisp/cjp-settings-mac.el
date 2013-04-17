@@ -81,7 +81,7 @@
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
-      mac-option-modifier 'hyper)
+      mac-option-modifier nil)
 
 ;;; In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not
 ;;; forward as is usual. This fixes this behaviour.
