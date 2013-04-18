@@ -966,6 +966,8 @@
 ;; (setq-default initial-major-mode 'python-mode)
 
 ;;; Word moving commands move point between CamelCaseWords
+(let ((entry (assq 'subword-mode minor-mode-alist)))
+    (when entry (setcdr entry '(nil))))
 (global-subword-mode 1)
 
 ;;; Don't always ask if I want to make a new file or buffer, just do it
