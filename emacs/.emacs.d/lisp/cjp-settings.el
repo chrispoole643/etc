@@ -966,9 +966,9 @@
 
 ;;; Word moving commands move point between CamelCaseWords.
 ;;; In Emacs 24.3.50+ (from git), modeline lists "," - stop this
+(global-subword-mode 1)
 (let ((entry (assq 'subword-mode minor-mode-alist)))
     (when entry (setcdr entry '(nil))))
-(global-subword-mode 1)
 
 ;;; Don't always ask if I want to make a new file or buffer, just do it
 (setq confirm-nonexistent-file-or-buffer nil)
