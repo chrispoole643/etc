@@ -944,8 +944,7 @@
 (add-hook 'after-save-hook
           (lambda ()
              (when (string-match
-                    (concat (expand-file-name
-                             (cjp-emacs-structure-dir "lisp/")) ".*\.el$")
+                    (concat ".emacs.d/lisp/" ".*\.el$")
                     buffer-file-name)
                (byte-compile-file buffer-file-name))))
 
