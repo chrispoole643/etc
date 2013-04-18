@@ -60,7 +60,7 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c C-c C-x C-m") 'execute-extended-command)
 
-(global-set-key (lbd "C-?") 'undo-tree-undo)
+(global-set-key (kbd "C-?") 'undo-tree-undo)
 (global-set-key (kbd "M-?") 'undo-tree-redo)
 (global-set-key (kbd "C-M-?") 'undo-tree-visualize)
 
