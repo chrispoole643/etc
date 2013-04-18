@@ -20,6 +20,13 @@
 ;;; Generic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Multiple cursors
+(global-set-key (kbd "C-M-/") 'mc/edit-lines)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M->") 'mc/mark-all-like-this)
+
 ;;; iedit
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
@@ -53,8 +60,9 @@
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c C-c C-x C-m") 'execute-extended-command)
 
-(global-set-key (kbd "M-/") 'undo-tree-redo)
-(global-set-key (kbd "C-M-/") 'undo-tree-visualize)
+(global-set-key (lbd "C-?") 'undo-tree-undo)
+(global-set-key (kbd "M-?") 'undo-tree-redo)
+(global-set-key (kbd "C-M-?") 'undo-tree-visualize)
 
 ;;; Default keybindings of C-c <left> and C-c <right> are annoying to type if
 ;;; going back more than one or two window configurations.

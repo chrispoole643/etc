@@ -34,12 +34,6 @@
 
 (require 'multiple-cursors)
 
-(global-set-key (kbd "H-c H-c") 'mc/edit-lines)
-(global-set-key (kbd "H-,") 'mc/mark-previous-like-this)
-(global-set-key (kbd "H-.") 'mc/mark-next-like-this)
-(global-set-key (kbd "H-c H-,") 'mc/mark-all-like-this)
-(global-set-key (kbd "H-c H-.") 'mc/mark-all-like-this)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Redshank
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
