@@ -410,17 +410,18 @@
 
 (require 'c-eldoc)
 
-(add-hook 'python-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'inferior-python-mode 'turn-on-eldoc-mode)
-(add-hook 'emacs-lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'scheme-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'inferior-scheme-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'geiser-repl-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'slime-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'slime-repl-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'lisp-interaction-mode-hook 'turn-on-eldoc-mode)
-(add-hook 'c-mode-hook 'c-turn-on-eldoc-mode)
+(mapc (lambda (x) (add-hook x 'turn-on-eldoc-mode))
+      '(python-mode-hook
+        inferior-python-mode
+        emacs-lisp-mode-hook
+        scheme-mode-hook
+        inferior-scheme-mode-hook
+        geiser-repl-mode-hook
+        lisp-mode-hook
+        slime-mode-hook
+        slime-repl-mode-hook
+        lisp-interaction-mode-hook
+        c-mode-hook))
 
 (setq c-eldoc-includes "-I./ -I../ -I/usr/include/ -I/usr/local/include/ ")
 
