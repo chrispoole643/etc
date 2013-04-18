@@ -202,7 +202,12 @@
 ;;; DocView
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'doc-view-mode-hook (lambda () (auto-revert-mode 1)))
+;;; When viewing pdf (for example), have it auto-revert. Useful if viewing a
+;;; LaTeX document with AUCTeX
+(add-hook 'doc-view-mode-hook 'auto-revert-mode)
+
+;;; Higher quality PDFs please
+(setq doc-view-resolution 300)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Editing from Google Chrome
@@ -1013,10 +1018,6 @@
 
 ;;; Use nxml-mode for XML files
 (add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
-
-;;; When viewing pdf (for example), have it auto-revert. Useful if viewing a
-;;; LaTeX document with AUCTeX
-(add-hook 'doc-view-mode-hook 'auto-revert-mode)
 
 ;;; Modifies kill line and copy line (C-x C-k and M-w) in place. If something is
 ;;; selected, copy/cut as usual. If nothing is selected, copy/cut the current
