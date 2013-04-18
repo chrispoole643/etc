@@ -1109,7 +1109,7 @@
 (setq column-number-mode t)
 
 ;;; My prefered code indentation style
-(setq c-set-style "gnu")
+(setq c-set-style "k&r")
 
 ;;; When double-clicking a file to open in Emacs, make sure it opens in a new
 ;;; window in the current frame; the default (nil) causes Emacs to create a new
