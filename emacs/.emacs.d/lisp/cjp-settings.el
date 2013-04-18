@@ -965,7 +965,8 @@
 ;;; Mode to use for the initial scratch buffer
 ;; (setq-default initial-major-mode 'python-mode)
 
-;;; Word moving commands move point between CamelCaseWords
+;;; Word moving commands move point between CamelCaseWords.
+;;; In Emacs 24.3.50+ (from git), modeline lists "," - stop this
 (let ((entry (assq 'subword-mode minor-mode-alist)))
     (when entry (setcdr entry '(nil))))
 (global-subword-mode 1)
