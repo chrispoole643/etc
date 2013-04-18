@@ -12,11 +12,15 @@
 ;;; These don't require their own section with other commands.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'cl)
 (require 'smallurl)
 (require 'smooth-scrolling)
 (require 'htmlize)
 (require 'pydoc-info)
-(require 'cl)
+(require 'expand-region)
+(require 'elisp-slime-nav)
+(require 'visual-regexp)
+(require 'highlight-symbol)
 
 (load-library "regex-tool")
 (load-library "smooth-scrolling")
@@ -49,41 +53,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'workgroups)
-(setq wg-prefix-key (kbd "C-c w"))
+(setq wg-prefix-key (kbd "C-c c w"))    ; Use my custom binding prefix
 (workgroups-mode 1)
 (setq wg-morph-on nil)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Expand region
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'expand-region)
-(global-set-key (kbd "C-=") 'er/expand-region)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Elisp slime nav
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'elisp-slime-nav)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Visual Regexp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'visual-regexp)
-(define-key global-map (kbd "C-c r") 'vr/replace)
-(define-key global-map (kbd "C-c q") 'vr/query-replace)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Highlight Symbol
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'highlight-symbol)
-;; (global-set-key [(control f3)] 'highlight-symbol-at-point)
-;; (global-set-key [f3] 'highlight-symbol-next)
-;; (global-set-key [(shift f3)] 'highlight-symbol-prev)
-;; (global-set-key [(meta f3)] 'highlight-symbol-prev)))
-;; (global-set-key [(control meta f3)] 'highlight-symbol-query-replace)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Powerline

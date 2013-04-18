@@ -20,12 +20,31 @@
 ;;; Generic
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Highlight symbol
+;; (global-set-key [(control f3)] 'highlight-symbol-at-point)
+;; (global-set-key [f3] 'highlight-symbol-next)
+;; (global-set-key [(shift f3)] 'highlight-symbol-prev)
+;; (global-set-key [(meta f3)] 'highlight-symbol-prev)))
+;; (global-set-key [(control meta f3)] 'highlight-symbol-query-replace)
+
+;;; Visual regexp
+(global-set-key (kbd "C-c r") 'vr/replace)
+(global-set-key (kbd "C-c q") 'vr/query-replace)
+
+;;; Expand region
+(global-set-key (kbd "C-=") 'er/expand-region)
+
 ;;; Multiple cursors
-(global-set-key (kbd "C-M-/") 'mc/edit-lines)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-<") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-M->") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M-?") 'mc/edit-lines)
+(global-set-key (kbd "C-S-,") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-.") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-S-,") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M-S-.") 'mc/mark-all-like-this)
+
+;;; Undo-tree
+(global-set-key (kbd "C-/") 'undo-tree-undo)
+(global-set-key (kbd "M-/") 'undo-tree-redo)
+(global-set-key (kbd "C-M-/") 'undo-tree-visualize)
 
 ;;; iedit
 (define-key global-map (kbd "C-;") 'iedit-mode)
@@ -59,10 +78,6 @@
 
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c C-c C-x C-m") 'execute-extended-command)
-
-(global-set-key (kbd "C-?") 'undo-tree-undo)
-(global-set-key (kbd "M-?") 'undo-tree-redo)
-(global-set-key (kbd "C-M-?") 'undo-tree-visualize)
 
 ;;; Default keybindings of C-c <left> and C-c <right> are annoying to type if
 ;;; going back more than one or two window configurations.
