@@ -258,16 +258,18 @@ sorted by most common use. If `smex' isn't available, use `ido'."
 
 (defun gtd-open-file (&rest paths)
   "Open tasks file, ready to enter a new item."
-  (find-file (apply 'gtd-location paths))
-  (goto-char (point-min))
-  (when (and (equal (car paths) "inbox")
-             (eq (length paths) 1))
-    (goto-char (point-max))
-    (if (eq (point-at-bol) (point))
-        (backward-char))
-    (when (not (eq (- (point) (point-at-bol)) 2))
-      (newline)
-      (insert "- "))))
+  (let ((already-inboxp (equal (buffer-name) "inbox")))
+    (find-file (apply 'gtd-location paths))
+    (goto-char (point-min))
+    (when (and (equal (car paths) "inbox")
+               (eq (length paths) 1)
+               already-inboxp)
+      (goto-char (point-max))
+      (if (eq (point-at-bol) (point))
+          (backward-char))
+      (when (not (eq (- (point) (point-at-bol)) 2))
+        (newline)
+        (insert "- ")))))
 
 (defun gtd-init ()
   "Creates GTD directories if they don't already exist. In
@@ -875,7 +877,8 @@ directory first."
           (lambda () (when (string-match (gtd-location) buffer-file-name)
                   (when gtd-auto-use-mode
                     (if (fboundp 'markdown-mode) (markdown-mode))
-                    (gtd-mode 1))
+                    (gtd-mode 1)
+                    (auto-revert-mode 1))
                   (if gtd-no-autofill
                       (setq fill-column 1000))
                   (when gtd-no-truncate
