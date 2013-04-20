@@ -564,12 +564,10 @@
 
 ;;; Geiser is a minor mode built on scheme-mode, supporting racket (PLT-Scheme)
 ;;; and guile. (See info doc.)
-;;; To install geiser, extract its tarball to geiser directory, then:
-;;; mkdir build && cd build && ../configure && make all
-;(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
-;                                                       "lisp"))
-;                        load-path))
-;(require 'geiser-install)
+(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
+                                                      "lisp"))
+                       load-path))
+(require 'geiser-install)
 (setq geiser-active-implementations '(racket)
       geiser-repl-history-filename (cjp-emacs-structure-dir ".geiser-history")
       geiser-repl-autodoc-p nil
