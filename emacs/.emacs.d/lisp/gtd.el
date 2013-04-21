@@ -265,10 +265,11 @@ sorted by most common use. If `smex' isn't available, use `ido'."
                (eq (length paths) 1)
                already-inboxp)
       (goto-char (point-max))
-      (if (eq (point-at-bol) (point))
+      (if (and (eq (point-at-bol) (point))
+               (> (point) 1))
           (backward-char))
       (when (not (eq (- (point) (point-at-bol)) 2))
-        (newline)
+        (if (> (point) 1) (newline))
         (insert "- ")))))
 
 (defun gtd-init ()
