@@ -21,6 +21,7 @@
 (require 'elisp-slime-nav)
 (require 'visual-regexp)
 (require 'highlight-symbol)
+(require 'litable)
 
 (load-library "regex-tool")
 (load-library "smooth-scrolling")
@@ -914,7 +915,7 @@
 (add-hook 'after-save-hook
           (lambda ()
              (when (string-match
-                    (concat ".emacs.d/lisp/" ".*\.el$")
+                    (concat "\.emacs\.d" ".*\.el$")
                     buffer-file-name)
                (byte-compile-file buffer-file-name))))
 
