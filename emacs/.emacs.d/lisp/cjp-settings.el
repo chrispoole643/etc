@@ -558,20 +558,20 @@
 ;;; Scheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq cjp-scheme-program "racket")
+(setq cjp-scheme-program "mit-scheme")
 
 (setq scheme-program-name cjp-scheme-program)
 
 ;;; Geiser is a minor mode built on scheme-mode, supporting racket (PLT-Scheme)
 ;;; and guile. (See info doc.)
-(setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
-                                                      "lisp"))
-                       load-path))
-(require 'geiser-install)
-(setq geiser-active-implementations '(racket)
-      geiser-repl-history-filename (cjp-emacs-structure-dir ".geiser-history")
-      geiser-repl-autodoc-p nil
-      geiser-mode-autodoc-p nil)
+;; (setq load-path (append (list (cjp-emacs-structure-dir "geiser/build/elisp"
+;;                                                       "lisp"))
+;;                        load-path))
+;; (require 'geiser-install)
+;; (setq geiser-active-implementations '(racket)
+;;       geiser-repl-history-filename (cjp-emacs-structure-dir ".geiser-history")
+;;       geiser-repl-autodoc-p nil
+;;       geiser-mode-autodoc-p nil)
 
 ;;; Shamelessly stolen from info-look.el, scheme-mode
 (info-lookup-maybe-add-help
