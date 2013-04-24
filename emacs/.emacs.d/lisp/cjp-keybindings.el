@@ -158,11 +158,6 @@
   (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
   (global-set-key (kbd "M-H") 'ns-do-hide-others)
 
-  ;; Goto points in current buffer really quickly
-  (global-set-key (kbd "§") 'ace-jump-char-mode) 
-  (global-set-key (kbd "M-§") 'ace-jump-word-mode) 
-  (global-set-key (kbd "C-§") 'ace-jump-line-mode) 
-
   ;; Easily open files with 'open' and show directories in Finder
   (define-key dired-mode-map (kbd "o") 'cjp-mac-guess-open-file)
   (define-key dired-mode-map (kbd "C-M-f") 'cjp-mac-show-finder)
@@ -175,11 +170,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when linuxp
-  ;; Goto points in current buffer really quickly
-  (global-set-key (kbd "`") 'ace-jump-char-mode) 
-  (global-set-key (kbd "M-`") 'ace-jump-word-mode) 
-  (global-set-key (kbd "C-`") 'ace-jump-line-mode) 
-
   ;; Outline-minor-mode key map
   (define-prefix-command 'cm-map nil "Outline-")
 
@@ -207,48 +197,60 @@
 ;;; Function keys
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(if macosxp
-    (progn
-      (global-set-key (kbd "<f1>") 'make-frame)
-      (global-set-key (kbd "<C-f1>") 'ns-next-frame)
-      (global-set-key (kbd "<C-M-f1>") 'delete-frame)
-      (global-set-key (kbd "<M-f2>") 'ns-toggle-fullscreen)
-      (global-set-key (kbd "<f7>") 'cjp-mac-show-finder)
-      (global-set-key (kbd "<C-f7>") 'cjp-mac-open-terminal)
-      (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
-                                         (cjp-mac-open-terminal t)))
-      (global-set-key (kbd "<f13>") 'cjp-mac-guess-open-file)
-      (global-set-key (kbd "<f14>") 'cjp-browse-url-on-line)
-      (global-set-key (kbd "<f15>") 'cjp-find-with-google))
-  (global-set-key (kbd "<f1>") 'make-frame)
-  (global-set-key (kbd "<C-f1>") 'next-frame)
-  (global-set-key (kbd "<C-M-f1>") 'delete-frame)
-  (global-set-key (kbd "<C-s-f12>") 'gtd-functions))
+;;; F1
+(global-set-key (kbd "<f1>") 'ace-jump-char-mode)
+(global-set-key (kbd "<M-f1>") 'ace-jump-word-mode)
+(global-set-key (kbd "<C-f1>") 'ace-jump-line-mode)
 
+;;; F2
 (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
 (global-set-key (kbd "<C-f2>") 'cjp-window-setup-toggle)
 
+;;; F3 and F4 reserved for macros
+
+;;; F5
 (global-set-key (kbd "<f5>") 'compile)
 (global-set-key (kbd "<C-f5>") 'recompile)
 
+;;; F6
 (global-set-key (kbd "<f6>") 'bookmark-jump)
 (global-set-key (kbd "<C-f6>") 'bookmark-bmenu-list)
 
+;;; F7
+(when macosxp
+  (global-set-key (kbd "<f7>") 'cjp-mac-show-finder)
+  (global-set-key (kbd "<C-f7>") 'cjp-mac-open-terminal)
+  (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
+                                     (cjp-mac-open-terminal t))))
+
+;;; F8
 (global-set-key (kbd "<f8>") 'cjp-ispell-guess-usage)
 (global-set-key (kbd "<C-f8>") 'dictionary-search)
 (global-set-key (kbd "<M-f8>") 'dictionary-match-words)
 
+;;; F9 reserved for Exposé (all windows)
+
+;;; F10
 (global-set-key (kbd "<f10>") 'epa-sign-region)
 (global-set-key (kbd "<C-f10>") 'epa-encrypt-region)
 (global-set-key (kbd "<M-f10>") 'epa-decrypt-region)
 
-(global-set-key (kbd "<f12>") 'gtd-inbox)
-(global-set-key (kbd "<C-f12>") 'gtd-select)
-(global-set-key (kbd "<M-f12>") 'gtd-action-list)
-(global-set-key (kbd "<C-M-f12>") 'gtd-functions)
+;;; F11 reserved for Exposé (desktop)
 
-(global-set-key (kbd "<C-f14>") 'cjp-browse-buffer)
+;;; F12
+(if macosxp
+    (progn
+      (global-set-key (kbd "<f12>") 'gtd-inbox)
+      (global-set-key (kbd "<C-f12>") 'gtd-select)
+      (global-set-key (kbd "<M-f12>") 'gtd-action-list)
+      (global-set-key (kbd "<C-M-f12>") 'gtd-functions))
+  (global-set-key (kbd "<C-s-f12>") 'gtd-functions))
 
-(global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
-(global-set-key (kbd "<C-f16>") (lambda () (interactive) (cjp-set-frame-uni)))
-
+;;; F13-16 (Apple extended keyboard only)
+(when macosxp
+  (global-set-key (kbd "<f13>") 'cjp-mac-guess-open-file)
+  (global-set-key (kbd "<f14>") 'cjp-browse-url-on-line)
+  (global-set-key (kbd "<C-f14>") 'cjp-browse-buffer)
+  (global-set-key (kbd "<f15>") 'cjp-find-with-google)
+  (global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
+  (global-set-key (kbd "<C-f16>") (lambda () (interactive) (cjp-set-frame-uni))))
