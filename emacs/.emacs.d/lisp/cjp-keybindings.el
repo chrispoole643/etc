@@ -36,10 +36,10 @@
 
 ;;; Multiple cursors
 (global-set-key (kbd "C-M-?") 'mc/edit-lines)
-(global-set-key (kbd "C-S-,") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-S-.") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-M-S-,") 'mc/mark-all-like-this)
-(global-set-key (kbd "C-M-S-.") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-M-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-M->") 'mc/mark-all-like-this)
 
 ;;; Undo-tree
 (global-set-key (kbd "C-/") 'undo-tree-undo)
