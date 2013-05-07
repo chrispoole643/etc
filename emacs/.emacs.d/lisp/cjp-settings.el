@@ -378,7 +378,7 @@
 ;;; 50 files ought to be enough.
 (setq recentf-save-file (cjp-emacs-structure-dir ".recentf") ; default is ~/.recentf
       recentf-max-saved-items 100
-      recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$" ".*Dropbox/gtd.*"))
+      recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$"))
 
 ;;; Enable recent files mode.
 (recentf-mode t)
