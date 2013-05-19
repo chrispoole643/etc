@@ -915,10 +915,11 @@
 ;;; From stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001
 (add-hook 'after-save-hook
           (lambda ()
-             (when (string-match
-                    (concat "\.emacs\.d" ".*\.el$")
-                    buffer-file-name)
-               (byte-compile-file buffer-file-name))))
+            (when (string-match
+                   (concat "\.emacs\.d" ".*\.el$")
+                   buffer-file-name)
+              (save-window-excursion
+                (byte-compile-file buffer-file-name)))))
 
 ;;; Put auto save files here
 (setq auto-save-list-file-prefix (cjp-emacs-structure-dir ".auto-save-list/.saves-"))
