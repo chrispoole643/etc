@@ -460,9 +460,9 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode))
 
-;;; Rebind tab key as yas/expand
+;;; Rebind C-tab as yas/expand
 (add-hook 'markdown-mode-hook (lambda ()
-                                 (local-set-key (kbd "<tab>") 'yas/expand)
+                                 (local-set-key (kbd "C-<tab>") 'yas/expand)
                                  (outline-minor-mode 1)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
