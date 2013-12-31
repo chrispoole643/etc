@@ -28,6 +28,15 @@
 (load-library "smooth-scrolling")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; RFC
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(add-to-list 'auto-mode-alist
+             '("/\\(rfc\\|std\\)[0-9]+\\.txt\\'" . rfcview-mode))
+
+(autoload 'rfcview-mode "rfcview" nil t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Zencoding
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -460,10 +469,15 @@
 (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode))
 
-;;; Rebind C-tab as yas/expand
-(add-hook 'markdown-mode-hook (lambda ()
-                                 (local-set-key (kbd "C-<tab>") 'yas/expand)
-                                 (outline-minor-mode 1)))
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Outline minor mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'outline-magic)
+
+(add-hook 'outline-minor-mode-hook 
+          (lambda () 
+            (define-key outline-minor-mode-map (kbd "<tab>") 'outline-cycle)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Python and related modes
@@ -693,26 +707,32 @@
 ;;; Org
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'org-install)
+(add-hook 'org-mode-hook (lambda ()
+                           (define-key org-mode-map (kbd "C-'") 'other-window)))
 
-;;; Org-mode setup
-(setq org-agenda-ndays 7                  ; Show next 7 days in agenda
-      org-deadline-warning-days 14        ; Show upcoming events 14 days prior
-      org-agenda-show-all-dates t         ; Show dates even if totally free
-      org-agenda-skip-deadline-if-done t  ; Don't show things already done
-      org-agenda-skip-scheduled-if-done t ; Don't show things already done
-      org-agenda-start-on-weekday nil     ; Always start with today
-      org-return-follows-link t
-      org-agenda-files (cjp-emacs-structure-dir-map '("gtd.org"))
-      org-default-notes-file (cjp-emacs-structure-dir "notes.org" "org")
-      org-directory (cjp-emacs-structure-dir "org"))
 
-(add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 
-(add-hook 'outline-minor-mode-hook
-          (lambda ()
-            (define-key outline-minor-mode-map (kbd "<C-tab>") 'org-cycle)
-            (define-key outline-minor-mode-map (kbd "<S-tab>") 'org-global-cycle)))
+;; (require 'org-install)
+
+;; ;;; Org-mode setup
+;; (setq org-agenda-ndays 7                  ; Show next 7 days in agenda
+;;       org-deadline-warning-days 14        ; Show upcoming events 14 days prior
+;;       org-agenda-show-all-dates t         ; Show dates even if totally free
+;;       org-agenda-skip-deadline-if-done t  ; Don't show things already done
+;;       org-agenda-skip-scheduled-if-done t ; Don't show things already done
+;;       org-agenda-start-on-weekday nil     ; Always start with today
+;;       org-return-follows-link t
+;;       ;; org-agenda-files (cjp-emacs-structure-dir-map '("gtd.org"))
+;;       ;; org-default-notes-file (cjp-emacs-structure-dir "notes.org" "org")
+;;       ;; org-directory (cjp-emacs-structure-dir "org")
+;;       )
+
+;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
+
+;; (add-hook 'outline-minor-mode-hook
+;;           (lambda ()
+;;             (define-key outline-minor-mode-map (kbd "<C-tab>") 'org-cycle)
+;;             (define-key outline-minor-mode-map (kbd "<S-tab>") 'org-global-cycle)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
@@ -915,11 +935,10 @@
 ;;; From stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001
 (add-hook 'after-save-hook
           (lambda ()
-            (when (string-match
-                   (concat "\.emacs\.d" ".*\.el$")
-                   buffer-file-name)
-              (save-window-excursion
-                (byte-compile-file buffer-file-name)))))
+             (when (string-match
+                    (concat "\.emacs\.d" ".*\.el$")
+                    buffer-file-name)
+               (byte-compile-file buffer-file-name))))
 
 ;;; Put auto save files here
 (setq auto-save-list-file-prefix (cjp-emacs-structure-dir ".auto-save-list/.saves-"))
@@ -1094,6 +1113,9 @@
 ;;; masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine
 (setq redisplay-dont-pause t)
 
+;;; Highlight the current line
+(hl-line-mode 1)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Themes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1102,6 +1124,6 @@
 
 (if (display-graphic-p)
   (progn (add-to-list 'custom-theme-load-path (cjp-emacs-structure-dir "themes"))
-         (load-theme 'cjp-tangotango t))
+         (load-theme 'tangotango t))
   (color-theme-initialize)
   (color-theme-hober))

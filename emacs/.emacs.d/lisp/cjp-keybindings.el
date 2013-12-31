@@ -153,6 +153,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (when macosxp
+  ;; Toggle fullscreen as usual
+  ;; (global-set-key (kbd "C-M-f") 'toggle-frame-fullscreen)
+  
   ;; Set cmd-H to hide Emacs and cmd-shift-h to hide others, as usual in Mac OS
   ;; X. Usually bound to mark-paragraph
   (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
@@ -235,15 +238,15 @@
 (global-set-key (kbd "<C-f10>") 'epa-encrypt-region)
 (global-set-key (kbd "<M-f10>") 'epa-decrypt-region)
 
-;;; F11 reserved for Exposé (desktop)
+;;; F11
+(global-set-key (kbd "<f11>") 'cjp-browse-url-on-line)
 
 ;;; F12
-(if macosxp
-    (progn
-      (global-set-key (kbd "<f12>") 'gtd-inbox)
-      (global-set-key (kbd "<C-f12>") 'gtd-select)
-      (global-set-key (kbd "<M-f12>") 'gtd-action-list)
-      (global-set-key (kbd "<C-M-f12>") 'gtd-functions))
+(global-set-key (kbd "<f12>") 'gtd-inbox)
+(global-set-key (kbd "<C-f12>") 'gtd-select)
+(global-set-key (kbd "<M-f12>") 'gtd-action-list)
+(global-set-key (kbd "<C-M-f12>") 'gtd-functions)
+(when linuxp
   (global-set-key (kbd "<C-s-f12>") 'gtd-functions))
 
 ;;; F13-16 (Apple extended keyboard only)

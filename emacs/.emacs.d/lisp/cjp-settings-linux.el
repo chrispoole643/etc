@@ -6,7 +6,7 @@
 
 ;;; Set font (Menlo default)
 (if (display-graphic-p)
-    (cjp-set-font-size "10" "Monospace"))
+    (cjp-set-font-size "12" "Inconsolata"))
 
 ;;; Move scrollbars to right side of frames
 (menu-bar-right-scroll-bar)
@@ -27,4 +27,9 @@
 (setq gtd-dir-support-project "~/documents/projects/")
 (setq gtd-dir-support-sm "~/documents/someday-maybe/")
 
+;;; Use outline mode to fold java code
 (add-hook 'java-mode-hook 'outline-minor-mode)
+
+;;; Browse URLs with Chrome
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "google-chrome")

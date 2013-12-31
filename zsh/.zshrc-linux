@@ -11,7 +11,13 @@
 ################################################################################
 
 
-export PATH="/home/chrispoole/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/home/chrispoole/bin:/usr/local/lib/python2.7:/home/chrispoole/.cabal/bin:/usr/local/texlive/2012/bin/x86_64-linux:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
+
+
+if [ -f "$HOME/.zshrc-common" ]; then
+    . "$HOME/.zshrc-common"
+fi
 
 
 ################################################################################
@@ -19,7 +25,7 @@ export PATH="/home/chrispoole/bin:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/
 ################################################################################
 
 
-alias open=gnome-open
+alias open=xdg-open
 alias cde='emacsclient -e "(dired \"$(pwd)\")"'
 
 alias o='fasd -fe gnome-open'
@@ -53,8 +59,9 @@ _start-gpg-agent () {
 ## tmux
 
 _start-tmux () {
-    tmux new -d -s main -n - \; splitw -h 'zsh -c htop' \; splitw -v \; selectp -t1 
-    tmux neww -n citm 'zsh -c "ssh citm"' \; splitw -h \; selectp -t1 
-    tmux neww -n backup \; splitw -h \; selectp -t1 
-    tmux neww -n - \; splitw -h \; selectp -t1 \; selectw -t1 \; attach
+    tmux new -d -s main -n - \; splitw -h \; selectp -t1 
+    tmux neww -n - \; splitw -h \; selectp -t1
+    tmux neww -n - \; splitw -h \; selectp -t1
+    tmux neww -n - \; splitw -h \; selectp -t1
+    tmux selectw -t1 \; attach
 }

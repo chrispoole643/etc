@@ -11,17 +11,17 @@
 ################################################################################
 
 
-fpath=($HOME/.zsh-prompts /usr/local/share/zsh-completions /usr/share/zsh/site-functions /usr/share/zsh/4.3.9/functions)
+fpath=(/Users/chris/.zsh-prompts /usr/local/share/zsh-completions /usr/local/share/zsh/site-functions /usr/local/Cellar/zsh/5.0.4/share/zsh/functions)
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 LC_CTYPE=C
 
-if [[ $platform == "macmini" ]]; then
-    export PATH="$HOME/bin:/usr/local/share/python:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/ruby/1.9.2-p180/bin:/usr/local/Cellar/git/1.7.3.4/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
-    DISPLAY=:0
-else
-    export PATH="$HOME/bin:/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p125/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.7.8/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+export PATH="$HOME/bin:/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p125/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.7.8/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+
+
+if [ -f "$HOME/.zshrc-common" ]; then
+    . "$HOME/.zshrc-common"
 fi
 
 

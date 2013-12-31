@@ -89,7 +89,7 @@
   "If true, set fill-column in GTD files to 1000. Prevents single
   tasks dropping into new lines.")
 
-(defvar gtd-update-after-save t
+(defvar gtd-update-after-save nil
   "If true, run `gtd-update' after saving a GTD file.")
 
 (defvar gtd-keep-done-tasks t

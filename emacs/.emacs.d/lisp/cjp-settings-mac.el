@@ -35,11 +35,9 @@
 (defun skim-make-url ()
   (concat
    (TeX-current-line)
-   " "
-   (expand-file-name (funcall file (TeX-output-extension) t)
-                     (file-name-directory (TeX-master-file)))
-   " "
-   (buffer-file-name)))
+   " '" (expand-file-name (funcall file (TeX-output-extension) t)
+                          (file-name-directory (TeX-master-file)))
+   "' '" (buffer-file-name) "'"))
 
 (setq LaTeX-command "latex -synctex=1")
 
