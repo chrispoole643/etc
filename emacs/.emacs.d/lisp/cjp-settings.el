@@ -15,27 +15,67 @@
 (require 'cl)
 (require 'generic-x)
 (require 'smallurl)
-(require 'smooth-scrolling)
-(require 'htmlize)
-(require 'pydoc-info)
-(require 'expand-region)
-(require 'elisp-slime-nav)
-(require 'visual-regexp)
-(require 'highlight-symbol)
-(require 'litable)
-
-(load-library "regex-tool")
-(load-library "smooth-scrolling")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Melpa
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defvar cjp-required-packages '(magit
+                                org
+                                yasnippet
+                                cl-lib
+                                smooth-scrolling
+                                htmlize
+                                pydoc-info
+                                expand-region
+                                elisp-slime-nav
+                                visual-regexp
+                                highlight-symbol
+                                litable
+                                regex-tool)
+  "Required packages to be pulled from melpa.")
+
+(require 'zencoding-mode)
+(require 'multiple-cursors)
+(require 'redshank-loader)
+(require 'workgroups)
+(require 'powerline)
+(require 'iedit)
+(require 'ace-jump-mode)
+(require 'auto-complete-config)
+(require 'w3m-load)
+(require 'bookmark+)
+(require 'pretty-lambdada)
+(require 'dired-details+)
+(require 'dired+)
+(require 'smex)
+(require 'uniquify)
+(require 'undo-tree)
+(require 'slime)
+(require 'ac-slime)
+(require 'recentf)
+(require 'c-eldoc)
+(require 'outline-magic)
+(require 'ac-python)
+(require 'quack)
+(require 'reftex)
+(require 'ido)
+
 (require 'package)
+
 (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; (setq package-enable-at-startup nil)
+(setq package-enable-at-startup nil)
+(unless package-archive-contents
+  (package-refresh-contents))
+(setq package-load-list '(all))
+(package-initialize)
+
+(mapc (lambda (package)
+        (unless (package-installed-p package)
+          (package-install package)))
+      cjp-required-packages)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; RFC
@@ -50,21 +90,12 @@
 ;;; Zencoding
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Multiple Cursors
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'multiple-cursors)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Redshank
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'redshank-loader)
-     
 (eval-after-load "redshank-loader"
   `(redshank-setup '(lisp-mode-hook
                      slime-repl-mode-hook) t))
@@ -73,7 +104,6 @@
 ;;; Workgroups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'workgroups)
 (setq wg-prefix-key (kbd "C-c c w"))    ; Use my custom binding prefix
 (workgroups-mode 1)
 (setq wg-morph-on nil)
@@ -82,7 +112,6 @@
 ;;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'powerline)
 (powerline-default-theme)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -109,23 +138,14 @@
 (setq magit-omit-untracked-dir-contents t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; iedit
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'iedit)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ace-jump
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'ace-jump-mode)
 (setq ace-jump-mode-case-sensitive-search nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-complete
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'auto-complete-config)
 
 (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
       ac-fuzzy-enable t)
@@ -162,8 +182,6 @@
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'w3m-load)
-
 (setq browse-url-browser-function 'w3m-browse-url
       w3m-default-save-directory "~/Documents/inbox"
       w3m-use-tab nil
@@ -173,8 +191,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Bookmarks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'bookmark+)
 
 ;;; Choose a location of bookmarks file.  Save bookmarks file every time I put a
 ;;; new bookmark in the file (not just when Emacs quits)
@@ -222,8 +238,6 @@
 ;;;
 ;;; Turn 'lambda' into the Greek letter.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'pretty-lambdada)
 
 ;; (setq cjp-lispy-modes '(lisp-mode-hook paredit-mode-hook))
 
@@ -279,8 +293,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Hide and show details (`ls -l` stuff) with '(' and ')'
-(require 'dired-details+)
-(require 'dired+)
+
 (setq dired-details-hidden-string ""
       dired-details-initially-hide nil
       dired-omit-files (concat dired-omit-files "\\|^\\..+$")) ; dired-omit-mode,
@@ -322,8 +335,6 @@
 ;;; Smex
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'smex)
-
 ;;; Start smex, saving into Emacs structure
 (setq smex-save-file (cjp-emacs-structure-dir ".smex-items"))
 ;;; Smex updates its list of possible commands when run; don't let it
@@ -336,8 +347,6 @@
 ;;; Uniquify
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'uniquify)
-
 ;;; Instead of <2> etc. after buffer name when opening multiple files with the
 ;;; same name, Change it to "name" : "directory name"
 (setq uniquify-buffer-name-style 'forward
@@ -347,7 +356,6 @@
 ;;; Undo-tree
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'undo-tree)
 (global-undo-tree-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -369,11 +377,11 @@
 ;;; Use sbcl
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-(require 'slime)
+
 (slime-setup '(slime-fancy))
 
 ;;; auto-complete for slime
-(require 'ac-slime)
+
 (add-hook 'slime-mode-hook 'set-up-slime-ac)
 (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
 (eval-after-load "auto-complete"
@@ -386,8 +394,6 @@
 ;;; From http://www.masteringemacs.org/articles/2011/01/27/
 ;;; find-files-faster-recent-files-package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'recentf)
 
 ;;; Tramp mode messes this up, causing Emacs to IO block for a short time. (From
 ;;; http://www.emacswiki.org/emacs/RecentFiles)
@@ -405,20 +411,18 @@
 ;;; Yasnippet
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'yasnippet)
 (yas-global-mode 1)
 
 ;;; Store my personal snippets in ~/emacs/snippets, still load the stock ones
-(setq yas/root-directory
-      (append (cjp-emacs-structure-dir-map '("personal" "contributed") "snippets")
-              (list (cjp-emacs-structure-dir "yasnippet/snippets" "lisp"))))
+(add-to-list 'yas/root-directory (cjp-emacs-structure-dir "contributed" "snippets"))
+(add-to-list 'yas/root-directory (cjp-emacs-structure-dir "personal" "snippets"))
 
 ;;; Load snippets from all directories
 (mapc 'yas/load-directory yas/root-directory)
 
 ;;; If there are multiple snippets to choose from, use ido by default in
 ;;; minibuffer.
-(setq yas/prompt-functions '(yas/ido-prompt
+(setq yas-prompt-functions '(yas/ido-prompt
                              yas/dropdown-prompt
                              yas/x-prompt
                              yas/completing-prompt
@@ -427,8 +431,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ElDoc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'c-eldoc)
 
 (mapc (lambda (x) (add-hook x 'turn-on-eldoc-mode))
       '(python-mode-hook
@@ -482,10 +484,8 @@
 ;;; Outline minor mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'outline-magic)
-
-(add-hook 'outline-minor-mode-hook 
-          (lambda () 
+(add-hook 'outline-minor-mode-hook
+          (lambda ()
             (define-key outline-minor-mode-map (kbd "<tab>") 'outline-cycle)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -496,8 +496,6 @@
 ;;; send the contents of a buffer to the interpreter easily, as python.el can
 ;;; (with C-c C-c).
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'ac-python)
 
 ;;; Use python-mode with files with these extensions
 (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
@@ -608,7 +606,7 @@
 	      "^[ \t]+-+ [^:]+:[ \t]*" "\\b")))
 
 ;;; Quack
-(require 'quack)
+
 (setq quack-default-program cjp-scheme-program
       quack-run-scheme-always-prompts-p nil)
 
@@ -719,8 +717,6 @@
 (add-hook 'org-mode-hook (lambda ()
                            (define-key org-mode-map (kbd "C-'") 'other-window)))
 
-
-
 ;; (require 'org-install)
 
 ;; ;;; Org-mode setup
@@ -746,8 +742,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'reftex)
 
 ;;; Load AUCTeX
 (load "auctex.el" nil t t)
@@ -791,8 +785,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ido
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'ido)
 
 (setq ido-save-directory-list-file (cjp-emacs-structure-dir ".ido.last"))
 (ido-mode t)
@@ -1003,7 +995,8 @@
 (add-hook 'c-mode-common-hook
           (lambda ()
             (font-lock-add-keywords nil
-                                    '(("\\<\\(FIXME\\|TODO\\|BUG\\):" 1 font-lock-warning-face t)))))
+                                    '(("\\<\\(FIXME\\|TODO\\|BUG\\):"
+                                       1 font-lock-warning-face t)))))
 
 ;;; Move mouse to top-right corner once it gets too close to cursor.  Move back
 ;;; once mouse moved away
