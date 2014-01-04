@@ -17,7 +17,7 @@ LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 LC_CTYPE=C
 
-export PATH="$HOME/bin:/usr/local/share/python:/usr/local/Cellar/ruby/1.9.3-p125/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.7.8/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+export PATH="$HOME/bin:/usr/local/share/python:/usr/local/Cellar/ruby/2.1.0/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 
 
 if [ -f "$HOME/.zshrc-common" ]; then
@@ -91,7 +91,6 @@ _start-gpg-agent () {
     eval $(gpg-agent -q --daemon --write-env-file "$HOME/.gpg-agent-info" \
         --default-cache-ttl "$time" --pinentry-program /usr/local/bin/pinentry \
         --max-cache-ttl 86400)      # 24 hours
-    source "$HOME/.zshrc"           # Update environment variables
 }
 
 ## tmux
