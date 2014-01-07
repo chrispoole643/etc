@@ -205,23 +205,24 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 eval "$(fasd --init auto)"
 
 # gpg agent
-if [[ -f "$HOME/.gpg-agent-info" ]]; then
-    printf "==> Loaded existing gpg agent.\n"
-    source "$HOME/.gpg-agent-info"
+if [[ ! -f "$HOME/.gpg-agent-info" ]]; then
+    printf "==> Loading new gpg agent.\n"
+    time=${1:-'1200'}                # 1200 seconds, 20 minutes
+    eval $(gpg-agent -q --daemon --write-env-file "$HOME/.gpg-agent-info" \
+        --default-cache-ttl "$time" --pinentry-program /usr/local/bin/pinentry \
+        --max-cache-ttl 86400)      # 24 hours
     export GPG_AGENT_INFO
     GPG_TTY=$(tty)
     export GPG_TTY
 else
-    _start-gpg-agent
+    source "$HOME/.gpg-agent-info" && printf "==> Loaded existing gpg agent.\n"
 fi
 
 # ssh agent
-if [[ -f "$HOME/.ssh-agent-info" ]]; then
-    printf "==> Loaded existing ssh agent.\n"
-else
-    ssh-agent >| "$HOME/.ssh-agent-info"
+if [[ ! -f "$HOME/.ssh-agent-info" ]]; then
+    printf "==> Loading new ssh agent.\n"
+    eval $(ssh-agent) >| "$HOME/.ssh-agent-info"
 fi
-eval  $(head -2 "$HOME/.ssh-agent-info")
 
 
 ################################################################################

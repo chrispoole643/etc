@@ -6,60 +6,43 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Requirements and libraries
-;;; --------------------------
-;;;
-;;; These don't require their own section with other commands.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'cl)
-(require 'generic-x)
-(require 'smallurl)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Melpa
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar cjp-required-packages '(magit
-                                org
-                                yasnippet
+(defvar cjp-required-packages '(ac-slime
+                                ace-jump-mode
+                                auto-complete
+                                bookmark+
+                                c-eldoc
                                 cl-lib
-                                smooth-scrolling
-                                htmlize
-                                pydoc-info
-                                expand-region
+                                dired+
+                                dired-details+
                                 elisp-slime-nav
-                                visual-regexp
+                                expand-region
                                 highlight-symbol
+                                htmlize
+                                iedit
                                 litable
-                                regex-tool)
+                                magit
+                                multiple-cursors
+                                org
+                                outline-magic
+                                powerline
+                                pretty-lambdada
+                                pydoc-info
+                                redshank
+                                reftex
+                                regex-tool
+                                slime
+                                smex
+                                smooth-scrolling
+                                undo-tree
+                                visual-regexp
+                                w3m
+                                workgroups
+                                yasnippet
+                                zencoding-mode)
   "Required packages to be pulled from melpa.")
-
-(require 'zencoding-mode)
-(require 'multiple-cursors)
-(require 'redshank-loader)
-(require 'workgroups)
-(require 'powerline)
-(require 'iedit)
-(require 'ace-jump-mode)
-(require 'auto-complete-config)
-(require 'w3m-load)
-(require 'bookmark+)
-(require 'pretty-lambdada)
-(require 'dired-details+)
-(require 'dired+)
-(require 'smex)
-(require 'uniquify)
-(require 'undo-tree)
-(require 'slime)
-(require 'ac-slime)
-(require 'recentf)
-(require 'c-eldoc)
-(require 'outline-magic)
-(require 'ac-python)
-(require 'quack)
-(require 'reftex)
-(require 'ido)
 
 (require 'package)
 
@@ -78,6 +61,19 @@
       cjp-required-packages)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Requirements and libraries
+;;; --------------------------
+;;;
+;;; These don't require their own section with other commands.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'cl)
+(require 'generic-x)
+(require 'smallurl)
+(require 'multiple-cursors)
+(require 'iedit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; RFC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -90,12 +86,14 @@
 ;;; Zencoding
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'zencoding-mode)
 (add-hook 'sgml-mode-hook 'zencoding-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Redshank
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'redshank-loader)
 (eval-after-load "redshank-loader"
   `(redshank-setup '(lisp-mode-hook
                      slime-repl-mode-hook) t))
@@ -104,6 +102,7 @@
 ;;; Workgroups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'workgroups)
 (setq wg-prefix-key (kbd "C-c c w"))    ; Use my custom binding prefix
 (workgroups-mode 1)
 (setq wg-morph-on nil)
@@ -112,6 +111,7 @@
 ;;; Powerline
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'powerline)
 (powerline-default-theme)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -141,11 +141,16 @@
 ;;; Ace-jump
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'ace-jump-mode)
 (setq ace-jump-mode-case-sensitive-search nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Auto-complete
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'auto-complete-config)
+(require 'ac-slime)
+(require 'ac-python)
 
 (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
       ac-fuzzy-enable t)
@@ -182,6 +187,7 @@
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'w3m-load)
 (setq browse-url-browser-function 'w3m-browse-url
       w3m-default-save-directory "~/Documents/inbox"
       w3m-use-tab nil
@@ -191,6 +197,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Bookmarks
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'bookmark+)
 
 ;;; Choose a location of bookmarks file.  Save bookmarks file every time I put a
 ;;; new bookmark in the file (not just when Emacs quits)
@@ -239,10 +247,9 @@
 ;;; Turn 'lambda' into the Greek letter.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'pretty-lambdada)
 ;; (setq cjp-lispy-modes '(lisp-mode-hook paredit-mode-hook))
-
 ;; (mapc (lambda (x) (add-hook x 'pretty-lambda)) cjp-lispy-modes)
-
 (add-hook 'lisp-interaction-mode-hook 'pretty-lambda)
 (add-hook 'emacs-lisp-mode-hook 'pretty-lambda)
 (add-hook 'lisp-mode-hook 'pretty-lambda)
@@ -292,8 +299,11 @@
 ;;; Dired
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Hide and show details (`ls -l` stuff) with '(' and ')'
+(require 'dired)
+(require 'dired+)
+(require 'dired-details+)
 
+;;; Hide and show details (`ls -l` stuff) with '(' and ')'
 (setq dired-details-hidden-string ""
       dired-details-initially-hide nil
       dired-omit-files (concat dired-omit-files "\\|^\\..+$")) ; dired-omit-mode,
@@ -335,6 +345,8 @@
 ;;; Smex
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'smex)
+
 ;;; Start smex, saving into Emacs structure
 (setq smex-save-file (cjp-emacs-structure-dir ".smex-items"))
 ;;; Smex updates its list of possible commands when run; don't let it
@@ -347,6 +359,7 @@
 ;;; Uniquify
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'uniquify)
 ;;; Instead of <2> etc. after buffer name when opening multiple files with the
 ;;; same name, Change it to "name" : "directory name"
 (setq uniquify-buffer-name-style 'forward
@@ -356,6 +369,7 @@
 ;;; Undo-tree
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'undo-tree)
 (global-undo-tree-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -374,11 +388,12 @@
 ;;; Slime
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'slime)
+
 ;;; Use sbcl
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
 
-
-(slime-setup '(slime-fancy))
+;;(slime-setup '(slime-fancy))
 
 ;;; auto-complete for slime
 
@@ -394,6 +409,8 @@
 ;;; From http://www.masteringemacs.org/articles/2011/01/27/
 ;;; find-files-faster-recent-files-package
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'recentf)
 
 ;;; Tramp mode messes this up, causing Emacs to IO block for a short time. (From
 ;;; http://www.emacswiki.org/emacs/RecentFiles)
@@ -431,6 +448,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ElDoc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'c-eldoc)
 
 (mapc (lambda (x) (add-hook x 'turn-on-eldoc-mode))
       '(python-mode-hook
@@ -483,6 +502,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Outline minor mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'outline-magic)
 
 (add-hook 'outline-minor-mode-hook
           (lambda ()
@@ -580,6 +601,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Scheme
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'quack)
 
 (setq cjp-scheme-program "mit-scheme")
 
@@ -743,6 +766,8 @@
 ;;; AUCTeX
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'reftex)
+
 ;;; Load AUCTeX
 (load "auctex.el" nil t t)
 
@@ -786,6 +811,7 @@
 ;;; Ido
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'ido)
 (setq ido-save-directory-list-file (cjp-emacs-structure-dir ".ido.last"))
 (ido-mode t)
 (setq ido-everywhere t
