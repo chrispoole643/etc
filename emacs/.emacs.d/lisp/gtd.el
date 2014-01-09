@@ -258,7 +258,7 @@ sorted by most common use. If `smex' isn't available, use `ido'."
 
 (defun gtd-open-file (&rest paths)
   "Open tasks file, ready to enter a new item."
-  (let ((already-inboxp (equal (buffer-name) "inbox")))
+  (let ((already-inboxp (string-match "inbox$" (buffer-name))))
     (find-file (apply 'gtd-location paths))
     (goto-char (point-min))
     (when (and (equal (car paths) "inbox")
