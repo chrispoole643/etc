@@ -88,6 +88,15 @@
 (require 'iedit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Ein
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'ein)
+(setq ein:use-auto-complete t)
+;; Or, to enable "superpack" (a little bit hacky improvements):
+;; (setq ein:use-auto-complete-superpack t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; RFC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -429,7 +438,7 @@
 
 ;;; 50 files ought to be enough.
 (setq recentf-save-file (cjp-emacs-structure-dir ".recentf") ; default is ~/.recentf
-      recentf-max-saved-items 100
+      recentf-max-saved-items 1024
       recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$"))
 
 ;;; Enable recent files mode.
@@ -954,6 +963,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Miscellaneous
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;;; Save (a longer) minibuffer history
+(savehist-mode t)
+(setq history-length 1024)
 
 ;;; A huge number forces windows to be split vertically, like C-x 3 does
 ;; (setq split-height-threshold 900)
