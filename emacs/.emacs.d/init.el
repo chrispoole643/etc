@@ -13,8 +13,10 @@
 
 ;;; Bootstrap with my library functions
 ;;; (`cjp-library' contains `cjp-get-dir-structure-in')
-(let ((file (concat user-emacs-directory "lisp/cjp-library.elc")))
-  (if (file-exists-p file) (load-file file)))
+(let ((file (concat user-emacs-directory "lisp/cjp-library.el"))
+      (compiled-file (concat user-emacs-directory "lisp/cjp-library.elc")))
+  (cond ((file-exists-p compiled-file) (load-file compiled-file))
+        ((file-exists-p file) (byte-compile-file file t))))
 
 ;;; Add lisp directory tree to load-path
 (setq load-path (append (cjp-get-dir-structure-in "lisp")
