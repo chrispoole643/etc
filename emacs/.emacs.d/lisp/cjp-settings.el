@@ -15,13 +15,14 @@
                                 auto-complete
                                 bookmark+
                                 c-eldoc
-                                clojure-mode
                                 cl-lib
+                                clojure-mode
                                 color-theme
                                 dictionary
                                 dired+
                                 dired-details+
                                 edit-server
+                                ein
                                 elisp-slime-nav
                                 expand-region
                                 flymake-cursor
