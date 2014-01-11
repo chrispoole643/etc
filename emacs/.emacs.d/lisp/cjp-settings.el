@@ -11,28 +11,41 @@
 
 (defvar cjp-required-packages '(ac-slime
                                 ace-jump-mode
+                                auctex
                                 auto-complete
                                 bookmark+
                                 c-eldoc
+                                clojure-mode
                                 cl-lib
+                                color-theme
+                                dictionary
                                 dired+
                                 dired-details+
+                                edit-server
                                 elisp-slime-nav
                                 expand-region
+                                flymake-cursor
+                                geiser
                                 highlight-symbol
                                 htmlize
                                 iedit
+                                irfc
+                                js2-mode
                                 litable
                                 magit
+                                markdown-mode
+                                markdown-mode+
                                 multiple-cursors
                                 org
                                 outline-magic
+                                paredit
                                 powerline
                                 pretty-lambdada
                                 pydoc-info
                                 redshank
                                 reftex
                                 regex-tool
+                                scpaste
                                 slime
                                 smex
                                 smooth-scrolling
@@ -77,10 +90,8 @@
 ;;; RFC
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-to-list 'auto-mode-alist
-             '("/\\(rfc\\|std\\)[0-9]+\\.txt\\'" . rfcview-mode))
-
-(autoload 'rfcview-mode "rfcview" nil t)
+(require 'irfc)
+(setq irfc-assoc-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Zencoding
@@ -187,7 +198,6 @@
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'w3m-load)
 (setq browse-url-browser-function 'w3m-browse-url
       w3m-default-save-directory "~/Documents/inbox"
       w3m-use-tab nil
@@ -767,9 +777,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'reftex)
-
-;;; Load AUCTeX
-(load "auctex.el" nil t t)
 
 ;;; These allow AUCTeX to parse TeX files automatically. Creates 'auto'
 ;;; directory with parse info for each TeX file, got annoying so disabled for
