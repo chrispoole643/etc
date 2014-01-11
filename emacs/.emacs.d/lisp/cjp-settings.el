@@ -19,6 +19,7 @@
                                 clojure-mode
                                 color-theme
                                 dictionary
+                                diminish
                                 dired+
                                 dired-details+
                                 edit-server
