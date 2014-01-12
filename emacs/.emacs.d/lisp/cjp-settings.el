@@ -51,6 +51,7 @@
                                 slime
                                 smex
                                 smooth-scrolling
+                                tangotango-theme
                                 undo-tree
                                 visual-regexp
                                 w3m
@@ -1180,7 +1181,6 @@
 (setq custom-safe-themes t)
 
 (if (display-graphic-p)
-  (progn (add-to-list 'custom-theme-load-path (cjp-emacs-structure-dir "themes"))
-         (load-theme 'tangotango t))
+  (load-theme 'tangotango t)
   (color-theme-initialize)
   (color-theme-hober))
