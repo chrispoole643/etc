@@ -49,6 +49,8 @@
 ;;; iedit
 (define-key global-map (kbd "C-;") 'iedit-mode)
 (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
+(define-key iedit-mode-keymap (kbd "M-n") 'iedit-next-occurrence)
+(define-key iedit-mode-keymap (kbd "M-p") 'iedit-prev-occurrence)
 
 (global-set-key (kbd "C-M-g") 'magit-status)
 
