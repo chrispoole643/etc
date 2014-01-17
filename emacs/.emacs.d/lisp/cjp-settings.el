@@ -16,6 +16,7 @@
                                 bookmark+
                                 c-eldoc
                                 cl-lib
+                                cider
                                 clojure-mode
                                 color-theme
                                 dictionary
