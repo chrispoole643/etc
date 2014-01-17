@@ -1041,8 +1041,10 @@
       backup-by-copying-when-linked t)  ; Copy linked files, don't rename
 
 ;;; Store all autosave files in one folder, not all over filesystem
-(add-to-list 'auto-save-file-name-transforms
-             `(".*" ,(cjp-emacs-structure-dir "autosaves/") t) t)
+(let ((save-dir (cjp-emacs-structure-dir "autosaves/")))
+  (when (not (file-exists-p save-dir)) (make-directory save-dir t))
+  (add-to-list 'auto-save-file-name-transforms
+               `(".*" ,save-dir t) t))
 
 ;;; From
 ;;; emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
