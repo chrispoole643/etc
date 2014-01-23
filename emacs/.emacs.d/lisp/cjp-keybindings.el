@@ -82,9 +82,15 @@
 (global-set-key (kbd "C-c C-c C-x C-m") 'execute-extended-command)
 
 ;;; Default keybindings of C-c <left> and C-c <right> are annoying to type if
-;;; going back more than one or two window configurations.
-(global-set-key (kbd "C-<left>") 'winner-undo)
-(global-set-key (kbd "C-<right>") 'winner-redo)
+;;; going back more than one or two window configurations. Use super key for
+;;; higher level Emacs command like these to avoid interfering with modes.
+(global-set-key (kbd "C-s-<left>") 'winner-undo)
+(global-set-key (kbd "C-s-<right>") 'winner-redo)
+
+(global-set-key (kbd "s-<left>")  'windmove-left)
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<up>")    'windmove-up)
+(global-set-key (kbd "s-<down>")  'windmove-down)
 
 ;;; Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had
 ;;; to be undefined before it could be made to run windmove-left.

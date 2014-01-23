@@ -410,10 +410,6 @@
 ;;; with C-c left and C-c right respectively
 (winner-mode 1)
 
-;;; Move to other windows with shift-(left|right|up|down)
-(when (fboundp 'windmove-default-keybindings)
-      (windmove-default-keybindings))
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Slime
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
