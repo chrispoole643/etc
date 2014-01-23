@@ -28,6 +28,7 @@
                                 elisp-slime-nav
                                 expand-region
                                 flymake-cursor
+                                framemove
                                 geiser
                                 highlight-symbol
                                 htmlize
@@ -403,12 +404,14 @@
 (global-undo-tree-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Winner / Windmove
+;;; Winner / Windmove / FrameMove
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Turn on winner mode to move back and forwards between window configurations
 ;;; with C-c left and C-c right respectively
 (winner-mode 1)
+(require 'framemove)
+(setq framemove-hook-into-windmove t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Slime
