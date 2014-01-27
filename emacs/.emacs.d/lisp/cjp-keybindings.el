@@ -207,7 +207,11 @@
   (define-key cm-map "p" 'outline-previous-visible-heading) ; Previous
   (define-key cm-map "f" 'outline-forward-same-level)       ; Forward - same level
   (define-key cm-map "b" 'outline-backward-same-level)      ; Backward - same level
-  (global-set-key (kbd "C-c C-c") cm-map))
+  (global-set-key (kbd "C-c C-c") cm-map)
+
+  ;; Since C-s-f toggles fullscreen on the Mac, maxmimise Emacs' frame on Linux
+  ;; with the same binding.
+  (global-set-key (kbd "C-s-f") 'toggle-frame-maximized))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Function keys
