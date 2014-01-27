@@ -377,7 +377,7 @@ word is always capitalized."
 (defun cjp-recompile-emacs-setup ()
   "Force recompile the Emacs setup directory."
   (interactive)
-  (byte-recompile-directory (cjp-emacs-structure-dir "") 0 t))
+  (byte-recompile-directory (cjp-emacs-structure-dir "lisp") 0 t))
 
 (defun cjp-scratch ()
   "Switch to the scratch buffer, or create it if it doesn't
