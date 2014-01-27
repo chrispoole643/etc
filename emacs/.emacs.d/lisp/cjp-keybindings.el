@@ -174,7 +174,11 @@
   (define-key dired-mode-map (kbd "C-M-f") 'cjp-mac-show-finder)
   (define-key dired-mode-map (kbd "e") 'cjp-mac-textedit-file)
   (define-key dired-mode-map (kbd "q") 'cjp-mac-quicklook-file)
-  (define-key dired-mode-map (kbd "C-M-t") 'cjp-mac-open-terminal))
+  (define-key dired-mode-map (kbd "C-M-t") 'cjp-mac-open-terminal)
+
+  ;; alt key on Mac is Super, but it also lets you type foreign accents and
+  ;; other useful characters. Use self insert for these purposes.
+  (global-set-key (kbd "s-3") '(lambda () (interactive) (insert "#"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Linux
