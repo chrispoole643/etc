@@ -168,6 +168,7 @@
   ;; X. Usually bound to mark-paragraph
   (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
   (global-set-key (kbd "M-H") 'ns-do-hide-others)
+  (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
   ;; Easily open files with 'open' and show directories in Finder
   (define-key dired-mode-map (kbd "o") 'cjp-mac-guess-open-file)
