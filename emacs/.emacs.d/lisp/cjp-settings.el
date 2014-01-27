@@ -16,6 +16,7 @@
                                 bookmark+
                                 c-eldoc
                                 cl-lib
+                                cider
                                 clojure-mode
                                 color-theme
                                 dictionary
@@ -27,6 +28,7 @@
                                 elisp-slime-nav
                                 expand-region
                                 flymake-cursor
+                                framemove
                                 geiser
                                 highlight-symbol
                                 htmlize
@@ -402,16 +404,14 @@
 (global-undo-tree-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Winner / Windmove
+;;; Winner / Windmove / FrameMove
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Turn on winner mode to move back and forwards between window configurations
 ;;; with C-c left and C-c right respectively
 (winner-mode 1)
-
-;;; Move to other windows with shift-(left|right|up|down)
-(when (fboundp 'windmove-default-keybindings)
-      (windmove-default-keybindings))
+(require 'framemove)
+(setq framemove-hook-into-windmove t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Slime
@@ -1041,8 +1041,10 @@
       backup-by-copying-when-linked t)  ; Copy linked files, don't rename
 
 ;;; Store all autosave files in one folder, not all over filesystem
-(add-to-list 'auto-save-file-name-transforms
-             `(".*" ,(cjp-emacs-structure-dir "autosaves/") t) t)
+(let ((save-dir (cjp-emacs-structure-dir "autosaves/")))
+  (when (not (file-exists-p save-dir)) (make-directory save-dir t))
+  (add-to-list 'auto-save-file-name-transforms
+               `(".*" ,save-dir t) t))
 
 ;;; From
 ;;; emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html
