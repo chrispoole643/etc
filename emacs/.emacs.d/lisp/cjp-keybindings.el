@@ -13,7 +13,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (mapc (lambda (arg)
-        (global-set-key (kbd (concat "C-c c " (car arg))) (cadr arg)))
+        (global-set-key (kbd (concat "C-c SPC " (car arg))) (cadr arg)))
       '(("l" find-library)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -26,6 +26,12 @@
 ;; (global-set-key [(shift f3)] 'highlight-symbol-prev)
 ;; (global-set-key [(meta f3)] 'highlight-symbol-prev)))
 ;; (global-set-key [(control meta f3)] 'highlight-symbol-query-replace)
+
+;;; Org mode
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c c") 'org-capture)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'org-iswitchb)
 
 ;;; Visual regexp
 (global-set-key (kbd "C-c r") 'vr/replace)

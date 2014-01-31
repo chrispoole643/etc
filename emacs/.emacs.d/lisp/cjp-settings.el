@@ -766,30 +766,16 @@
 ;;; Org
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(add-hook 'org-mode-hook (lambda ()
-                           (define-key org-mode-map (kbd "C-'") 'other-window)))
+(add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-;; (require 'org-install)
-
-;; ;;; Org-mode setup
-;; (setq org-agenda-ndays 7                  ; Show next 7 days in agenda
-;;       org-deadline-warning-days 14        ; Show upcoming events 14 days prior
-;;       org-agenda-show-all-dates t         ; Show dates even if totally free
-;;       org-agenda-skip-deadline-if-done t  ; Don't show things already done
-;;       org-agenda-skip-scheduled-if-done t ; Don't show things already done
-;;       org-agenda-start-on-weekday nil     ; Always start with today
-;;       org-return-follows-link t
-;;       ;; org-agenda-files (cjp-emacs-structure-dir-map '("gtd.org"))
-;;       ;; org-default-notes-file (cjp-emacs-structure-dir "notes.org" "org")
-;;       ;; org-directory (cjp-emacs-structure-dir "org")
-;;       )
-
-;; (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
-
-;; (add-hook 'outline-minor-mode-hook
-;;           (lambda ()
-;;             (define-key outline-minor-mode-map (kbd "<C-tab>") 'org-cycle)
-;;             (define-key outline-minor-mode-map (kbd "<S-tab>") 'org-global-cycle)))
+;;; Org-mode setup
+(setq org-agenda-span 7                   ; Show next 7 days in agenda
+      org-deadline-warning-days 14        ; Show upcoming events 14 days prior
+      org-agenda-show-all-dates t         ; Show dates even if totally free
+      org-agenda-skip-deadline-if-done t  ; Don't show things already done
+      org-agenda-skip-scheduled-if-done t ; Don't show things already done
+      org-agenda-start-on-weekday nil     ; Always start with today
+      org-return-follows-link t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
