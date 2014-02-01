@@ -204,8 +204,8 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 # fasd
 eval "$(fasd --init auto)"
 
-# Load ssh and gpg keys
-eval $(keychain --timeout 30 --ignore-missing --agents ssh --nogui --inherit any --eval github dundee pi strongspace gsa)
+# Load ssh keys (alive for 8 hours)
+eval $(keychain --timeout 480 --ignore-missing --agents ssh --nogui --inherit any --eval github dundee pi strongspace gsa)
 
 
 ################################################################################
@@ -272,8 +272,7 @@ inform-emacs-gpg-agent () {
 start-gpg-agent () {
     time=${1:-'180'} # Request key cache time in minutes
     time_sec=$(($time * 60))
-    # _start-gpg-agent "$time_sec" &&
-    inform-emacs-gpg-agent
+    _start-gpg-agent "$time_sec" && inform-emacs-gpg-agent
     starter_file="/tmp/gpg-agent-starter"
     sig_starter_file="$starter_file.gpg"
     gpg_key=${1:-"$cjp_gpg_key"}
