@@ -204,25 +204,8 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 # fasd
 eval "$(fasd --init auto)"
 
-# gpg agent
-if [[ ! -f "$HOME/.gpg-agent-info" ]]; then
-    printf "==> Loading new gpg agent.\n"
-    time=${1:-'1200'}                # 1200 seconds, 20 minutes
-    eval $(gpg-agent -q --daemon --write-env-file "$HOME/.gpg-agent-info" \
-        --default-cache-ttl "$time" --pinentry-program /usr/local/bin/pinentry \
-        --max-cache-ttl 86400)      # 24 hours
-    export GPG_AGENT_INFO
-    GPG_TTY=$(tty)
-    export GPG_TTY
-else
-    source "$HOME/.gpg-agent-info" && printf "==> Loaded existing gpg agent.\n"
-fi
-
-# ssh agent
-if [[ ! -f "$HOME/.ssh-agent-info" ]]; then
-    printf "==> Loading new ssh agent.\n"
-    eval $(ssh-agent) >| "$HOME/.ssh-agent-info"
-fi
+# Load ssh and gpg keys
+eval $(keychain --eval github dundee pi strongspace BAD246F9)
 
 
 ################################################################################
@@ -241,12 +224,12 @@ alias sf='fasd -sif'     # interactive file selection
 alias j='fasd_cd -d'
 alias ji='fasd_cd -id'
 
+alias kill-keychain-agents='keychain -k all'
 alias more=less
 alias gi=get_iplayer
 alias gig='get_iplayer -g'
 alias fget='get_flash_videos'
 alias gits='git st | less'
-alias kill-ssh-keys='ssh-add -D'
 alias femacs='emacs -Q -nw'
 alias zz="source $HOME/.zshrc"
 alias e='emacsclient'
@@ -280,40 +263,9 @@ tmux_name=main
 
 
 # gpg
-kill-gpg-agent () {
-    printf "Killing gpg agents... "
-    killall gpg-agent
-    ps aux | grep -i gpg | grep -v grep
-    printf "done.\n"
-}
-
 inform-emacs-gpg-agent () {
     agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
     emacsclient -e "(setenv \"GPG_AGENT_INFO\" \"$agent_id\")"
-}
-
-start-gpg-agent () {
-    time=${1:-'180'}             # Request key cache time in minutes
-    time_sec=$(($time * 60))
-    _start-gpg-agent "$time_sec" && inform-emacs-gpg-agent
-    starter_file="/tmp/gpg-agent-starter"
-    sig_starter_file="$starter_file.gpg"
-    gpg_key=${1:-"$cjp_gpg_key"}
-    touch "$starter_file"
-    if [[ -f "$sig_starter_file" ]]; then
-        rm "$sig_starter_file"
-    fi
-    gpg -esr "$gpg_key" -o "$sig_starter_file" "$starter_file"
-    if [[ -f "$starter_file" ]]; then
-        rm "$starter_file"
-    fi
-    gpg -d -o "$starter_file" "$sig_starter_file"
-    if [[ -f "$starter_file" ]]; then
-        rm "$starter_file"
-    fi
-    if [[ -f "$sig_starter_file" ]]; then
-        rm "$sig_starter_file"
-    fi
 }
 
 # tmux
