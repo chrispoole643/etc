@@ -376,6 +376,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq cua-enable-cua-keys nil)
+(setq cua-rectangle-mark-key (kbd "<C-M-return>"))
 (cua-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -781,7 +782,8 @@
       org-agenda-skip-scheduled-if-done t ; Don't show things already done
       org-agenda-start-on-weekday nil     ; Always start with today
       org-return-follows-link t           ; Hit RET on a link to follow it
-      org-startup-indented t)             ; Indent Headings and hide stars
+      org-startup-indented t              ; Indent Headings and hide stars
+      org-M-RET-may-split-line t)         ; Split line in the middle with M-RET
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX

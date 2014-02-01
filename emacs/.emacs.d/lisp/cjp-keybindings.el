@@ -9,11 +9,11 @@
 ;;; Custom Binding Prefix
 ;;; ---------------------
 ;;;
-;;; Use `C-c c` as a prefix for more complicated stuff.
+;;; Use `super-SPACE` as a prefix for more complicated stuff.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (mapc (lambda (arg)
-        (global-set-key (kbd (concat "C-c SPC " (car arg))) (cadr arg)))
+        (global-set-key (kbd (concat "s-SPC " (car arg))) (cadr arg)))
       '(("l" find-library)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
