@@ -205,7 +205,7 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 eval "$(fasd --init auto)"
 
 # Load ssh and gpg keys
-eval $(keychain --timeout 30 --ignore-missing --nogui --inherit any --eval github dundee pi strongspace BAD246F9)
+eval $(keychain --timeout 30 --ignore-missing --agents ssh --nogui --inherit any --eval github dundee pi strongspace gsa)
 
 
 ################################################################################
@@ -224,7 +224,8 @@ alias sf='fasd -sif'     # interactive file selection
 alias j='fasd_cd -d'
 alias ji='fasd_cd -id'
 
-alias kill-keychain-agents='keychain -k all'
+alias kill-keychain-agents='keychain --clear'
+alias kill-gpg-agent='killall gpg-agent'
 alias more=less
 alias gi=get_iplayer
 alias gig='get_iplayer -g'
@@ -266,6 +267,31 @@ tmux_name=main
 inform-emacs-gpg-agent () {
     agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
     emacsclient -e "(setenv \"GPG_AGENT_INFO\" \"$agent_id\")"
+}
+
+start-gpg-agent () {
+    time=${1:-'180'} # Request key cache time in minutes
+    time_sec=$(($time * 60))
+    # _start-gpg-agent "$time_sec" &&
+    inform-emacs-gpg-agent
+    starter_file="/tmp/gpg-agent-starter"
+    sig_starter_file="$starter_file.gpg"
+    gpg_key=${1:-"$cjp_gpg_key"}
+    touch "$starter_file"
+    if [[ -f "$sig_starter_file" ]]; then
+        rm "$sig_starter_file"
+    fi
+    gpg -esr "$gpg_key" -o "$sig_starter_file" "$starter_file"
+    if [[ -f "$starter_file" ]]; then
+        rm "$starter_file"
+    fi
+    gpg -d -o "$starter_file" "$sig_starter_file"
+    if [[ -f "$starter_file" ]]; then
+        rm "$starter_file"
+    fi
+    if [[ -f "$sig_starter_file" ]]; then
+        rm "$sig_starter_file"
+    fi
 }
 
 # tmux
