@@ -205,7 +205,7 @@ ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
 eval "$(fasd --init auto)"
 
 # Load ssh and gpg keys
-eval $(keychain --timeout 30 --eval github dundee pi strongspace BAD246F9)
+eval $(keychain --timeout 30 --nogui --eval github dundee pi strongspace BAD246F9)
 
 
 ################################################################################
