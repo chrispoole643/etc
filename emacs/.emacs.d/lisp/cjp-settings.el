@@ -339,15 +339,15 @@
       dired-details-initially-hide nil
       dired-omit-files (concat dired-omit-files "\\|^\\..+$")) ; dired-omit-mode,
                                                                ; ignore dotfiles
-(setq-default dired-omit-mode nil) ; this is buffer-local variable
+(setq-default dired-omit-mode nil)      ; this is buffer-local variable
 
 ;;; Make return key open files in another window, except if item at point is a
 ;;; directory, and then open in the current window.
 (define-key dired-mode-map (kbd "RET") (lambda ()
-                                          (interactive)
-                                          (if (cjp-dired-directoryp)
-                                              (dired-find-file)
-                                            (dired-find-file-other-window))))
+                                         (interactive)
+                                         (if (cjp-dired-directoryp)
+                                             (dired-find-file)
+                                           (dired-find-file-other-window))))
 
 (defadvice dired-details-toggle (after fit-dired-frame activate)
   "Resize dired buffer (horizontally) after toggling details."
@@ -516,12 +516,12 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
+  "Major mode for editing Markdown files" t)
 
 (setq markdown-command "kramdown"
-      markdown-italic-underscore t ; Use underscores for italics
+      markdown-italic-underscore t      ; Use underscores for italics
       markdown-indent-on-enter nil
-      markdown-enable-math t) ; Enable syntax highlighting (LaTeX)
+      markdown-enable-math t)           ; Enable syntax highlighting (LaTeX)
 
 ;;; Webgen uses markdown syntax in .page files
 (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
@@ -604,10 +604,10 @@
 (setq Info-directory-list Info-default-directory-list)
 
 (info-lookup-add-help
-    :mode 'lisp-mode
-    :regexp "[^][()'\" \t\n]+"
-    :ignore-case t
-    :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
+ :mode 'lisp-mode
+ :regexp "[^][()'\" \t\n]+"
+ :ignore-case t
+ :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
 
 (info-lookup-maybe-add-help
  :mode 'emacs-lisp-mode
@@ -655,7 +655,7 @@
  :ignore-case t
  ;; Aubrey Jaffer's rendition from <URL:ftp://ftp-swiss.ai.mit.edu/pub/scm>
  :doc-spec '(("(r5rs)Index" nil
-	      "^[ \t]+-+ [^:]+:[ \t]*" "\\b")))
+              "^[ \t]+-+ [^:]+:[ \t]*" "\\b")))
 
 ;;; Quack
 
@@ -667,9 +667,9 @@
 
 (autoload 'scheme-get-current-symbol-info "scheme-complete" nil t)
 (add-hook 'scheme-mode-hook
-  (lambda ()
-    (make-local-variable 'eldoc-documentation-function)
-    (setq eldoc-documentation-function 'scheme-get-current-symbol-info)))
+          (lambda ()
+            (make-local-variable 'eldoc-documentation-function)
+            (setq eldoc-documentation-function 'scheme-get-current-symbol-info)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Paredit
@@ -750,16 +750,16 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq diary-file (cjp-emacs-structure-dir "diary") ; Choose my custom diary file
-      calendar-week-start-day 1 ; Start Calendar on Monday
-      european-calendar-style 't) ; European date format (DD/MM/YYYY)
+      calendar-week-start-day 1                    ; Start Calendar on Monday
+      european-calendar-style 't)       ; European date format (DD/MM/YYYY)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Abbrev
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default abbrev-mode t) ; Operate on startup, save in specified file
+(setq-default abbrev-mode t)        ; Operate on startup, save in specified file
 (setq abbrev-file-name (cjp-emacs-structure-dir ".abbrev_defs")
-      save-abbrevs t ; Save abbrevs when files are saved
+      save-abbrevs t                    ; Save abbrevs when files are saved
       dabbrev-abbrev-char-regexp "\\sw\\|\\s_") ; Recognise understores too
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -789,7 +789,7 @@
 ;; (setq TeX-auto-save t)
 
 (setq TeX-parse-self t
-      TeX-PDF-mode t ; Use pdflatex as default mode in AuCTEX, always
+      TeX-PDF-mode t            ; Use pdflatex as default mode in AuCTEX, always
       ;; TeX-electric-sub-and-superscript nil
       )
 
@@ -804,12 +804,12 @@
 
 (setq TeX-source-correlate-method 'synctex)
 
-(setq reftex-plug-into-AUCTeX t ; Setup RefTeX with AUCTeX automatically
+(setq reftex-plug-into-AUCTeX t         ; Setup RefTeX with AUCTeX automatically
       reftex-section-prefixes '((0 . "part-") ; Use `-', not `:'.
                                 (1 . "cha-")
                                 (t . "sec-"))
       reftex-cite-format "\\citet[][]{%l}" ; Change citation format to natbib
-                                           ; \citet format
+                                        ; \citet format
       )
 
 ;;; Highlight keywords from the natbib package
@@ -828,7 +828,7 @@
 (ido-mode t)
 (setq ido-everywhere t
       ido-enable-flex-matching t
-      ido-create-new-buffer 'always) ; If a buffer name that doesn't exist is
+      ido-create-new-buffer 'always)    ; If a buffer name that doesn't exist is
                                      ; chosen, just make a new one without
                                      ; prompting
 
@@ -932,8 +932,8 @@
 
 ;;; ibuffer defaults to opening files with ibuffer-find-file; I prefer ido
 (add-hook 'ibuffer-load-hook (lambda ()
-                                (define-key ibuffer-mode-map
-                                  (kbd "C-x C-f") 'ido-find-file)))
+                               (define-key ibuffer-mode-map
+                                 (kbd "C-x C-f") 'ido-find-file)))
 
 ;;; `* !' is what dired uses to clear all marks
 (add-hook 'ibuffer-load-hook (lambda ()
@@ -978,10 +978,10 @@
 ;;; From stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001
 (add-hook 'after-save-hook
           (lambda ()
-             (when (string-match
-                    (concat "\.emacs\.d" ".*\.el$")
-                    buffer-file-name)
-               (byte-compile-file buffer-file-name))))
+            (when (string-match
+                   (concat "\.emacs\.d" ".*\.el$")
+                   buffer-file-name)
+              (byte-compile-file buffer-file-name))))
 
 ;;; Put auto save files here
 (setq auto-save-list-file-prefix (cjp-emacs-structure-dir ".auto-save-list/.saves-"))
@@ -1003,7 +1003,7 @@
 ;;; In Emacs 24.3.50+ (from git), modeline lists "," - stop this
 (global-subword-mode 1)
 (let ((entry (assq 'subword-mode minor-mode-alist)))
-    (when entry (setcdr entry '(nil))))
+  (when entry (setcdr entry '(nil))))
 
 ;;; Don't always ask if I want to make a new file or buffer, just do it
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -1058,16 +1058,16 @@
 ;;; line
 (defadvice kill-ring-save (before slick-copy activate compile) "When called
   interactively with no active region, copy a single line instead."
-  (interactive (if mark-active (list (region-beginning) (region-end)) (message
-  "Copied line") (list (line-beginning-position) (line-beginning-position
-  2)))))
+           (interactive (if mark-active (list (region-beginning) (region-end)) (message
+                                                                                "Copied line") (list (line-beginning-position) (line-beginning-position
+                                                                                                                                2)))))
 
 (defadvice kill-region (before slick-cut activate compile)
   "When called interactively with no active region, kill a single line instead."
   (interactive
-    (if mark-active (list (region-beginning) (region-end))
-      (list (line-beginning-position)
-        (line-beginning-position 2)))))
+   (if mark-active (list (region-beginning) (region-end))
+     (list (line-beginning-position)
+           (line-beginning-position 2)))))
 
 ;;; Replace yes/no by y/n
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -1078,8 +1078,8 @@
 ;;; Require C-x C-c prompt. I've closed too often by accident
 (global-set-key (kbd "C-x C-c")
                 (lambda () (interactive)
-                   (cond ((y-or-n-p "Quit? ")
-                          (save-buffers-kill-emacs)))))
+                  (cond ((y-or-n-p "Quit? ")
+                         (save-buffers-kill-emacs)))))
 
 ;;; Always flash for parens
 (show-paren-mode 1)
@@ -1089,8 +1089,8 @@
 ;;; *Scratch*) called 'test.txt' to make it open in text-mode, or 'test.js' for
 ;;; javascript-mode, etc.
 (setq default-major-mode (lambda ()
-     (let ((buffer-file-name (or buffer-file-name (buffer-name))))
-          (set-auto-mode))))
+                           (let ((buffer-file-name (or buffer-file-name (buffer-name))))
+                             (set-auto-mode))))
 
 ;;; Open new buffers (without files or filename extensions) in markdown-mode
 (add-to-list 'auto-mode-alist '("" . markdown-mode) t)
@@ -1169,6 +1169,6 @@
 (setq custom-safe-themes t)
 
 (if (display-graphic-p)
-  (load-theme 'tangotango t)
+    (load-theme 'tangotango t)
   (color-theme-initialize)
   (color-theme-hober))
