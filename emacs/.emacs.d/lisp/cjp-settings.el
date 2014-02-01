@@ -768,14 +768,14 @@
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-;;; Org-mode setup
 (setq org-agenda-span 7                   ; Show next 7 days in agenda
       org-deadline-warning-days 14        ; Show upcoming events 14 days prior
       org-agenda-show-all-dates t         ; Show dates even if totally free
       org-agenda-skip-deadline-if-done t  ; Don't show things already done
       org-agenda-skip-scheduled-if-done t ; Don't show things already done
       org-agenda-start-on-weekday nil     ; Always start with today
-      org-return-follows-link t)
+      org-return-follows-link t           ; Hit RET on a link to follow it
+      org-startup-indented t)             ; Indent Headings and hide stars
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
