@@ -90,8 +90,8 @@
 ;;; Default keybindings of C-c <left> and C-c <right> are annoying to type if
 ;;; going back more than one or two window configurations. Use super key for
 ;;; higher level Emacs command like these to avoid interfering with modes.
-(global-set-key (kbd "s-S-<left>") 'winner-undo)
-(global-set-key (kbd "s-S-<right>") 'winner-redo)
+(global-set-key (kbd "C-s-<left>") 'winner-undo)
+(global-set-key (kbd "C-s-<right>") 'winner-redo)
 
 (global-set-key (kbd "s-<left>")  'windmove-left)
 (global-set-key (kbd "s-<right>") 'windmove-right)
