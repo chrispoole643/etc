@@ -130,9 +130,9 @@
 
 ;;; Since re-mapped C-w to backward-kill-word, and moved cut option to C-\,
 ;;; should move copy command too (M-w -> M-\). Re-map old M-\ -> M-w
-;;; (global-set-key (kbd "M-w") 'delete-horizontal-space)
-;;; (global-set-key (kbd "M-\\") 'kill-ring-save)
-;;; (global-set-key (kbd "M-#") 'kill-ring-save)
+;; (global-set-key (kbd "M-w") 'delete-horizontal-space)
+;; (global-set-key (kbd "M-\\") 'kill-ring-save)
+;; (global-set-key (kbd "M-#") 'kill-ring-save)
 
 ;;; M-/ is used often to expand words as a basic tab completion, so map command
 ;;; to somewhere easier to press quickly, M-o (previously undefined), or M-i if
@@ -155,12 +155,12 @@
 
 ;;; Type ( and have Emacs add the ) and put point in middle
 ;;; (setq skeleton-pair t)
-;;; (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-;;; (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-;;; (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
+;; (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
+;; (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
+;; (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
 
 ;;; Unbind keys
-(global-unset-key (kbd "C-z")) ; Usually suspend-frame. Annoying.
+(global-unset-key (kbd "C-z"))          ; Usually suspend-frame. Annoying.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Mac
@@ -202,11 +202,11 @@
   (define-key cm-map "l" 'hide-leaves)    ; Hide body lines in this entry and sub-entries
   (define-key cm-map "d" 'hide-subtree)   ; Hide everything in this entry and sub-entries
 
-  (define-key cm-map "a" 'show-all)       ; Show (expand) everything
-  (define-key cm-map "e" 'show-entry)     ; Show this heading's body
-  (define-key cm-map "i" 'show-children)  ; Show this heading's immediate child sub-headings
-  (define-key cm-map "k" 'show-branches)  ; Show all sub-headings under this heading
-  (define-key cm-map "s" 'show-subtree)   ; Show (expand) everything in this heading & below
+  (define-key cm-map "a" 'show-all)      ; Show (expand) everything
+  (define-key cm-map "e" 'show-entry)    ; Show this heading's body
+  (define-key cm-map "i" 'show-children) ; Show this heading's immediate child sub-headings
+  (define-key cm-map "k" 'show-branches) ; Show all sub-headings under this heading
+  (define-key cm-map "s" 'show-subtree)  ; Show (expand) everything in this heading & below
 
   (define-key cm-map "u" 'outline-up-heading)               ; Up
   (define-key cm-map "n" 'outline-next-visible-heading)     ; Next

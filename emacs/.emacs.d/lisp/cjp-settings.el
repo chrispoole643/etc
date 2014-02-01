@@ -519,9 +519,9 @@
   "Major mode for editing Markdown files" t)
 
 (setq markdown-command "kramdown"
-      markdown-italic-underscore t      ; Use underscores for italics
+      markdown-italic-underscore t ; Use underscores for italics
       markdown-indent-on-enter nil
-      markdown-enable-math t)           ; Enable syntax highlighting (LaTeX)
+      markdown-enable-math t)      ; Enable syntax highlighting (LaTeX)
 
 ;;; Webgen uses markdown syntax in .page files
 (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
@@ -751,15 +751,15 @@
 
 (setq diary-file (cjp-emacs-structure-dir "diary") ; Choose my custom diary file
       calendar-week-start-day 1                    ; Start Calendar on Monday
-      european-calendar-style 't)       ; European date format (DD/MM/YYYY)
+      european-calendar-style 't)                  ; European date format (DD/MM/YYYY)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Abbrev
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default abbrev-mode t)        ; Operate on startup, save in specified file
+(setq-default abbrev-mode t)                    ; Operate on startup, save in specified file
 (setq abbrev-file-name (cjp-emacs-structure-dir ".abbrev_defs")
-      save-abbrevs t                    ; Save abbrevs when files are saved
+      save-abbrevs t                            ; Save abbrevs when files are saved
       dabbrev-abbrev-char-regexp "\\sw\\|\\s_") ; Recognise understores too
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -789,7 +789,7 @@
 ;; (setq TeX-auto-save t)
 
 (setq TeX-parse-self t
-      TeX-PDF-mode t            ; Use pdflatex as default mode in AuCTEX, always
+      TeX-PDF-mode t ; Use pdflatex as default mode in AuCTEX, always
       ;; TeX-electric-sub-and-superscript nil
       )
 
@@ -804,12 +804,12 @@
 
 (setq TeX-source-correlate-method 'synctex)
 
-(setq reftex-plug-into-AUCTeX t         ; Setup RefTeX with AUCTeX automatically
+(setq reftex-plug-into-AUCTeX t               ; Setup RefTeX with AUCTeX automatically
       reftex-section-prefixes '((0 . "part-") ; Use `-', not `:'.
                                 (1 . "cha-")
                                 (t . "sec-"))
-      reftex-cite-format "\\citet[][]{%l}" ; Change citation format to natbib
-                                        ; \citet format
+      reftex-cite-format "\\citet[][]{%l}"    ; Change citation format to natbib
+                                              ; \citet format
       )
 
 ;;; Highlight keywords from the natbib package
@@ -828,7 +828,7 @@
 (ido-mode t)
 (setq ido-everywhere t
       ido-enable-flex-matching t
-      ido-create-new-buffer 'always)    ; If a buffer name that doesn't exist is
+      ido-create-new-buffer 'always) ; If a buffer name that doesn't exist is
                                      ; chosen, just make a new one without
                                      ; prompting
 
@@ -1020,11 +1020,11 @@
 
 ;;; Store all backup files in one folder, not all over filesystem
 (setq backup-directory-alist (list (cons "." (cjp-emacs-structure-dir "backup/")))
-      version-control t                 ; Use version numbers for backups
-      kept-new-versions 2               ; Number of newest versions to keep
-      kept-old-versions 2               ; Number of oldest versions to keep
-      delete-old-versions t             ; Ask to delete excess backup versions?
-      backup-by-copying-when-linked t)  ; Copy linked files, don't rename
+      version-control t                ; Use version numbers for backups
+      kept-new-versions 2              ; Number of newest versions to keep
+      kept-old-versions 2              ; Number of oldest versions to keep
+      delete-old-versions t            ; Ask to delete excess backup versions?
+      backup-by-copying-when-linked t) ; Copy linked files, don't rename
 
 ;;; Store all autosave files in one folder, not all over filesystem
 (let ((save-dir (cjp-emacs-structure-dir "autosaves/")))
