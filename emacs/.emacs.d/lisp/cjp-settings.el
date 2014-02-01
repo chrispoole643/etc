@@ -96,7 +96,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'diminish)
-;;(diminish 'undo-tree-mode "ut")
+
+;;; TODO: make this work
+;; (mapc (lambda (mode) (diminish (car mode) (cdr mode)))
+;;       '((org-indent-mode "")
+;;         (emacs-lisp-mode "ELisp")
+;;         (undo-tree-mode "")
+;;         (yas-minor-mode "")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ein
