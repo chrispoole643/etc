@@ -65,8 +65,7 @@
 (require 'package)
 
 (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+(setq package-archives (list '("melpa" . "http://melpa.milkbox.net/packages/")))
 (setq package-enable-at-startup nil)
 (unless package-archive-contents
   (package-refresh-contents))
