@@ -781,8 +781,10 @@
       org-agenda-skip-scheduled-if-done t ; Don't show things already done
       org-agenda-start-on-weekday nil     ; Always start with today
       org-return-follows-link t           ; Hit RET on a link to follow it
+      org-startup-folded "content"        ; Expand headlines to CONTENT
       org-startup-indented t              ; Indent Headings and hide stars
       org-M-RET-may-split-line t          ; Split line in the middle with M-RET
+      org-use-fast-todo-selection t       ; Quickly select TODO states
       org-list-demote-modify-bullet t)    ; Change sublist bullet types
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
