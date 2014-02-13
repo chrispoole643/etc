@@ -774,18 +774,21 @@
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-(setq org-agenda-span 7                   ; Show next 7 days in agenda
-      org-deadline-warning-days 14        ; Show upcoming events 14 days prior
-      org-agenda-show-all-dates t         ; Show dates even if totally free
-      org-agenda-skip-deadline-if-done t  ; Don't show things already done
-      org-agenda-skip-scheduled-if-done t ; Don't show things already done
-      org-agenda-start-on-weekday nil     ; Always start with today
-      org-return-follows-link t           ; Hit RET on a link to follow it
-      org-startup-folded "content"        ; Expand headlines to CONTENT
-      org-startup-indented t              ; Indent Headings and hide stars
-      org-M-RET-may-split-line t          ; Split line in the middle with M-RET
-      org-use-fast-todo-selection t       ; Quickly select TODO states
-      org-list-demote-modify-bullet t)    ; Change sublist bullet types
+(setq org-agenda-span 7                        ; Show next 7 days in agenda
+      org-deadline-warning-days 14             ; Show upcoming events 14 days prior
+      org-agenda-show-all-dates t              ; Show dates even if totally free
+      org-agenda-skip-deadline-if-done t       ; Don't show things already done
+      org-agenda-skip-scheduled-if-done t      ; Don't show things already done
+      org-agenda-start-on-weekday nil          ; Always start with today
+      org-agenda-dim-blocked-tasks t           ; Dim blocked tasks
+      org-return-follows-link t                ; Hit RET on a link to follow it
+      org-startup-folded "content"             ; Expand headlines to CONTENT
+      org-startup-indented t                   ; Indent Headings and hide stars
+      org-M-RET-may-split-line t               ; Split line in the middle with M-RET
+      org-use-fast-todo-selection t            ; Quickly select TODO states
+      org-enforce-todo-dependencies t          ; Only mark a parent DONE when all children are too
+      org-enforce-todo-checkbox-dependencies t ; Same as above, with checkboxes
+      org-list-demote-modify-bullet t)         ; Change sublist bullet types
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
