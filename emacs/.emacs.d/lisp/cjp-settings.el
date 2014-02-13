@@ -775,8 +775,9 @@
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;;; Use better defaults when opening files
-(setq org-file-apps (if macosxp org-file-apps-defaults-macosx
-                      org-file-apps-defaults-gnu))
+(eval-after-load "org" '(setq org-file-apps (if macosxp
+					       org-file-apps-defaults-macosx
+					     org-file-apps-defaults-gnu)))
 
 (setq org-agenda-span 7                        ; Show next 7 days in agenda
       org-deadline-warning-days 14             ; Show upcoming events 14 days prior
