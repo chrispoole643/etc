@@ -65,17 +65,18 @@
 (require 'package)
 
 (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
-(setq package-archives (list '("melpa" . "http://melpa.milkbox.net/packages/")))
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
 (setq package-enable-at-startup nil)
-(unless package-archive-contents
-  (package-refresh-contents))
 (setq package-load-list '(all))
 (package-initialize)
 
-(mapc (lambda (package)
-        (unless (package-installed-p package)
-          (package-install package)))
-      cjp-required-packages)
+(when (y-or-n-p "Check for (m)elpa updates?")
+  (unless package-archive-contents
+    (package-refresh-contents))
+  (mapc (lambda (package)
+          (unless (package-installed-p package)
+            (package-install package)))
+        cjp-required-packages))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Requirements and libraries
@@ -186,7 +187,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'auto-complete-config)
-(require 'ac-slime)
 (require 'ac-python)
 
 (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
@@ -423,7 +423,7 @@
 ;;; Slime
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'slime)
+;; (require 'slime)
 
 ;;; Use sbcl
 (setq inferior-lisp-program "/usr/local/bin/sbcl")
@@ -609,29 +609,29 @@
 
 (setq Info-directory-list Info-default-directory-list)
 
-(info-lookup-add-help
- :mode 'lisp-mode
- :regexp "[^][()'\" \t\n]+"
- :ignore-case t
- :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
+;; (info-lookup-add-help
+;;  :mode 'lisp-mode
+;;  :regexp "[^][()'\" \t\n]+"
+;;  :ignore-case t
+;;  :doc-spec '(("(ansicl)Symbol Index" nil nil nil)))
 
-(info-lookup-maybe-add-help
- :mode 'emacs-lisp-mode
- :regexp "[^][()`',\" \t\n]+"
- :doc-spec '(("(elisp)Index"          nil "^ -+ .*: " "\\( \\|$\\)")
-             ;; Commands with key sequences appear in nodes as `foo' and
-             ;; those without as `M-x foo'.
-             ("(emacs)Command Index"  nil "`\\(M-x[ \t\n]+\\)?" "'")
-             ;; Variables normally appear in nodes as just `foo'.
-             ("(emacs)Variable Index" nil "`" "'")
-             ;; Almost all functions, variables, etc appear in nodes as
-             ;; " -- Function: foo" etc.  A small number of aliases and
-             ;; symbols appear only as `foo', and will miss out on exact
-             ;; positions.  Allowing `foo' would hit too many false matches
-             ;; for things that should go to Function: etc, and those latter
-             ;; are much more important.  Perhaps this could change if some
-             ;; sort of fallback match scheme existed.
-             ))
+;; (info-lookup-maybe-add-help
+;;  :mode 'emacs-lisp-mode
+;;  :regexp "[^][()`',\" \t\n]+"
+;;  :doc-spec '(("(elisp)Index"          nil "^ -+ .*: " "\\( \\|$\\)")
+;;              ;; Commands with key sequences appear in nodes as `foo' and
+;;              ;; those without as `M-x foo'.
+;;              ("(emacs)Command Index"  nil "`\\(M-x[ \t\n]+\\)?" "'")
+;;              ;; Variables normally appear in nodes as just `foo'.
+;;              ("(emacs)Variable Index" nil "`" "'")
+;;              ;; Almost all functions, variables, etc appear in nodes as
+;;              ;; " -- Function: foo" etc.  A small number of aliases and
+;;              ;; symbols appear only as `foo', and will miss out on exact
+;;              ;; positions.  Allowing `foo' would hit too many false matches
+;;              ;; for things that should go to Function: etc, and those latter
+;;              ;; are much more important.  Perhaps this could change if some
+;;              ;; sort of fallback match scheme existed.
+;;              ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Scheme
@@ -655,13 +655,13 @@
 ;;       geiser-mode-autodoc-p nil)
 
 ;;; Shamelessly stolen from info-look.el, scheme-mode
-(info-lookup-maybe-add-help
- :mode 'geiser-repl-mode
- :regexp "[^()`',\" \t\n]+"
- :ignore-case t
- ;; Aubrey Jaffer's rendition from <URL:ftp://ftp-swiss.ai.mit.edu/pub/scm>
- :doc-spec '(("(r5rs)Index" nil
-              "^[ \t]+-+ [^:]+:[ \t]*" "\\b")))
+;; (info-lookup-maybe-add-help
+;;  :mode 'geiser-repl-mode
+;;  :regexp "[^()`',\" \t\n]+"
+;;  :ignore-case t
+;;  ;; Aubrey Jaffer's rendition from <URL:ftp://ftp-swiss.ai.mit.edu/pub/scm>
+;;  :doc-spec '(("(r5rs)Index" nil
+;;               "^[ \t]+-+ [^:]+:[ \t]*" "\\b")))
 
 ;;; Quack
 
@@ -776,16 +776,11 @@
 
 ;;; Use better defaults when opening files
 (eval-after-load "org" '(setq org-file-apps (if macosxp
-					       org-file-apps-defaults-macosx
-					     org-file-apps-defaults-gnu)))
+                                                org-file-apps-defaults-macosx
+                                              org-file-apps-defaults-gnu)))
 
-(setq org-agenda-span 7                        ; Show next 7 days in agenda
-      org-deadline-warning-days 14             ; Show upcoming events 14 days prior
-      org-agenda-show-all-dates t              ; Show dates even if totally free
-      org-agenda-skip-deadline-if-done t       ; Don't show things already done
-      org-agenda-skip-scheduled-if-done t      ; Don't show things already done
-      org-agenda-start-on-weekday nil          ; Always start with today
-      org-agenda-dim-blocked-tasks t           ; Dim blocked tasks
+;;; Setup
+(setq org-deadline-warning-days 7              ; Show upcoming events 14 days prior
       org-return-follows-link t                ; Hit RET on a link to follow it
       org-startup-folded "content"             ; Expand headlines to CONTENT
       org-startup-indented t                   ; Indent Headings and hide stars
@@ -793,7 +788,76 @@
       org-use-fast-todo-selection t            ; Quickly select TODO states
       org-enforce-todo-dependencies t          ; Only mark a parent DONE when all children are too
       org-enforce-todo-checkbox-dependencies t ; Same as above, with checkboxes
+      org-export-html-postamble nil            ; Don't show the postamble in exported docs
       org-list-demote-modify-bullet t)         ; Change sublist bullet types
+
+;;; Tags and todo keywords
+(setq org-tag-alist '(("office" . ?o)
+                      ("home" . ?h)
+                      ("phone" . ?p)
+                      ("parents" . ?a)
+                      ("grandparents" . ?g)
+                      ("shops" . ?s)
+                      ("reading" . ?r)
+                      ("waiting" . ?w)
+                      ("laptop" . ?l)))
+
+(setq org-todo-keywords '((sequence "NEXT(n)" "DEFER(f)" "|" "DONE(d)" "CANCEL(c)")))
+
+;;; Functions
+(defun gtd-open-file ()
+  (interactive)
+  (find-file (concat org-directory
+                     (ido-completing-read "GTD file: " (directory-files org-directory
+                                                                        nil "\.org$")))))
+
+;;; Capture
+(setq org-directory (if macosxp "~/Dropbox/gtd/" "~/gtd/"))
+(setq org-default-notes-file (concat org-directory "inbox.org"))
+(setq gtd-project-list (concat org-directory "project-list.org"))
+(setq gtd-someday-maybe-file (concat org-directory "someday-maybe.org"))
+(setq org-capture-templates
+      '(("i" "Inbox" entry (file+headline "" "Inbox")
+         "* %?")
+        ("p" "Project" entry (file+headline gtd-project-list "Projects")
+         "* %?")
+        ("a" "Action" entry (file+headline gtd-project-list "Actions")
+         "* NEXT %?")))
+
+;;; Agenda
+(setq org-agenda-span 7                        ; Show next x days in agenda
+      org-agenda-show-all-dates t              ; Show dates even if totally free
+      org-agenda-skip-deadline-if-done t       ; Don't show things already done
+      org-agenda-skip-scheduled-if-done t      ; Don't show things already done
+      org-agenda-start-on-weekday nil          ; Always start with today
+      org-agenda-files (list gtd-project-list) ; Only include project list in agenda
+      org-agenda-dim-blocked-tasks t)          ; Dim blocked tasks
+
+(setq org-agenda-custom-commands
+      (mapcar (lambda (tag)
+                (let* ((text (car tag))
+                       (shortcut (string (cdr tag)))
+                       (waitp (equal text "waiting")))
+                  (if waitp
+                      '("w" "Waiting for" ((tags "waiting")))
+                    `(,shortcut ,(capitalize text)
+                              ((tags-todo ,(concat "TODO=\"NEXT\"+" text))
+                               (agenda ""))))))
+              org-tag-alist))
+
+(add-to-list 'org-agenda-custom-commands
+             '("W" "Weekly review" agenda "" ((org-agenda-span 7) (org-agenda-log-mode 1))))
+
+;;; Refiling
+(setq org-log-refile t)
+(setq org-reverse-note-order t)         ; Store notes at the top of the tree
+(setq org-refile-targets '((gtd-project-list :maxlevel . 1)
+                           (gtd-someday-maybe-file :maxlevel . 2)))
+
+;;; Revert files automatically
+(add-hook 'find-file-hook
+          (lambda () (when (string-match org-directory buffer-file-name)
+                  (auto-revert-mode 1))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
@@ -957,13 +1021,6 @@
 (add-hook 'ibuffer-load-hook (lambda ()
                                (define-key ibuffer-mode-map
                                  (kbd "* !") 'ibuffer-unmark-all)))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; GTD
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'gtd)
-;; (gtd-use-menu)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Unicode
