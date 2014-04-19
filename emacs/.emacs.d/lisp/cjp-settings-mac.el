@@ -78,11 +78,12 @@
           (append '((left . 60) (top . 0) (width . 80) (height . 56))
                   default-frame-alist)))
 
-;;; I prefer cmd key for meta
+;;; I prefer cmd key for meta, and the right cmd as super
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
-      mac-option-modifier 'super)
+      mac-option-modifier 'super
+      mac-right-command-modifier 'super)
 
 ;;; In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not
 ;;; forward as is usual. This fixes this behaviour.
