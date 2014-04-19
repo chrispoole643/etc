@@ -265,12 +265,10 @@
 (global-set-key (kbd "<f11>") 'cjp-browse-url-on-line)
 
 ;;; F12
-(global-set-key (kbd "<f12>") 'gtd-inbox)
-(global-set-key (kbd "<C-f12>") 'gtd-select)
-(global-set-key (kbd "<M-f12>") 'gtd-action-list)
-(global-set-key (kbd "<C-M-f12>") 'gtd-functions)
-(when linuxp
-  (global-set-key (kbd "<C-s-f12>") 'gtd-functions))
+(global-set-key (kbd "<f12>") (lambda () (interactive) (org-capture nil "i")))
+(global-set-key (kbd "<C-f12>") 'gtd-open-file)
+(global-set-key (kbd "<M-f12>") 'org-agenda)
+(global-set-key (kbd (if macosxp "<C-M-f12>" "<C-s-f12>")) 'org-capture)
 
 ;;; F13-16 (Apple extended keyboard only)
 (when macosxp
