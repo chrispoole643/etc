@@ -13,10 +13,8 @@
 
 ;;; Bootstrap with my library functions
 ;;; (`cjp-library' contains `cjp-get-dir-structure-in')
-(let ((file (concat user-emacs-directory "lisp/cjp-library.el"))
-      (compiled-file (concat user-emacs-directory "lisp/cjp-library.elc")))
-  (cond ((file-exists-p compiled-file) (load-file compiled-file))
-        ((file-exists-p file) (byte-compile-file file t))))
+(let ((file (concat user-emacs-directory "lisp/cjp-library.el")))
+  (if (file-exists-p file) (load-file file)))
 
 ;;; Add lisp directory tree to load-path
 (setq load-path (append (cjp-get-dir-structure-in "lisp")
@@ -31,7 +29,7 @@
           (let ((absfile (concat "/Users/Chris/.emacs.d-private/"
                                  file)))
             (if (file-exists-p absfile) (load-file absfile))))
-        '("cjp-library-private.elc" "cjp-settings-private.elc"))
+        '("cjp-library-private.el" "cjp-settings-private.el"))
 
 ;;; Load custom faces
 (load-library "cjp-faces")
