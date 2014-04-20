@@ -837,16 +837,30 @@
       (mapcar (lambda (tag)
                 (let* ((text (car tag))
                        (shortcut (string (cdr tag)))
+                       (action-list (concat org-directory "action-lists/" text))
                        (waitp (equal text "waiting")))
                   (if waitp
-                      '("w" "Waiting for" ((tags "waiting")))
+                      `("w" "Waiting for" ((tags ,text)) nil
+                        (,action-list))
                     `(,shortcut ,(capitalize text)
                               ((tags-todo ,(concat "TODO=\"NEXT\"+" text))
-                               (agenda ""))))))
+                               (agenda ""))
+                              nil
+                              (,action-list)))))
               org-tag-alist))
 
 (add-to-list 'org-agenda-custom-commands
              '("W" "Weekly review" agenda "" ((org-agenda-span 7) (org-agenda-log-mode 1))))
+
+;;; Export agendas as action lists
+(setq org-agenda-exporter-settings
+      '((ps-number-of-columns 2)
+        (ps-landscape-mode t)
+        (org-agenda-add-entry-text-maxlines 5)
+        (htmlize-output-type 'css)
+        (org-agenda-prefix-format " [ ] ")
+        (org-agenda-with-colors t)
+        (org-agenda-remove-tags t)))
 
 ;;; Refiling
 (setq org-log-refile t)
