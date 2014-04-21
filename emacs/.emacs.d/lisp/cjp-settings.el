@@ -779,17 +779,32 @@
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
-;;; Setup
-(setq org-deadline-warning-days 7              ; Show upcoming events 14 days prior
-      org-return-follows-link t                ; Hit RET on a link to follow it
-      org-startup-folded "content"             ; Expand headlines to CONTENT
-      org-startup-indented t                   ; Indent Headings and hide stars
-      org-M-RET-may-split-line t               ; Split line in the middle with M-RET
-      org-use-fast-todo-selection t            ; Quickly select TODO states
-      org-enforce-todo-dependencies t          ; Only mark a parent DONE when all children are too
-      org-enforce-todo-checkbox-dependencies t ; Same as above, with checkboxes
-      org-export-html-postamble nil            ; Don't show the postamble in exported docs
-      org-list-demote-modify-bullet t)         ; Change sublist bullet types
+;;; Setup org mode
+(setq ;; Show upcoming events 14 days prior
+      org-deadline-warning-days 7
+      ;; Hit RET on a link to follow it
+      org-return-follows-link t
+      ;; Expand headlines to CONTENT
+      org-startup-folded "content"
+      ;; Indent Headings and hide stars
+      org-startup-indented t
+      ;; Split line in the middle with M-RET
+      org-M-RET-may-split-line t
+      ;; Quickly select TODO states
+      org-use-fast-todo-selection t
+      ;; Only mark a parent DONE when all children are too
+      org-enforce-todo-dependencies t
+      ;; Same as above, with checkboxes
+      org-enforce-todo-checkbox-dependencies t
+      ;; When choosing tags, assume one tag per entry, and don't even show the
+      ;; temp buffer listing the tags --- hit C-c again to override
+      org-fast-tag-selection-single-key "expert"
+      ;; Change TODO state using TAG interface
+      org-fast-tag-selection-include-todo t
+      ;; Don't show the postamble in exported docs
+      org-export-html-postamble nil
+      ;; Change sublist bullet types
+      org-list-demote-modify-bullet t)
 
 ;;; Tags and todo keywords
 (setq org-tag-alist '(("office" . ?o)
