@@ -880,7 +880,8 @@
 
 ;;; Refiling
 (setq org-log-refile t)
-(setq org-reverse-note-order t)         ; Store notes at the top of the tree
+;; Store notes at the top of the tree
+(setq org-reverse-note-order t)
 (setq org-refile-targets '((gtd-project-list :maxlevel . 2)
                            (gtd-someday-maybe-file :maxlevel . 2)))
 
