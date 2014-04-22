@@ -812,12 +812,13 @@
                       ("phone" . ?p)
                       ("parents" . ?a)
                       ("grandparents" . ?g)
+                      ("katie" . ?k)
                       ("shops" . ?s)
                       ("reading" . ?r)
                       ("waiting" . ?w)
                       ("laptop" . ?l)))
 
-(setq org-todo-keywords '((sequence "NEXT(n)" "DEFER(f)" "|" "DONE(d)" "CANCEL(c)")))
+(setq org-todo-keywords '((sequence "DEFER(f)" "NEXT(n)" "|" "DONE(d)" "CANCEL(c)")))
 
 ;;; Functions
 (defun gtd-open-file ()
