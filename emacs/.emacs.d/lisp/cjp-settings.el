@@ -110,7 +110,7 @@
 
 (require 'ein)
 (setq ein:use-auto-complete t)
-;; Or, to enable "superpack" (a little bit hacky improvements):
+;;; Or, to enable "superpack" (a little bit hacky improvements):
 ;; (setq ein:use-auto-complete-superpack t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -141,7 +141,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'workgroups)
-(setq wg-prefix-key (kbd "C-c c w"))    ; Use my custom binding prefix
+;;; Use my custom binding prefix
+(setq wg-prefix-key (kbd "C-c c w"))    
 (workgroups-mode 1)
 (setq wg-morph-on nil)
 
@@ -342,9 +343,11 @@
 ;;; Hide and show details (`ls -l` stuff) with '(' and ')'
 (setq dired-details-hidden-string ""
       dired-details-initially-hide nil
-      dired-omit-files (concat dired-omit-files "\\|^\\..+$")) ; dired-omit-mode,
-                                                               ; ignore dotfiles
-(setq-default dired-omit-mode nil)      ; this is buffer-local variable
+      ;; dired-omit-mode, ignore dotfiles
+      dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
+
+;;; This is buffer-local variable                       
+(setq-default dired-omit-mode nil)      
 
 ;;; Make return key open files in another window, except if item at point is a
 ;;; directory, and then open in the current window.
@@ -356,7 +359,7 @@
 
 (defadvice dired-details-toggle (after fit-dired-frame activate)
   "Resize dired buffer (horizontally) after toggling details."
-  (fix-horizontal-size-to-buffer))      ; In cjp-library
+  (fix-horizontal-size-to-buffer))      
 
 ;;; Don't show '..' since '^' does this; show human file sizes
 (setq dired-listing-switches "-Alh")
@@ -452,7 +455,8 @@
 (setq recentf-auto-cleanup 'never)
 
 ;;; 50 files ought to be enough.
-(setq recentf-save-file (cjp-emacs-structure-dir ".recentf") ; default is ~/.recentf
+(setq ;; default is ~/.recentf
+      recentf-save-file (cjp-emacs-structure-dir ".recentf") 
       recentf-max-saved-items 1024
       recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$"))
 
@@ -525,9 +529,11 @@
   "Major mode for editing Markdown files" t)
 
 (setq markdown-command "kramdown"
-      markdown-italic-underscore t ; Use underscores for italics
+      ;; Use underscores for italics
+      markdown-italic-underscore t 
       markdown-indent-on-enter nil
-      markdown-enable-math t)      ; Enable syntax highlighting (LaTeX)
+      ;; Enable syntax highlighting (LaTeX)
+      markdown-enable-math t)      
 
 ;;; Webgen uses markdown syntax in .page files
 (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
@@ -755,18 +761,24 @@
 ;;; Calendar and Diary
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq diary-file (cjp-emacs-structure-dir "diary") ; Choose my custom diary file
-      calendar-week-start-day 1                    ; Start Calendar on Monday
-      european-calendar-style 't)                  ; European date format (DD/MM/YYYY)
+(setq ;; Choose my custom diary file
+      diary-file (cjp-emacs-structure-dir "diary") 
+      ;; Start Calendar on Monday
+      calendar-week-start-day 1                    
+      ;; European date format (DD/MM/YYYY)
+      european-calendar-style 't)                  
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Abbrev
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq-default abbrev-mode t)                    ; Operate on startup, save in specified file
+;;; Operate on startup, save in specified file
+(setq-default abbrev-mode t)                    
 (setq abbrev-file-name (cjp-emacs-structure-dir ".abbrev_defs")
-      save-abbrevs t                            ; Save abbrevs when files are saved
-      dabbrev-abbrev-char-regexp "\\sw\\|\\s_") ; Recognise understores too
+      ;; Save abbrevs when files are saved
+      save-abbrevs t                            
+      ;; Recognise understores too
+      dabbrev-abbrev-char-regexp "\\sw\\|\\s_") 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Org
@@ -841,13 +853,20 @@
          "* NEXT %?")))
 
 ;;; Agenda
-(setq org-agenda-span 7                        ; Show next x days in agenda
-      org-agenda-show-all-dates t              ; Show dates even if totally free
-      org-agenda-skip-deadline-if-done t       ; Don't show things already done
-      org-agenda-skip-scheduled-if-done t      ; Don't show things already done
-      org-agenda-start-on-weekday nil          ; Always start with today
-      org-agenda-files (list gtd-project-list) ; Only include project list in agenda
-      org-agenda-dim-blocked-tasks t)          ; Dim blocked tasks
+(setq ;; Show next x days in agenda
+      org-agenda-span 7
+      ;; Show dates even if totally free
+      org-agenda-show-all-dates t
+      ;; Don't show things already done
+      org-agenda-skip-deadline-if-done t
+      ;; Don't show things already done
+      org-agenda-skip-scheduled-if-done t
+      ;; Always start with today (nil) or Saturday (6)
+      org-agenda-start-on-weekday 6
+      ;; Only include project list in agenda
+      org-agenda-files (list gtd-project-list)
+      ;; Dim blocked tasks
+      org-agenda-dim-blocked-tasks t)
 
 (setq org-agenda-custom-commands
       (mapcar (lambda (tag)
@@ -879,8 +898,8 @@
         (org-agenda-remove-tags t)))
 
 ;;; Refiling
-(setq org-log-refile t)
-;; Store notes at the top of the tree
+(setq org-log-refile nil)
+;;; Store notes at the top of the tree
 (setq org-reverse-note-order t)
 (setq org-refile-targets '((gtd-project-list :maxlevel . 2)
                            (gtd-someday-maybe-file :maxlevel . 2)))
@@ -902,7 +921,8 @@
 ;; (setq TeX-auto-save t)
 
 (setq TeX-parse-self t
-      TeX-PDF-mode t ; Use pdflatex as default mode in AuCTEX, always
+      ;; Use pdflatex as default mode in AuCTEX, always
+      TeX-PDF-mode t 
       ;; TeX-electric-sub-and-superscript nil
       )
 
@@ -917,13 +937,14 @@
 
 (setq TeX-source-correlate-method 'synctex)
 
-(setq reftex-plug-into-AUCTeX t               ; Setup RefTeX with AUCTeX automatically
-      reftex-section-prefixes '((0 . "part-") ; Use `-', not `:'.
+(setq ;; Setup RefTeX with AUCTeX automatically
+      reftex-plug-into-AUCTeX t               
+      ;; Use `-', not `:'
+      reftex-section-prefixes '((0 . "part-") 
                                 (1 . "cha-")
                                 (t . "sec-"))
-      reftex-cite-format "\\citet[][]{%l}"    ; Change citation format to natbib
-                                              ; \citet format
-      )
+      ;; Change citation format to natbib (\citet format)
+      reftex-cite-format "\\citet[][]{%l}")
 
 ;;; Highlight keywords from the natbib package
 (setq font-latex-match-reference-keywords
@@ -941,9 +962,10 @@
 (ido-mode t)
 (setq ido-everywhere t
       ido-enable-flex-matching t
-      ido-create-new-buffer 'always) ; If a buffer name that doesn't exist is
-                                     ; chosen, just make a new one without
-                                     ; prompting
+      ;; If a buffer name that doesn't exist is chosen, just make a new one without prompting
+      ido-create-new-buffer 'always) 
+                                     
+                                     
 
 ;;; Ignore the .aux extensions that TeX programs create
 (setq completion-ignored-extensions
@@ -1126,11 +1148,16 @@
 
 ;;; Store all backup files in one folder, not all over filesystem
 (setq backup-directory-alist (list (cons "." (cjp-emacs-structure-dir "backup/")))
-      version-control t                ; Use version numbers for backups
-      kept-new-versions 2              ; Number of newest versions to keep
-      kept-old-versions 2              ; Number of oldest versions to keep
-      delete-old-versions t            ; Ask to delete excess backup versions?
-      backup-by-copying-when-linked t) ; Copy linked files, don't rename
+      ;; Use version numbers for backups
+      version-control t                
+      ;; Number of newest versions to keep
+      kept-new-versions 2              
+      ;; Number of oldest versions to keep
+      kept-old-versions 2              
+      ;; Ask to delete excess backup versions?
+      delete-old-versions t            
+      ;; Copy linked files, don't rename
+      backup-by-copying-when-linked t) 
 
 ;;; Store all autosave files in one folder, not all over filesystem
 (let ((save-dir (cjp-emacs-structure-dir "autosaves/")))
