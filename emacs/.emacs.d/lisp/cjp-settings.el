@@ -796,7 +796,7 @@
       org-deadline-warning-days 7
       ;; Hit RET on a link to follow it
       org-return-follows-link t
-      ;; Expand headlines to CONTENT
+      ;; Expand headlines to CONTENT or OVERVIEW or LOGDONE
       org-startup-folded "content"
       ;; Indent Headings and hide stars
       org-startup-indented t
@@ -818,17 +818,25 @@
       ;; Change sublist bullet types
       org-list-demote-modify-bullet t)
 
-;;; Tags and todo keywords
-(setq org-tag-alist '(("office" . ?o)
-                      ("home" . ?h)
-                      ("phone" . ?p)
-                      ("parents" . ?a)
-                      ("grandparents" . ?g)
-                      ("katie" . ?k)
-                      ("shops" . ?s)
-                      ("reading" . ?r)
-                      ("waiting" . ?w)
-                      ("laptop" . ?l)))
+;;; Tags and todo keywords (for home and work)
+(if macosxp
+    (setq org-tag-alist '(("office" . ?o)
+                          ("home" . ?h)
+                          ("phone" . ?p)
+                          ("parents" . ?a)
+                          ("grandparents" . ?g)
+                          ("katie" . ?k)
+                          ("shops" . ?s)
+                          ("reading" . ?r)
+                          ("waiting" . ?w)
+                          ("laptop" . ?l)))
+  (setq org-tag-alist '(("tony" . ?t)
+                        ("andy_bates" . ?a)
+                        ("laptop" . ?l)
+                        ("DTScrum" . ?u)
+                        ("scrum" . ?s)
+                        ("office" . ?o)
+                        ("waiting" . ?w))))
 
 (setq org-todo-keywords '((sequence "DEFER(f)" "NEXT(n)" "|" "DONE(d)" "CANCEL(c)")))
 
