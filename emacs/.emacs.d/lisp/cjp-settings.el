@@ -844,6 +844,7 @@
 (setq org-default-notes-file (concat org-directory "inbox.org"))
 (setq gtd-project-list (concat org-directory "project-list.org"))
 (setq gtd-someday-maybe-file (concat org-directory "someday-maybe.org"))
+(setq gtd-reference-file (concat org-directory "reference.org"))
 (setq org-capture-templates
       '(("i" "Inbox" entry (file+headline "" "Inbox")
          "* %?")
@@ -902,7 +903,8 @@
 ;;; Store notes at the top of the tree
 (setq org-reverse-note-order t)
 (setq org-refile-targets '((gtd-project-list :maxlevel . 2)
-                           (gtd-someday-maybe-file :maxlevel . 2)))
+                           (gtd-someday-maybe-file :maxlevel . 2)
+                           (gtd-reference-file :maxlevel . 2)))
 
 ;;; Revert files automatically
 (add-hook 'find-file-hook
