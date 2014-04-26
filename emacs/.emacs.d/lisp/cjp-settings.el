@@ -888,6 +888,10 @@
 (add-to-list 'org-agenda-custom-commands
              '("W" "Weekly review" agenda "" ((org-agenda-span 7) (org-agenda-log-mode 1))))
 
+;;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
+;;; to make it useful.
+(define-key org-agenda-keymap (kbd "C-c C-c") 'org-agenda-todo)
+
 ;;; Export agendas as action lists
 (setq org-agenda-exporter-settings
       '((ps-number-of-columns 2)
