@@ -900,7 +900,7 @@
 
 ;;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
 ;;; to make it useful.
-(define-key org-agenda-keymap (kbd "C-c C-c") 'org-agenda-todo)
+(add-hook 'org-agenda-mode-hook (lambda () (define-key org-agenda-keymap (kbd "C-c C-c") 'org-agenda-todo)))
 
 ;;; Export agendas as action lists
 (setq org-agenda-exporter-settings
