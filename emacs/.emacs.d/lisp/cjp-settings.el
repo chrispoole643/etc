@@ -225,11 +225,11 @@
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq browse-url-browser-function 'w3m-browse-url
-      w3m-default-save-directory "~/Documents/inbox"
-      w3m-use-tab nil
-      w3m-use-tab-menubar nil
-      w3m-key-binding "info")
+;; (setq browse-url-browser-function 'w3m-browse-url
+;;       w3m-default-save-directory "~/Documents/inbox"
+;;       w3m-use-tab nil
+;;       w3m-use-tab-menubar nil
+;;       w3m-key-binding "info")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Bookmarks
