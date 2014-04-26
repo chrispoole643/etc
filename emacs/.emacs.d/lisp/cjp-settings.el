@@ -797,9 +797,11 @@
       ;; Hit RET on a link to follow it
       org-return-follows-link t
       ;; Expand headlines to CONTENT or OVERVIEW or LOGDONE
-      org-startup-folded "content"
+      org-startup-folded "overview"
       ;; Indent Headings and hide stars
       org-startup-indented t
+      ;; Show inline images
+      org-startup-with-inline-images t
       ;; Split line in the middle with M-RET
       org-M-RET-may-split-line t
       ;; Quickly select TODO states
@@ -913,6 +915,9 @@
 (setq org-refile-targets '((gtd-project-list :maxlevel . 2)
                            (gtd-someday-maybe-file :maxlevel . 2)
                            (gtd-reference-file :maxlevel . 2)))
+
+;;; Save org files after refiling
+(add-hook 'org-after-refile-insert-hook 'org-save-all-org-buffers)
 
 ;;; Revert files automatically
 (add-hook 'find-file-hook
