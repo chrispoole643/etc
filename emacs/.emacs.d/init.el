@@ -47,9 +47,9 @@
 (load-library "cjp-keybindings")
 
 ;;; Always start a python process, for quick maths, and shell
-(when (display-graphic-p)
-  ;; (with-temp-buffer
-  ;;   (python-mode)
-  ;;   (insert "import os, math, time"))
-  ;; (run-python nil t)
-  (save-window-excursion (eshell)))
+;; (when (display-graphic-p)
+;;   (with-temp-buffer
+;;     (python-mode)
+;;     (insert "import os, math, time"))
+;;   (run-python nil t)
+;;   (save-window-excursion (eshell)))
