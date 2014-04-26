@@ -225,11 +225,11 @@
 ;;; w3m
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq browse-url-browser-function 'w3m-browse-url
-      w3m-default-save-directory "~/Documents/inbox"
-      w3m-use-tab nil
-      w3m-use-tab-menubar nil
-      w3m-key-binding "info")
+;; (setq browse-url-browser-function 'w3m-browse-url
+;;       w3m-default-save-directory "~/Documents/inbox"
+;;       w3m-use-tab nil
+;;       w3m-use-tab-menubar nil
+;;       w3m-key-binding "info")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Bookmarks
@@ -897,6 +897,10 @@
 
 (add-to-list 'org-agenda-custom-commands
              '("W" "Weekly review" agenda "" ((org-agenda-span 7) (org-agenda-log-mode 1))))
+
+;;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
+;;; to make it useful.
+(define-key org-agenda-keymap (kbd "C-c C-c") 'org-agenda-todo)
 
 ;;; Export agendas as action lists
 (setq org-agenda-exporter-settings
