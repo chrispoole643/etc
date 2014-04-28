@@ -876,6 +876,8 @@
       org-agenda-start-on-weekday 6
       ;; Only include project list in agenda
       org-agenda-files (list gtd-project-list)
+      ;; Always show the action in context
+      org-agenda-start-with-follow-mode t
       ;; Dim blocked tasks
       org-agenda-dim-blocked-tasks t)
 
