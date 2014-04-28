@@ -886,7 +886,7 @@
                        (action-list (concat org-directory "action-lists/" text))
                        (waitp (equal text "waiting")))
                   (if waitp
-                      `("w" "Waiting for" ((tags ,text)) nil
+                      `("w" "Waiting for" ((tags ,(concat text "/!-DONE"))) nil
                         (,action-list))
                     `(,shortcut ,(capitalize text)
                               ((tags-todo ,(concat "TODO=\"NEXT\"+" text))
@@ -899,8 +899,12 @@
              '("W" "Weekly review" agenda "" ((org-agenda-span 7) (org-agenda-log-mode 1))))
 
 ;;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
-;;; to make it useful.
-(add-hook 'org-agenda-mode-hook (lambda () (define-key org-agenda-keymap (kbd "C-c C-c") 'org-agenda-todo)))
+;;; to make it useful (and then save all org buffers).
+(add-hook 'org-agenda-mode-hook (lambda () (define-key org-agenda-keymap (kbd "C-c C-c")
+                                        (lambda ()
+                                          (interactive)
+                                          (org-agenda-todo "DONE")
+                                          (org-save-all-org-buffers)))))
 
 ;;; Export agendas as action lists
 (setq org-agenda-exporter-settings
