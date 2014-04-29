@@ -817,6 +817,10 @@
       org-fast-tag-selection-include-todo t
       ;; Don't show the postamble in exported docs
       org-export-html-postamble nil
+      ;; Define stuck projects as level 2 items that aren't a DONE or NEXT
+      ;; action, don't have NEXT actions inside them, and don't have items
+      ;; tagged as waiting.
+      org-stuck-projects '("+LEVEL=2/-DONE-NEXT" ("NEXT") ("waiting") "")
       ;; Change sublist bullet types
       org-list-demote-modify-bullet t)
 
@@ -898,7 +902,12 @@
               org-tag-alist))
 
 (add-to-list 'org-agenda-custom-commands
-             '("W" "Weekly review" agenda "" ((org-agenda-span 7) (org-agenda-log-mode 1))))
+             '("W" "Weekly Review"
+               ((agenda "" ((org-agenda-span 14)
+                            (org-agenda-start-day "-7d")
+                            (org-agenda-show-log t)
+                            (org-agenda-start-with-log-mode t)))
+                (stuck ""))))
 
 ;;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
 ;;; to make it useful (and then save all org buffers).
