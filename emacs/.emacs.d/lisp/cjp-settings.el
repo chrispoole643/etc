@@ -791,6 +791,13 @@
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
+;;; Define file locations
+(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/"))
+      org-default-notes-file (concat org-directory "inbox.org")
+      gtd-project-list (concat org-directory "project-list.org")
+      gtd-someday-maybe-file (concat org-directory "someday-maybe.org")
+      gtd-reference-file (concat org-directory "reference.org"))
+
 ;;; Setup org mode
 (setq ;; Show upcoming events 14 days prior
       org-deadline-warning-days 7
@@ -854,11 +861,6 @@
                                                                         nil "\.org$")))))
 
 ;;; Capture
-(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/")))
-(setq org-default-notes-file (concat org-directory "inbox.org"))
-(setq gtd-project-list (concat org-directory "project-list.org"))
-(setq gtd-someday-maybe-file (concat org-directory "someday-maybe.org"))
-(setq gtd-reference-file (concat org-directory "reference.org"))
 (setq org-capture-templates
       '(("i" "Inbox" entry (file+headline "" "Inbox")
          "* %?")
