@@ -32,6 +32,9 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
+(global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
+(global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
+(global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
 
 ;;; Visual regexp
 (global-set-key (kbd "C-c r") 'vr/replace)
