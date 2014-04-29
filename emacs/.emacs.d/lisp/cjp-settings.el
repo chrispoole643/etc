@@ -905,11 +905,11 @@
 
 (add-to-list 'org-agenda-custom-commands
              '("W" "Weekly Review"
-               ((agenda "" ((org-agenda-span 14)
+               ((stuck "")
+                (agenda "" ((org-agenda-span 14)
                             (org-agenda-start-day "-7d")
                             (org-agenda-show-log t)
-                            (org-agenda-start-with-log-mode t)))
-                (stuck ""))))
+                            (org-agenda-start-with-log-mode t))))))
 
 ;;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
 ;;; to make it useful (and then save all org buffers).
