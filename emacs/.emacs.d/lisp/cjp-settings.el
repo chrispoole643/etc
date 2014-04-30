@@ -794,7 +794,8 @@
 ;;; Define file locations
 (setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/"))
       org-default-notes-file (concat org-directory "inbox.org")
-      gtd-project-list (concat org-directory "project-list.org")
+      gtd-projects-file (concat org-directory "projects.org")
+      gtd-actions-file (concat org-directory "actions.org")
       gtd-someday-maybe-file (concat org-directory "someday-maybe.org")
       gtd-reference-file (concat org-directory "reference.org"))
 
@@ -827,7 +828,7 @@
       ;; Define stuck projects as level 2 items that aren't a DONE or NEXT
       ;; action, don't have NEXT actions inside them, and don't have items
       ;; tagged as waiting.
-      org-stuck-projects '("+LEVEL=2/-DONE-NEXT" ("NEXT") ("waiting") "")
+      org-stuck-projects '("+LEVEL=2/-DONE-NEXT-DEFER" ("NEXT") ("waiting") "")
       ;; Change sublist bullet types
       org-list-demote-modify-bullet t)
 
@@ -864,9 +865,9 @@
 (setq org-capture-templates
       '(("i" "Inbox" entry (file+headline "" "Inbox")
          "* %?")
-        ("p" "Project" entry (file+headline gtd-project-list "Projects")
+        ("p" "Project" entry (file+headline gtd-projects-file "Projects")
          "* %?")
-        ("a" "Action" entry (file+headline gtd-project-list "Actions")
+        ("a" "Action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %?")))
 
 ;;; Agenda
@@ -880,8 +881,8 @@
       org-agenda-skip-scheduled-if-done t
       ;; Always start with today (nil) or Saturday (6)
       org-agenda-start-on-weekday 6
-      ;; Only include project list in agenda
-      org-agenda-files (list gtd-project-list)
+      ;; Only include project and action lists in agenda
+      org-agenda-files (list gtd-projects-file gtd-actions-file)
       ;; Don't by default show the action in context
       org-agenda-start-with-follow-mode nil
       ;; Dim blocked tasks
@@ -894,7 +895,7 @@
                        (action-list (concat org-directory "action-lists/" text))
                        (waitp (equal text "waiting")))
                   (if waitp
-                      `("w" "Waiting for" ((tags ,(concat text "/!-DONE"))) nil
+                      `("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
                         (,action-list))
                     `(,shortcut ,(capitalize text)
                               ((tags-todo ,(concat "TODO=\"NEXT\"+" text))
@@ -933,7 +934,8 @@
 (setq org-log-refile nil)
 ;;; Store notes at the top of the tree
 (setq org-reverse-note-order t)
-(setq org-refile-targets '((gtd-project-list :maxlevel . 2)
+(setq org-refile-targets '((gtd-projects-file :maxlevel . 2)
+                           (gtd-actions-file :maxlevel . 2)
                            (gtd-someday-maybe-file :maxlevel . 2)
                            (gtd-reference-file :maxlevel . 2)))
 
