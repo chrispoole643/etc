@@ -842,6 +842,7 @@
                           ("katie" . ?k)
                           ("shops" . ?s)
                           ("reading" . ?r)
+                          ("video" . ?v)
                           ("waiting" . ?w)
                           ("laptop" . ?l)))
   (setq org-tag-alist '(("tony" . ?t)
@@ -850,6 +851,7 @@
                         ("DTScrum" . ?u)
                         ("scrum" . ?s)
                         ("office" . ?o)
+                        ("video" . ?v)
                         ("waiting" . ?w))))
 
 (setq org-todo-keywords '((sequence "DEFER(f)" "NEXT(n)" "|" "DONE(d)" "CANCEL(c)")))
