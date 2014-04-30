@@ -271,7 +271,7 @@
 (global-set-key (kbd "<f12>") (lambda () (interactive) (org-capture nil "i")))
 (global-set-key (kbd "<C-f12>") 'gtd-open-file)
 (global-set-key (kbd "<M-f12>") 'org-agenda)
-(global-set-key (kbd (if macosxp "<C-M-f12>" "<C-s-f12>")) 'org-capture)
+(global-set-key (kbd "<s-f12>") 'org-capture)
 
 ;;; F13-16 (Apple extended keyboard only)
 (when macosxp
