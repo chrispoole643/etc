@@ -35,6 +35,7 @@
 (global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
 (global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
 (global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
+(global-set-key (kbd "C-s-/") (lambda () (interactive) (org-agenda nil "/")))
 
 ;;; Visual regexp
 (global-set-key (kbd "C-c r") 'vr/replace)
