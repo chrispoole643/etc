@@ -796,6 +796,7 @@
       org-default-notes-file (concat org-directory "inbox.org")
       gtd-projects-file (concat org-directory "projects.org")
       gtd-actions-file (concat org-directory "actions.org")
+      gtd-action-lists-dir (concat org-directory "action-lists/")
       gtd-someday-maybe-file (concat org-directory "someday-maybe.org")
       gtd-reference-file (concat org-directory "reference.org"))
 
@@ -894,7 +895,7 @@
       (mapcar (lambda (tag)
                 (let* ((text (car tag))
                        (shortcut (string (cdr tag)))
-                       (action-list (concat org-directory "action-lists/" text))
+                       (action-list (concat gtd-action-lists-dir text))
                        (waitp (equal text "waiting")))
                   (if waitp
                       `("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
