@@ -830,6 +830,8 @@
       ;; action, don't have NEXT actions inside them, and don't have items
       ;; tagged as waiting.
       org-stuck-projects '("+LEVEL=2/-DONE-NEXT-DEFER" ("NEXT") ("waiting") "")
+      ;; In column format, I'm only interested in the task and its priority
+      org-columns-default-format "%80ITEM(Task){X/} %1PRIORITY(P) %0TODO %0TAGS"
       ;; Change sublist bullet types
       org-list-demote-modify-bullet t)
 
@@ -888,8 +890,18 @@
       org-agenda-files (list gtd-projects-file gtd-actions-file)
       ;; Don't by default show the action in context
       org-agenda-start-with-follow-mode nil
+      ;; Don't show tags in the agendas
+      org-agenda-remove-tags t
       ;; Dim blocked tasks
-      org-agenda-dim-blocked-tasks t)
+      org-agenda-dim-blocked-tasks t
+      ;; Remove extra stuff from tags agenda views (what the GTD context views
+      ;; use). Keep the others here too (with their original format) in case
+      ;; these need modifying also
+      org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+                                 (timeline . "  % s")
+                                 (todo . " %i %-12:c")
+                                 (tags . "")
+                                 (search . " %i %-12:c")))
 
 (setq org-agenda-custom-commands
       (mapcar (lambda (tag)
