@@ -37,6 +37,9 @@
 (global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
 (global-set-key (kbd "C-s-/") (lambda () (interactive) (org-agenda nil "/")))
 
+;;; Ace jump mode
+(global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
+
 ;;; Visual regexp
 (global-set-key (kbd "C-c r") 'vr/replace)
 (global-set-key (kbd "C-c q") 'vr/query-replace)
@@ -228,28 +231,27 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; F1
-(global-set-key (kbd "<f1>") 'ace-jump-char-mode)
-(global-set-key (kbd "<M-f1>") 'ace-jump-word-mode)
-(global-set-key (kbd "<C-f1>") 'ace-jump-line-mode)
+(global-set-key (kbd "<f1>") 'make-frame)
+(global-set-key (kbd "<M-f1>") 'delete-frame)
 
 ;;; F2
 (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
-(global-set-key (kbd "<C-f2>") 'cjp-window-setup-toggle)
+(global-set-key (kbd "<M-f2>") 'cjp-window-setup-toggle)
 
 ;;; F3 and F4 reserved for macros
 
 ;;; F5
 (global-set-key (kbd "<f5>") 'compile)
-(global-set-key (kbd "<C-f5>") 'recompile)
+(global-set-key (kbd "<M-f5>") 'recompile)
 
 ;;; F6
 (global-set-key (kbd "<f6>") 'bookmark-jump)
-(global-set-key (kbd "<C-f6>") 'bookmark-bmenu-list)
+(global-set-key (kbd "<M-f6>") 'bookmark-bmenu-list)
 
 ;;; F7
 (when macosxp
   (global-set-key (kbd "<f7>") 'cjp-mac-show-finder)
-  (global-set-key (kbd "<C-f7>") 'cjp-mac-open-terminal)
+  (global-set-key (kbd "<M-f7>") 'cjp-mac-open-terminal)
   (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
                                      (cjp-mac-open-terminal t))))
 
@@ -278,7 +280,7 @@
 (when macosxp
   (global-set-key (kbd "<f13>") 'cjp-mac-guess-open-file)
   (global-set-key (kbd "<f14>") 'cjp-browse-url-on-line)
-  (global-set-key (kbd "<C-f14>") 'cjp-browse-buffer)
+  (global-set-key (kbd "<M-f14>") 'cjp-browse-buffer)
   (global-set-key (kbd "<f15>") 'cjp-find-with-google)
   (global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
-  (global-set-key (kbd "<C-f16>") (lambda () (interactive) (cjp-set-frame-uni))))
+  (global-set-key (kbd "<M-f16>") (lambda () (interactive) (cjp-set-frame-uni))))
