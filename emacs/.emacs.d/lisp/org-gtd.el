@@ -146,7 +146,7 @@
              '("W" "Weekly Review"
                ((stuck "")
                 (agenda "" ((org-agenda-span 14)
-                            (org-agenda-start-day "-7d")
+                            (org-agenda-start-day "-3d")
                             (org-agenda-show-log t)
                             (org-agenda-start-with-log-mode t))))))
 
