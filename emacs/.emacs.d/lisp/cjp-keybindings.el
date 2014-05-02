@@ -35,7 +35,9 @@
 (global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
 (global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
 (global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
-(global-set-key (kbd "C-s-/") (lambda () (interactive) (org-agenda nil "/")))
+(global-set-key (kbd "C-s-/") (lambda () (interactive)
+                                (org-agenda nil "/")
+                                (select-window (get-buffer-window "*Occur*" t))))
 
 ;;; Ace jump mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
