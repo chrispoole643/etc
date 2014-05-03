@@ -114,6 +114,10 @@
       org-agenda-remove-tags t
       ;; Dim blocked tasks
       org-agenda-dim-blocked-tasks t
+      ;; TODO entries become start date
+      org-icalendar-use-scheduled '(todo-start event-if-todo)
+      ;; Add scheduled (and not DONE) tasks to exported calendar
+      org-icalendar-include-todo nil
       ;; Remove extra stuff from tags agenda views (what the GTD context views
       ;; use). Keep the others here too (with their original format) in case
       ;; these need modifying also
@@ -187,6 +191,9 @@
                            (gtd-actions-file :maxlevel . 2)
                            (gtd-someday-maybe-file :maxlevel . 3)
                            (gtd-reference-file :maxlevel . 2)))
+
+
+;;; Hooks
 
 ;; Save org files after refiling
 (add-hook 'org-after-refile-insert-hook 'org-save-all-org-buffers)
