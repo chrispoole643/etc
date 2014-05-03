@@ -135,10 +135,15 @@
                       `("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
                         (,action-list))
                     `(,shortcut ,(capitalize text)
-                              ((tags-todo ,(concat "TODO=\"NEXT\"+" text))
-                               (agenda ""))
-                              nil
-                              (,action-list)))))
+                                ((tags-todo ,(concat "TODO=\"NEXT\"+" text)
+                                            ((org-agenda-overriding-header
+                                              ,(concat "\n@" text " Tasks\n"
+                                                       ;; Add 7 for "@ Tasks" characters
+                                                       (make-string (+ 7 (string-width text)) ?\=)
+                                                       "\n"))))
+                                 (agenda ""))
+                                nil
+                                (,action-list)))))
               org-tag-alist))
 
 ;; During weekly review, show the previous week, as well as the week ahead
