@@ -178,7 +178,7 @@
 (setq org-reverse-note-order t)
 (setq org-refile-targets '((gtd-projects-file :maxlevel . 2)
                            (gtd-actions-file :maxlevel . 2)
-                           (gtd-someday-maybe-file :maxlevel . 2)
+                           (gtd-someday-maybe-file :maxlevel . 3)
                            (gtd-reference-file :maxlevel . 2)))
 
 ;; Save org files after refiling
