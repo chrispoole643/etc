@@ -786,14 +786,15 @@
 
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
-;;; Use better defaults when opening files
+;; Use better defaults when opening files
 (eval-after-load "org" '(setq org-file-apps (if macosxp
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
 (setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/")))
+(setq org-icalendar-combined-agenda-file (expand-file-name "~/Dropbox/Public/calendar.ics"))
 
-;;; GTD tags
+;; GTD tags
 (if macosxp
     (setq org-tag-alist '(("office" . ?o)
                           ("home" . ?h)
