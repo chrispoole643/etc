@@ -148,12 +148,14 @@
 
 ;; During weekly review, show the previous week, as well as the week ahead
 (add-to-list 'org-agenda-custom-commands
-             '("W" "Weekly Review"
-               ((stuck "")
+             '("W" "Weekly review"
+               ((stuck "" ((org-agenda-overriding-header (concat "\nWeekly Review\n"
+                                                                 (make-string 13 ?\=) "\n"))))
                 (agenda "" ((org-agenda-span 14)
                             (org-agenda-start-day "-3d")
                             (org-agenda-show-log t)
-                            (org-agenda-start-with-log-mode t))))))
+                            (org-agenda-start-with-log-mode t)
+                            (org-agenda-overriding-header ""))))))
 
 ;; In agenda buffers, C-c C-c isn't bound to anything. Bind to org-agenda-todo,
 ;; to make it useful (and then save all org buffers)
