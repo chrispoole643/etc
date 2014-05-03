@@ -117,7 +117,7 @@
       ;; Remove extra stuff from tags agenda views (what the GTD context views
       ;; use). Keep the others here too (with their original format) in case
       ;; these need modifying also
-      org-agenda-prefix-format '((agenda . " %i %-12:c%?-12t% s")
+      org-agenda-prefix-format '((agenda . "  %-12t%s")
                                  (timeline . "  % s")
                                  (todo . " %i %-12:c")
                                  (tags . "")
