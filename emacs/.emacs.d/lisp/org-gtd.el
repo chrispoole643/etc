@@ -93,7 +93,7 @@
          "* %?")
         ("a" "Action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %?")
-        ("c" "Calendar entry" entry (file+headline gtd-actions-file "Calendar")
+        ("c" "Calendar entry" entry (file+headline gtd-calendar-file "Calendar")
          "* DEFER %?")))
 
 
