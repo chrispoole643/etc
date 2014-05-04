@@ -115,6 +115,10 @@ events to a combined iCalendar file."
       org-agenda-skip-deadline-if-done t
       ;; Don't show things already done
       org-agenda-skip-scheduled-if-done t
+      ;; Time grid
+      org-agenda-time-grid '((daily require-timed)
+                             "--------------------"
+                             (800 1000 1200 1400 1600 1800 2000 2200))
       ;; Always start with today (nil) or Saturday (6)
       org-agenda-start-on-weekday 6
       ;; Only include project and action lists in agenda
