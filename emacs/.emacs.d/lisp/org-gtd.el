@@ -33,7 +33,8 @@
       gtd-actions-file (concat org-directory "actions.org")
       gtd-action-lists-dir (concat org-directory "action-lists/")
       gtd-someday-maybe-file (concat org-directory "someday-maybe.org")
-      gtd-reference-file (concat org-directory "reference.org"))
+      gtd-reference-file (concat org-directory "reference.org")
+      gtd-calendar-file (concat org-directory "calendar.org"))
 
 ;; Setup org mode
 (setq ;; Show upcoming events 14 days prior
@@ -91,7 +92,9 @@
         ("p" "Project" entry (file+headline gtd-projects-file "Projects")
          "* %?")
         ("a" "Action" entry (file+headline gtd-actions-file "Actions")
-         "* NEXT %?")))
+         "* NEXT %?")
+        ("c" "Calendar entry" entry (file+headline gtd-actions-file "Calendar")
+         "* DEFER %?")))
 
 
 ;;; Agenda
@@ -107,7 +110,7 @@
       ;; Always start with today (nil) or Saturday (6)
       org-agenda-start-on-weekday 6
       ;; Only include project and action lists in agenda
-      org-agenda-files (list gtd-projects-file gtd-actions-file)
+      org-agenda-files (list gtd-projects-file gtd-actions-file gtd-calendar-file)
       ;; Don't by default show the action in context
       org-agenda-start-with-follow-mode nil
       ;; Don't show tags in the agendas
@@ -180,7 +183,8 @@
 (setq org-refile-targets '((gtd-projects-file :maxlevel . 2)
                            (gtd-actions-file :maxlevel . 2)
                            (gtd-someday-maybe-file :maxlevel . 3)
-                           (gtd-reference-file :maxlevel . 2)))
+                           (gtd-reference-file :maxlevel . 2)
+                           (gtd-calendar-file :maxlevel . 2)))
 
 
 ;;; Hooks
