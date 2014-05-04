@@ -210,9 +210,6 @@ events to a combined iCalendar file."
 ;; Save org files after refiling
 (add-hook 'org-after-refile-insert-hook 'org-save-all-org-buffers)
 
-;; Update iCalendar file when creating exported files
-(add-hook 'org-store-agenda-views 'org-icalendar-combine-agenda-files)
-
 ;; Revert files automatically
 (add-hook 'find-file-hook
           (lambda () (when (string-match org-directory buffer-file-name)
