@@ -78,10 +78,18 @@
 ;;; Functions
 
 (defun gtd-open-file ()
+  "Open a GTD org-mode file (using the Ido system)."
   (interactive)
   (find-file (concat org-directory
                      (ido-completing-read "GTD file: " (directory-files org-directory
                                                                         nil "\.org$")))))
+
+(defun gtd-export-agendas-and-calendar ()
+  "Store agenda views as plain text files, and export scheduled
+events to a combined iCalendar file."
+  (interactive)
+  (org-store-agenda-views)
+  (org-icalendar-combine-agenda-files))
 
 
 ;;; Capture
