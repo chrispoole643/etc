@@ -222,7 +222,6 @@ events to a combined iCalendar file."
 
 ;; Save org files after refiling
 (add-hook 'org-after-refile-insert-hook 'org-save-all-org-buffers)
-(add-hook 'org-after-todo-state-change-hook 'org-save-all-org-buffers)
 
 ;; Revert files automatically
 (add-hook 'find-file-hook
