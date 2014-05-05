@@ -115,6 +115,8 @@ events to a combined iCalendar file."
       org-agenda-show-all-dates t
       ;; Don't show things already done
       org-agenda-skip-deadline-if-done t
+      ;; By default set events that only have a start date to be 30 minutes
+      org-agenda-default-appointment-duration 30
       ;; Don't show things already done
       org-agenda-skip-scheduled-if-done t
       ;; Time grid
