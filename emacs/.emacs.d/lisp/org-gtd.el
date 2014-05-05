@@ -57,7 +57,7 @@
       org-enforce-todo-checkbox-dependencies t
       ;; When choosing tags, assume one tag per entry, and don't even show the
       ;; temp buffer listing the tags --- hit C-c again to override
-      org-fast-tag-selection-single-key "expert"
+      org-fast-tag-selection-single-key 'expert
       ;; Change TODO state using TAG interface
       org-fast-tag-selection-include-todo t
       ;; Don't show the postamble in exported docs
