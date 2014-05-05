@@ -53,6 +53,8 @@
       org-use-fast-todo-selection t
       ;; Only mark a parent DONE when all children are too
       org-enforce-todo-dependencies t
+      ;; Don't log when I complete a repeating event
+      org-log-repeat nil
       ;; Same as above, with checkboxes
       org-enforce-todo-checkbox-dependencies t
       ;; When choosing tags, assume one tag per entry, and don't even show the
@@ -88,8 +90,8 @@
   "Store agenda views as plain text files, and export scheduled
 events to a combined iCalendar file."
   (interactive)
-  (org-store-agenda-views)
-  (org-icalendar-combine-agenda-files))
+  (save-window-excursion (org-store-agenda-views)
+                         (org-icalendar-combine-agenda-files)))
 
 
 ;;; Capture
@@ -130,9 +132,16 @@ events to a combined iCalendar file."
       ;; Dim blocked tasks
       org-agenda-dim-blocked-tasks t
       ;; TODO entries become start date
-      org-icalendar-use-scheduled '(todo-start event-if-todo)
+      org-icalendar-use-scheduled '(event-if-todo)
       ;; Add scheduled (and not DONE) tasks to exported calendar
       org-icalendar-include-todo nil
+      ;; Don't include any body text in calendar events
+      org-icalendar-include-body nil
+      ;; Set an alarm for 15 minutes before timed events
+      org-icalendar-alarm-time 15
+
+      org-icalendar-with-timestamps 'active
+
       ;; Remove extra stuff from tags agenda views (what the GTD context views
       ;; use). Keep the others here too (with their original format) in case
       ;; these need modifying also
@@ -208,11 +217,13 @@ events to a combined iCalendar file."
                                     (lambda ()
                                       (interactive)
                                       (org-agenda-todo "DONE")
+                                      (org-agenda-redo)
                                       (org-save-all-org-buffers)))
                                   (hl-line-mode)))
 
 ;; Save org files after refiling
 (add-hook 'org-after-refile-insert-hook 'org-save-all-org-buffers)
+(add-hook 'org-after-todo-state-change-hook 'org-save-all-org-buffers)
 
 ;; Revert files automatically
 (add-hook 'find-file-hook
