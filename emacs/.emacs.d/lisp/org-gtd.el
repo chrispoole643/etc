@@ -67,7 +67,7 @@
       ;; Define stuck projects as level 2 items that aren't a DONE or NEXT
       ;; action, don't have NEXT actions inside them, and don't have items
       ;; tagged as waiting.
-      org-stuck-projects '("+LEVEL=2/-DONE-NEXT-DEFER" ("NEXT") ("waiting") "")
+      org-stuck-projects '("+LEVEL=2/-DONE-NEXT-DEFER" ("NEXT") ("waiting") "SCHEDULED")
       ;; In column format, I'm only interested in the task and its priority
       org-columns-default-format "%80ITEM(Task){X/} %1PRIORITY(P) %0TODO %0TAGS"
       ;; Change sublist bullet types
