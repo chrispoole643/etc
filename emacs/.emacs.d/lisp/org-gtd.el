@@ -139,9 +139,8 @@ events to a combined iCalendar file."
       org-icalendar-include-body nil
       ;; Set an alarm for 15 minutes before timed events
       org-icalendar-alarm-time 15
-
+      ;; Export iCalendar events with active timestamps (<...>, not [...]) only
       org-icalendar-with-timestamps 'active
-
       ;; Remove extra stuff from tags agenda views (what the GTD context views
       ;; use). Keep the others here too (with their original format) in case
       ;; these need modifying also
