@@ -90,8 +90,8 @@
   "Store agenda views as plain text files, and export scheduled
 events to a combined iCalendar file."
   (interactive)
-  (save-window-excursion (org-store-agenda-views)
-                         (org-icalendar-combine-agenda-files)))
+  (org-store-agenda-views)
+  (org-icalendar-combine-agenda-files))
 
 
 ;;; Capture
