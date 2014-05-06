@@ -192,7 +192,7 @@ events to a combined iCalendar file."
         (ps-landscape-mode t)
         (org-agenda-add-entry-text-maxlines 5)
         (htmlize-output-type 'css)
-        (org-agenda-prefix-format " [ ] ")
+        (org-agenda-prefix-format "[] ")
         (org-agenda-with-colors t)
         (org-agenda-remove-tags t)))
 
