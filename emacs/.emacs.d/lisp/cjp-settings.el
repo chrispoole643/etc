@@ -792,8 +792,11 @@
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
-(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/")))
-(setq org-icalendar-combined-agenda-file (expand-file-name "~/Dropbox/Public/calendar.ics"))
+(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/"
+                                        "~/gtd/")))
+(setq org-icalendar-combined-agenda-file
+      (expand-file-name (if macosxp "~/Dropbox/Public/calendar.ics"
+                          "~/gtd/calendar.ics")))
 
 ;; GTD tags
 (if macosxp
