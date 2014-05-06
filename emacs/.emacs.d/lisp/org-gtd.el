@@ -115,10 +115,10 @@ events to a combined iCalendar file."
       org-agenda-show-all-dates t
       ;; Don't show things already done
       org-agenda-skip-deadline-if-done t
-      ;; By default set events that only have a start date to be 30 minutes
-      org-agenda-default-appointment-duration 30
       ;; Don't show things already done
       org-agenda-skip-scheduled-if-done t
+      ;; By default set events that only have a start date to be 30 minutes
+      org-agenda-default-appointment-duration 30
       ;; Time grid
       org-agenda-time-grid '((daily require-timed)
                              "--------------------"
@@ -134,7 +134,7 @@ events to a combined iCalendar file."
       ;; Dim blocked tasks
       org-agenda-dim-blocked-tasks t
       ;; TODO entries become start date
-      org-icalendar-use-scheduled '(event-if-todo)
+      org-icalendar-use-scheduled '(event-if-todo event-if-not-todo)
       ;; Add scheduled (and not DONE) tasks to exported calendar
       org-icalendar-include-todo nil
       ;; Don't include any body text in calendar events
