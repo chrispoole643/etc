@@ -134,7 +134,7 @@ events to a combined iCalendar file."
       ;; Dim blocked tasks
       org-agenda-dim-blocked-tasks t
       ;; TODO entries become start date
-      org-icalendar-use-scheduled '(event-if-todo event-if-not-todo)
+      org-icalendar-use-scheduled '(event-if-not-todo)
       ;; Add scheduled (and not DONE) tasks to exported calendar
       org-icalendar-include-todo nil
       ;; Don't include any body text in calendar events
