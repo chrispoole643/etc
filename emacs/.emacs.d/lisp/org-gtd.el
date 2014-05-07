@@ -133,8 +133,11 @@ events to a combined iCalendar file."
       org-agenda-remove-tags t
       ;; Dim blocked tasks
       org-agenda-dim-blocked-tasks t
-      ;; TODO entries become start date
-      org-icalendar-use-scheduled '(event-if-not-todo)
+      ;; Scheduling time stamps in TODO entries become start date. Some calendar
+      ;; applications show TODO entries only after that date.
+      org-icalendar-use-scheduled '(todo-start)
+      ;; Use deadlines in TODO entries as due-dates
+      org-icalendar-use-deadline '(todo-due)
       ;; Add scheduled (and not DONE) tasks to exported calendar
       org-icalendar-include-todo nil
       ;; Don't include any body text in calendar events
@@ -151,6 +154,10 @@ events to a combined iCalendar file."
                                  (todo . " %i %-12:c")
                                  (tags . "")
                                  (search . " %i %-12:c")))
+
+;;; TODO: fix iCalendar so it exports only scheduled tasks
+;;; http://orgmode.org/manual/iCalendar-export.html
+;;; http://orgmode.org/worg/org-tutorials/org-google-sync.html
 
 ;; Create agendas for each tag (GTD context) defined. Set up the waiting for
 ;; list separately
