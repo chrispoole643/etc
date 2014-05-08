@@ -37,8 +37,8 @@
       gtd-calendar-file (concat org-directory "calendar.org"))
 
 ;; Setup org mode
-(setq ;; Show upcoming events 14 days prior
-      org-deadline-warning-days 7
+(setq ;; Show upcoming deadlines 3 days prior
+      org-deadline-warning-days 3
       ;; Hit RET on a link to follow it
       org-return-follows-link t
       ;; Expand headlines to CONTENT or OVERVIEW or LOGDONE
