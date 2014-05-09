@@ -42,24 +42,24 @@
         (set-buffer-modified-p nil) t))))
 
 ;;; Great frame- or window-resizing function from
-;;; http://dse.livejournal.com/67732.html. Resizes either frame or window to 80
-;;; columns. If the window can be sized to 80 columns wide, without resizing the
+;;; http://dse.livejournal.com/67732.html. Resizes either frame or window to 90
+;;; columns. If the window can be sized to 90 columns wide, without resizing the
 ;;; frame itself, it will resize the window. Otherwise, it will resize the
 ;;; frame. You can use a prefix argument to specify a different column width
 (defun fix-frame-horizontal-size (width)
-  "Set the frame's size to 80 (or prefix arg WIDTH) columns wide."
+  "Set the frame's size to 90 (or prefix arg WIDTH) columns wide."
   (interactive "P")
   (if window-system
-      (set-frame-width (selected-frame) (or width 80))
+      (set-frame-width (selected-frame) (or width 90))
     (error "Cannot resize frame horizontally: is a text terminal")))
 
 (defun fix-window-horizontal-size (width)
-  "Set the window's size to 80 (or prefix arg WIDTH) columns wide."
+  "Set the window's size to 90 (or prefix arg WIDTH) columns wide."
   (interactive "P")
-  (enlarge-window (- (or width 80) (window-width)) 'horizontal))
+  (enlarge-window (- (or width 90) (window-width)) 'horizontal))
 
 (defun fix-horizontal-size (width)
-  "Set the window's or frame's width to 80 (or prefix arg WIDTH)."
+  "Set the window's or frame's width to 90 (or prefix arg WIDTH)."
   (interactive "P")
   (condition-case nil
       (fix-window-horizontal-size width)
