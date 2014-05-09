@@ -86,12 +86,28 @@
                      (ido-completing-read "GTD file: " (directory-files org-directory
                                                                         nil "\.org$")))))
 
+(defun gtd-filter-scheduled-todo-tasks (content backend info)
+  "Filter iCalendar export to include only TODO tasks that are
+not done, but which are scheduled or have a deadline."
+  (message (nth 4 (org-heading-components)))
+  (when (eq backend 'icalendar)
+    (if (and (org-entry-is-todo-p)
+             (not (org-entry-is-done-p))
+             (or (org-get-scheduled-time (point))
+                 (org-get-deadline-time (point))))
+        content nil)))
+
+
 (defun gtd-export-agendas-and-calendar ()
   "Store agenda views as plain text files, and export scheduled
-events to a combined iCalendar file."
+events to a combined iCalendar file. Filter the calendar using
+`gtd-filter-scheduled-todo-tasks', only allowing tasks that
+aren't DONE, but are scheduled."
   (interactive)
   (org-store-agenda-views)
-  (org-icalendar-combine-agenda-files))
+  (let ((org-export-filter-final-output-functions
+         '(gtd-filter-scheduled-todo-tasks)))
+    (org-icalendar-combine-agenda-files)))
 
 
 ;;; Capture
