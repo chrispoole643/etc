@@ -20,6 +20,7 @@ x3270.keymap: mine
 ! The definition for Shift<Key>Backspace must come before the 
 ! definition for <Key>BackSpace
 x3270.keymap.mine: #override \
+    <Key>Escape           : Attn()\n\
     <Key>Return           : Newline()\n\
     <Key>Control_R        : Enter()\n\
     <Key>Control_L        : Reset()\n\
