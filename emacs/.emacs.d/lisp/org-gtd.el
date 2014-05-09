@@ -89,7 +89,7 @@
 (defun gtd-filter-scheduled-todo-tasks (content backend info)
   "Filter iCalendar export to include only TODO tasks that are
 not done, but which are scheduled or have a deadline."
-  (message content)
+  (message (nth 4 (org-heading-components)))
   (when (eq backend 'icalendar)
     (if (and (org-entry-is-todo-p)
              (not (org-entry-is-done-p))
