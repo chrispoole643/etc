@@ -89,7 +89,6 @@
 (defun gtd-filter-scheduled-todo-tasks (content backend info)
   "Filter iCalendar export to include only TODO tasks that are
 not done, but which are scheduled or have a deadline."
-  (message (nth 4 (org-heading-components)))
   (when (eq backend 'icalendar)
     (if (and (org-entry-is-todo-p)
              (not (org-entry-is-done-p))
@@ -132,7 +131,7 @@ aren't DONE, but are scheduled."
 ;;; Agenda
 
 (setq ;; Show next x days in agenda
-      org-agenda-span 7
+      org-agenda-span 1
       ;; Show dates even if totally free
       org-agenda-show-all-dates t
       ;; Don't show things already done
