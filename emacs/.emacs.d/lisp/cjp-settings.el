@@ -43,6 +43,8 @@
                                 org
                                 outline-magic
                                 paredit
+                                perspective
+                                popwin
                                 powerline
                                 pretty-lambdada
                                 pydoc-info
@@ -91,6 +93,12 @@
 (require 'smallurl)
 (require 'multiple-cursors)
 (require 'iedit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Popwin
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(popwin-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Diminish
