@@ -43,7 +43,7 @@
                                 org
                                 outline-magic
                                 paredit
-                                perspective
+                                persp-mode
                                 popwin
                                 powerline
                                 pretty-lambdada
@@ -102,6 +102,15 @@
 (popwin-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Persp-mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; (with-eval-after-load "persp-mode-autoloads"
+;;   ;; switch off animation of restoring window configuration
+;;   (setq wg-morph-on nil)
+;;   (add-hook 'after-init-hook #'(lambda () (persp-mode 1))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Diminish
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -152,7 +161,7 @@
 
 (require 'workgroups)
 ;;; Use my custom binding prefix
-(setq wg-prefix-key (kbd "C-c c w"))    
+(setq wg-prefix-key (kbd "C-c c w"))
 (workgroups-mode 1)
 (setq wg-morph-on nil)
 
@@ -356,8 +365,8 @@
       ;; dired-omit-mode, ignore dotfiles
       dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 
-;;; This is buffer-local variable                       
-(setq-default dired-omit-mode nil)      
+;;; This is buffer-local variable
+(setq-default dired-omit-mode nil)
 
 ;;; Make return key open files in another window, except if item at point is a
 ;;; directory, and then open in the current window.
@@ -369,7 +378,7 @@
 
 (defadvice dired-details-toggle (after fit-dired-frame activate)
   "Resize dired buffer (horizontally) after toggling details."
-  (fix-horizontal-size-to-buffer))      
+  (fix-horizontal-size-to-buffer))
 
 ;;; Don't show '..' since '^' does this; show human file sizes
 (setq dired-listing-switches "-Alh")
@@ -466,7 +475,7 @@
 
 ;;; 50 files ought to be enough.
 (setq ;; default is ~/.recentf
-      recentf-save-file (cjp-emacs-structure-dir ".recentf") 
+      recentf-save-file (cjp-emacs-structure-dir ".recentf")
       recentf-max-saved-items 1024
       recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$"))
 
@@ -540,10 +549,10 @@
 
 (setq markdown-command "kramdown"
       ;; Use underscores for italics
-      markdown-italic-underscore t 
+      markdown-italic-underscore t
       markdown-indent-on-enter nil
       ;; Enable syntax highlighting (LaTeX)
-      markdown-enable-math t)      
+      markdown-enable-math t)
 
 ;;; Webgen uses markdown syntax in .page files
 (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
@@ -772,23 +781,23 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq ;; Choose my custom diary file
-      diary-file (cjp-emacs-structure-dir "diary") 
+      diary-file (cjp-emacs-structure-dir "diary")
       ;; Start Calendar on Monday
-      calendar-week-start-day 1                    
+      calendar-week-start-day 1
       ;; European date format (DD/MM/YYYY)
-      european-calendar-style 't)                  
+      european-calendar-style 't)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Abbrev
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Operate on startup, save in specified file
-(setq-default abbrev-mode t)                    
+(setq-default abbrev-mode t)
 (setq abbrev-file-name (cjp-emacs-structure-dir ".abbrev_defs")
       ;; Save abbrevs when files are saved
-      save-abbrevs t                            
+      save-abbrevs t
       ;; Recognise understores too
-      dabbrev-abbrev-char-regexp "\\sw\\|\\s_") 
+      dabbrev-abbrev-char-regexp "\\sw\\|\\s_")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Org
@@ -844,7 +853,7 @@
 
 (setq TeX-parse-self t
       ;; Use pdflatex as default mode in AuCTEX, always
-      TeX-PDF-mode t 
+      TeX-PDF-mode t
       ;; TeX-electric-sub-and-superscript nil
       )
 
@@ -860,9 +869,9 @@
 (setq TeX-source-correlate-method 'synctex)
 
 (setq ;; Setup RefTeX with AUCTeX automatically
-      reftex-plug-into-AUCTeX t               
+      reftex-plug-into-AUCTeX t
       ;; Use `-', not `:'
-      reftex-section-prefixes '((0 . "part-") 
+      reftex-section-prefixes '((0 . "part-")
                                 (1 . "cha-")
                                 (t . "sec-"))
       ;; Change citation format to natbib (\citet format)
@@ -885,9 +894,9 @@
 (setq ido-everywhere t
       ido-enable-flex-matching t
       ;; If a buffer name that doesn't exist is chosen, just make a new one without prompting
-      ido-create-new-buffer 'always) 
-                                     
-                                     
+      ido-create-new-buffer 'always)
+
+
 
 ;;; Ignore the .aux extensions that TeX programs create
 (setq completion-ignored-extensions
@@ -1071,15 +1080,15 @@
 ;;; Store all backup files in one folder, not all over filesystem
 (setq backup-directory-alist (list (cons "." (cjp-emacs-structure-dir "backup/")))
       ;; Use version numbers for backups
-      version-control t                
+      version-control t
       ;; Number of newest versions to keep
-      kept-new-versions 2              
+      kept-new-versions 2
       ;; Number of oldest versions to keep
-      kept-old-versions 2              
+      kept-old-versions 2
       ;; Ask to delete excess backup versions?
-      delete-old-versions t            
+      delete-old-versions t
       ;; Copy linked files, don't rename
-      backup-by-copying-when-linked t) 
+      backup-by-copying-when-linked t)
 
 ;;; Store all autosave files in one folder, not all over filesystem
 (let ((save-dir (cjp-emacs-structure-dir "autosaves/")))
