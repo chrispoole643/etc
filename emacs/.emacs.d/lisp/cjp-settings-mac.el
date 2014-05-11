@@ -78,12 +78,15 @@
           (append '((left . 60) (top . 0) (width . 80) (height . 56))
                   default-frame-alist)))
 
-;;; I prefer cmd key for meta, and the right cmd as super
+;;; I prefer cmd key for meta, and the right cmd as super. Left alt is super,
+;;; but right alt is unset, allowing me to type (right) alt-3 and get a #
+;;; symbol.
 (setq mac-option-key-is-meta nil
       mac-command-key-is-meta t
       mac-command-modifier 'meta
       mac-option-modifier 'super
-      mac-right-command-modifier 'super)
+      mac-right-command-modifier 'super
+      ns-right-alternate-modifier 'none)
 
 ;;; In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not
 ;;; forward as is usual. This fixes this behaviour.
