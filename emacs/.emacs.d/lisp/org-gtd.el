@@ -118,13 +118,13 @@ aren't DONE, but are scheduled."
          "* %?")
         ("a" "Action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %?")
-        ("h" "Action" entry (file+headline gtd-actions-file "Actions")
+        ("h" "Home action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :home:")
-        ("o" "Action" entry (file+headline gtd-actions-file "Actions")
+        ("o" "Office action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :office:")
-        ("l" "Action" entry (file+headline gtd-actions-file "Actions")
+        ("l" "Laptop action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :laptop:")
-        ("c" "Calendar entry" entry (file+headline gtd-calendar-file "Calendar")
+        ("c" "Calendar entry" entry (file+headline gtd-actions-file "Actions")
          "* DEFER %?")))
 
 
