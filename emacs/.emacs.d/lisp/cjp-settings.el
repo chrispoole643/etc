@@ -1163,8 +1163,8 @@
                            (let ((buffer-file-name (or buffer-file-name (buffer-name))))
                              (set-auto-mode))))
 
-;;; Open new buffers (without files or filename extensions) in markdown-mode
-(add-to-list 'auto-mode-alist '("" . markdown-mode) t)
+;;; Open new buffers (without files or filename extensions) in org-mode
+(add-to-list 'auto-mode-alist '("" . org-mode) t)
 
 ;;; Open log files in text mode, for now
 (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
