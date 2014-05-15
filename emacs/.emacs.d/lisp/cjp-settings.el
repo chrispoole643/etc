@@ -1230,9 +1230,6 @@
 ;;; masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine
 (setq redisplay-dont-pause t)
 
-;;; Highlight the current line
-(hl-line-mode 1)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Themes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
