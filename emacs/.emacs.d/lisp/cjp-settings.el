@@ -60,6 +60,7 @@
                                 visual-regexp
                                 w3m
                                 workgroups
+                                writeroom-mode
                                 yasnippet
                                 zencoding-mode)
   "Required packages to be pulled from melpa.")
@@ -93,6 +94,12 @@
 (require 'smallurl)
 (require 'multiple-cursors)
 (require 'iedit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Writeroom
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq writeroom-width 90)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Popwin
