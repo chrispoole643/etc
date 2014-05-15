@@ -1202,8 +1202,8 @@
 ;;; Don't use tabs
 (setq-default indent-tabs-mode nil)
 
-;;; Set auto-fill-mode to fill to column 80
-(setq default-fill-column 80)
+;;; Set auto-fill-mode to fill to column 89 (ideal for a 90 char width)
+(setq default-fill-column 89)
 
 ;;; Set tab key to two spaces
 (setq-default c-basic-offset 4)
