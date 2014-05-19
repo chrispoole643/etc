@@ -64,6 +64,8 @@
       org-fast-tag-selection-include-todo t
       ;; Don't show the postamble in exported docs
       org-export-html-postamble nil
+      ;; Set the default priority to be the lowest
+      org-default-priority ?C
       ;; Define stuck projects as level 2 items that aren't a DONE or NEXT
       ;; action, don't have NEXT actions inside them, and don't have items
       ;; tagged as waiting.
@@ -197,7 +199,9 @@ aren't DONE, but are scheduled."
                                               ,(concat "\n@" text " Tasks\n"
                                                        ;; Add 7 for "@ Tasks" characters
                                                        (make-string (+ 7 (string-width text)) ?\=)
-                                                       "\n"))))
+                                                       "\n"))
+                                             (org-agenda-sorting-strategy
+                                              '((agenda time-up priority-down tag-up)))))
                                  (agenda ""))
                                 nil
                                 (,action-list)))))
