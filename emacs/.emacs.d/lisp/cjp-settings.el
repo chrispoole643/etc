@@ -825,7 +825,8 @@
 
 ;; GTD tags
 (if macosxp
-    (setq org-tag-alist '(("office" . ?o)
+    (setq org-tag-alist '((:startgroup . nil)
+                          ("office" . ?o)
                           ("home" . ?h)
                           ("phone" . ?p)
                           ("parents" . ?a)
@@ -835,15 +836,18 @@
                           ("reading" . ?r)
                           ("video" . ?v)
                           ("waiting" . ?w)
-                          ("laptop" . ?l)))
-  (setq org-tag-alist '(("tony" . ?t)
+                          ("laptop" . ?l)
+                          (:endgroup . nil)))
+  (setq org-tag-alist '((:startgroup . nil)
+                        ("tony" . ?t)
                         ("andy_bates" . ?a)
                         ("laptop" . ?l)
                         ("DTScrum" . ?u)
                         ("scrum" . ?s)
                         ("office" . ?o)
                         ("video" . ?v)
-                        ("waiting" . ?w))))
+                        ("waiting" . ?w)
+                        (:endgroup . nil))))
 
 (require 'org-gtd)
 
