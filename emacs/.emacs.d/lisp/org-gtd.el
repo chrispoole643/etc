@@ -260,7 +260,8 @@ aren't DONE, but are scheduled."
 ;; Revert files automatically
 (add-hook 'find-file-hook
           (lambda () (when (string-match org-directory buffer-file-name)
-                  (auto-revert-mode 1))))
+                  (auto-revert-mode 1)
+                  (setq fill-column 80))))
 
 (provide 'org-gtd)
 
