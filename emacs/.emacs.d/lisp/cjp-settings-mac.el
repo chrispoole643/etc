@@ -75,7 +75,7 @@
 ;;; Height for MacBook Pro 15" screen
 (if (display-graphic-p)
     (setq default-frame-alist
-          (append '((left . 60) (top . 0) (width . 80) (height . 56))
+          (append '((left . 60) (top . 0) (width . 90) (height . 56))
                   default-frame-alist)))
 
 ;;; I prefer cmd key for meta, and the right cmd as super. Left alt is super,
