@@ -64,6 +64,8 @@
       org-fast-tag-selection-include-todo t
       ;; Don't show the postamble in exported docs
       org-export-html-postamble nil
+      ;; Set the default priority to be the lowest
+      org-default-priority ?C
       ;; Define stuck projects as level 2 items that aren't a DONE or NEXT
       ;; action, don't have NEXT actions inside them, and don't have items
       ;; tagged as waiting.
@@ -180,23 +182,26 @@ aren't DONE, but are scheduled."
 ;; list separately
 (setq org-agenda-custom-commands
       (mapcar (lambda (tag)
-                (let* ((text (car tag))
-                       (shortcut (string (cdr tag)))
-                       (action-list (concat gtd-action-lists-dir text))
-                       (waitp (equal text "waiting")))
-                  (if waitp
-                      `("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
-                        (,action-list))
-                    `(,shortcut ,(capitalize text)
-                                ((tags-todo ,(concat "TODO=\"NEXT\"+" text)
-                                            ((org-agenda-overriding-header
-                                              ,(concat "\n@" text " Tasks\n"
-                                                       ;; Add 7 for "@ Tasks" characters
-                                                       (make-string (+ 7 (string-width text)) ?\=)
-                                                       "\n"))))
-                                 (agenda ""))
-                                nil
-                                (,action-list)))))
+                (when (stringp (car tag))
+		  (let* ((text (car tag))
+			 (shortcut (string (cdr tag)))
+			 (action-list (concat gtd-action-lists-dir text))
+			 (waitp (equal text "waiting")))
+		    (if waitp
+			`("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
+			  (,action-list))
+		      `(,shortcut ,(capitalize text)
+				  ((tags-todo ,(concat "TODO=\"NEXT\"+" text)
+					      ((org-agenda-overriding-header
+						,(concat "\n@" text " Tasks\n"
+							 ;; Add 7 for "@ Tasks" characters
+							 (make-string (+ 7 (string-width text)) ?\=)
+							 "\n"))
+					       (org-agenda-sorting-strategy
+						'((agenda time-up priority-down tag-up)))))
+				   (agenda ""))
+				  nil
+				  (,action-list))))))
               org-tag-alist))
 
 ;; During weekly review, show the previous week, as well as the week ahead
@@ -254,7 +259,8 @@ aren't DONE, but are scheduled."
 ;; Revert files automatically
 (add-hook 'find-file-hook
           (lambda () (when (string-match org-directory buffer-file-name)
-                  (auto-revert-mode 1))))
+                  (auto-revert-mode 1)
+                  (setq fill-column 80))))
 
 (provide 'org-gtd)
 
