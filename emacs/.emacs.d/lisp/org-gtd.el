@@ -186,25 +186,26 @@ aren't DONE, but are scheduled."
 ;; list separately
 (setq org-agenda-custom-commands
       (mapcar (lambda (tag)
-                (let* ((text (car tag))
-                       (shortcut (string (cdr tag)))
-                       (action-list (concat gtd-action-lists-dir text))
-                       (waitp (equal text "waiting")))
-                  (if waitp
-                      `("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
-                        (,action-list))
-                    `(,shortcut ,(capitalize text)
-                                ((tags-todo ,(concat "TODO=\"NEXT\"+" text)
-                                            ((org-agenda-overriding-header
-                                              ,(concat "\n@" text " Tasks\n"
-                                                       ;; Add 7 for "@ Tasks" characters
-                                                       (make-string (+ 7 (string-width text)) ?\=)
-                                                       "\n"))
-                                             (org-agenda-sorting-strategy
-                                              '((agenda time-up priority-down tag-up)))))
-                                 (agenda ""))
-                                nil
-                                (,action-list)))))
+                (when (stringp (car tag))
+		  (let* ((text (car tag))
+			 (shortcut (string (cdr tag)))
+			 (action-list (concat gtd-action-lists-dir text))
+			 (waitp (equal text "waiting")))
+		    (if waitp
+			`("w" "Waiting for" ((tags ,(concat text "-TODO=\"DONE\""))) nil
+			  (,action-list))
+		      `(,shortcut ,(capitalize text)
+				  ((tags-todo ,(concat "TODO=\"NEXT\"+" text)
+					      ((org-agenda-overriding-header
+						,(concat "\n@" text " Tasks\n"
+							 ;; Add 7 for "@ Tasks" characters
+							 (make-string (+ 7 (string-width text)) ?\=)
+							 "\n"))
+					       (org-agenda-sorting-strategy
+						'((agenda time-up priority-down tag-up)))))
+				   (agenda ""))
+				  nil
+				  (,action-list))))))
               org-tag-alist))
 
 ;; During weekly review, show the previous week, as well as the week ahead
