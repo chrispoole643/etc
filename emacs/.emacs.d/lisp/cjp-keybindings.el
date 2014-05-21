@@ -40,9 +40,7 @@
 (global-set-key (kbd "C-s-l") (lambda () (interactive) (org-capture nil "l")))
 (global-set-key (kbd "C-s-c") (lambda () (interactive) (org-capture nil "c")))
 (global-set-key (kbd "C-s-e") 'gtd-export-agendas-and-calendar)
-(global-set-key (kbd "C-s-/") (lambda () (interactive)
-                                (org-agenda nil "/")
-                                (select-window (get-buffer-window "*Occur*" t))))
+(global-set-key (kbd "C-s-/") (lambda () (interactive) (org-refile '(4))))
 
 ;;; Ace jump mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
