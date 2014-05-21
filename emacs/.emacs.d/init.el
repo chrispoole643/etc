@@ -53,3 +53,6 @@
 ;;     (insert "import os, math, time"))
 ;;   (run-python nil t)
 ;;   (save-window-excursion (eshell)))
+
+;;; GTD: show the @laptop action list
+(org-agenda nil "l")
