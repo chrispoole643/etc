@@ -42,6 +42,7 @@
                                 multiple-cursors
                                 org
                                 outline-magic
+                                ox-reveal
                                 paredit
                                 persp-mode
                                 popwin
@@ -854,6 +855,10 @@
 
 ;; Structure templates
 ;; http://dl.dropboxusercontent.com/u/3968124/sacha-emacs.html#sec-1-7-17
+
+;; Reveal.js exporting
+
+(require 'ox-reveal)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
