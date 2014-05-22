@@ -43,6 +43,8 @@
       org-return-follows-link t
       ;; Expand headlines to CONTENT or OVERVIEW or LOGDONE
       org-startup-folded "overview"
+      ;; Pretty colours in code blocks
+      org-src-fontify-natively t
       ;; Indent Headings and hide stars
       org-startup-indented t
       ;; Show inline images
