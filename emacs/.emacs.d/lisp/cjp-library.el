@@ -367,12 +367,12 @@ word is always capitalized."
       (setq title-split (cdr title-split)))
     new-title))
 
-(defun cjp-set-font-size (size &optional font)
+(defun cjp-set-font-size (size &optional font allframes)
   "Set frame font (either FONT or by default `Menlo') to SIZE."
   (interactive "sFont size: ")
   (if (>= emacs-major-version 23)
       (set-frame-font (concat (or font (if macosxp "Menlo" "Monospace"))
-                              "-" size))))
+                              "-" size) t allframes)))
 
 (defun cjp-recompile-emacs-setup ()
   "Force recompile the Emacs setup directory."

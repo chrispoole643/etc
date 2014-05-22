@@ -54,5 +54,7 @@
 ;;   (run-python nil t)
 ;;   (save-window-excursion (eshell)))
 
-;;; GTD: show the @laptop action list
+;;; GTD: show the @laptop action list (and give it its own frame)
+(make-frame)
 (org-agenda nil "l")
+(delete-other-windows)

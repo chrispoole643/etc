@@ -59,7 +59,7 @@
 
 ;;; Set font (Menlo default)
 (if (display-graphic-p)
-    (cjp-set-font-size "11"))
+    (cjp-set-font-size "11" nil t))
 
 ;;; Eenable sRGB
 (setq ns-use-srgb-colorspace t)
