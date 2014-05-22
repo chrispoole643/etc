@@ -88,16 +88,17 @@
                      (ido-completing-read "GTD file: " (directory-files org-directory
                                                                         nil "\.org$")))))
 
-(defun gtd-filter-scheduled-todo-tasks (content backend info)
+(defun gtd-filter-scheduled-todo-tasks (data backend info)
   "Filter iCalendar export to include only TODO tasks that are
 not done, but which are scheduled or have a deadline."
   (when (eq backend 'icalendar)
-    (if (and (org-entry-is-todo-p)
-             (not (org-entry-is-done-p))
-             (or (org-get-scheduled-time (point))
-                 (org-get-deadline-time (point))))
-        content nil)))
-
+    (org-element-map data 'headline
+      (lambda (hl)
+        (when (or (not (equal 'todo (org-element-property :todo-type hl)))
+                  (equal "DONE" (org-element-property :todo-keyword hl))
+                  (not (or (org-element-property :scheduled hl)
+                           (org-element-property :deadline hl))))
+          (org-export-ignore-element hl info))) info) data))
 
 (defun gtd-export-agendas-and-calendar ()
   "Store agenda views as plain text files, and export scheduled
@@ -106,8 +107,7 @@ events to a combined iCalendar file. Filter the calendar using
 aren't DONE, but are scheduled."
   (interactive)
   (org-store-agenda-views)
-  (let ((org-export-filter-final-output-functions
-         '(gtd-filter-scheduled-todo-tasks)))
+  (let ((org-export-filter-parse-tree-functions '(gtd-filter-scheduled-todo-tasks)))
     (org-icalendar-combine-agenda-files)))
 
 
@@ -161,8 +161,8 @@ aren't DONE, but are scheduled."
       org-icalendar-use-scheduled '(todo-start)
       ;; Use deadlines in TODO entries as due-dates
       org-icalendar-use-deadline '(todo-due)
-      ;; Add scheduled (and not DONE) tasks to exported calendar
-      org-icalendar-include-todo nil
+      ;; Add TODO tasks to exported calendar
+      org-icalendar-include-todo t
       ;; Don't include any body text in calendar events
       org-icalendar-include-body nil
       ;; Set an alarm for 15 minutes before timed events
@@ -177,10 +177,6 @@ aren't DONE, but are scheduled."
                                  (todo . " %i %-12:c")
                                  (tags . "")
                                  (search . " %i %-12:c")))
-
-;;; TODO: fix iCalendar so it exports only scheduled tasks
-;;; http://orgmode.org/manual/iCalendar-export.html
-;;; http://orgmode.org/worg/org-tutorials/org-google-sync.html
 
 ;; Create agendas for each tag (GTD context) defined. Set up the waiting for
 ;; list separately
@@ -217,7 +213,9 @@ aren't DONE, but are scheduled."
                             (org-agenda-start-day "-3d")
                             (org-agenda-show-log t)
                             (org-agenda-start-with-log-mode t)
-                            (org-agenda-overriding-header ""))))))
+                            (org-agenda-overriding-header "")
+                            (org-agenda-skip-deadline-if-done nil)
+                            (org-agenda-skip-scheduled-if-done nil))))))
 
 ;; Export agendas as action lists
 (setq org-agenda-exporter-settings

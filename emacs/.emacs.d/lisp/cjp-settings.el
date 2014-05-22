@@ -817,11 +817,9 @@
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
-(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/"
-                                        "~/gtd/")))
+(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/")))
 (setq org-icalendar-combined-agenda-file
-      (expand-file-name (if macosxp "~/Dropbox/Public/calendar.ics"
-                          "~/gtd/calendar.ics")))
+      (expand-file-name (if macosxp "~/Dropbox/Public/calendar.ics" "~/gtd/calendar.ics")))
 
 ;; GTD tags
 (if macosxp
@@ -853,6 +851,9 @@
 
 (add-to-list 'org-capture-templates
              '("b" "PBC Entry" entry (file+headline "" "Inbox") "* PBC: %?"))
+
+;; Structure templates
+;; http://dl.dropboxusercontent.com/u/3968124/sacha-emacs.html#sec-1-7-17
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
