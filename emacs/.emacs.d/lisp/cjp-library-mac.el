@@ -185,17 +185,3 @@ message if called interactively."
                  (read-string "Message: "))))
     (start-process "growlnotify" nil "/usr/local/bin/growlnotify"
                    "Emacs" "-m" (format "%s" msg) "-a" "Emacs" "-n" "Emacs")))
-
-(defun cjp-toggle-distractions (&optional width)
-  "Set window margins to WIDTH (default 92), and highlight the
-current line."
-  (interactive)
-  (let ((width (if cjp-distractionsp 0 (or width 92))))
-    (setq left-margin-width width)
-    (setq right-margin-width width)
-    (set-window-margins nil width width)
-    (hl-line-mode (if cjp-distractionsp -1 1)))
-  (ns-toggle-fullscreen)
-  (setq cjp-distractionsp (not cjp-distractionsp)))
-
-(defvar cjp-distractionsp nil)
