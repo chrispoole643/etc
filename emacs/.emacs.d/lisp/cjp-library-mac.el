@@ -186,12 +186,6 @@ message if called interactively."
     (start-process "growlnotify" nil "/usr/local/bin/growlnotify"
                    "Emacs" "-m" (format "%s" msg) "-a" "Emacs" "-n" "Emacs")))
 
-(defun cjp-set-font-size (size &optional font allframes)
-  "Set frame font (either FONT or by default `Menlo') to SIZE."
-  (interactive "sFont size: ")
-  (if (>= emacs-major-version 23)
-      (set-frame-font (concat (or font "Menlo") "-" size) t allframes)))
-
 (defun cjp-toggle-distractions (&optional width)
   "Set window margins to WIDTH (default 92), and highlight the
 current line."
