@@ -49,6 +49,9 @@
       org-startup-indented t
       ;; Show inline images
       org-startup-with-inline-images t
+      ;; Use ido (flex) completion; disable completing in steps for performance
+      org-completion-use-ido t
+      org-outline-path-complete-in-steps nil
       ;; Split line in the middle with M-RET
       org-M-RET-may-split-line t
       ;; Quickly select TODO states
