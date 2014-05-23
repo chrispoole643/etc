@@ -124,6 +124,8 @@ aren't DONE, but are scheduled."
          "* NEXT %?")
         ("h" "Home action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :home:")
+        ("w" "Waiting action" entry (file+headline gtd-actions-file "Actions")
+         "* DEFER %? :waiting:")
         ("o" "Office action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :office:")
         ("l" "Laptop action" entry (file+headline gtd-actions-file "Actions")
