@@ -27,6 +27,10 @@
 
 ;;; Variables
 
+(defvar gtd-agenda-use-full-frame-p t
+  "When true, if using a multi-frame Emacs environment, have the
+  agenda delete other windows when being displayed.")
+
 ;; Define file locations
 (setq org-default-notes-file (concat org-directory "inbox.org")
       gtd-projects-file (concat org-directory "projects.org")
@@ -258,7 +262,10 @@ aren't DONE, but are scheduled."
                                       (org-agenda-todo "DONE")
                                       (org-agenda-redo)
                                       (org-save-all-org-buffers)))
-                                  (hl-line-mode)))
+                                  (hl-line-mode)
+                                  (when (and gtd-agenda-use-full-frame-p
+                                             (> (length (frame-list)) 1))
+                                    (delete-other-windows))))
 
 ;; Save org files after refiling
 (add-hook 'org-after-refile-insert-hook 'org-save-all-org-buffers)
@@ -272,3 +279,8 @@ aren't DONE, but are scheduled."
 (provide 'org-gtd)
 
 ;;; org-gtd.el ends here
+
+
+
+
+
