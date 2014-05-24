@@ -211,19 +211,6 @@ DIR is included as the head of the list."
   (interactive)
   (cjp-get-directories-in (cjp-emacs-structure-dir dir)))
 
-(defun cjp-run-webgen-in-eshell ()
-  "Run `webgen` in Emacs shell, switching back to the previous
-buffer."
-  (interactive)
-  (when (get-buffer "*eshell*")
-    (let ((previous-buffer (buffer-name)))
-      (switch-to-buffer-other-window "*eshell*")
-      (goto-char (point-max))
-      (insert "webgen")
-      (comint-send-input)
-      (goto-char (point-max))
-      (switch-to-buffer-other-window previous-buffer))))
-
 (defun cjp-find-double-words (arg)
   "Find double words in current buffer. Start from current point
 unless given a prefix argument, in which case start from top.
