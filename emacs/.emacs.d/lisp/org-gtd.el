@@ -137,7 +137,7 @@ aren't DONE, but are scheduled."
          "* NEXT %? :office:")
         ("l" "Laptop action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :laptop:")
-        ("c" "Calendar entry" entry (file+headline gtd-actions-file "Actions")
+        ("r" "Recurring calendar entry" entry (file+headline gtd-calendar-file "Recurring events")
          "* DEFER %?")))
 
 

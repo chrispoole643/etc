@@ -40,7 +40,7 @@
 (global-set-key (kbd "C-s-o") (lambda () (interactive) (org-capture nil "o")))
 (global-set-key (kbd "C-s-w") (lambda () (interactive) (org-capture nil "w")))
 (global-set-key (kbd "C-s-l") (lambda () (interactive) (org-capture nil "l")))
-(global-set-key (kbd "C-s-c") (lambda () (interactive) (org-capture nil "c")))
+(global-set-key (kbd "C-s-r") (lambda () (interactive) (org-capture nil "r")))
 (global-set-key (kbd "C-s-e") 'gtd-export-agendas-and-calendar)
 (global-set-key (kbd "C-s-/") (lambda () (interactive) (org-refile '(4))))
 
