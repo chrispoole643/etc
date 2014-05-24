@@ -168,15 +168,6 @@ default Mac browser."
     (re-search-forward (concat "export " var "=\"\\([^\"]+\\)\""))
     (cjp-tilde-to-longform (match-string 1) "$HOME")))
 
-(defun cjp-check-uni-proxy ()
-  "Set HTTP_PROXY environment variable if at uni, else remove it.
-
-Works in conjunction with marco polo script."
-  (interactive)
-  (if (file-exists-p "~/.atuni")
-      (setenv "HTTP_PROXY" "http://wwwcache.lancs.ac.uk:8080")
-    (setenv "HTTP_PROXY" nil)))
-
 (defun cjp-show-growl-notification (&optional arg-msg)
   "Show growl notification with string ARG-MSG, or prompt for
 message if called interactively."
