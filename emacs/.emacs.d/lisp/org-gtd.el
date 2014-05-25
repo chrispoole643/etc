@@ -108,7 +108,10 @@ NOT scheduled (or deadlined) tasks that aren't done"
     (org-element-map data 'headline
       (lambda (hl)
         (let ((title (org-element-property :raw-value hl))
-              (notsection (>= (org-element-property :level hl) 2))
+              ;; Go down 5 levels to find scheduled items. If only needing the actions
+              ;; list, 2 would be enough, but projects can have scheduled tasks at
+              ;; greater depth in the tree
+              (notsection (>= (org-element-property :level hl) 5))
               (notscheduledp (not (org-element-property :scheduled hl)))
               (notdeadlinep (not (org-element-property :deadline hl)))
               (donep (equal "DONE" (org-element-property :todo-keyword hl))))
