@@ -813,6 +813,9 @@
 ;;; Org
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(require 'org-gtd)
+(require 'ox-reveal)
+
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 
 ;; Use better defaults when opening files
@@ -820,47 +823,11 @@
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
-(setq org-directory (expand-file-name (if macosxp "~/Dropbox/gtd/" "~/gtd/")))
-(setq org-icalendar-combined-agenda-file
-      (expand-file-name (if macosxp "~/Dropbox/Public/calendar.ics" "~/gtd/calendar.ics")))
-
-;; GTD tags
-(if macosxp
-    (setq org-tag-alist '((:startgroup . nil)
-                          ("office" . ?o)
-                          ("home" . ?h)
-                          ("phone" . ?p)
-                          ("parents" . ?a)
-                          ("grandparents" . ?g)
-                          ("katie" . ?k)
-                          ("shops" . ?s)
-                          ("reading" . ?r)
-                          ("video" . ?v)
-                          ("waiting" . ?w)
-                          ("laptop" . ?l)
-                          (:endgroup . nil)))
-  (setq org-tag-alist '((:startgroup . nil)
-                        ("tony" . ?t)
-                        ("andy_bates" . ?a)
-                        ("laptop" . ?l)
-                        ("DTScrum" . ?u)
-                        ("scrum" . ?s)
-                        ("office" . ?o)
-                        ("video" . ?v)
-                        ("waiting" . ?w)
-                        (:endgroup . nil))))
-
-(require 'org-gtd)
-
 (add-to-list 'org-capture-templates
              '("b" "PBC Entry" entry (file+headline "" "Inbox") "* PBC: %?"))
 
 ;; Structure templates
 ;; http://dl.dropboxusercontent.com/u/3968124/sacha-emacs.html#sec-1-7-17
-
-;; Reveal.js exporting
-
-(require 'ox-reveal)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; AUCTeX
