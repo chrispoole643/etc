@@ -38,7 +38,8 @@
       gtd-action-lists-dir (concat org-directory "action-lists/")
       gtd-someday-maybe-file (concat org-directory "someday-maybe.org")
       gtd-reference-file (concat org-directory "reference.org")
-      gtd-calendar-file (concat org-directory "calendar.org"))
+      gtd-calendar-file (concat org-directory "calendar.org")
+      gtd-goals-file (concat org-directory "goals.org"))
 
 ;; Setup org mode
 (setq ;; Show upcoming deadlines 3 days prior
@@ -168,7 +169,7 @@ aren't DONE, but are scheduled."
       ;; Always start with today (nil) or Saturday (6)
       org-agenda-start-on-weekday 6
       ;; Only include project and action lists in agenda
-      org-agenda-files (list gtd-projects-file gtd-actions-file gtd-calendar-file)
+      org-agenda-files (list gtd-projects-file gtd-actions-file gtd-calendar-file gtd-goals-file)
       ;; Don't by default show the action in context
       org-agenda-start-with-follow-mode nil
       ;; Don't show tags in the agendas
