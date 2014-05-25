@@ -99,15 +99,23 @@
 
 (defun gtd-filter-scheduled-todo-tasks (data backend info)
   "Filter iCalendar export to include only TODO tasks that are
-not done, but which are scheduled or have a deadline."
+not done, but which are scheduled or have a deadline.
+
+Aim: ignore items that are NOT the main section (like \"Actions\"), and
+NOT scheduled (or deadlined) tasks that aren't done"
   (when (eq backend 'icalendar)
     (org-element-map data 'headline
       (lambda (hl)
-        (when (or (not (equal 'todo (org-element-property :todo-type hl)))
-                  (equal "DONE" (org-element-property :todo-keyword hl))
-                  (not (or (org-element-property :scheduled hl)
-                           (org-element-property :deadline hl))))
-          (org-export-ignore-element hl info))) info) data))
+        (let ((title (org-element-property :raw-value hl))
+              (notsection (>= (org-element-property :level hl) 2))
+              (notscheduledp (not (org-element-property :scheduled hl)))
+              (notdeadlinep (not (org-element-property :deadline hl)))
+              (donep (equal "DONE" (org-element-property :todo-keyword hl))))
+          (when (or donep
+                    (and notsection
+                         notscheduledp
+                         notdeadlinep))
+            (org-export-ignore-element hl info)))) info) data))
 
 (defun gtd-export-agendas-and-calendar ()
   "Store agenda views as plain text files, and export scheduled
@@ -137,7 +145,7 @@ aren't DONE, but are scheduled."
          "* NEXT %? :office:")
         ("l" "Laptop action" entry (file+headline gtd-actions-file "Actions")
          "* NEXT %? :laptop:")
-        ("r" "Recurring calendar entry" entry (file+headline gtd-calendar-file "Recurring events")
+        ("r" "Recurring calendar entry" entry (file+headline gtd-calendar-file "Miscellaneous recurring events")
          "* DEFER %?")))
 
 
@@ -169,9 +177,9 @@ aren't DONE, but are scheduled."
       org-agenda-dim-blocked-tasks t
       ;; Scheduling time stamps in TODO entries become start date. Some calendar
       ;; applications show TODO entries only after that date.
-      org-icalendar-use-scheduled '(todo-start)
+      org-icalendar-use-scheduled '(event-if-todo event-if-not-todo todo-start)
       ;; Use deadlines in TODO entries as due-dates
-      org-icalendar-use-deadline '(todo-due)
+      org-icalendar-use-deadline '(event-if-todo event-if-not-todo todo-due)
       ;; Add TODO tasks to exported calendar
       org-icalendar-include-todo t
       ;; Don't include any body text in calendar events
