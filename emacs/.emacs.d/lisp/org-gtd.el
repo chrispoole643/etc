@@ -158,7 +158,7 @@ aren't DONE, but are scheduled."
 (setq ;; Show next x days in agenda
       org-agenda-span 1
       ;; Show dates even if totally free
-      org-agenda-show-all-dates t
+      org-agenda-show-all-dates nil
       ;; Don't show things already done
       org-agenda-skip-deadline-if-done t
       ;; Don't show things already done
