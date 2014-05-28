@@ -36,3 +36,8 @@
 ;;; Browse URLs with Chrome
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "google-chrome")
+
+;;; Opening files using xdg-open in org-mode doesn't work. This appears to be /a/
+;;; solution, perhaps not the best one long
+;;; term. http://lists.gnu.org/archive/html/emacs-orgmode/2014-04/msg00912.html
+(setq process-connection-type nil)
