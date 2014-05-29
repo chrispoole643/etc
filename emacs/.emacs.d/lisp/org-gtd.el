@@ -107,16 +107,22 @@ NOT scheduled (or deadlined) tasks that aren't done"
   (when (eq backend 'icalendar)
     (org-element-map data 'headline
       (lambda (hl)
-        (let ((title (org-element-property :raw-value hl))
+        (let ((hl-length (length hl))
+              (title (org-element-property :raw-value hl))
               ;; Go down 5 levels to find scheduled items. If only needing the actions
               ;; list, 2 would be enough, but projects can have scheduled tasks at
               ;; greater depth in the tree
-              (notsection (>= (org-element-property :level hl) 5))
+              (notsectionp (> (org-element-property :level hl) 1))
               (notscheduledp (not (org-element-property :scheduled hl)))
               (notdeadlinep (not (org-element-property :deadline hl)))
+              (nottodop (not (equal 'todo (org-element-property :todo-type hl))))
               (donep (equal "DONE" (org-element-property :todo-keyword hl))))
+          (message (concat title ": " (int-to-string hl-length) "\n"))
+          (org-element-map (org-element-contents (cdr hl)) 'headline (lambda (chl)
+                                                                 (let ((ctitle (org-element-property :raw-value chl)))
+                                                                   (message ctitle))))
           (when (or donep
-                    (and notsection
+                    (and notsectionp
                          notscheduledp
                          notdeadlinep))
             (org-export-ignore-element hl info)))) info) data))
