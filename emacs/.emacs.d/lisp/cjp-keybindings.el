@@ -32,17 +32,27 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c b") 'org-iswitchb)
+
+;;; Capture stuff
 (global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
 (global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
 (global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
 (global-set-key (kbd "C-s-h") (lambda () (interactive) (org-capture nil "h")))
 (global-set-key (kbd "C-s-b") (lambda () (interactive) (org-capture nil "b")))
-(global-set-key (kbd "C-s-o") (lambda () (interactive) (org-capture nil "o")))
 (global-set-key (kbd "C-s-w") (lambda () (interactive) (org-capture nil "w")))
 (global-set-key (kbd "C-s-l") (lambda () (interactive) (org-capture nil "l")))
 (global-set-key (kbd "C-s-r") (lambda () (interactive) (org-capture nil "r")))
+
+;;; Export
 (global-set-key (kbd "C-s-e") 'gtd-export-agendas-and-calendar)
+
+;;; Search for things using the refile interface
 (global-set-key (kbd "C-s-/") (lambda () (interactive) (org-refile '(4))))
+
+;;; Make using attachments easier
+(global-set-key (kbd "C-s-o") 'org-attach-open)
+(global-set-key (kbd "C-s-d") 'org-attach-reveal-in-emacs)
+(global-set-key (kbd "C-s-z") 'org-attach-sync)
 
 ;;; Ace jump mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)

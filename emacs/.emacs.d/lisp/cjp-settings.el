@@ -823,6 +823,8 @@
                                                 org-file-apps-defaults-macosx
                                               org-file-apps-defaults-gnu)))
 
+(setq org-attach-directory (expand-file-name "~/Support/Attachments/"))
+
 (add-to-list 'org-capture-templates
              '("b" "PBC Entry" entry (file+headline "" "Inbox") "* PBC: %?"))
 
