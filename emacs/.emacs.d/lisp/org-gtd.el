@@ -257,7 +257,7 @@ aren't DONE, but are scheduled."
                                                                      (make-string (+ 7 (string-width text)) ?\=)
                                                                      "\n"))
                                                            (org-agenda-sorting-strategy
-                                                            '((agenda time-up priority-down tag-up)))))
+                                                            '((agenda priority-up)))))
                                                (agenda ""))
                                               nil
                                               (,action-list))))))
