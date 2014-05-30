@@ -98,6 +98,22 @@
                      (ido-completing-read "GTD file: " (directory-files org-directory
                                                                         nil "\.org$")))))
 
+(defun gtd-done-exported-tasks ()
+    "Return a list of done tasks from the exported action
+lists."
+  (interactive)
+  (let ((done-tasks '()))
+    (mapc (lambda (file)
+            (when (file-regular-p file)
+              (with-temp-buffer
+                (insert-file-contents file)
+                (goto-char (point-min))
+                (while (re-search-forward "\\[ *[Xx] *\\] NEXT \\(.+\\)" (point-max) t)
+                  (add-to-list 'done-tasks (match-string 1) t)
+                  (add-to-list 'done-tasks (file-name-base file) t)))))
+          (directory-files gtd-action-lists-dir t))
+    done-tasks))
+
 (defun gtd-filter-scheduled-todo-tasks (data backend info)
   "Filter iCalendar export to include only TODO tasks that are
 not done, but which are scheduled or have a deadline.
