@@ -98,6 +98,13 @@
                      (ido-completing-read "GTD file: " (directory-files org-directory
                                                                         nil "\.org$")))))
 
+(defun gtd-construct-todo-regex ()
+  "Construct a regular expression matching any of the todo states in `org-todo-keywords'."
+  (mapconcat (lambda (keyword)
+               (if (string-match "\(NEXT\)" keyword)
+                   (match-string 1)))
+             (cdar org-todo-keywords) "\\|"))
+
 (defun gtd-done-exported-tasks ()
     "Return a list of done tasks from the exported action
 lists."
@@ -108,9 +115,12 @@ lists."
               (with-temp-buffer
                 (insert-file-contents file)
                 (goto-char (point-min))
-                (while (re-search-forward "\\[ *[Xx] *\\] NEXT \\(.+\\)" (point-max) t)
-                  (add-to-list 'done-tasks (match-string 1) t)
-                  (add-to-list 'done-tasks (file-name-base file) t)))))
+                (while (re-search-forward (concat "\\[ *[Xx] *\\] \\("
+                                                  gtd-construct-todo-regex
+                                                  "\\) \\(.+\\)")
+                                          (point-max) t)
+                  (setq done-tasks (append (list (file-name-base file)) done-tasks))
+                  (setq done-tasks (append (list (match-string 2)) done-tasks))))))
           (directory-files gtd-action-lists-dir t))
     done-tasks))
 
@@ -135,13 +145,15 @@ NOT scheduled (or deadlined) tasks that aren't done"
               (donep (equal "DONE" (org-element-property :todo-keyword hl))))
           (message (concat title ": " (int-to-string hl-length) "\n"))
           (org-element-map (org-element-contents (cdr hl)) 'headline (lambda (chl)
-                                                                 (let ((ctitle (org-element-property :raw-value chl)))
-                                                                   (message ctitle))))
+                                                                       (let ((ctitle (org-element-property :raw-value chl)))
+                                                                         (message ctitle))))
           (when (or donep
                     (and notsectionp
                          notscheduledp
                          notdeadlinep))
-            (org-export-ignore-element hl info)))) info) data))
+            (org-export-ignore-element hl info))))
+      info)
+    data))
 
 (defun gtd-export-agendas-and-calendar ()
   "Store agenda views as plain text files, and export scheduled
