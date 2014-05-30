@@ -278,11 +278,11 @@ aren't DONE, but are scheduled."
 (setq org-log-refile nil)
 ;; Store notes at the top of the tree
 (setq org-reverse-note-order t)
-(setq org-refile-targets '((gtd-projects-file :maxlevel . 2)
-                           (gtd-actions-file :maxlevel . 2)
+(setq org-refile-targets '((gtd-projects-file :maxlevel . 3)
+                           (gtd-actions-file :maxlevel . 3)
                            (gtd-someday-maybe-file :maxlevel . 3)
-                           (gtd-reference-file :maxlevel . 2)
-                           (gtd-calendar-file :maxlevel . 2)))
+                           (gtd-reference-file :maxlevel . 3)
+                           (gtd-calendar-file :maxlevel . 3)))
 
 
 ;;; Hooks
