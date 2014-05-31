@@ -103,9 +103,9 @@
 (defun gtd-construct-todo-regex ()
   "Construct a regular expression matching any of the todo states in `org-todo-keywords'."
   (mapconcat (lambda (keyword)
-               (if (string-match "\(NEXT\)" keyword)
-                   (match-string 1)))
-             (cdar org-todo-keywords) "\\|"))
+               (string-match "\\([A-Za-z]+\\)" keyword)
+               (match-string 0 keyword))
+             (delete "|" (cdar org-todo-keywords)) "\\|"))
 
 (defun gtd-done-exported-tasks ()
     "Return a list of done tasks from the exported action
@@ -118,13 +118,34 @@ lists."
                 (insert-file-contents file)
                 (goto-char (point-min))
                 (while (re-search-forward (concat "\\[ *[Xx] *\\] \\("
-                                                  gtd-construct-todo-regex
+                                                  (gtd-construct-todo-regex)
                                                   "\\) \\(.+\\)")
                                           (point-max) t)
                   (setq done-tasks (append (list (file-name-base file)) done-tasks))
                   (setq done-tasks (append (list (match-string 2)) done-tasks))))))
           (directory-files gtd-action-lists-dir t))
     done-tasks))
+
+;(setq data (org-element-parse-buffer))
+;; (let ((new-data nil))
+;;   (org-element-map data 'headline
+;;     (lambda (hl)
+;;       (let ((title (org-element-property :raw-value hl))
+;;             (notrootp (> (org-element-property :level hl) 1))
+;;             (scheduledp (org-element-property :scheduled hl))
+;;             (deadlinep (org-element-property :deadline hl))
+;;             (todop (equal 'todo (org-element-property :todo-type hl)))
+;;             (notdonep (not (equal "DONE" (org-element-property :todo-keyword hl)))))
+;;         (when (and notrootp
+;;                    (or scheduledp
+;;                        deadlinep)
+;;                    todop
+;;                    notdonep)
+;;           (message title)
+;;           (setq new-data (append (list hl) new-data))))))
+;;   (setq new-data (append (list 'nil) new-data))
+;;   (setq new-data (append (list 'org-data) new-data))
+;;   new-data)
 
 (defun gtd-filter-scheduled-todo-tasks (data backend info)
   "Filter iCalendar export to include only TODO tasks that are
@@ -133,24 +154,24 @@ not done, but which are scheduled or have a deadline.
 Aim: ignore items that are NOT the main section (like \"Actions\"), and
 NOT scheduled (or deadlined) tasks that aren't done"
   (when (eq backend 'icalendar)
-    (org-element-map data 'headline
-      (lambda (hl)
-        (let ((title (org-element-property :raw-value hl))
-              ;; Go down 5 levels to find scheduled items. If only needing the actions
-              ;; list, 2 would be enough, but projects can have scheduled tasks at
-              ;; greater depth in the tree
-              (notsectionp (> (org-element-property :level hl) 5))
-              (notscheduledp (not (org-element-property :scheduled hl)))
-              (notdeadlinep (not (org-element-property :deadline hl)))
-              (nottodop (not (equal 'todo (org-element-property :todo-type hl))))
-              (donep (equal "DONE" (org-element-property :todo-keyword hl))))
-          (when (or donep
-                    (and notsectionp
-                         notscheduledp
-                         notdeadlinep))
-            (org-export-ignore-element hl info))))
-      info)
-    data))
+    (let ((new-data nil))
+      (org-element-map data 'headline
+        (lambda (hl)
+          (let ((title (org-element-property :raw-value hl))
+                (notrootp (> (org-element-property :level hl) 1))
+                (scheduledp (org-element-property :scheduled hl))
+                (deadlinep (org-element-property :deadline hl))
+                (todop (equal 'todo (org-element-property :todo-type hl)))
+                (notdonep (not (equal "DONE" (org-element-property :todo-keyword hl)))))
+            (when (and notrootp
+                       (or scheduledp
+                           deadlinep)
+                       todop
+                       notdonep)
+              (setq new-data (append (list hl) new-data))))))
+      (setq new-data (append (list 'nil) new-data))
+      (setq new-data (append (list 'org-data) new-data))
+      new-data)))
 
 (defun gtd-export-agendas-and-calendar ()
   "Store agenda views as plain text files, and export scheduled
