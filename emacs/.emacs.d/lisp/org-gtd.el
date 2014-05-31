@@ -74,8 +74,10 @@
       org-fast-tag-selection-include-todo t
       ;; Don't show the postamble in exported docs
       org-export-html-postamble nil
-      ;; Set the default priority to be the lowest
-      org-default-priority ?C
+      ;; Use priority to mark Urgent tasks
+      org-default-priority ?U
+      org-lowest-priority ?U
+      org-highest-priority ?U
       ;; Define stuck projects as level 2 items that aren't a DONE or NEXT
       ;; action, don't have NEXT actions inside them, and don't have items
       ;; tagged as waiting.
@@ -97,6 +99,32 @@
   (find-file (concat org-directory
                      (ido-completing-read "GTD file: " (directory-files org-directory
                                                                         nil "\.org$")))))
+
+(defun gtd-construct-todo-regex ()
+  "Construct a regular expression matching any of the todo states in `org-todo-keywords'."
+  (mapconcat (lambda (keyword)
+               (if (string-match "\(NEXT\)" keyword)
+                   (match-string 1)))
+             (cdar org-todo-keywords) "\\|"))
+
+(defun gtd-done-exported-tasks ()
+    "Return a list of done tasks from the exported action
+lists."
+  (interactive)
+  (let ((done-tasks '()))
+    (mapc (lambda (file)
+            (when (file-regular-p file)
+              (with-temp-buffer
+                (insert-file-contents file)
+                (goto-char (point-min))
+                (while (re-search-forward (concat "\\[ *[Xx] *\\] \\("
+                                                  gtd-construct-todo-regex
+                                                  "\\) \\(.+\\)")
+                                          (point-max) t)
+                  (setq done-tasks (append (list (file-name-base file)) done-tasks))
+                  (setq done-tasks (append (list (match-string 2)) done-tasks))))))
+          (directory-files gtd-action-lists-dir t))
+    done-tasks))
 
 (defun gtd-filter-scheduled-todo-tasks (data backend info)
   "Filter iCalendar export to include only TODO tasks that are
@@ -120,7 +148,9 @@ NOT scheduled (or deadlined) tasks that aren't done"
                     (and notsectionp
                          notscheduledp
                          notdeadlinep))
-            (org-export-ignore-element hl info)))) info) data))
+            (org-export-ignore-element hl info))))
+      info)
+    data))
 
 (defun gtd-export-agendas-and-calendar ()
   "Store agenda views as plain text files, and export scheduled
@@ -257,11 +287,11 @@ aren't DONE, but are scheduled."
 (setq org-log-refile nil)
 ;; Store notes at the top of the tree
 (setq org-reverse-note-order t)
-(setq org-refile-targets '((gtd-projects-file :maxlevel . 2)
-                           (gtd-actions-file :maxlevel . 2)
+(setq org-refile-targets '((gtd-projects-file :maxlevel . 3)
+                           (gtd-actions-file :maxlevel . 3)
                            (gtd-someday-maybe-file :maxlevel . 3)
-                           (gtd-reference-file :maxlevel . 2)
-                           (gtd-calendar-file :maxlevel . 2)))
+                           (gtd-reference-file :maxlevel . 3)
+                           (gtd-calendar-file :maxlevel . 3)))
 
 
 ;;; Hooks
