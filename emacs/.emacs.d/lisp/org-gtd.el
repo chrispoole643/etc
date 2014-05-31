@@ -193,6 +193,7 @@ events to a combined iCalendar file. Filter the calendar using
 `gtd-filter-scheduled-todo-tasks', only allowing tasks that
 aren't DONE, but are scheduled."
   (interactive)
+  (gtd-mark-completed-exported-tasks-as-done)
   (org-store-agenda-views)
   (let ((org-export-filter-parse-tree-functions '(gtd-filter-scheduled-todo-tasks)))
     (org-icalendar-combine-agenda-files)))
