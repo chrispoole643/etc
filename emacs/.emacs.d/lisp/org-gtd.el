@@ -110,8 +110,8 @@ in `org-todo-keywords'."
 
 (defun gtd-mark-completed-exported-tasks-as-done ()
   "Find completed entries in exported action lists (e.g., those
-marked \"[x]\"), and mark them complete in the originating agenda
-file."
+marked \"[x]\"), and mark them \"DONE\" in the originating agenda
+file. Save all org buffers."
   (interactive)
   ;; done-tasks becomes a list of paired values, title & tag.
   ;; For example, ("book an appointment" "phone").
