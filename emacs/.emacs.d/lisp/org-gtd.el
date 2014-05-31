@@ -101,17 +101,22 @@
                                                                         nil "\.org$")))))
 
 (defun gtd-construct-todo-regex ()
-  "Construct a regular expression matching any of the todo states in `org-todo-keywords'."
+  "Construct a regular expression matching any of the todo states
+in `org-todo-keywords'."
   (mapconcat (lambda (keyword)
                (string-match "\\([A-Za-z]+\\)" keyword)
                (match-string 0 keyword))
              (delete "|" (cdar org-todo-keywords)) "\\|"))
 
-(defun gtd-done-exported-tasks ()
-    "Return a list of done tasks from the exported action
-lists."
+(defun gtd-mark-completed-exported-tasks-as-done ()
+  "Find completed entries in exported action lists (e.g., those
+marked \"[x]\"), and mark them complete in the originating agenda
+file."
   (interactive)
+  ;; done-tasks becomes a list of paired values, title & tag.
+  ;; For example, ("book an appointment" "phone").
   (let ((done-tasks '()))
+    ;; Find the completed tasks
     (mapc (lambda (file)
             (when (file-regular-p file)
               (with-temp-buffer
@@ -124,7 +129,16 @@ lists."
                   (setq done-tasks (append (list (file-name-base file)) done-tasks))
                   (setq done-tasks (append (list (match-string 2)) done-tasks))))))
           (directory-files gtd-action-lists-dir t))
-    done-tasks))
+    ;; Look through the agenda files for each completed task, and mark them done
+    (while (> (length done-tasks) 0)
+      (let ((title (car done-tasks))
+            (tag (cadr done-tasks)))
+        (org-map-entries (lambda ()
+                           (when (equal title (org-get-heading t t))
+                             (org-entry-put (point) "TODO" "DONE")))
+                         tag 'agenda))
+      (setq done-tasks (cddr done-tasks)))
+    (org-save-all-org-buffers)))
 
 ;(setq data (org-element-parse-buffer))
 ;; (let ((new-data nil))
