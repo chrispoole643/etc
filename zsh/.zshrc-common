@@ -336,10 +336,10 @@ cencrypt () {
     for i in "$@"; do
         if [ -d "$i" ]; then
             tar cf - "$i" | gpg -c -z9 --cipher-algo AES256 --compress-algo bzip2 \
-                -o ${i%/##}.tar.gpg && ls -lh "$i"* && srm -rmi ${i%/##}
+                -o ${i%/##}.tar.gpg && ls -lh "$i"* && srm -rDi ${i%/##}
         elif [ -f "$i" ]; then
             gpg -c -z9 --cipher-algo AES256 --compress-algo bzip2 \
-                -o ${i}.gpg "$i" && ls -lh "$i"* && srm -mi "$i"
+                -o ${i}.gpg "$i" && ls -lh "$i"* && srm -Di "$i"
         else
             echo "$i" is not a valid file or directory.
         fi
@@ -351,9 +351,9 @@ encrypt () {
     for i in "$@"; do
         if [ -d "$i" ]; then
             # Strip following '/'
-            tar cf - "$i" | gpg -er "$cjp_gpg_key" -z9 -o ${i%/##}.tar.gpg && du -hs ${i%/##}* && srm -rmi ${i%/##}
+            tar cf - "$i" | gpg -er "$cjp_gpg_key" -z9 -o ${i%/##}.tar.gpg && du -hs ${i%/##}* && srm -rDi ${i%/##}
         elif [ -f "$i" ]; then
-            gpg -er "$cjp_gpg_key" -z9 -o ${i}.gpg "$i" && ls -lh "$i"* && srm -mi "$i"
+            gpg -er "$cjp_gpg_key" -z9 -o ${i}.gpg "$i" && ls -lh "$i"* && srm -Di "$i"
         else
             echo "$i" is not a valid file or directory.
         fi
@@ -365,9 +365,9 @@ sencrypt () {
     for i in "$@"; do
         if [ -d "$i" ]; then
             # Strip following '/'
-            tar cf - "$i" | gpg -esr "$cjp_gpg_key" -z9 -o ${i%/##}.tar.gpg && du -hs ${i%/##}* && srm -rmi ${i%/##}
+            tar cf - "$i" | gpg -esr "$cjp_gpg_key" -z9 -o ${i%/##}.tar.gpg && du -hs ${i%/##}* && srm -rDi ${i%/##}
         elif [ -f "$i" ]; then
-            gpg -esr "$cjp_gpg_key" -z9 -o ${i}.gpg "$i" && ls -lh "$i"* && srm -mi "$i"
+            gpg -esr "$cjp_gpg_key" -z9 -o ${i}.gpg "$i" && ls -lh "$i"* && srm -Di "$i"
         else
             echo "$i" is not a valid file or directory.
         fi
