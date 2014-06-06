@@ -1,0 +1,13 @@
+* Dotfiles
+
+A collection of configuration files for emacs, tmux, zsh, etc.
+
+To deploy, I store these files in an ~etc~ directory, and use [[http://www.gnu.org/software/stow][stow]] to link
+them into my home directory:
+
+#+BEGIN_SRC shell
+stow -t$HOME emacs tmux zsh
+#+END_SRC
+
+When you run Emacs for the first time, it'll fetch packages from [[http://melpa.milkbox.net][melpa]]
+(after asking you for confirmation), so may take a while.
