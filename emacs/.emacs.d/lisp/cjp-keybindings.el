@@ -250,6 +250,7 @@
 ;;; F1
 (global-set-key (kbd "<f1>") 'make-frame)
 (global-set-key (kbd "<M-f1>") 'delete-frame)
+(global-set-key (kbd "<C-f1>") 'toggle-frame-fullscreen)
 
 ;;; F2
 (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
