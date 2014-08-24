@@ -49,6 +49,7 @@
                                 powerline
                                 pretty-lambdada
                                 pydoc-info
+                                python-info
                                 redshank
                                 reftex
                                 regex-tool
@@ -640,6 +641,7 @@
 
 (setq Info-default-directory-list
       (append (cjp-get-dir-structure-in "info")
+              (cjp-get-dir-structure-in "elpa")
               Info-default-directory-list))
 
 (setq Info-directory-list Info-default-directory-list)
