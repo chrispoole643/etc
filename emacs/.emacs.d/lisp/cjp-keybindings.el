@@ -52,7 +52,9 @@
 ;;; Make using attachments easier
 (global-set-key (kbd "C-s-o") 'org-attach-open)
 (global-set-key (kbd "C-s-d") 'org-attach-reveal-in-emacs)
-(global-set-key (kbd "C-s-z") 'org-attach-sync)
+(global-set-key (kbd "C-s-z") (lambda () (interactive) (save-excursion
+                                                    (goto-char (point-min))
+                                                    (org-attach-sync))))
 
 ;;; Ace jump mode
 (global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
