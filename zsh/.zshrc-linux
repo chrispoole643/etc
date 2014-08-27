@@ -11,7 +11,7 @@
 ################################################################################
 
 
-export PATH="/home/chrispoole/bin:/usr/local/lib/python2.7:/home/chrispoole/.cabal/bin:/usr/local/texlive/2012/bin/x86_64-linux:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/home/chrispoole/bin/CICS_Explorer/:/home/chrispoole/bin:/usr/local/lib/python2.7:/home/chrispoole/.cabal/bin:/usr/local/texlive/2012/bin/x86_64-linux:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 
 
