@@ -48,10 +48,10 @@ cjp_gpg_key=1DE85A0C
 
 # tmux
 _start-tmux () {
-    tmux new -d -s main -n - \; splitw -h \; selectp -t1 
-    tmux neww -n - \; splitw -h \; selectp -t1
-    tmux neww -n - \; splitw -h \; selectp -t1
-    tmux neww -n - \; splitw -h \; selectp -t1
+    tmux new -d -s main -n - \; selectp -t1 
+    tmux neww -n - \; selectp -t1
+    tmux neww -n - \; selectp -t1
+    tmux neww -n - \; selectp -t1
     tmux selectw -t1 \; attach
 }
 
