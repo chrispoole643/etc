@@ -36,21 +36,22 @@ prompt_pure_git_dirty() {
 	# check if we're in a git repo
 	command git rev-parse --is-inside-work-tree &>/dev/null || return
 	# check if it's dirty
-	command git diff --quiet --ignore-submodules HEAD &>/dev/null
+	[[ "$PURE_GIT_UNTRACKED_DIRTY" == 0 ]] && local umode="-uno" || local umode="-unormal"
+	command test -n "$(git status --porcelain --ignore-submodules ${umode})"
 
-	(($? == 1)) && echo '*'
+	(($? == 0)) && echo '*'
 }
 
 # displays the exec time of the last command if set threshold was exceeded
 prompt_pure_cmd_exec_time() {
-	local stop=$(date +%s)
+	local stop=$EPOCHSECONDS
 	local start=${cmd_timestamp:-$stop}
 	integer elapsed=$stop-$start
 	(($elapsed > ${PURE_CMD_MAX_EXEC_TIME:=5})) && prompt_pure_human_time $elapsed
 }
 
 prompt_pure_preexec() {
-	cmd_timestamp=$(date +%s)
+	cmd_timestamp=$EPOCHSECONDS
 
 	# shows the current dir and executed command in the title when a process is active
 	print -Pn "\e]0;"
@@ -70,7 +71,7 @@ prompt_pure_precmd() {
 	# git info
 	vcs_info
 
-	local prompt_pure_preprompt='\n%F{blue}%~%F{242}$vcs_info_msg_0_`prompt_pure_git_dirty` $prompt_pure_username%f %F{yellow}`prompt_pure_cmd_exec_time`%f'
+	local prompt_pure_preprompt="\n%F{blue}%~%F{242}$vcs_info_msg_0_`prompt_pure_git_dirty` $prompt_pure_username%f %F{yellow}`prompt_pure_cmd_exec_time`%f"
 	print -P $prompt_pure_preprompt
 
 	# check async if there is anything to pull
@@ -80,10 +81,12 @@ prompt_pure_precmd() {
 		# check check if there is anything to pull
 		command git fetch &>/dev/null &&
 		# check if there is an upstream configured for this branch
-		command git rev-parse --abbrev-ref @'{u}' &>/dev/null &&
-		(( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) &&
-		# some crazy ansi magic to inject the symbol into the previous line
-		print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}⇣%f\e8"
+		command git rev-parse --abbrev-ref @'{u}' &>/dev/null && {
+			local arrows=''
+			(( $(command git rev-list --right-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows='⇣'
+			(( $(command git rev-list --left-only --count HEAD...@'{u}' 2>/dev/null) > 0 )) && arrows+='⇡'
+			print -Pn "\e7\e[A\e[1G\e[`prompt_pure_string_length $prompt_pure_preprompt`C%F{cyan}${arrows}%f\e8"
+		}
 	} &!
 
 	# reset value since `preexec` isn't always triggered
@@ -98,6 +101,7 @@ prompt_pure_setup() {
 
 	prompt_opts=(cr subst percent)
 
+	zmodload zsh/datetime
 	autoload -Uz add-zsh-hook
 	autoload -Uz vcs_info
 
