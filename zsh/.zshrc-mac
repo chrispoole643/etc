@@ -17,7 +17,7 @@ LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 LC_CTYPE=C
 
-export PATH="$HOME/bin:/usr/local/share/python:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 
 
 if [ -f "$HOME/.zshrc-common" ]; then
