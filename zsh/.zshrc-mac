@@ -10,8 +10,7 @@
 ## Path and environment
 ################################################################################
 
-
-fpath=(/Users/chris/.zsh-prompts /usr/local/share/zsh-completions /usr/local/share/zsh/site-functions /usr/local/Cellar/zsh/5.0.5/share/zsh/functions)
+fpath=(/Users/chris/.zsh-prompts /usr/local/share/zsh-completions $fpath)
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
