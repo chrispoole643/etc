@@ -10,14 +10,13 @@
 ## Path and environment
 ################################################################################
 
-
-fpath=(/Users/chris/.zsh-prompts /usr/local/share/zsh-completions /usr/local/share/zsh/site-functions /usr/local/Cellar/zsh/5.0.5/share/zsh/functions)
+fpath=(/Users/chris/.zsh-prompts /usr/local/share/zsh-completions $fpath)
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 LC_CTYPE=C
 
-export PATH="$HOME/bin:/usr/local/share/python:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+export PATH="$HOME/bin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
 
 
 if [ -f "$HOME/.zshrc-common" ]; then
@@ -41,6 +40,7 @@ alias -s avi='open -a Quicktime\ Player.app'
 alias -s mp4='open -a Quicktime\ Player.app'
 alias -s mov='open -a Quicktime\ Player.app'
 alias -s m4v='open -a Quicktime\ Player.app'
+alias -s mkv='open -a VLC.app'
 alias -s pdf='open -a Preview.app'
 alias -s jpg='open -a Preview.app'
 alias -s png='open -a Preview.app'
