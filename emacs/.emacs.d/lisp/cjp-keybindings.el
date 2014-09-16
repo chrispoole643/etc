@@ -269,11 +269,11 @@
 (global-set-key (kbd "<M-f6>") 'bookmark-bmenu-list)
 
 ;;; F7
-(when macosxp
-  (global-set-key (kbd "<f7>") 'cjp-mac-show-finder)
-  (global-set-key (kbd "<M-f7>") 'cjp-mac-open-terminal)
-  (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
-                                     (cjp-mac-open-terminal t))))
+(cond (macosxp (global-set-key (kbd "<f7>") 'cjp-mac-show-finder)
+               (global-set-key (kbd "<M-f7>") 'cjp-mac-open-terminal)
+               (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
+                                                  (cjp-mac-open-terminal t))))
+      (linuxp (global-set-key (kbd "<f7>") 'cjp-linux-show-files)))
 
 ;;; F8
 (global-set-key (kbd "<f8>") 'cjp-ispell-guess-usage)

@@ -16,3 +16,26 @@ default Mac browser."
     (goto-char (point-at-bol))
     (re-search-forward "[a-zA-Z]+://" (point-at-eol) t)
     (browse-url (thing-at-point 'url))))
+
+(defun cjp-linux-show-files (&optional directoryp)
+  "If in dired buffer, show file at point in Finder.
+
+If in buffer with an associated file, show it in Finder.
+
+If passed a prefix argument (e.g., C-u), show the directory that
+contains the file instead."
+   (interactive "P")
+   (let* ((item
+          (or (and (eq major-mode 'dired-mode)
+                   (cond (directoryp
+                          (cjp-tilde-to-longform default-directory))
+                         ((not (dired-get-marked-files))
+                          (cjp-tilde-to-longform (dired-get-file-for-visit)))
+                         (t
+                          (dired-get-marked-files))))
+              (and (eq major-mode 'eshell-mode)
+                   default-directory)
+              (and buffer-file-name
+                   (file-name-directory buffer-file-name))
+              (error "No file associated with buffer"))))
+     (start-process "growlnotify" nil "/usr/bin/xdg-open" item)))
