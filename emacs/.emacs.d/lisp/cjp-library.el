@@ -132,6 +132,11 @@ only. Else, run ispell as usual."
 ;;; Miscellaneous
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun cjp-tilde-to-longform (string &optional initial)
+  "Replace INITIAL with expansion of `~' in STRING. If INITIAL
+isn't given, use `~'."
+  (replace-regexp-in-string (or initial "~") (expand-file-name "~") string t))
+
 (defun cjp-search-elisp-docs (topic)
   "Search Elisp docs for TOPIC."
   (interactive "sTopic: ")
