@@ -273,7 +273,7 @@
                (global-set-key (kbd "<M-f7>") 'cjp-mac-open-terminal)
                (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
                                                   (cjp-mac-open-terminal t))))
-      (linuxp (global-set-key (kbd "<f7>") 'cjp-linux-show-files)))
+      (linuxp (global-set-key (kbd "<f7>") 'cjp-linux-show-directory)))
 
 ;;; F8
 (global-set-key (kbd "<f8>") 'cjp-ispell-guess-usage)

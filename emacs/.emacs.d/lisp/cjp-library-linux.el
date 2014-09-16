@@ -17,15 +17,28 @@ default Mac browser."
     (re-search-forward "[a-zA-Z]+://" (point-at-eol) t)
     (browse-url (thing-at-point 'url))))
 
-(defun cjp-linux-show-files (&optional directoryp)
-  "If in dired buffer, show file at point in Finder.
+(defun cjp-linux-show-directory (&optional directoryp)
+  "Open current buffer's directory in file system application."
+  (interactive "P")
+  (let* ((item
+          (or (and (eq major-mode 'dired-mode)
+                   (cjp-tilde-to-longform default-directory))
+              (and (eq major-mode 'eshell-mode)
+                   default-directory)
+              (and buffer-file-name
+                   (file-name-directory buffer-file-name))
+              (error "No file associated with buffer"))))
+    (start-process "growlnotify" nil "/usr/bin/xdg-open" item)))
 
-If in buffer with an associated file, show it in Finder.
+(defun cjp-linux-show-files (&optional directoryp)
+  "If in dired buffer, show file at point in file system application.
+
+If in buffer with an associated file, show it in file system application.
 
 If passed a prefix argument (e.g., C-u), show the directory that
 contains the file instead."
-   (interactive "P")
-   (let* ((item
+  (interactive "P")
+  (let* ((item
           (or (and (eq major-mode 'dired-mode)
                    (cond (directoryp
                           (cjp-tilde-to-longform default-directory))
@@ -38,4 +51,4 @@ contains the file instead."
               (and buffer-file-name
                    (file-name-directory buffer-file-name))
               (error "No file associated with buffer"))))
-     (start-process "growlnotify" nil "/usr/bin/xdg-open" item)))
+    (start-process "growlnotify" nil "/usr/bin/xdg-open" item)))
