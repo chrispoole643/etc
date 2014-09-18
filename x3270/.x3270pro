@@ -98,7 +98,7 @@ x3270.emulatorFont: 3270
 x3270.model: 3279-5-E
 
 ! Window size; 160x62 is maximum in PCOMM 
-x3270.oversize: 160x69
+x3270.oversize: 160x62
 
 ! Crosshair
 x3270.crosshair: true
