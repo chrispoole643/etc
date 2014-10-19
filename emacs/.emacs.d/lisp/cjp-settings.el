@@ -76,7 +76,7 @@
 (setq package-load-list '(all))
 (package-initialize)
 
-(when (y-or-n-p "Check for (m)elpa updates?")
+(when (< (length (directory-files package-user-dir)) 3)
   (unless package-archive-contents
     (package-refresh-contents))
   (mapc (lambda (package)
@@ -504,7 +504,7 @@
 (add-to-list 'yas/root-directory (cjp-emacs-structure-dir "personal" "snippets"))
 
 ;;; Load snippets from all directories
-(mapc 'yas/load-directory yas/root-directory)
+;(mapc 'yas/load-directory yas/root-directory)
 
 ;;; If there are multiple snippets to choose from, use ido by default in
 ;;; minibuffer.
