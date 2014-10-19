@@ -1,3 +1,0 @@
-# From https://github.com/ChrisJohnsen/tmux-MacOSX-pasteboard
-# Fixes Mac OS X pasteboard issue
-set -g default-command "reattach-to-user-namespace -l zsh"
