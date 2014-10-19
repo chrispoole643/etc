@@ -13,3 +13,6 @@ elif [[ "$OSTYPE" == *linux* ]]; then
     platform="linux"
     source "$HOME/.zshrc-linux"
 fi
+
+# Start tmux
+st
