@@ -9,5 +9,5 @@ them into my home directory:
 stow -t$HOME emacs tmux zsh
 #+END_SRC
 
-When you run Emacs for the first time, it'll fetch packages from [[http://melpa.milkbox.net][melpa]]
-(after asking you for confirmation), so may take a while.
+When you run Emacs for the first time, it'll fetch packages from [[http://melpa.milkbox.net][melpa]], so may take a
+while.
