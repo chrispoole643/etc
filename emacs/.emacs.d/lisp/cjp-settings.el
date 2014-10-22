@@ -76,7 +76,8 @@
 (setq package-load-list '(all))
 (package-initialize)
 
-(when (< (length (directory-files package-user-dir)) 3)
+(when (or (not (file-exists-p package-user-dir))
+       (< (length (directory-files package-user-dir)) 3))
   (unless package-archive-contents
     (package-refresh-contents))
   (mapc (lambda (package)
