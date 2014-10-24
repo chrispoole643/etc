@@ -70,7 +70,7 @@
 (require 'package)
 
 (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/"))
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
 (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
 (setq package-enable-at-startup nil)
 (setq package-load-list '(all))
