@@ -95,10 +95,15 @@ x3270.visualBell: true
 ! Use a larger font
 x3270.emulatorFont: 3270
 
-x3270.model: 3279-5-E
-
 ! Window size; 160x62 is maximum in PCOMM 
 x3270.oversize: 160x62
+
+x3270.model: 3279-5-E
+
+! Demo mode:
+!x3270.emulatorFont: 3270gt32
+!x3270.oversize: 96x26
+!x3270.model: 3279-2-E
 
 ! Crosshair
 x3270.crosshair: true
@@ -107,7 +112,7 @@ x3270.crosshair: true
 !x3270.loginMacro: demotso cjpoole
 
 ! Pull-down menus: Ctrl and each of the mouse buttons
-x3270.menuBar: true
+x3270.menuBar: false
 
 ! Reconnect automatically
 x3270.reconnect: true
