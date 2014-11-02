@@ -108,9 +108,6 @@ x3270.model: 3279-5-E
 ! Crosshair
 x3270.crosshair: true
 
-! Run commands upon host connection
-!x3270.loginMacro: demotso cjpoole
-
 ! Pull-down menus: Ctrl and each of the mouse buttons
 x3270.menuBar: false
 
