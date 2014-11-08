@@ -40,6 +40,7 @@
                                 magit
                                 markdown-mode
                                 markdown-mode+
+                                monokai-theme
                                 multiple-cursors
                                 org
                                 outline-magic
@@ -1207,6 +1208,6 @@
 (setq custom-safe-themes t)
 
 (if (display-graphic-p)
-    (load-theme 'tangotango t)
+    (load-theme 'monokai t)
   (color-theme-initialize)
   (color-theme-hober))
