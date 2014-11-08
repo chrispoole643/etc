@@ -26,6 +26,7 @@
                                 edit-server
                                 ein
                                 elisp-slime-nav
+                                elpy
                                 expand-region
                                 flymake-cursor
                                 framemove
@@ -611,30 +612,10 @@
 ;;; displays "\" at the end of lines that wrap
 (setq longlines-show-hard-newlines t)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Pymacs & Ropemacs
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq ropemacs-enable-shortcuts nil)
-(setq ropemacs-local-prefix nil)
-(setq ropemacs-enable-autoimport nil)
-(setq ropemacs-confirm-saving t)
-(setq ropemacs-global-prefix "C-c r")
-
-(autoload 'pymacs-apply "pymacs")
-(autoload 'pymacx1s-call "pymacs")
-(autoload 'pymacs-eval "pymacs" nil t)
-(autoload 'pymacs-exec "pymacs" nil t)
-(autoload 'pymacs-load "pymacs" nil t)
-
-(defun load-ropemacs ()
-  (interactive)
-  (pymacs-load "ropemacs" "rope-")
-  (ac-ropemacs-initialize)
-  (add-hook 'python-mode-hook
-            (lambda () (add-to-list 'ac-sources 'ac-source-ropemacs)))
-  (if (eq major-mode 'python-mode)
-      (ropemacs-mode 1)))
+;;; elpy
+(elpy-enable)
+(when (equal 0 (shell-command "which ipython"))
+  (elpy-use-ipython))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Info
