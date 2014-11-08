@@ -20,7 +20,7 @@
 ;;; Resize Emacs frame on startup, and place at top-left of screen
 (if (display-graphic-p)
     (setq default-frame-alist
-          (append '((left . 60) (top . 0) (width . 89) (height . 30))
+          (append '((left . 60) (top . 0) (width . 90) (height . 30))
                   default-frame-alist)))
 
 ;;; Change binding for outline minor mode
