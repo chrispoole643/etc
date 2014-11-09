@@ -221,7 +221,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'auto-complete-config)
-(require 'ac-python)
 
 (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
       ac-fuzzy-enable t)
@@ -602,10 +601,6 @@
 ;;; Use python major mode if 'python' is in hashbang.
 (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 
-;;; Use python as the python interpreter (can be changed to "ipython" in time
-;;; when it works)
-(setq python-python-command "python")
-
 ;;; Check files for pep8 mistakes
 (autoload 'python-pep8 "python-pep8")
 (autoload 'pep8 "python-pep8")
@@ -617,6 +612,7 @@
 (elpy-enable)
 (when (equal 0 (shell-command "which ipython"))
   (elpy-use-ipython))
+(elpy-use-ipython)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Info
