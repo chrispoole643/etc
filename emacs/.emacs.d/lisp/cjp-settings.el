@@ -9,64 +9,89 @@
 ;;; Melpa
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar cjp-required-packages '(ac-slime
-                                ace-jump-mode
+(defvar cjp-required-packages '(;; Common Lisp
+                                ac-slime
+                                redshank
+                                slime
+
+                                ;; LaTeX
                                 auctex
-                                auto-complete
-                                bookmark+
+                                reftex
+
+                                ;; C/C++
                                 c-eldoc
-                                cl-lib
+
+                                ;; Clojure
                                 cider
                                 clojure-mode
+
+                                ;; Python
+                                ein
+                                elpy
+                                pydoc-info
+                                python-info
+
+                                ;; Elisp
+                                elisp-slime-nav
+                                litable
+                                paredit
+
+                                ;; Scheme
+                                geiser
+
+                                ;; JavaScript
+                                js2-mode
+
+                                ;; Markdown
+                                markdown-mode
+                                markdown-mode+
+
+                                ;; Color themes
                                 color-theme
+                                monokai-theme
+                                tangotango-theme
+
+                                ;; Org
+                                org
+                                ox-reveal
+
+                                ;; HTML
+                                zencoding-mode
+
+                                ;; Miscellaneous
+                                ace-jump-mode
+                                auto-complete
+                                bookmark+
+                                cl-lib
                                 dictionary
                                 diminish
                                 dired+
                                 dired-details+
                                 edit-server
-                                ein
-                                elisp-slime-nav
-                                elpy
                                 expand-region
                                 flymake-cursor
                                 framemove
-                                geiser
                                 highlight-symbol
                                 htmlize
                                 iedit
                                 irfc
-                                js2-mode
-                                litable
                                 magit
-                                markdown-mode
-                                markdown-mode+
-                                monokai-theme
                                 multiple-cursors
-                                org
                                 outline-magic
-                                ox-reveal
-                                paredit
                                 persp-mode
                                 popwin
                                 powerline
                                 pretty-lambdada
-                                pydoc-info
-                                python-info
-                                redshank
-                                reftex
                                 regex-tool
                                 scpaste
-                                slime
                                 smex
                                 smooth-scrolling
-                                tangotango-theme
                                 undo-tree
                                 visual-regexp
                                 w3m
                                 workgroups
                                 writeroom-mode
-                                yasnippet
-                                zencoding-mode)
+                                yasnippet)
   "Required packages to be pulled from melpa.")
 
 (require 'package)
