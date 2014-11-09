@@ -84,6 +84,10 @@
 (define-key iedit-mode-keymap (kbd "M-n") 'iedit-next-occurrence)
 (define-key iedit-mode-keymap (kbd "M-p") 'iedit-prev-occurrence)
 
+;;; Python
+(define-key python-mode-map (kbd "<s-tab>") 'elpy-company-backend)
+
+;;; Magit
 (global-set-key (kbd "C-M-g") 'magit-status)
 
 ;;; Swap these round from usual; I find it more logical
