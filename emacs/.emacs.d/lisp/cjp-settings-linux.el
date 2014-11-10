@@ -6,7 +6,7 @@
 
 ;;; Set font (Menlo default)
 (if (display-graphic-p)
-    (cjp-set-font-size "12" "Inconsolata" t))
+    (cjp-set-font-size "11" "Menlo" t))
 
 ;;; Move scrollbars to right side of frames
 (menu-bar-right-scroll-bar)
