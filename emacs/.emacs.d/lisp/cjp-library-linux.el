@@ -28,7 +28,15 @@ default Mac browser."
               (and buffer-file-name
                    (file-name-directory buffer-file-name))
               (error "No file associated with buffer"))))
-    (when (eq major-mode 'org-mode) (org-attach-reveal-in-emacs))
+    (when (eq major-mode 'org-mode)
+      (org-attach-reveal-in-emacs)
+      (let ((wait-count 0))
+        (while (or (< wait-count 3)
+                   (not (eq major-mode 'org-mode)))
+          (message "sleeping...")
+          (sleep-for 0.5)
+          (message "add one to wait count")
+          (setq wait-count (+ 1 wait-count)))))
     (start-process "growlnotify" nil "/usr/bin/xdg-open" item)))
 
 (defun cjp-linux-show-files (&optional directoryp)

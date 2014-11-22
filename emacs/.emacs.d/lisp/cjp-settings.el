@@ -70,7 +70,9 @@
                                 edit-server
                                 expand-region
                                 flymake-cursor
+                                flx-ido
                                 framemove
+                                helm
                                 highlight-symbol
                                 htmlize
                                 iedit
@@ -83,6 +85,7 @@
                                 powerline
                                 pretty-lambdada
                                 regex-tool
+                                restclient
                                 scpaste
                                 smex
                                 smooth-scrolling
@@ -126,6 +129,12 @@
 (require 'smallurl)
 (require 'multiple-cursors)
 (require 'iedit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Hl-line
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(global-hl-line-mode)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Writeroom
@@ -635,7 +644,7 @@
 
 ;;; elpy
 (elpy-enable)
-(when (equal 0 (shell-command "which ipython"))
+(when (executable-find "ipython")
   (elpy-use-ipython))
 (elpy-use-ipython)
 
@@ -882,16 +891,19 @@
 (setq-default TeX-master nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Ido
+;;; Ido & Flx
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'ido)
+(require 'flx-ido)
 (setq ido-save-directory-list-file (cjp-emacs-structure-dir ".ido.last"))
 (ido-mode t)
 (setq ido-everywhere t
       ido-enable-flex-matching t
       ;; If a buffer name that doesn't exist is chosen, just make a new one without prompting
-      ido-create-new-buffer 'always)
+      ido-create-new-buffer 'always
+      ;; Use flx faces
+      ido-use-faces nil)
 
 
 
