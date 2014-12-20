@@ -54,37 +54,42 @@ _zsh_highlight()
   # Do not highlight if there are pending inputs (copy/paste).
   [[ $PENDING -gt 0 ]] && return $ret
 
+  # Reset region highlight to build it from scratch
+  region_highlight=();
+
   {
-    local -a selected_highlighters
     local cache_place
+    local -a region_highlight_copy
 
     # Select which highlighters in ZSH_HIGHLIGHT_HIGHLIGHTERS need to be invoked.
     local highlighter; for highlighter in $ZSH_HIGHLIGHT_HIGHLIGHTERS; do
 
+      # eval cache place for current highlighter and prepare it
+      cache_place="_zsh_highlight_${highlighter}_highlighter_cache"
+      typeset -ga ${cache_place}
+
       # If highlighter needs to be invoked
       if "_zsh_highlight_${highlighter}_highlighter_predicate"; then
 
-        # Mark the highlighter as selected for update.
-        selected_highlighters+=($highlighter)
+        # save a copy, and cleanup region_highlight
+        region_highlight_copy=("${region_highlight[@]}")
+        region_highlight=()
 
-        # Remove what was stored in its cache from region_highlight.
-        cache_place="_zsh_highlight_${highlighter}_highlighter_cache"
-        typeset -ga ${cache_place}
-        [[ ${#${(P)cache_place}} -gt 0 ]] && [[ ! -z ${region_highlight-} ]] && region_highlight=(${region_highlight:#(${(P~j.|.)cache_place})})
+        # Execute highlighter and save result
+        {
+          "_zsh_highlight_${highlighter}_highlighter"
+        } always {
+          eval "${cache_place}=(\"\${region_highlight[@]}\")"
+        }
+
+        # Restore saved region_highlight
+        region_highlight=("${region_highlight_copy[@]}")
 
       fi
-    done
 
-    # Invoke each selected highlighter and store the result in its cache.
-    local -a region_highlight_copy
-    for highlighter in $selected_highlighters; do
-      cache_place="_zsh_highlight_${highlighter}_highlighter_cache"
-      region_highlight_copy=($region_highlight)
-      {
-        "_zsh_highlight_${highlighter}_highlighter"
-      } always  {
-        [[ ! -z ${region_highlight-} ]] && : ${(PA)cache_place::=${region_highlight:#(${(~j.|.)region_highlight_copy})}}
-      }
+      # Use value form cache if any cached
+      eval "region_highlight+=(\"\${${cache_place}[@]}\")"
+
     done
 
   } always {
@@ -107,7 +112,7 @@ typeset -gA ZSH_HIGHLIGHT_STYLES
 # Returns 0 if the buffer has changed since _zsh_highlight was last called.
 _zsh_highlight_buffer_modified()
 {
-  [[ ${_ZSH_HIGHLIGHT_PRIOR_BUFFER:-} != $BUFFER ]]
+  [[ "${_ZSH_HIGHLIGHT_PRIOR_BUFFER:-}" != "$BUFFER" ]]
 }
 
 # Whether the cursor has moved or not.
@@ -134,7 +139,7 @@ _zsh_highlight_bind_widgets()
 
   # Override ZLE widgets to make them invoke _zsh_highlight.
   local cur_widget
-  for cur_widget in ${${(f)"$(builtin zle -la)"}:#(.*|_*|orig-*|run-help|which-command|beep)}; do
+  for cur_widget in ${${(f)"$(builtin zle -la)"}:#(.*|_*|orig-*|run-help|which-command|beep|yank*)}; do
     case $widgets[$cur_widget] in
 
       # Already rebound event: do nothing.
@@ -142,16 +147,16 @@ _zsh_highlight_bind_widgets()
 
       # User defined widget: override and rebind old one with prefix "orig-".
       user:*) eval "zle -N orig-$cur_widget ${widgets[$cur_widget]#*:}; \
-                    _zsh_highlight_widget_$cur_widget() { builtin zle orig-$cur_widget \"\$@\" && _zsh_highlight }; \
+                    _zsh_highlight_widget_$cur_widget() { builtin zle orig-$cur_widget -- \"\$@\" && _zsh_highlight }; \
                     zle -N $cur_widget _zsh_highlight_widget_$cur_widget";;
 
       # Completion widget: override and rebind old one with prefix "orig-".
       completion:*) eval "zle -C orig-$cur_widget ${${widgets[$cur_widget]#*:}/:/ }; \
-                          _zsh_highlight_widget_$cur_widget() { builtin zle orig-$cur_widget \"\$@\" && _zsh_highlight }; \
+                          _zsh_highlight_widget_$cur_widget() { builtin zle orig-$cur_widget -- \"\$@\" && _zsh_highlight }; \
                           zle -N $cur_widget _zsh_highlight_widget_$cur_widget";;
 
       # Builtin widget: override and make it call the builtin ".widget".
-      builtin) eval "_zsh_highlight_widget_$cur_widget() { builtin zle .$cur_widget \"\$@\" && _zsh_highlight }; \
+      builtin) eval "_zsh_highlight_widget_$cur_widget() { builtin zle .$cur_widget -- \"\$@\" && _zsh_highlight }; \
                      zle -N $cur_widget _zsh_highlight_widget_$cur_widget";;
 
       # Default: unhandled case.
@@ -198,10 +203,21 @@ _zsh_highlight_bind_widgets || {
 }
 
 # Resolve highlighters directory location.
-_zsh_highlight_load_highlighters "${ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR:-${0:h}/highlighters}" || {
+_zsh_highlight_load_highlighters "${ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR:-${${0:A}:h}/highlighters}" || {
   echo 'zsh-syntax-highlighting: failed loading highlighters, exiting.' >&2
   return 1
 }
+
+# Reset scratch variables when commandline is done.
+_zsh_highlight_preexec_hook()
+{
+  _ZSH_HIGHLIGHT_PRIOR_BUFFER=
+  _ZSH_HIGHLIGHT_PRIOR_CURSOR=
+}
+autoload -U add-zsh-hook
+add-zsh-hook preexec _zsh_highlight_preexec_hook 2>/dev/null || {
+    echo 'zsh-syntax-highlighting: failed loading add-zsh-hook.' >&2
+  }
 
 # Initialize the array of active highlighters if needed.
 [[ $#ZSH_HIGHLIGHT_HIGHLIGHTERS -eq 0 ]] && ZSH_HIGHLIGHT_HIGHLIGHTERS=(main) || true
