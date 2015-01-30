@@ -20,24 +20,18 @@ default Mac browser."
 (defun cjp-linux-show-directory (&optional directoryp)
   "Open current buffer's directory in file system application."
   (interactive "P")
-  (let* ((item
-          (or (and (eq major-mode 'dired-mode)
-                   (cjp-tilde-to-longform default-directory))
-              (and (eq major-mode 'eshell-mode)
-                   default-directory)
-              (and buffer-file-name
-                   (file-name-directory buffer-file-name))
-              (error "No file associated with buffer"))))
+  (save-window-excursion
     (when (eq major-mode 'org-mode)
-      (org-attach-reveal-in-emacs)
-      (let ((wait-count 0))
-        (while (or (< wait-count 3)
-                   (not (eq major-mode 'org-mode)))
-          (message "sleeping...")
-          (sleep-for 0.5)
-          (message "add one to wait count")
-          (setq wait-count (+ 1 wait-count)))))
-    (start-process "growlnotify" nil "/usr/bin/xdg-open" item)))
+      (org-attach-reveal-in-emacs))
+    (let* ((item
+            (or (and (eq major-mode 'dired-mode)
+                     (cjp-tilde-to-longform default-directory))
+                (and (eq major-mode 'eshell-mode)
+                     default-directory)
+                (and buffer-file-name
+                     (file-name-directory buffer-file-name))
+                (error "No file associated with buffer"))))
+      (start-process "growlnotify" nil "/usr/bin/xdg-open" item))))
 
 (defun cjp-linux-show-files (&optional directoryp)
   "If in dired buffer, show file at point in file system application.
