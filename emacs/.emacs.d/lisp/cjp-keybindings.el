@@ -36,6 +36,7 @@
 ;;; Capture stuff
 (global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
 (global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
+(global-set-key (kbd "C-s-s") (lambda () (interactive) (org-capture nil "s")))
 (global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
 (global-set-key (kbd "C-s-h") (lambda () (interactive) (org-capture nil "h")))
 (global-set-key (kbd "C-s-b") (lambda () (interactive) (org-capture nil "b")))

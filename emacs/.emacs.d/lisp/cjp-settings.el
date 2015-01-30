@@ -30,6 +30,7 @@
                                 elpy
                                 pydoc-info
                                 python-info
+                                pyvenv
 
                                 ;; Elisp
                                 elisp-slime-nav
