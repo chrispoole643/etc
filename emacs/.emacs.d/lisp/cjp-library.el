@@ -197,7 +197,7 @@ manuals."
 If DIR is not passed, assume root of emacs directory. DIR should
 not end with a directory separator."
   (interactive)
-  (concat user-emacs-directory (if dir (concat dir "/")) item))
+  (concat (expand-file-name user-emacs-directory) (if dir (concat dir "/")) item))
 
 (defun cjp-emacs-structure-dir-map (items &optional dir)
   "Return list of directory paths of ITEMS under DIR in emacs structure.
