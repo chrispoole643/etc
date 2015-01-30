@@ -92,7 +92,7 @@
                                 undo-tree
                                 visual-regexp
                                 w3m
-                                workgroups
+                                workgroups2
                                 writeroom-mode
                                 yasnippet)
   "Required packages to be pulled from melpa.")
@@ -207,7 +207,7 @@
 ;;; Workgroups
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(require 'workgroups)
+(require 'workgroups2)
 ;;; Use my custom binding prefix
 (setq wg-prefix-key (kbd "C-c c w"))
 (workgroups-mode 1)
@@ -1223,7 +1223,7 @@
 
 ;;; When double-clicking a file to open in Emacs, make sure it opens in a new
 ;;; window in the current frame; the default (nil) causes Emacs to create a new
-;;; frame.
+;;; frame
 (setq display-buffer-reuse-frames t)
 
 ;;; When lines wrap, `next-line' drops to the next real line, not the next
@@ -1233,6 +1233,10 @@
 ;;; From
 ;;; masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine
 (setq redisplay-dont-pause t)
+
+;;; If I open a symlink file that is backed by a VC'd regular file, don't ask me if I
+;;; want to follow the link, just do it
+(setq vc-follow-symlinks t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Themes
