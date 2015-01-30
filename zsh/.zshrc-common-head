@@ -184,18 +184,6 @@ zstyle ':completion:*' auto-description 'specify: %d'
 # # pip zsh completion end
 
 
-# Add-ons
-# -------
-
-ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.zsh-highlighters"
-
-source "$HOME/.zsh-syntax-highlighting.zsh"
-source "$HOME/.zsh-history-substring-search.zsh"
-
-ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
-ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
-
-
 ################################################################################
 ## Loading
 ################################################################################

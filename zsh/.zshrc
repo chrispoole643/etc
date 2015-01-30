@@ -6,6 +6,8 @@
 ################################################################################
 
 
+source "$HOME/.zshrc-common-head"
+
 if [[ ${OSTYPE%%.*} == "darwin13" ]] || [[ ${OSTYPE%%.*} == "darwin14" ]]; then
     platform="mac"
     source "$HOME/.zshrc-mac"
@@ -13,6 +15,8 @@ elif [[ "$OSTYPE" == *linux* ]]; then
     platform="linux"
     source "$HOME/.zshrc-linux"
 fi
+
+source "$HOME/.zshrc-common-tail"
 
 # Start tmux
 st

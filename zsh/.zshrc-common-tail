@@ -1,0 +1,25 @@
+# -*- mode: shell-script -*-
+################################################################################
+### Common functions and aliases
+### ============================
+###
+### Functions and aliases that work on mac and linux machines
+################################################################################
+
+
+ZSH_HIGHLIGHT_HIGHLIGHTERS_DIR="$HOME/.zsh-highlighters"
+
+source "$HOME/.zsh-syntax-highlighting.zsh"
+source "$HOME/.zsh-history-substring-search.zsh"
+
+ZSH_HIGHLIGHT_STYLES[history-expansion]='fg=yellow'
+ZSH_HIGHLIGHT_STYLES[globbing]='fg=yellow'
+
+# bind UP and DOWN arrow keys
+zmodload zsh/terminfo
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+bindkey -M emacs '^P' history-substring-search-up
+bindkey -M emacs '^N' history-substring-search-down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
