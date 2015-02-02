@@ -551,6 +551,9 @@
                              yas/completing-prompt
                              yas/no-prompt))
 
+;;; Yasnippet doesn't play well with ansi-term
+(add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ElDoc
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
