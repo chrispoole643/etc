@@ -13,7 +13,7 @@
 
 fpath=(/home/chrispoole/.zsh-prompts /usr/share/zsh-completions $fpath)
 
-export PATH="/home/chrispoole/bin/CICS_Explorer/:/home/chrispoole/bin:/usr/local/lib/python2.7:/home/chrispoole/.cabal/bin:/usr/local/texlive/2012/bin/x86_64-linux:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"
+export PATH="/home/chrispoole/bin:/usr/lib/jvm/java-1.7.0-ibm-1.7.0.8.0.x86_64/jre/bin:/usr/local/lib/python2.7:/home/chrispoole/.cabal/bin:/usr/local/texlive/2012/bin/x86_64-linux:/usr/local/bin:/usr/local/sbin:/usr/sbin:/usr/bin:/sbin:/bin"
 export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
 
 
