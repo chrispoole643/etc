@@ -114,5 +114,9 @@ x3270.menuBar: false
 ! Reconnect automatically
 x3270.reconnect: true
 
+! When pasting text, treat columns to the left of the cursor as a martin to 
+! avoid printing into
+x3270.marginedPaste: true
+
 ! Complete list of defaults can be found at:
 ! http://stuff.mit.edu/afs/athena/astaff/source/src-8.4/third/x3270/X3270.xad
