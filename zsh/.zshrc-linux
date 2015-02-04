@@ -29,6 +29,9 @@ alias o='fasd -fe gnome-open'
 alias od='fasd -ide gnome-open'
 alias oi='fasd -iae gnome-open'
 
+alias pbcopy='xclip -i -selection clipboard'
+alias pbpaste='xclip -o -selection clipboard'
+
 
 ################################################################################
 ## Variables
