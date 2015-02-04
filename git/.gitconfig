@@ -1,0 +1,12 @@
+# -*- conf -*-
+
+[user]
+    name = Chris Poole
+    email = chris@chrispoole.com
+
+[alias]
+    st = status
+    ca = commit -a
+
+[status]
+    showUntrackedFiles = no
