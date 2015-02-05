@@ -7,6 +7,18 @@
 [alias]
     st = status
     ca = commit -a
+    co = checkout
+    wc = whatchanged
 
 [status]
     showUntrackedFiles = no
+
+[core]
+    editor = e
+    quotepath = false
+
+[color]
+    ui = true
+
+[push]
+    default = simple
