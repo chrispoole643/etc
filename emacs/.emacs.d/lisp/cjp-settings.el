@@ -59,6 +59,12 @@
                                 ;; HTML
                                 zencoding-mode
 
+                                ;; Helm
+                                helm
+                                ac-helm
+                                helm-dictionary
+                                helm-google
+
                                 ;; Miscellaneous
                                 ace-jump-mode
                                 auto-complete
@@ -73,7 +79,6 @@
                                 flymake-cursor
                                 flx-ido
                                 framemove
-                                helm
                                 highlight-symbol
                                 htmlize
                                 iedit
@@ -130,6 +135,27 @@
 (require 'smallurl)
 (require 'multiple-cursors)
 (require 'iedit)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Helm
+;;; ----
+;;;
+;;; 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'helm-config)
+
+
+(when (executable-find "curl")
+  (setq helm-google-suggest-use-curl-p t))
+
+(setq helm-split-window-in-side-p           t ; Open helm buffer inside current window
+      helm-move-to-line-cycle-in-source     t
+      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t)
+
+(helm-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Hl-line
