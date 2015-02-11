@@ -359,12 +359,14 @@ word is always capitalized."
       (setq title-split (cdr title-split)))
     new-title))
 
-(defun cjp-set-font-size (size &optional font allframes)
-  "Set frame font (either FONT or by default `Menlo') to SIZE."
-  (interactive "sFont size: ")
+(defun cjp-set-font-size (&optional size font allframes)
+  "Set frame font (either FONT or by default `Menlo') to SIZE. If
+SIZE isn't specified, prompt for input (defaulting to `10')."
+  (interactive)
   (if (>= emacs-major-version 23)
-      (set-frame-font (concat (or font (if macosxp "Menlo" "Monospace"))
-                              "-" size) t allframes)))
+      (set-frame-font (concat (or font (if macosxp "Menlo" "Inconsolata"))
+                              "-" (or size (read-string "Font size: " nil nil "10")))
+                      t allframes)))
 
 (defun cjp-recompile-emacs-setup ()
   "Force recompile the Emacs setup directory."
