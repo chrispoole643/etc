@@ -58,7 +58,7 @@
                                                     (org-attach-sync))))
 
 ;;; Ace jump mode
-(global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
+;;(global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
 
 ;;; Visual regexp
 (global-set-key (kbd "C-c r") 'vr/replace)
@@ -102,19 +102,6 @@
 (global-set-key (kbd "C-c S") 'dictionary-search)
 (global-set-key (kbd "C-c m") 'dictionary-match-words)
 
-;;; Rebind keys, including backups to old command. M-x doesn't work with same
-;;; keys on all systems, so bind to C-x X-m too (And C-c for good measure, in
-;;; case your finger slips)
-(global-set-key (kbd "M-x") 'smex)
-(global-set-key (kbd "C-x m") 'smex)
-(global-set-key (kbd "C-x C-m") 'smex)
-(global-set-key (kbd "C-c C-m") 'smex)
-
-(global-set-key (kbd "M-X") 'smex-major-mode-commands)
-(global-set-key (kbd "C-x M") 'smex)
-(global-set-key (kbd "C-x C-M") 'smex)
-(global-set-key (kbd "C-c C-M") 'smex)
-
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 (global-set-key (kbd "C-c C-c C-x C-m") 'execute-extended-command)
 
@@ -133,9 +120,6 @@
 ;;; to be undefined before it could be made to run windmove-left.
 (define-key undo-tree-map (kbd "C-x u") nil)
 (global-set-key (kbd "C-x o") 'other-window)
-
-;;; Get rid of `find-file-read-only' and replace it with something more useful.
-(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
 
 ;;; I like M-g for goto-line
 (global-set-key (kbd "M-g") 'goto-line)
@@ -157,7 +141,6 @@
 (global-set-key (kbd "C-w") 'backward-kill-word)
 (global-set-key (kbd "C-x C-k") 'kill-region)
 (global-set-key (kbd "C-c C-k") 'kill-region)
-;;; (global-set-key (kbd "C-#") 'kill-region)
 
 ;;; Since re-mapped C-w to backward-kill-word, and moved cut option to C-\,
 ;;; should move copy command too (M-w -> M-\). Re-map old M-\ -> M-w
@@ -183,15 +166,6 @@
 
 ;;; Open the current buffer with privileges given by `sudo'
 (global-set-key (kbd "C-x C-V") 'find-alternative-file-with-sudo)
-
-;;; Type ( and have Emacs add the ) and put point in middle
-;;; (setq skeleton-pair t)
-;; (global-set-key (kbd "(") 'skeleton-pair-insert-maybe)
-;; (global-set-key (kbd "[") 'skeleton-pair-insert-maybe)
-;; (global-set-key (kbd "{") 'skeleton-pair-insert-maybe)
-
-;;; Unbind keys
-(global-unset-key (kbd "C-z"))          ; Usually suspend-frame. Annoying.
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Mac

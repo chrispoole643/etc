@@ -63,7 +63,6 @@
                                 helm
                                 ac-helm
                                 helm-dictionary
-                                helm-google
 
                                 ;; Miscellaneous
                                 ace-jump-mode
@@ -140,22 +139,61 @@
 ;;; Helm
 ;;; ----
 ;;;
-;;; 
+;;; Good setup advice from https://tuhdo.github.io/helm-intro.html
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'helm-config)
-
+(helm-mode 1)
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
 
-(setq helm-split-window-in-side-p           t ; Open helm buffer inside current window
-      helm-move-to-line-cycle-in-source     t
-      helm-ff-search-library-in-sexp        t ; search for library in `require' and `declare-function' sexp.
-      helm-scroll-amount                    8 ; scroll 8 lines other window using M-<next>/M-<prior>
-      helm-ff-file-name-history-use-recentf t)
+(setq helm-split-window-in-side-p t    ; Open helm buffer inside current window
+      helm-move-to-line-cycle-in-source t
+      helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+      helm-scroll-amount 8             ; scroll 8 lines other window using M-<next>/M-<prior>
+      helm-ff-file-name-history-use-recentf t
+      helm-autoresize-mode t)
 
-(helm-mode 1)
+;;; Fuzzy match where possible
+(setq helm-M-x-fuzzy-match t
+      helm-buffers-fuzzy-matching t
+      helm-recentf-fuzzy-match t
+      helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match t
+      helm-locate-fuzzy-match t
+      helm-apropos-fuzzy-match t
+      helm-lisp-fuzzy-completion t)
+
+;;; M-x doesn't work with same keys on all systems, so bind to C-x X-m too (And C-c for
+;;; good measure, in case your finger slips)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x m") 'helm-M-x)
+(global-set-key (kbd "C-x C-m") 'helm-M-x)
+(global-set-key (kbd "C-c C-m") 'helm-M-x)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-x C-r") 'helm-recentf)
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-c C-f") 'helm-semantic-or-imenu)
+(global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+
+(define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+(define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+(global-unset-key (kbd "C-z")) ; Usually suspend-frame. Annoying.
+(define-key helm-map (kbd "C-z")  'helm-select-action)
+(define-key helm-map (kbd "C-w") 'backward-kill-word)
+(define-key helm-find-files-map (kbd "C-w") 'helm-find-files-up-one-level)
+(define-key helm-find-files-map (kbd "<backspace>") 'helm-find-files-up-one-level)
+
+;;; Use thing at point when invoking helm-man-woman
+(add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Semantic mode
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(semantic-mode 1)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Hl-line
