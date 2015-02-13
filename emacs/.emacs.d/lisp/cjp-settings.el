@@ -174,6 +174,7 @@
 (global-set-key (kbd "C-x b") 'helm-mini)
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x C-d") 'helm-find-files) ; Replace ido-dired, too
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-c C-f") 'helm-semantic-or-imenu)
 (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)

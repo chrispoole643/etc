@@ -128,10 +128,6 @@
 (global-set-key (kbd "M-s") 'ispell-word)
 (global-set-key (kbd "M-S") 'dictionary-lookup-definition)
 
-;;; I often use dired mode; this prevents mistakes if quickly typing usual
-;;; shortcut of C-x d
-(global-set-key (kbd "C-x C-d") 'ido-dired)
-
 ;;; I often hit C-x s by mistaken when I want C-x C-s, so bind it to the same
 ;;; command
 (global-set-key (kbd "C-x s") 'save-buffer)
