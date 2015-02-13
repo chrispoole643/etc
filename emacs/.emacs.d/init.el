@@ -45,16 +45,3 @@
   (load-library "cjp-settings-mac"))
 
 (load-library "cjp-keybindings")
-
-;;; Always start a python process, for quick maths, and shell
-;; (when (display-graphic-p)
-;;   (with-temp-buffer
-;;     (python-mode)
-;;     (insert "import os, math, time"))
-;;   (run-python nil t)
-;;   (save-window-excursion (eshell)))
-
-;;; GTD: show the @laptop action list (and give it its own frame)
-(make-frame)
-(org-agenda nil "l")
-(delete-other-windows)
