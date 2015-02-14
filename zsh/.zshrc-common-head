@@ -434,4 +434,5 @@ bz22xz () {
 
 
 # Prompt
+PURE_GIT_UNTRACKED_DIRTY=0
 source "$HOME/.zsh-prompts/prompt_pure_setup"
