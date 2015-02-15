@@ -97,7 +97,6 @@
                                 undo-tree
                                 visual-regexp
                                 w3m
-                                workgroups2
                                 writeroom-mode
                                 yasnippet)
   "Required packages to be pulled from melpa.")
@@ -279,16 +278,6 @@
 (eval-after-load "redshank-loader"
   `(redshank-setup '(lisp-mode-hook
                      slime-repl-mode-hook) t))
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Workgroups
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(require 'workgroups2)
-;;; Use my custom binding prefix
-(setq wg-prefix-key (kbd "C-c c w"))
-(workgroups-mode 1)
-(setq wg-morph-on nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Powerline
