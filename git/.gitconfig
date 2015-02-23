@@ -22,3 +22,5 @@
 
 [push]
     default = simple
+[credential]
+    helper = cache
