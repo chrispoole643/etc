@@ -4,6 +4,10 @@
 (setq mc/cmds-to-run-for-all
       '(
         cua-copy-region
+        isearch-abort
+        isearch-exit
+        isearch-forward-regexp
+        isearch-printing-char
         org-beginning-of-line
         org-self-insert-command
         org-yank
