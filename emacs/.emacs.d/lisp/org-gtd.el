@@ -57,8 +57,8 @@
       org-startup-indented t
       ;; Show inline images
       org-startup-with-inline-images t
-      ;; Use ido (flex) completion; disable completing in steps for performance
-      org-completion-use-ido t
+      ;; Disable ido and completing in steps for performance and Helm use
+      org-completion-use-ido nil
       org-outline-path-complete-in-steps nil
       ;; Split line in the middle with M-RET
       org-M-RET-may-split-line t
@@ -98,11 +98,13 @@
 ;;; Functions
 
 (defun gtd-open-file ()
-  "Open a GTD org-mode file (using the Ido system)."
+  "Open a GTD org-mode file (using Helm system)."
   (interactive)
   (find-file (concat org-directory
-                     (ido-completing-read "GTD file: " (directory-files org-directory
-                                                                        nil "\.org$")))))
+                     (funcall (if (fboundp 'helm-comp-read)
+                                  'completing-read 'helm-comp-read)
+                              "GTD file: " (directory-files org-directory
+                                                            nil "\.org$")))))
 
 (defun gtd-construct-todo-regex ()
   "Construct a regular expression matching any of the todo states
