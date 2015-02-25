@@ -18,5 +18,8 @@ fi
 
 source "$HOME/.zshrc-common-tail"
 
-# Start tmux
-st
+# Start tmux (with my configuration) if it isn't already running
+tmux list-sessions 2>&1 > /dev/null
+if [[ $? -eq 1 ]]; then
+    st
+fi
