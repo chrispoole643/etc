@@ -143,7 +143,6 @@
 
 (require 'helm-config)
 (helm-mode 1)
-(helm-autoresize-mode t)
 
 (when (executable-find "curl")
   (setq helm-google-suggest-use-curl-p t))
