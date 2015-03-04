@@ -8,10 +8,6 @@
 (if (display-graphic-p)
     (cjp-set-font-size "10" "Inconsolata" t))
 
-;;; Move scrollbars to right side of frames
-;(menu-bar-right-scroll-bar)
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
-
 ;;; Make Super another Meta key (useful for Mac keyboard)
 (setq x-super-keysym 'super)
 
