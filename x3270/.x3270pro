@@ -111,8 +111,8 @@ x3270.crosshair: true
 ! Pull-down menus: Ctrl and each of the mouse buttons
 x3270.menuBar: false
 
-! Reconnect automatically
-x3270.reconnect: true
+! Don't reconnect automatically
+x3270.reconnect: false
 
 ! When pasting text, treat columns to the left of the cursor as a martin to 
 ! avoid printing into
