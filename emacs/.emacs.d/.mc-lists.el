@@ -9,6 +9,7 @@
         isearch-forward-regexp
         isearch-printing-char
         org-beginning-of-line
+        org-delete-char
         org-self-insert-command
         org-yank
         paredit-forward-delete
