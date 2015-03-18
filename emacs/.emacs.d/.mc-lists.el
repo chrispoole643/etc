@@ -3,6 +3,7 @@
 
 (setq mc/cmds-to-run-for-all
       '(
+        c-electric-delete-forward
         cua-copy-region
         helm-mini
         isearch-abort
