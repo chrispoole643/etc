@@ -84,6 +84,8 @@ x3270.colorScheme: default
 ! Use block cursor
 x3270.altCursor: false
 
+x3270.scrollBar: false
+
 ! Colors of menus
 x3270.background: black
 x3270.foreground: red
