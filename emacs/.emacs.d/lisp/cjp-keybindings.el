@@ -116,8 +116,8 @@
 (global-set-key (kbd "s-<up>")    'windmove-up)
 (global-set-key (kbd "s-<down>")  'windmove-down)
 
-(global-set-key (kbd "C-<up>") '(lambda () (interactive) (scroll-up 1)))
-(global-set-key (kbd "C-<down>") '(lambda () (interactive) (scroll-down 1)))
+(global-set-key (kbd "C-<up>") '(lambda () (interactive) (scroll-down 1)))
+(global-set-key (kbd "C-<down>") '(lambda () (interactive) (scroll-up 1)))
 
 ;;; Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had
 ;;; to be undefined before it could be made to run windmove-left.
