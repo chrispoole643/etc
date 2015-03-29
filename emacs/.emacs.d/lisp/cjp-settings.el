@@ -1309,6 +1309,11 @@
 ;;; Use hl-line mode everywhere
 (global-hl-line-mode)
 
+;;; Fix scrolling when using the mouse wheel or trackpad
+(setq mouse-wheel-progressive-speed nil
+      mouse-wheel-scroll-amount '(2 ((shift) . 5))
+      scroll-conservatively 101)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Themes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
