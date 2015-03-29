@@ -111,10 +111,13 @@
 (global-set-key (kbd "C-s-<left>") 'winner-undo)
 (global-set-key (kbd "C-s-<right>") 'winner-redo)
 
-(global-set-key (kbd "C-<left>")  'windmove-left)
-(global-set-key (kbd "C-<right>") 'windmove-right)
-(global-set-key (kbd "C-<up>")    'windmove-up)
-(global-set-key (kbd "C-<down>")  'windmove-down)
+(global-set-key (kbd "s-<left>")  'windmove-left)
+(global-set-key (kbd "s-<right>") 'windmove-right)
+(global-set-key (kbd "s-<up>")    'windmove-up)
+(global-set-key (kbd "s-<down>")  'windmove-down)
+
+(global-set-key (kbd "C-<up>") '(lambda () (interactive) (scroll-up 1)))
+(global-set-key (kbd "C-<down>") '(lambda () (interactive) (scroll-down 1)))
 
 ;;; Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had
 ;;; to be undefined before it could be made to run windmove-left.
