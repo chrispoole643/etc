@@ -6,7 +6,7 @@
 
 ;;; Set font (Menlo default)
 (if (display-graphic-p)
-    (cjp-set-font-size "10" "Inconsolata" t))
+    (cjp-set-font-size "12" "Inconsolata" t))
 
 ;;; Make Super another Meta key (useful for Mac keyboard)
 (setq x-super-keysym 'super)
