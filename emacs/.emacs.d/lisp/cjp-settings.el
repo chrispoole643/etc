@@ -226,7 +226,9 @@
 ;;; Writeroom
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(setq writeroom-width 90)
+;; Defaults to 80. Allow a bit more if using in conjunction with org mode, where
+;; the document might have indented lines
+(setq writeroom-width 100)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Popwin
