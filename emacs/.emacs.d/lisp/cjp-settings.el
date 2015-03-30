@@ -135,6 +135,17 @@
 (require 'iedit)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Themes
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq custom-safe-themes t)
+
+(if (display-graphic-p)
+    (load-theme 'monokai t)
+  (color-theme-initialize)
+  (color-theme-hober))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Helm
 ;;; ----
 ;;;
@@ -1314,14 +1325,3 @@
 (setq mouse-wheel-progressive-speed nil
       mouse-wheel-scroll-amount '(2 ((shift) . 5))
       scroll-conservatively 101)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Themes
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(setq custom-safe-themes t)
-
-(if (display-graphic-p)
-    (load-theme 'monokai t)
-  (color-theme-initialize)
-  (color-theme-hober))
