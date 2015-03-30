@@ -284,6 +284,7 @@
 
 (require 'powerline)
 (powerline-default-theme)
+(setq powerline-default-separator 'wave)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CPerl mode
