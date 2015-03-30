@@ -5,6 +5,7 @@
       '(
         c-electric-delete-forward
         cua-copy-region
+        cua-paste
         helm-mini
         isearch-abort
         isearch-exit
@@ -18,6 +19,8 @@
         org-self-insert-command
         org-yank
         paredit-forward-delete
+        paredit-kill
+        paredit-open-round
         ))
 
 (setq mc/cmds-to-run-once
