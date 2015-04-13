@@ -138,6 +138,7 @@
 ;;; Themes
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Treat all themes as safe
 (setq custom-safe-themes t)
 
 (if (display-graphic-p)

@@ -61,7 +61,7 @@
 (if (display-graphic-p)
     (cjp-set-font-size "11" nil t))
 
-;;; Eenable sRGB
+;;; Enable sRGB --- when true, powerline colors don't match
 (setq ns-use-srgb-colorspace t)
 
 ;;; Use default Mac OS X browser, and move to trash when deleting stuff
