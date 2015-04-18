@@ -175,6 +175,8 @@
       helm-apropos-fuzzy-match t
       helm-lisp-fuzzy-completion t)
 
+;(setq helm-boring-file-regexp-list (append '("\\.$" "\\.\\.$") helm-boring-file-regexp-list))
+
 ;;; M-x doesn't work with same keys on all systems, so bind to C-x X-m too (And C-c for
 ;;; good measure, in case your finger slips)
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -191,11 +193,17 @@
 
 (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
 (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
-(global-unset-key (kbd "C-z")) ; Usually suspend-frame. Annoying.
 (define-key helm-map (kbd "C-z")  'helm-select-action)
 (define-key helm-map (kbd "C-w") 'backward-kill-word)
-(define-key helm-find-files-map (kbd "C-w") 'helm-find-files-up-one-level)
-(define-key helm-find-files-map (kbd "<backspace>") 'helm-find-files-up-one-level)
+
+;;; If the thing at point is a directory, go into the directory (as though hitting
+;;; <tab>). Else, open it. If the directory is `.' or `..', open in dired as usual.
+(define-key helm-find-files-map (kbd "<return>")
+  '(lambda () (interactive) (let ((sel (helm-get-selection)))
+                         (if (and (file-directory-p sel)
+                                  (not (helm-ff-dot-file-p sel)))
+                             (helm-execute-persistent-action)
+                           (helm-maybe-exit-minibuffer)))))
 
 ;;; Use thing at point when invoking helm-man-woman
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
@@ -1328,3 +1336,6 @@
 (setq mouse-wheel-progressive-speed nil
       mouse-wheel-scroll-amount '(2 ((shift) . 5))
       scroll-conservatively 101)
+
+;;; Usually suspend-frame. Annoying
+(global-unset-key (kbd "C-z"))
