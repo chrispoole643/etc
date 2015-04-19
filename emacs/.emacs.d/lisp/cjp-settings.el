@@ -63,8 +63,10 @@
                                 helm
                                 ac-helm
                                 helm-dictionary
+                                helm-swoop
 
                                 ;; Miscellaneous
+                                ace-isearch
                                 ace-jump-mode
                                 auto-complete
                                 bookmark+
@@ -145,6 +147,19 @@
     (load-theme 'monokai t)
   (color-theme-initialize)
   (color-theme-hober))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Helm
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(require 'ace-isearch)
+(global-ace-isearch-mode t)
+
+(setq ace-isearch-input-idle-delay 0.3
+      ace-isearch-input-length 6
+      ace-isearch-function-from-isearch 'helm-swoop-from-isearch
+      ace-isearch-submode 'ace-jump-char-mode
+      ace-isearch-use-ace-jump 'printing-char)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Helm
