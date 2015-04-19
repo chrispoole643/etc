@@ -59,7 +59,7 @@
 
 ;;; Set font (Menlo default)
 (if (display-graphic-p)
-    (cjp-set-font-size "11" nil t))
+    (cjp-set-font-size "12" nil t))
 
 ;;; Enable sRGB --- when true, powerline colors don't match
 (setq ns-use-srgb-colorspace t)
