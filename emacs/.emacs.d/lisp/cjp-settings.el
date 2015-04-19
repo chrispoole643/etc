@@ -50,6 +50,7 @@
                                 ;; Color themes
                                 color-theme
                                 monokai-theme
+                                solarized-theme
                                 tangotango-theme
 
                                 ;; Org
@@ -144,19 +145,20 @@
 (setq custom-safe-themes t)
 
 (if (display-graphic-p)
-    (load-theme 'monokai t)
+    (load-theme 'solarized-light t)
+    ;; (load-theme 'monokai t)
   (color-theme-initialize)
   (color-theme-hober))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Helm
+;;; ace-isearch
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'ace-isearch)
 (global-ace-isearch-mode t)
 
-(setq ace-isearch-input-idle-delay 0.3
-      ace-isearch-input-length 6
+(setq ace-isearch-input-idle-delay 0.4
+      ace-isearch-input-length 10
       ace-isearch-function-from-isearch 'helm-swoop-from-isearch
       ace-isearch-submode 'ace-jump-char-mode
       ace-isearch-use-ace-jump 'printing-char)
@@ -223,6 +225,25 @@
 ;;; Use thing at point when invoking helm-man-woman
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 
+
+
+
+;;; helm-swoop
+
+(require 'helm-swoop)
+
+(define-key isearch-mode-map (kbd "M-s") 'helm-swoop-from-isearch)
+(define-key helm-swoop-map (kbd "M-s") 'helm-multi-swoop-all-from-helm-swoop)
+(define-key helm-multi-swoop-map (kbd "M-s") 'helm-mult)
+
+;;; Move up and down like isearch
+(define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
+(define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
+(define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
+
+(setq helm-swoop-use-line-number-face t)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Semantic mode
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -280,12 +301,16 @@
 ;;; https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 ;;; Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩ
 
-(diminish 'paredit-mode " Ⓟ")
-(diminish 'undo-tree-mode " Ⓤ")
-(diminish 'auto-complete-mode " Ⓒ")
-(diminish 'helm-mode " Ⓗ")
-(diminish 'abbrev-mode " Ⓐ")
-(diminish 'magit-auto-revert-mode " Ⓜ")
+(eval-after-load "auto-complete" '(diminish 'auto-complete-mode " Ⓐ"))
+(eval-after-load "abbrev" '(diminish 'abbrev-mode " Ⓐ"))
+(eval-after-load "anzu" '(diminish 'anzu-mode " Ⓐ"))
+(eval-after-load "elpy" '(diminish 'elpy-mode " Ⓔ"))
+(eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
+(eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
+(eval-after-load "magit" '(diminish 'magit-auto-revert-mode " Ⓜ"))
+(eval-after-load "org-indent" '(diminish 'org-indent-mode " Ⓞ"))
+(eval-after-load "paredit" '(diminish 'paredit-mode " Ⓟ"))
+(eval-after-load "undo-tree" '(diminish 'undo-tree-mode " Ⓤ"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ein
@@ -325,7 +350,104 @@
 
 (require 'powerline)
 (powerline-default-theme)
+
+
+
+
+;; A string is printed verbatim in the mode line except for %-constructs:
+;;   %b -- print buffer name.      %f -- print visited file name.
+;;   %F -- print frame name.
+;;   %* -- print %, * or hyphen.   %+ -- print *, % or hyphen.
+;; 	%& is like %*, but ignore read-only-ness.
+;; 	% means buffer is read-only and * means it is modified.
+;; 	For a modified read-only buffer, %* gives % and %+ gives *.
+;;   %s -- print process status.   %l -- print the current line number.
+;;   %c -- print the current column number (this makes editing slower).
+;;         To make the column number update correctly in all cases,
+;; 	`column-number-mode' must be non-nil.
+;;   %i -- print the size of the buffer.
+;;   %I -- like %i, but use k, M, G, etc., to abbreviate.
+;;   %p -- print percent of buffer above top of window, or Top, Bot or All.
+;;   %P -- print percent of buffer above bottom of window, perhaps plus Top,
+;;         or print Bottom or All.
+;;   %n -- print Narrow if appropriate.
+;;   %t -- visited file is text or binary (if OS supports this distinction).
+;;   %z -- print mnemonics of keyboard, terminal, and buffer coding systems.
+;;   %Z -- like %z, but including the end-of-line format.
+;;   %e -- print error message about full memory.
+;;   %@ -- print @ or hyphen.  @ means that default-directory is on a
+;;         remote machine.
+;;   %[ -- print one [ for each recursive editing level.  %] similar.
+;;   %% -- print %.   %- -- print infinitely many dashes.
+;; Decimal digits after the % specify field width to which to pad.
+
+
+
+
+(setq-default mode-line-format
+              '("%e"
+                (:eval
+                 (let* ((active (powerline-selected-window-active))
+                        (mode-line (if active 'mode-line 'mode-line-inactive))
+                        (face1 (if active 'powerline-active1 'powerline-inactive1))
+                        (face2 (if active 'powerline-active2 'powerline-inactive2))
+                        (separator-left (intern (format "powerline-%s-%s"
+                                                        (powerline-current-separator)
+                                                        (car powerline-default-separator-dir))))
+                        (separator-right (intern (format "powerline-%s-%s"
+                                                         (powerline-current-separator)
+                                                         (cdr powerline-default-separator-dir))))
+                        (lhs (list (powerline-raw "%*" nil 'l)
+                                   (when powerline-display-buffer-size
+                                     (powerline-buffer-size nil 'l))
+                                   (when powerline-display-mule-info
+                                     (powerline-raw mode-line-mule-info nil 'l))
+                                   (powerline-buffer-id nil 'l)
+                                   (when (and (boundp 'which-func-mode) which-func-mode)
+                                     (powerline-raw which-func-format nil 'l))
+                                   (powerline-raw " ")
+                                   (funcall separator-left mode-line face1)
+                                   (when (boundp 'erc-modified-channels-object)
+                                     (powerline-raw erc-modified-channels-object face1 'l))
+                                   (powerline-major-mode face1 'l)
+                                   (powerline-process face1)
+                                   (powerline-minor-modes face1 'l)
+                                   (powerline-narrow face1 'l)
+                                   (powerline-raw " " face1)
+                                   (funcall separator-left face1 face2)
+                                   (powerline-vc face2 'r)
+                                   (when (bound-and-true-p nyan-mode)
+                                     (powerline-raw (list (nyan-create)) face2 'l))))
+                        (rhs (list (powerline-raw global-mode-string face2 'r)
+                                   (funcall separator-right face2 face1)
+                                   (unless window-system
+                                     (powerline-raw (char-to-string #xe0a1) face1 'l))
+                                   (powerline-raw "%4l" face1 'l)
+                                   (powerline-raw ":" face1 'l)
+                                   (powerline-raw "%3c" face1 'r)
+                                   (funcall separator-right face1 mode-line)
+                                   (powerline-raw " ")
+                                   (powerline-raw "%6p" nil 'r)
+                                   (when powerline-display-hud
+                                     (powerline-hud face2 face1)))))
+                   (concat (powerline-render lhs)
+                           (powerline-fill face2 (powerline-width rhs))
+                           (powerline-render rhs))))))
+
+
+
+
+
+
+
+
+
+
 (setq powerline-default-separator 'wave)
+
+;;; Anzu
+
+(global-anzu-mode t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; CPerl mode
