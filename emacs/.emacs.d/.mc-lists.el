@@ -18,6 +18,7 @@
         org-kill-line
         org-self-insert-command
         org-yank
+        paredit-doublequote
         paredit-forward-delete
         paredit-kill
         paredit-open-round
@@ -25,4 +26,5 @@
 
 (setq mc/cmds-to-run-once
       '(
+        kmacro-start-macro-or-insert-counter
         ))
