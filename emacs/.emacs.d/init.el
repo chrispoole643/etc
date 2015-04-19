@@ -24,8 +24,8 @@
 (mapc (lambda (file)
         (let ((absfile (expand-file-name (concat "~/.emacs.d-private/" file))))
           (when (file-exists-p absfile)
-            (load-file absfile))))
-      '("cjp-library-private.el" "cjp-settings-private.el"))
+            (org-babel-load-file absfile))))
+      '("cjp-library-private.org" "cjp-settings-private.org"))
 
 ;;; Load all my settings, as well as contributed functions
 (load-library "library-contributed")
