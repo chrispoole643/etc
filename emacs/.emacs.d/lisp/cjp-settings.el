@@ -276,12 +276,16 @@
 
 (require 'diminish)
 
-;;; TODO: make this work
-;; (mapc (lambda (mode) (diminish (car mode) (cdr mode)))
-;;       '((org-indent-mode "")
-;;         (emacs-lisp-mode "ELisp")
-;;         (undo-tree-mode "")
-;;         (yas-minor-mode "")))
+;;; Alphanumeric unicode characters with circles around them are listed on
+;;; https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
+;;; Ⓐ Ⓑ Ⓒ Ⓓ Ⓔ Ⓕ Ⓖ Ⓗ Ⓘ Ⓙ Ⓚ Ⓛ Ⓜ Ⓝ Ⓞ Ⓟ Ⓠ Ⓡ Ⓢ Ⓣ Ⓤ Ⓥ Ⓦ Ⓧ Ⓨ Ⓩ
+
+(diminish 'paredit-mode " Ⓟ")
+(diminish 'undo-tree-mode " Ⓤ")
+(diminish 'auto-complete-mode " Ⓒ")
+(diminish 'helm-mode " Ⓗ")
+(diminish 'abbrev-mode " Ⓐ")
+(diminish 'magit-auto-revert-mode " Ⓜ")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Ein
