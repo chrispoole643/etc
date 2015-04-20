@@ -66,6 +66,7 @@
 
 ;;; Expand region
 (global-set-key (kbd "C-=") 'er/expand-region)
+(global-set-key (kbd "C-+") 'er/expand-region)
 
 ;;; Multiple cursors
 (global-set-key (kbd "C-M-?") 'mc/edit-lines)
