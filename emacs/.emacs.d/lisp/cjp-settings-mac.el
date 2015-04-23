@@ -93,9 +93,5 @@
 (if (display-graphic-p)
     (normal-erase-is-backspace-mode 1))
 
-;;; Turn off menubar if using Emacs in terminal
-(if (not (display-graphic-p))
-    (menu-bar-mode -1))
-
 ;;; When dragging files onto Emacs icon in dock, don't create a new frame
 (setq ns-pop-up-frames nil)

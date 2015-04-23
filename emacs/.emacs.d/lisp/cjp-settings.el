@@ -1233,6 +1233,10 @@
 ;;; Miscellaneous
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+;;; Turn off the menu bar and the scrollbar
+(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+
 ;;; Save (a longer) minibuffer history
 (savehist-mode t)
 (setq history-length 1024)

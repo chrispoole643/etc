@@ -11,9 +11,6 @@
 ;;; Make Super another Meta key (useful for Mac keyboard)
 (setq x-super-keysym 'super)
 
-;;; Remove menubar
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 ;;; Resize Emacs frame on startup, and place at top-left of screen
 (if (display-graphic-p)
     (setq default-frame-alist
