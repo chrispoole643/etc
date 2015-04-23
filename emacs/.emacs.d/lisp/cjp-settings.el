@@ -144,11 +144,19 @@
 ;;; Treat all themes as safe
 (setq custom-safe-themes t)
 
-(if (display-graphic-p)
-    (load-theme 'solarized-light t)
-    ;; (load-theme 'monokai t)
-  (color-theme-initialize)
-  (color-theme-hober))
+;; Make the fringe stand out from the background
+(setq solarized-distinct-fringe-background nil)
+
+;; Don't change the font for some headings and titles
+(setq solarized-use-variable-pitch nil)
+
+;; Make the modeline high contrast: makes it easy to notice the current buffer
+(setq solarized-high-contrast-mode-line t)
+
+;;; Draw the underline at the same place as the descent line: looks better
+(setq x-underline-at-descent-line t)
+
+(load-theme 'solarized-light t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; ace-isearch
