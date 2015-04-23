@@ -231,11 +231,12 @@
                              (helm-execute-persistent-action)
                            (helm-maybe-exit-minibuffer)))))
 
-;;; If the first two items in helm-find-files results are '.' and '..', move cursor down by two
+;;; If the first two items in helm-find-files results are '.' and '..', and point would
+;;; usually be on the first one, move point down by two
 (add-hook 'helm-after-update-hook
           (lambda () (when (and (helm-file-completion-source-p)
                            (not (helm-empty-source-p))
-                           (string-match "/\\.$" "file/." ))
+                           (string-match "/\\.$" (helm-get-selection)))
                   (helm-next-line 2))))
 
 ;;; Use thing at point when invoking helm-man-woman
