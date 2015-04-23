@@ -9,6 +9,7 @@
     ca = commit -a
     co = checkout
     wc = whatchanged
+    pl = log --graph --oneline
 
 [status]
     showUntrackedFiles = no
