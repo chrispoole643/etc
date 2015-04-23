@@ -27,7 +27,7 @@
       '("cjp-library-private" "cjp-settings-private"))
 
 ;;; Load all my settings, as well as contributed functions
-(load-library "library-contributed")
+(cjp-org-load-file "library-contributed")
 (load-library "cjp-settings")
 
 ;;; Load stuff for GNU/Linux systems only
