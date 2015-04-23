@@ -31,9 +31,6 @@
 (load-library "library-contributed")
 (load-library "cjp-settings")
 
-;;; Load custom faces
-(load-library "cjp-faces")
-
 ;;; Load stuff for GNU/Linux systems only
 (when linuxp
   (load-library "cjp-library-linux")
