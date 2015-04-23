@@ -134,7 +134,7 @@ only. Else, run ispell as usual."
 
 (defun cjp-org-load-file (file)
   "Load an org file under the `.emacs.d/lisp'. Appends file extension."
-  (org-babel-load-file (cjp-emacs-structure-dir (concat file ".org") "lisp") t))
+  (org-babel-load-file (cjp-emacs-structure-dir (concat file ".org") "lisp")))
 
 (defun cjp-tilde-to-longform (string &optional initial)
   "Replace INITIAL with expansion of `~' in STRING. If INITIAL
