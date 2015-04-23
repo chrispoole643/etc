@@ -200,8 +200,6 @@
       helm-apropos-fuzzy-match t
       helm-lisp-fuzzy-completion t)
 
-;(setq helm-boring-file-regexp-list (append '("\\.$" "\\.\\.$") helm-boring-file-regexp-list))
-
 ;;; M-x doesn't work with same keys on all systems, so bind to C-x X-m too (And C-c for
 ;;; good measure, in case your finger slips)
 (global-set-key (kbd "M-x") 'helm-M-x)
@@ -233,11 +231,15 @@
                              (helm-execute-persistent-action)
                            (helm-maybe-exit-minibuffer)))))
 
+;;; If the first two items in helm-find-files results are '.' and '..', move cursor down by two
+(add-hook 'helm-after-update-hook
+          (lambda () (when (and (helm-file-completion-source-p)
+                           (not (helm-empty-source-p))
+                           (string-match "/\\.$" "file/." ))
+                  (helm-next-line 2))))
+
 ;;; Use thing at point when invoking helm-man-woman
 (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
-
-
-
 
 ;;; helm-swoop
 
