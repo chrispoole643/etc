@@ -11,12 +11,6 @@
 ;;; Make Super another Meta key (useful for Mac keyboard)
 (setq x-super-keysym 'super)
 
-;;; Resize Emacs frame on startup, and place at top-left of screen
-(if (display-graphic-p)
-    (setq default-frame-alist
-          (append '((left . 60) (top . 0) (width . 90) (height . 30))
-                  default-frame-alist)))
-
 ;;; Change binding for outline minor mode
 (add-hook 'outline-minor-mode-hook
           (lambda () (local-set-key (kbd "C-c C-c")

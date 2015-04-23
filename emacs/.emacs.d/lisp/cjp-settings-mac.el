@@ -71,13 +71,6 @@
 ;;; Ignore .DS_Store files with ido mode
 (add-to-list 'ido-ignore-files "\\.DS_Store")
 
-;;; Resize Emacs frame on startup, and place at top-left of screen.
-;;; Height for MacBook Pro 15" screen
-(if (display-graphic-p)
-    (setq default-frame-alist
-          (append '((left . 60) (top . 0) (width . 90) (height . 56))
-                  default-frame-alist)))
-
 ;;; I prefer cmd key for meta, and the right cmd as super. Left alt is super,
 ;;; but right alt is unset, allowing me to type (right) alt-3 and get a #
 ;;; symbol.
