@@ -12,7 +12,6 @@
 (setq user-emacs-directory "~/.emacs.d/")
 
 ;;; Bootstrap with my library functions
-;;; (`cjp-library' contains `cjp-get-dir-structure-in')
 (let ((file (concat user-emacs-directory "lisp/cjp-library.el")))
   (if (file-exists-p file) (load-file file)))
 
@@ -24,8 +23,8 @@
 (mapc (lambda (file)
         (let ((absfile (expand-file-name (concat "~/.emacs.d-private/" file))))
           (when (file-exists-p absfile)
-            (org-babel-load-file absfile))))
-      '("cjp-library-private.org" "cjp-settings-private.org"))
+            (cjp-org-load-file absfile))))
+      '("cjp-library-private" "cjp-settings-private"))
 
 ;;; Load all my settings, as well as contributed functions
 (load-library "library-contributed")
@@ -41,4 +40,5 @@
   (load-library "cjp-library-mac")
   (load-library "cjp-settings-mac"))
 
-(load-library "cjp-keybindings")
+(cjp-org-load-file "cjp-keybindings")
+
