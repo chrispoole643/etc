@@ -8,6 +8,7 @@
         cua-paste
         helm-mini
         isearch-abort
+        isearch-backward-regexp
         isearch-exit
         isearch-forward-regexp
         isearch-printing-char
