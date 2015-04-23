@@ -362,41 +362,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (require 'powerline)
-(powerline-default-theme)
 
-
-
-
-;; A string is printed verbatim in the mode line except for %-constructs:
-;;   %b -- print buffer name.      %f -- print visited file name.
-;;   %F -- print frame name.
-;;   %* -- print %, * or hyphen.   %+ -- print *, % or hyphen.
-;; 	%& is like %*, but ignore read-only-ness.
-;; 	% means buffer is read-only and * means it is modified.
-;; 	For a modified read-only buffer, %* gives % and %+ gives *.
-;;   %s -- print process status.   %l -- print the current line number.
-;;   %c -- print the current column number (this makes editing slower).
-;;         To make the column number update correctly in all cases,
-;; 	`column-number-mode' must be non-nil.
-;;   %i -- print the size of the buffer.
-;;   %I -- like %i, but use k, M, G, etc., to abbreviate.
-;;   %p -- print percent of buffer above top of window, or Top, Bot or All.
-;;   %P -- print percent of buffer above bottom of window, perhaps plus Top,
-;;         or print Bottom or All.
-;;   %n -- print Narrow if appropriate.
-;;   %t -- visited file is text or binary (if OS supports this distinction).
-;;   %z -- print mnemonics of keyboard, terminal, and buffer coding systems.
-;;   %Z -- like %z, but including the end-of-line format.
-;;   %e -- print error message about full memory.
-;;   %@ -- print @ or hyphen.  @ means that default-directory is on a
-;;         remote machine.
-;;   %[ -- print one [ for each recursive editing level.  %] similar.
-;;   %% -- print %.   %- -- print infinitely many dashes.
-;; Decimal digits after the % specify field width to which to pad.
-
-
-
-
+;;; Same as powerline-default-theme, but move some of the items about a bit
 (setq-default mode-line-format
               '("%e"
                 (:eval
@@ -411,11 +378,8 @@
                                                          (powerline-current-separator)
                                                          (cdr powerline-default-separator-dir))))
                         (lhs (list (powerline-raw "%*" nil 'l)
-                                   (when powerline-display-buffer-size
-                                     (powerline-buffer-size nil 'l))
-                                   (when powerline-display-mule-info
-                                     (powerline-raw mode-line-mule-info nil 'l))
                                    (powerline-buffer-id nil 'l)
+                                   (powerline-vc nil 'l)
                                    (when (and (boundp 'which-func-mode) which-func-mode)
                                      (powerline-raw which-func-format nil 'l))
                                    (powerline-raw " ")
@@ -428,13 +392,17 @@
                                    (powerline-narrow face1 'l)
                                    (powerline-raw " " face1)
                                    (funcall separator-left face1 face2)
-                                   (powerline-vc face2 'r)
                                    (when (bound-and-true-p nyan-mode)
                                      (powerline-raw (list (nyan-create)) face2 'l))))
                         (rhs (list (powerline-raw global-mode-string face2 'r)
                                    (funcall separator-right face2 face1)
+                                   (powerline-raw " " face1)
                                    (unless window-system
                                      (powerline-raw (char-to-string #xe0a1) face1 'l))
+                                   (when powerline-display-buffer-size
+                                     (powerline-buffer-size face1 'r))
+                                   (when powerline-display-mule-info
+                                     (powerline-raw mode-line-mule-info face1 'r))
                                    (powerline-raw "%4l" face1 'l)
                                    (powerline-raw ":" face1 'l)
                                    (powerline-raw "%3c" face1 'r)
@@ -446,15 +414,6 @@
                    (concat (powerline-render lhs)
                            (powerline-fill face2 (powerline-width rhs))
                            (powerline-render rhs))))))
-
-
-
-
-
-
-
-
-
 
 (setq powerline-default-separator 'wave)
 
