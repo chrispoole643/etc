@@ -2,7 +2,8 @@
 ;;;; Emacs Configuration
 ;;;; ===================
 ;;;;
-;;;; Loads generally-required elisp, then platform-specific files.
+;;;; Bootstrapping setup to be able to load the content kept in org-mode files. Loads
+;;;; generally-required files first, then those that are platform-specific.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; Check to see if running on Mac OS X or some GNU/Linux distro
