@@ -29,7 +29,7 @@
 
 ;;; Load all my settings, as well as contributed functions
 (cjp-org-load-file "library-contributed")
-(load-library "cjp-settings")
+(cjp-org-load-file "cjp-settings")
 
 ;;; Load stuff for GNU/Linux systems only
 (when linuxp
@@ -42,4 +42,3 @@
   (cjp-org-load-file "cjp-settings-mac"))
 
 (cjp-org-load-file "cjp-keybindings")
-
