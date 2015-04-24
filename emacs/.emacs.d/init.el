@@ -12,8 +12,8 @@
 (setq user-emacs-directory "~/.emacs.d/")
 
 ;;; Bootstrap with my library functions
-(let ((file (concat user-emacs-directory "lisp/cjp-library.el")))
-  (if (file-exists-p file) (load-file file)))
+(let ((file (concat user-emacs-directory "lisp/cjp-library.org")))
+  (if (file-exists-p file) (org-babel-load-file file)))
 
 ;;; Add lisp directory tree to load-path
 (setq load-path (append (cjp-get-dir-structure-in "lisp")
