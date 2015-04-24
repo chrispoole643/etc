@@ -1521,11 +1521,12 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido.
 
 ** Miscellaneous
 
-Turn off the menu bar and the scrollbar.
+Turn off the menu bar, toolbar, and scrollbar.
 
 #+BEGIN_SRC emacs-lisp
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
   (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+END_SRC
 
 Save (a longer) minibuffer history.
@@ -1793,12 +1794,6 @@ True by default in Carbon Emacs. Set here for Aquamacs and other distros.
 
 #+BEGIN_SRC emacs-lisp
   (setq x-select-enable-clipboard t)
-#+END_SRC
-
-Remove the annoying toolbar.
-
-#+BEGIN_SRC emacs-lisp
-  (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+END_SRC
 
 Mute annoying beep.
