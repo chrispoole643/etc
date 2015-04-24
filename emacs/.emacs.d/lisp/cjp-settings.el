@@ -246,9 +246,21 @@
 
 (require 'helm-swoop)
 
+
+;;; Result of a question I asked on reddit:
+;;; https://www.reddit.com/r/emacs/comments/334a7a/binding_to_trigger_helmswoop_multiline/cqj6xqd
+(defun helm-swoop-multiline-from-helm-swoop ()
+  "Run `helm-swoop' over multiple lines, using the current
+helm-swoop pattern."
+  (interactive)
+  ;; run after exit the current minibuffer operation
+  (run-with-timer
+   0 nil (lambda () (helm-swoop :$query helm-swoop-pattern :$multiline 4)))
+  (exit-minibuffer))
+
 (define-key isearch-mode-map (kbd "M-s") 'helm-swoop-from-isearch)
 (define-key helm-swoop-map (kbd "M-s") 'helm-multi-swoop-all-from-helm-swoop)
-(define-key helm-multi-swoop-map (kbd "M-s") 'helm-mult)
+(define-key helm-multi-swoop-map (kbd "M-s") 'helm-swoop-multiline-from-helm-swoop)
 
 ;;; Move up and down like isearch
 (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
