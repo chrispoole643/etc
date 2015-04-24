@@ -37,8 +37,8 @@
 
 ;;; Load stuff for Mac OS X only
 (when macosxp
-  (load-library "cjp-library-mac")
-  (load-library "cjp-settings-mac"))
+  (cjp-org-load-file "cjp-library-mac")
+  (cjp-org-load-file "cjp-settings-mac"))
 
 (cjp-org-load-file "cjp-keybindings")
 

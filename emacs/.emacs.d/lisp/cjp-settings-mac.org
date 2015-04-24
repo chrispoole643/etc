@@ -1,0 +1,105 @@
+* Custom stuff for Mac OS X systems only
+
+** Path and proxy changes
+
+#+BEGIN_SRC emacs-lisp
+  (setenv "PATH" (cjp-get-zsh-env-var "PATH"))
+  (setq exec-path (split-string (getenv "PATH") ":"))
+  (add-to-list 'exec-path "/Applications/Emacs.app/Contents/MacOS/bin" t)
+
+  (setenv "PYTHONPATH" (cjp-get-zsh-env-var "PYTHONPATH"))
+#+END_SRC
+
+** w3m
+
+Use 'o' in w3m buffers to open current page in default Mac browser.
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'w3m-mode-hook
+            (lambda () (define-key w3m-mode-map (kbd "o")
+                         (lambda () (interactive)
+                           (browse-url-default-macosx-browser w3m-current-url)))))
+#+END_SRC
+
+** AUCTeX
+
+Functions here to pass Skim the page information for SyncTeX from [[bleedingmind.com/index.php/2010/06/17/synctex-on-linux-and-mac-os-x-with-emacs/][bleedingmind.com]].
+
+#+BEGIN_SRC emacs-lisp
+  (defun skim-make-url ()
+    (concat
+     (TeX-current-line)
+     " '" (expand-file-name (funcall file (TeX-output-extension) t)
+                            (file-name-directory (TeX-master-file)))
+     "' '" (buffer-file-name) "'"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (setq LaTeX-command "latex -synctex=1")
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'LaTeX-mode-hook
+            (lambda ()
+              (add-to-list 'TeX-expand-list '("%q" skim-make-url))
+              (setq TeX-view-program-list
+                    '(("Skim"
+                       "/Applications/Skim.app/Contents/SharedSupport/displayline -br %q")))
+              (setq TeX-view-program-selection '((output-pdf "Skim")))))
+#+END_SRC
+
+** Miscellaneous
+
+First few from [[http://reddit.com/r/emacs/comments/ab5m7/whats_your_emacs_23_os_x_setup/][reddit]].
+
+Set font (Menlo default).
+
+#+BEGIN_SRC emacs-lisp
+  (if (display-graphic-p)
+      (cjp-set-font-size "11" nil t))
+#+END_SRC
+
+Enable sRGB --- when true, powerline colors don't match.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ns-use-srgb-colorspace nil)
+#+END_SRC
+
+Use default Mac OS X browser, and move to trash when deleting stuff.
+
+#+BEGIN_SRC emacs-lisp
+  (setq delete-by-moving-to-trash t
+        trash-directory "~/.Trash/emacs")
+#+END_SRC
+
+Ignore .DS_Store files with ido mode.
+
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'ido-ignore-files "\\.DS_Store")
+#+END_SRC
+
+I prefer cmd key for meta, and the right cmd as super. Left alt is super, but right alt
+is unset, allowing me to type (right) alt-3 and get a # symbol.
+
+#+BEGIN_SRC emacs-lisp
+  (setq mac-option-key-is-meta nil
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier 'super
+        mac-right-command-modifier 'super
+        ns-right-alternate-modifier 'none)
+#+END_SRC
+
+In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not forward as is
+usual. This fixes this behaviour.
+
+#+BEGIN_SRC emacs-lisp
+  (if (display-graphic-p)
+      (normal-erase-is-backspace-mode 1))
+#+END_SRC
+
+When dragging files onto Emacs icon in dock, don't create a new frame.
+
+#+BEGIN_SRC emacs-lisp
+  (setq ns-pop-up-frames nil)
+#+END_SRC
