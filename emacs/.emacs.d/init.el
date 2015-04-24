@@ -32,8 +32,8 @@
 
 ;;; Load stuff for GNU/Linux systems only
 (when linuxp
-  (load-library "cjp-library-linux")
-  (load-library "cjp-settings-linux"))
+  (cjp-org-load-file "cjp-library-linux")
+  (cjp-org-load-file "cjp-settings-linux"))
 
 ;;; Load stuff for Mac OS X only
 (when macosxp
