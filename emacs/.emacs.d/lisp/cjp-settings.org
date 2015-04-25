@@ -72,6 +72,7 @@ System-agnostic.
                                   diminish
                                   dired+
                                   dired-details+
+                                  dired-subtree
                                   edit-server
                                   expand-region
                                   flymake-cursor
@@ -741,6 +742,10 @@ The default fonts don't look nice with Tango theme, at least to my eyes.
                                         (:foreground "Red"))
         diredp-rare-priv '((background dark)
                            (:background "#FFFF00008080" :foreground "White")))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (define-key dired-mode-map (kbd "i") 'dired-subtree-insert)
 #+END_SRC
 
 ** CUA
