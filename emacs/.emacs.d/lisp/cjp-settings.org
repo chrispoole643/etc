@@ -1901,3 +1901,10 @@ Usually suspend-frame. Annoying.
 #+BEGIN_SRC emacs-lisp
   (global-unset-key (kbd "C-z"))
 #+END_SRC
+
+When running commands like =query-replace=, always keep a few lines of context when the
+current match is at the bottom of the screen. Thanks to [[https://emacs.stackexchange.com/questions/10898/query-replace-leaves-potential-match-to-be-replaced-at-bottom-of-window/10903#10903][this answer on Stack Exchange]].
+
+#+BEGIN_SRC emacs-lisp
+  (setq scroll-margin 3)
+#+END_SRC
