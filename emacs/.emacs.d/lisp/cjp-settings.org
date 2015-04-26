@@ -5,7 +5,7 @@ System-agnostic.
 ** Melpa
 
 #+BEGIN_SRC emacs-lisp
-  (defvar cjp-required-packages '( ;; Common Lisp
+  (defvar cjp-required-packages '(;; Common Lisp
                                   ac-slime
                                   redshank
                                   slime
