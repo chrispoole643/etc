@@ -17,8 +17,7 @@
   (if (file-exists-p file) (org-babel-load-file file)))
 
 ;;; Add lisp directory tree to load-path
-(setq load-path (append (cjp-get-dir-structure-in "lisp")
-                        load-path))
+(setq load-path (append (cjp-get-dir-structure-in "lisp") load-path))
 
 ;;; Load private files
 (mapc (lambda (file)
