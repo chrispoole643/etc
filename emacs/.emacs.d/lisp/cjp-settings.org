@@ -1300,6 +1300,7 @@ Use better defaults when opening files.
 
 #+BEGIN_SRC emacs-lisp
   (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
+  (define-key org-mode-map (kbd "C-'") 'helm-org-headlines)
   (define-key org-src-mode-map (kbd "C-c C-'") 'org-edit-src-exit)
 #+END_SRC
 
