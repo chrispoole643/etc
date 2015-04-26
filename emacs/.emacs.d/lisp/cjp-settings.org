@@ -138,31 +138,31 @@ These don't require their own section with other commands.
 
 ** Themes
 
-Treat all themes as safe.
+Treat all themes as safe:
 
 #+BEGIN_SRC emacs-lisp
   (setq custom-safe-themes t)
 #+END_SRC
 
-Make the fringe stand out from the background.
+Make the fringe stand out from the background:
 
 #+BEGIN_SRC emacs-lisp
   (setq solarized-distinct-fringe-background nil)
 #+END_SRC
 
-Don't change the font for some headings and titles.
+Don't change the font for some headings and titles:
 
 #+BEGIN_SRC emacs-lisp
   (setq solarized-use-variable-pitch nil)
 #+END_SRC
 
-Make the modeline high contrast: makes it easy to notice the current buffer.
+Make the modeline high contrast: makes it easy to notice the current buffer:
 
 #+BEGIN_SRC emacs-lisp
   (setq solarized-high-contrast-mode-line t)
 #+END_SRC
 
-Draw the underline at the same place as the descent line: looks better.
+Draw the underline at the same place as the descent line: looks better:
 
 #+BEGIN_SRC emacs-lisp
   (setq x-underline-at-descent-line t)
@@ -187,7 +187,7 @@ Draw the underline at the same place as the descent line: looks better.
 
 ** Helm
 
-Good setup advice from https://tuhdo.github.io/helm-intro.html.
+Good setup advice from https://tuhdo.github.io/helm-intro.html:
 
 #+BEGIN_SRC emacs-lisp
   (require 'helm-config)
@@ -207,7 +207,7 @@ General helm configuration:
 #+BEGIN_SRC emacs-lisp
   (setq helm-split-window-in-side-p t     ; Open helm buffer inside current window
         helm-move-to-line-cycle-in-source t
-        helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+        helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp
         helm-scroll-amount 8         ; scroll 8 lines other window using M-<next>/M-<prior>
         helm-ff-file-name-history-use-recentf t
         helm-yank-symbol-first t
@@ -270,7 +270,7 @@ Bindings while in helm-mode:
 #+END_SRC
 
 If the thing at point is a directory, go into the directory (as though hitting
-<tab>). Else, open it. If the directory is `.' or `..', open in dired as usual.
+<tab>). Else, open it. If the directory is `.' or `..', open in dired as usual:
 
 #+BEGIN_SRC emacs-lisp
   (define-key helm-find-files-map (kbd "<return>")
@@ -282,7 +282,7 @@ If the thing at point is a directory, go into the directory (as though hitting
 #+END_SRC
 
 If the first two items in helm-find-files results are '.' and '..', and point would
-usually be on the first one, move point down by two.
+usually be on the first one, move point down by two:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'helm-after-update-hook
@@ -292,7 +292,7 @@ usually be on the first one, move point down by two.
                          (helm-next-line 2))))
 #+END_SRC
 
-Use thing at point when invoking helm-man-woman.
+Use thing at point when invoking helm-man-woman:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
@@ -323,7 +323,7 @@ Use thing at point when invoking helm-man-woman.
   (define-key helm-multi-swoop-map (kbd "M-s") 'helm-swoop-multiline-from-helm-swoop)
 #+END_SRC
 
-Move up and down like isearch.
+Move up and down like isearch:
 
 #+BEGIN_SRC emacs-lisp
   (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
@@ -350,7 +350,7 @@ Move up and down like isearch.
 
 ** Restclient
 
-Don't change window focus to the output window when submitting a command.
+Don't change window focus to the output window when submitting a command:
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load "restclient-autoloads"
@@ -363,7 +363,7 @@ Don't change window focus to the output window when submitting a command.
 ** Writeroom
 
 Defaults to 80. Allow a bit more if using in conjunction with org mode, where the
-document might have indented lines.
+document might have indented lines:
 
 #+BEGIN_SRC emacs-lisp
   (setq writeroom-width 100)
@@ -450,7 +450,7 @@ Or, to enable "superpack" (a little bit hacky improvements):
   (require 'powerline)
 #+END_SRC
 
-Same as powerline-default-theme, but move some of the items about a bit.
+Same as powerline-default-theme, but move some of the items about a bit:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default mode-line-format
@@ -518,7 +518,7 @@ Same as powerline-default-theme, but move some of the items about a bit.
 
 ** CPerl mode
 
-cperl-mode is preferred to perl-mode.
+cperl-mode is preferred to perl-mode:
 
 #+BEGIN_SRC emacs-lisp
   (defalias 'perl-mode 'cperl-mode)
@@ -564,7 +564,7 @@ cperl-mode is preferred to perl-mode.
 ** IELM
 
 Start ielm with AC, ElDoc, and Paredit. Make it inherit local variables from the buffer
-it was invoked from.
+it was invoked from:
 
 #+BEGIN_SRC emacs-lisp
   (defvar ielm-invoked-from-buffer nil)
@@ -607,7 +607,7 @@ it was invoked from.
 #+END_SRC
 
 Choose a location of bookmarks file. Save bookmarks file every time I put a new bookmark
-in the file (not just when Emacs quits).
+in the file (not just when Emacs quits):
 
 #+BEGIN_SRC emacs-lisp
   (setq bookmark-default-file (cjp-emacs-structure-dir "bookmarks")
@@ -620,13 +620,13 @@ in the file (not just when Emacs quits).
 ** DocView
 
 When viewing pdf (for example), have it auto-revert. Useful if viewing a LaTeX document
-with AUCTeX.
+with AUCTeX:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'doc-view-mode-hook 'auto-revert-mode)
 #+END_SRC
 
-Higher quality PDFs please.
+Higher quality PDFs please:
 
 #+BEGIN_SRC emacs-lisp
   (setq doc-view-resolution 300)
@@ -656,7 +656,7 @@ Further details: http://www.emacswiki.org/emacs/Edit_with_Emacs.
 ** Pretty Lambda
 
 
-Turn 'lambda' into the Greek letter.
+Turn 'lambda' into the Greek letter:
 
 #+BEGIN_SRC emacs-lisp
   (require 'pretty-lambdada)
@@ -674,13 +674,13 @@ Turn 'lambda' into the Greek letter.
 
 ** Flymake
 
-Show error messages in minibuffer, not as a GUI menu.
+Show error messages in minibuffer, not as a GUI menu:
 
 #+BEGIN_SRC emacs-lisp
   (load-library "flymake-cursor")
 #+END_SRC
 
-Use pyflakes with flymake.
+Use pyflakes with flymake:
 
 #+BEGIN_SRC emacs-lisp
   (when (load "flymake" t)
@@ -720,7 +720,7 @@ Use pyflakes with flymake.
   (require 'dired-details+)
 #+END_SRC
 
-Hide and show details (`ls -l` stuff) with '(' and ')'.
+Hide and show details (`ls -l` stuff) with '(' and ')':
 
 #+BEGIN_SRC emacs-lisp
   (setq dired-details-hidden-string ""
@@ -729,14 +729,14 @@ Hide and show details (`ls -l` stuff) with '(' and ')'.
         dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 #+END_SRC
 
-This is buffer-local variable.
+This is buffer-local variable:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default dired-omit-mode nil)
 #+END_SRC
 
 Make return key open files in another window, except if item at point is a directory, and
-then open in the current window.
+then open in the current window:
 
 #+BEGIN_SRC emacs-lisp
   (define-key dired-mode-map (kbd "RET") (lambda ()
@@ -752,13 +752,13 @@ then open in the current window.
     (fix-horizontal-size-to-buffer))
 #+END_SRC
 
-Don't show '..' since '^' does this; show human file sizes.
+Don't show '..' since '^' does this; show human file sizes:
 
 #+BEGIN_SRC emacs-lisp
   (setq dired-listing-switches "-Alh")
 #+END_SRC
 
-The default fonts don't look nice with Tango theme, at least to my eyes.
+The default fonts don't look nice with Tango theme, at least to my eyes:
 
 #+BEGIN_SRC emacs-lisp
   (setq diredp-compressed-file-suffix '((background dark)
@@ -773,8 +773,7 @@ The default fonts don't look nice with Tango theme, at least to my eyes.
 
 ** CUA
 
-
-Turn on for rectangle mode only.
+Turn on for rectangle mode only:
 
 #+BEGIN_SRC emacs-lisp
   (setq cua-enable-cua-keys nil)
@@ -783,24 +782,27 @@ Turn on for rectangle mode only.
 #+END_SRC
 
 ** Smex
+:PROPERTIES:
+:tangle:   no
+:END:
 
 #+BEGIN_SRC emacs-lisp
   (require 'smex)
 #+END_SRC
 
-Start smex, saving into Emacs structure.
+Start smex, saving into Emacs structure:
 
 #+BEGIN_SRC emacs-lisp
   (setq smex-save-file (cjp-emacs-structure-dir ".smex-items"))
 #+END_SRC
 
-Smex updates its list of possible commands when run; don't let it.
+Smex updates its list of possible commands when run; don't let it:
 
 #+BEGIN_SRC emacs-lisp
   (setq smex-auto-update t)
 #+END_SRC
 
-Update smex when Emacs has been idle for (default 60) seconds.
+Update smex when Emacs has been idle for (default 60) seconds:
 
 #+BEGIN_SRC emacs-lisp
   (smex-auto-update)
@@ -814,7 +816,7 @@ Update smex when Emacs has been idle for (default 60) seconds.
 #+END_SRC
 
 Instead of <2> etc. after buffer name when opening multiple files with the same name,
-Change it to "name" : "directory name".
+Change it to "name" : "directory name":
 
 #+BEGIN_SRC emacs-lisp
   (setq uniquify-buffer-name-style 'forward
@@ -831,7 +833,7 @@ Change it to "name" : "directory name".
 ** Winner / Windmove / FrameMove
 
 Turn on winner mode to move back and forwards between window configurations with C-c left
-and C-c right respectively.
+and C-c right respectively:
 
 #+BEGIN_SRC emacs-lisp
   (winner-mode 1)
@@ -855,13 +857,13 @@ Use sbcl
   ;;(slime-setup '(slime-fancy))
 #+END_SRC
 
-auto-complete for slime.
+auto-complete for slime:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'slime-mode-hook 'set-up-slime-ac)
-(add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-(eval-after-load "auto-complete"
-  '(add-to-list 'ac-modes 'slime-repl-mode))
+  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+  (eval-after-load "auto-complete"
+    '(add-to-list 'ac-modes 'slime-repl-mode))
 #+END_SRC
 
 ** Recent files
@@ -874,13 +876,13 @@ find-files-faster-recent-files-package
 #+END_SRC
 
 Tramp mode messes this up, causing Emacs to IO block for a short time. (From
-http://www.emacswiki.org/emacs/RecentFiles).
+http://www.emacswiki.org/emacs/RecentFiles):
 
 #+BEGIN_SRC emacs-lisp
   (setq recentf-auto-cleanup 'never)
 #+END_SRC
 
-50 files ought to be enough.
+50 files ought to be enough:
 
 #+BEGIN_SRC emacs-lisp
   (setq ;; default is ~/.recentf
@@ -889,7 +891,7 @@ http://www.emacswiki.org/emacs/RecentFiles).
    recentf-exclude '("\.recentf" "\.ido\.last" "\.aux" "~$"))
 #+END_SRC
 
-Enable recent files mode.
+Enable recent files mode:
 
 #+BEGIN_SRC emacs-lisp
   (recentf-mode t)
@@ -901,20 +903,20 @@ Enable recent files mode.
   (yas-global-mode 1)
 #+END_SRC
 
-Store my personal snippets in ~/emacs/snippets, still load the stock ones.
+Store my personal snippets in ~/emacs/snippets, still load the stock ones:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'yas/root-directory (cjp-emacs-structure-dir "contributed" "snippets"))
   (add-to-list 'yas/root-directory (cjp-emacs-structure-dir "personal" "snippets"))
 #+END_SRC
 
-Load snippets from all directories.
+Load snippets from all directories:
 
 #+BEGIN_SRC emacs-lisp
   ;(mapc 'yas/load-directory yas/root-directory)
 #+END_SRC
 
-If there are multiple snippets to choose from, use ido by default in minibuffer.
+If there are multiple snippets to choose from, use ido by default in minibuffer:
 
 #+BEGIN_SRC emacs-lisp
   (setq yas-prompt-functions '(yas/ido-prompt
@@ -924,7 +926,7 @@ If there are multiple snippets to choose from, use ido by default in minibuffer.
                                yas/no-prompt))
 #+END_SRC
 
-Yasnippet doesn't play well with ansi-term.
+Yasnippet doesn't play well with ansi-term:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'term-mode-hook (lambda() (yas-minor-mode -1)))
@@ -956,7 +958,7 @@ Yasnippet doesn't play well with ansi-term.
 #+END_SRC
 
 Make ElDoc aware of ParEdit's most used commands (ElDoc will automatically refresh the
-minibuffer).
+minibuffer):
 
 #+BEGIN_SRC emacs-lisp
   (eldoc-add-command
@@ -973,7 +975,7 @@ minibuffer).
 
 ** Markdown
 
-Using kramdown from ruby gem.
+Using kramdown from ruby gem:
 
 #+BEGIN_SRC emacs-lisp
   (autoload 'markdown-mode "markdown-mode"
@@ -989,7 +991,7 @@ Using kramdown from ruby gem.
         markdown-enable-math t)
 #+END_SRC
 
-Webgen uses markdown syntax in .page files.
+Webgen uses markdown syntax in .page files:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
@@ -1014,33 +1016,33 @@ Webgen uses markdown syntax in .page files.
 Using python.el, not python-mode.el. The latter doesn't seem to be able to send the
 contents of a buffer to the interpreter easily, as python.el can (with C-c C-c).
 
-Use python-mode with files with these extensions.
+Use python-mode with files with these extensions:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
   (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 #+END_SRC
 
-Turn on auto-complete in python shells.
+Turn on auto-complete in python shells:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'inferior-python-mode-hook (lambda () (auto-complete-mode 1)))
 #+END_SRC
 
-Use python major mode if 'python' is in hashbang.
+Use python major mode if 'python' is in hashbang:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 #+END_SRC
 
-Check files for pep8 mistakes.
+Check files for pep8 mistakes:
 
 #+BEGIN_SRC emacs-lisp
   (autoload 'python-pep8 "python-pep8")
   (autoload 'pep8 "python-pep8")
 #+END_SRC
 
-displays "\" at the end of lines that wrap.
+displays "\" at the end of lines that wrap:
 
 #+BEGIN_SRC emacs-lisp
   (setq longlines-show-hard-newlines t)
@@ -1122,7 +1124,7 @@ guile. (See info doc.).
   ;;       geiser-mode-autodoc-p nil)
 #+END_SRC
 
-Shamelessly stolen from info-look.el, scheme-mode.
+Shamelessly stolen from info-look.el, scheme-mode:
 
 #+BEGIN_SRC emacs-lisp
   ;; (info-lookup-maybe-add-help
@@ -1141,7 +1143,7 @@ Shamelessly stolen from info-look.el, scheme-mode.
         quack-run-scheme-always-prompts-p nil)
 #+END_SRC
 
-http://synthcode.com/wiki/scheme-complete.
+http://synthcode.com/wiki/scheme-complete:
 
 #+BEGIN_SRC emacs-lisp
   (autoload 'scheme-smart-complete "scheme-complete" nil t)
@@ -1157,7 +1159,7 @@ http://synthcode.com/wiki/scheme-complete.
 
 ** Paredit
 
-Taken from http://www.emacswiki.org/emacs/ParEdit.
+Taken from http://www.emacswiki.org/emacs/ParEdit:
 
 #+BEGIN_SRC emacs-lisp
   (autoload 'paredit-mode "paredit"
@@ -1176,7 +1178,7 @@ Taken from http://www.emacswiki.org/emacs/ParEdit.
 #+END_SRC
 
 Use C-w to backwards kill words, consistent with global custom settings. Also undefine
-C-left and C-right, to use these with winner mode.
+C-left and C-right, to use these with winner mode:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'paredit-mode-hook
@@ -1186,7 +1188,7 @@ C-left and C-right, to use these with winner mode.
               (define-key paredit-mode-map (kbd "C-<right>") nil)))
 #+END_SRC
 
-Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '('.
+Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '(':
 
 #+BEGIN_SRC emacs-lisp
   (defun override-slime-repl-bindings-with-paredit ()
@@ -1204,20 +1206,20 @@ Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '
 
 ** Tramp
 
-Use SSH in TRAMP by default.
+Use SSH in TRAMP by default:
 
 #+BEGIN_SRC emacs-lisp
   (setq tramp-default-method "ssh")
 #+END_SRC
 
-Don't make backup files when using TRAMP.
+Don't make backup files when using TRAMP:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'backup-directory-alist
                (cons tramp-file-name-regexp nil))
 #+END_SRC
 
-Store information here (not default ~/.emacs.d/tramp).
+Store information here (not default ~/.emacs.d/tramp):
 
 #+BEGIN_SRC emacs-lisp
   (setq tramp-persistency-file-name (cjp-emacs-structure-dir ".tramp"))
@@ -1225,7 +1227,7 @@ Store information here (not default ~/.emacs.d/tramp).
 
 ** Comint
 
-Add current directory to mode line of shell windows.
+Add current directory to mode line of shell windows:
 
 #+BEGIN_SRC emacs-lisp
   ;; (defun add-mode-line-dirtrack ()
@@ -1234,7 +1236,7 @@ Add current directory to mode line of shell windows.
   ;; (add-hook 'shell-mode-hook 'add-mode-line-dirtrack)
 #+END_SRC
 
-Make sure passwords not echoed in shell.
+Make sure passwords not echoed in shell:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'comint-output-filter-functions
@@ -1261,13 +1263,13 @@ Make sure passwords not echoed in shell.
 
 ** Abbrev
 
-Operate on startup.
+Operate on startup:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default abbrev-mode t)
 #+END_SRC
 
-Save in specified file.
+Save in specified file:
 
 #+BEGIN_SRC emacs-lisp
   (setq abbrev-file-name (cjp-emacs-structure-dir ".abbrev_defs")
@@ -1279,7 +1281,7 @@ Save in specified file.
 
 ** Org
 
-Enable the extra backends: required to run before org is required.
+Enable the extra backends. Required to run before org is required:
 
 #+BEGIN_SRC emacs-lisp
   (setq org-export-backends '(beamer man md odt org texinfo ascii html icalendar latex))
@@ -1291,7 +1293,7 @@ Enable the extra backends: required to run before org is required.
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 #+END_SRC
 
-Use better defaults when opening files.
+Use better defaults when opening files:
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load "org" '(setq org-file-apps (if macosxp
@@ -1352,7 +1354,7 @@ info for each TeX file, got annoying so disabled for now.
         )
 #+END_SRC
 
-Enable math mode and auto-fill when typing LaTeX, and RefTeX.
+Enable math mode and auto-fill when typing LaTeX, and RefTeX:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
@@ -1361,7 +1363,7 @@ Enable math mode and auto-fill when typing LaTeX, and RefTeX.
   (add-hook 'LaTeX-mode-hook (lambda () (TeX-source-correlate-mode 1)))
 #+END_SRC
 
-Use tex parser so that TeX commands aren't checked.
+Use tex parser so that TeX commands aren't checked:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'LaTeX-mode-hook (lambda () (setq ispell-parser 'tex)))
@@ -1382,14 +1384,14 @@ Use tex parser so that TeX commands aren't checked.
    reftex-cite-format "\\citet[][]{%l}")
 #+END_SRC
 
-Highlight keywords from the natbib package.
+Highlight keywords from the natbib package:
 
 #+BEGIN_SRC emacs-lisp
   (setq font-latex-match-reference-keywords
         '(("citet" "[{")))
 #+END_SRC
 
-Have AUCTeX ask which is master file for multi-document TeX.
+Have AUCTeX ask which is master file for multi-document TeX:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default TeX-master nil)
@@ -1416,40 +1418,40 @@ Have AUCTeX ask which is master file for multi-document TeX.
         ido-use-faces nil)
 #+END_SRC
 
-Ignore the .aux extensions that TeX programs create.
+Ignore the .aux extensions that TeX programs create:
 
 #+BEGIN_SRC emacs-lisp
   (setq completion-ignored-extensions
         (cons "*.aux" completion-ignored-extensions))
 #+END_SRC
 
-Order extensions by how I use them.
+Order extensions by how I use them:
 
 #+BEGIN_SRC emacs-lisp
   (setq ido-file-extensions-order '(".tex" ".txt" ".md" ".py" ".sh" ".el" ".xml" ".htm"))
 #+END_SRC
 
-Ignore files defined in variable completion-ignored-extensions.
+Ignore files defined in variable completion-ignored-extensions:
 
 #+BEGIN_SRC emacs-lisp
   (setq ido-ignore-extensions t)
 #+END_SRC
 
 Default keybinding is backspace key, but I use C-w in the non-Ido-mode minibuffers often,
-so this is more conventient for muscle memory.
+so this is more conventient for muscle memory:
 
 #+BEGIN_SRC emacs-lisp
   (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)
 #+END_SRC
 
 Stops Ido searching for similar-named files if I use C-x C-s to create a new
-file and buffer.
+file and buffer:
 
 #+BEGIN_SRC emacs-lisp
   (setq ido-auto-merge-work-directories-length -1)
 #+END_SRC
 
-Keep annoying buffers out of my face.
+Keep annoying buffers out of my face:
 
 #+BEGIN_SRC emacs-lisp
   (setq ido-ignore-buffers (list (rx (or (and bos  " ")
@@ -1460,7 +1462,7 @@ Keep annoying buffers out of my face.
                                               eos)))))
 #+END_SRC
 
-Allow spaces when using ido-find-file.
+Allow spaces when using ido-find-file:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'ido-make-file-list-hook
@@ -1469,7 +1471,7 @@ Allow spaces when using ido-find-file.
 #+END_SRC
 
 Use Ido for completing-read, such as describe-variable (C-h v) From
-http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13.
+http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13:
 
 #+BEGIN_SRC emacs-lisp
   ;; (defvar ido-enable-replace-completing-read t
@@ -1484,7 +1486,7 @@ http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13.
   ;;      (let (ido-enable-replace-completing-read) ad-do-it))")
 #+END_SRC
 
-Replace completing-read wherever possible, unless directed otherwise.
+Replace completing-read wherever possible, unless directed otherwise:
 
 #+BEGIN_SRC emacs-lisp
   ;;(defadvice completing-read
@@ -1512,7 +1514,7 @@ ido-completing-read, as it messes up dired-do-rename, and probably other stuff t
   ;;             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 #+END_SRC
 
-python.el doesn't like ido-completing-read either.
+python.el doesn't like ido-completing-read either:
 
 #+BEGIN_SRC emacs-lisp
   ;; (add-hook 'python-mode-hook
@@ -1522,7 +1524,7 @@ python.el doesn't like ido-completing-read either.
 
 ** Aspell
 
-Found from http://www.emacswiki.org/emacs/CocoAspell.
+Found from http://www.emacswiki.org/emacs/CocoAspell:
 
 #+BEGIN_SRC emacs-lisp
   (setq ispell-program-name "aspell"
@@ -1536,7 +1538,7 @@ Found from http://www.emacswiki.org/emacs/CocoAspell.
             ("english" ,@default))))
 #+END_SRC
 
-Save personal dictionary in emacs structure.
+Save personal dictionary in emacs structure:
 
 #+BEGIN_SRC emacs-lisp
   (setq ispell-personal-dictionary
@@ -1545,13 +1547,13 @@ Save personal dictionary in emacs structure.
 
 ** ibuffer
 
-Use ibuffer for my buffer menu (C-x C-b).
+Use ibuffer for my buffer menu (C-x C-b):
 
 #+BEGIN_SRC emacs-lisp
   (defalias 'list-buffers 'ibuffer)
 #+END_SRC
 
-ibuffer defaults to opening files with ibuffer-find-file; I prefer ido.
+ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'ibuffer-load-hook (lambda ()
@@ -1559,7 +1561,7 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido.
                                    (kbd "C-x C-f") 'ido-find-file)))
 #+END_SRC
 
-`* !' is what dired uses to clear all marks.
+`* !' is what dired uses to clear all marks:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'ibuffer-load-hook (lambda ()
@@ -1577,7 +1579,7 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido.
 
 ** Miscellaneous
 
-Turn off the menu bar, toolbar, and scrollbar.
+Turn off the menu bar, toolbar, and scrollbar:
 
 #+BEGIN_SRC emacs-lisp
   (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
@@ -1585,14 +1587,14 @@ Turn off the menu bar, toolbar, and scrollbar.
   (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 #+END_SRC
 
-Save (a longer) minibuffer history.
+Save (a longer) minibuffer history:
 
 #+BEGIN_SRC emacs-lisp
   (savehist-mode t)
   (setq history-length 1024)
 #+END_SRC
 
-A huge number forces windows to be split vertically, like C-x 3 does.
+A huge number forces windows to be split vertically, like C-x 3 does:
 
 #+BEGIN_SRC emacs-lisp
   ;; (setq split-height-threshold 900)
@@ -1602,20 +1604,20 @@ A huge number forces windows to be split vertically, like C-x 3 does.
   (setq tab-always-indent 'complete)
 #+END_SRC
 
-Enable narrowing.
+Enable narrowing:
 
 #+BEGIN_SRC emacs-lisp
   (put 'narrow-to-region 'disabled nil)
 #+END_SRC
 
-If using customize, save generated elisp here, not .emacs.
+If using customize, save generated elisp here, not .emacs:
 
 #+BEGIN_SRC emacs-lisp
   (setq custom-file (cjp-emacs-structure-dir ".customize.el"))
 #+END_SRC
 
 If saving a .el file in my emacs structure, automatically byte compile it.  From
-stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001.
+stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001:
 
 #+BEGIN_SRC emacs-lisp
   ;; (add-hook 'after-save-hook
@@ -1626,77 +1628,77 @@ stackoverflow.com/questions/154097/whats-in-your-emacs/2277001#2277001.
   ;;               (byte-compile-file buffer-file-name))))
 #+END_SRC
 
-Put auto save files here.
+Put auto save files here:
 
 #+BEGIN_SRC emacs-lisp
   (setq auto-save-list-file-prefix (cjp-emacs-structure-dir ".auto-save-list/.saves-"))
 #+END_SRC
 
-Store tetris scores.
+Store tetris scores:
 
 #+BEGIN_SRC emacs-lisp
   (setq tetris-score-file (cjp-emacs-structure-dir ".tetris-scores"))
 #+END_SRC
 
-Make scripts executable when saved by default (chmod +x).
+Make scripts executable when saved by default (chmod +x):
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 #+END_SRC
 
-These functions area disabled by default for new users. I want them!.
+These functions area disabled by default for new users. I want them!
 
 #+BEGIN_SRC emacs-lisp
   (put 'upcase-region 'disabled nil)
   (put 'downcase-region 'disabled nil)
 #+END_SRC
 
-Mode to use for the initial scratch buffer.
+Mode to use for the initial scratch buffer:
 
 #+BEGIN_SRC emacs-lisp
   ;; (setq-default initial-major-mode 'python-mode)
 #+END_SRC
 
 Word moving commands move point between CamelCaseWords
-FIXME: causes ERC issue --- http://osdir.com/ml/bug-gnu-emacs-gnu/2014-05/msg00914.html.
+FIXME: causes ERC issue --- http://osdir.com/ml/bug-gnu-emacs-gnu/2014-05/msg00914.html:
 
 #+BEGIN_SRC emacs-lisp
   ;; (global-subword-mode 1)
 #+END_SRC
 
-In Emacs 24.3.50+ (from git), modeline lists "," - stop this.
+In Emacs 24.3.50+ (from git), modeline lists "," - stop this:
 
 #+BEGIN_SRC emacs-lisp
   (let ((entry (assq 'subword-mode minor-mode-alist)))
     (when entry (setcdr entry '(nil))))
 #+END_SRC
 
-Don't always ask if I want to make a new file or buffer, just do it.
+Don't always ask if I want to make a new file or buffer, just do it:
 
 #+BEGIN_SRC emacs-lisp
   (setq confirm-nonexistent-file-or-buffer nil)
 #+END_SRC
 
-I use this function a lot so create a shortcut. M-x bc invokes it.
+I use this function a lot so create a shortcut. M-x bc invokes it:
 
 #+BEGIN_SRC emacs-lisp
   (defalias 'bc 'emacs-lisp-byte-compile)
 #+END_SRC
 
-Auto-fill mode is useful in text mode.
+Auto-fill mode is useful in text mode:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'text-mode-hook 'turn-on-auto-fill)
 #+END_SRC
 
 Remove the "This buffer is for notes" text that shows at the top of the scratch buffer
-when Emacs loads.
+when Emacs loads:
 
 #+BEGIN_SRC emacs-lisp
   (setq initial-scratch-message nil)
 #+END_SRC
 
-Store all backup files in one folder, not all over filesystem.
+Store all backup files in one folder, not all over filesystem:
 
 #+BEGIN_SRC emacs-lisp
   (setq backup-directory-alist (list (cons "." (cjp-emacs-structure-dir "backup/")))
@@ -1712,7 +1714,7 @@ Store all backup files in one folder, not all over filesystem.
         backup-by-copying-when-linked t)
 #+END_SRC
 
-Store all autosave files in one folder, not all over filesystem.
+Store all autosave files in one folder, not all over filesystem:
 
 #+BEGIN_SRC emacs-lisp
   (let ((save-dir (cjp-emacs-structure-dir "autosaves/")))
@@ -1721,8 +1723,8 @@ Store all autosave files in one folder, not all over filesystem.
                  `(".*" ,save-dir t) t))
 #+END_SRC
 
-From emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html Highlights
-comments like /* FIXME: do something */ in C-like (C, C++, Obj-C, etc.) languages.
+From [[http://emacs-fu.blogspot.com/2008/12/highlighting-todo-fixme-and-friends.html][emacs-fu]]. Highlights comments like /* FIXME: do something */ in C-like (C, C++,
+Obj-C, etc.) languages:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'c-mode-common-hook
@@ -1733,27 +1735,27 @@ comments like /* FIXME: do something */ in C-like (C, C++, Obj-C, etc.) language
 #+END_SRC
 
 Move mouse to top-right corner once it gets too close to cursor.  Move back once mouse
-moved away.
+moved away:
 
 #+BEGIN_SRC emacs-lisp
   (mouse-avoidance-mode 'exile)
 #+END_SRC
 
 Forces lines longer than buffer width to overlap in a nice way. I don't think I'm too
-keen on it, so turned it off for the time being.
+keen on it, so turned it off for the time being:
 
 #+BEGIN_SRC emacs-lisp
   (global-visual-line-mode 0)
 #+END_SRC
 
-Use nxml-mode for XML files.
+Use nxml-mode for XML files:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.xml\\'" . nxml-mode))
 #+END_SRC
 
 Modifies kill line and copy line (C-x C-k and M-w) in place. If something is selected,
-copy/cut as usual. If nothing is selected, copy/cut the current line.
+copy/cut as usual. If nothing is selected, copy/cut the current line:
 
 #+BEGIN_SRC emacs-lisp
   (defadvice kill-ring-save (before slick-copy activate compile)
@@ -1775,19 +1777,19 @@ copy/cut as usual. If nothing is selected, copy/cut the current line.
              (line-beginning-position 2)))))
 #+END_SRC
 
-Replace yes/no by y/n.
+Replace yes/no by y/n:
 
 #+BEGIN_SRC emacs-lisp
   (fset 'yes-or-no-p 'y-or-n-p)
 #+END_SRC
 
-Because I know where to find the help file.
+Because I know where to find the help file:
 
 #+BEGIN_SRC emacs-lisp
   (setq inhibit-splash-screen t)
 #+END_SRC
 
-Require C-x C-c prompt. I've closed too often by accident.
+Require C-x C-c prompt. I've closed too often by accident:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-c")
@@ -1796,7 +1798,7 @@ Require C-x C-c prompt. I've closed too often by accident.
                            (save-buffers-kill-emacs)))))
 #+END_SRC
 
-Always flash for parens.
+Always flash for parens:
 
 #+BEGIN_SRC emacs-lisp
   (show-paren-mode 1)
@@ -1804,7 +1806,7 @@ Always flash for parens.
 
 Set mode of buffer automatically based on filename or other indications (see
 set-auto-mode documentation), so can quickly make a temp. buffer (like *Scratch*) called
-'test.txt' to make it open in text-mode, or 'test.js' for javascript-mode, etc.
+'test.txt' to make it open in text-mode, or 'test.js' for javascript-mode, etc:
 
 #+BEGIN_SRC emacs-lisp
   (setq default-major-mode (lambda ()
@@ -1812,139 +1814,138 @@ set-auto-mode documentation), so can quickly make a temp. buffer (like *Scratch*
                                (set-auto-mode))))
 #+END_SRC
 
-Open new buffers (without files or filename extensions) in org-mode.
+Open new buffers (without files or filename extensions) in org-mode:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("" . org-mode) t)
 #+END_SRC
 
-Open log files in text mode, for now.
+Open log files in text mode, for now:
 
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'auto-mode-alist '("\\.log\\'" . text-mode))
 #+END_SRC
 
-Keep ispell word as M-s even when editing git commit logs.
+Keep ispell word as M-s even when editing git commit logs:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'log-edit-mode-hook
             (lambda () (define-key log-edit-mode-map (kbd "M-s") 'ispell-word)))
 #+END_SRC
 
-I like this mode; seems to be on by default under emacs-snapshot on GNU/Linux systems.
+I like this mode; seems to be on by default under emacs-snapshot on GNU/Linux systems:
 
 #+BEGIN_SRC emacs-lisp
   (transient-mark-mode 1)
 #+END_SRC
 
-Make the compilation window appear smallish (not half of frame as default).
+Make the compilation window appear smallish (not half of frame as default):
 
 #+BEGIN_SRC emacs-lisp
   (setq compilation-window-height 10)
 #+END_SRC
 
-Set default path to my inbox.
+Set default path to my inbox:
 
 #+BEGIN_SRC emacs-lisp
   ;; (setq default-directory "~/Documents/Inbox/")
 #+END_SRC
 
-True by default in Carbon Emacs. Set here for Aquamacs and other distros.
+True by default in Carbon Emacs. Set here for Aquamacs and other distros:
 
 #+BEGIN_SRC emacs-lisp
   (setq x-select-enable-clipboard t)
 #+END_SRC
 
-Mute annoying beep.
+Mute annoying beep:
 
 #+BEGIN_SRC emacs-lisp
   (setq visible-bell t)
 #+END_SRC
 
-Stop cursor from blinking.
+Stop cursor from blinking:
 
 #+BEGIN_SRC emacs-lisp
   (blink-cursor-mode -1)
 #+END_SRC
 
-Let emacsclient send stuff to existing Emacs process.
+Let emacsclient send stuff to existing Emacs process:
 
 #+BEGIN_SRC emacs-lisp
   (if (display-graphic-p)
       (server-start))
 #+END_SRC
 
-Don't use tabs.
+Don't use tabs:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default indent-tabs-mode nil)
 #+END_SRC
 
-Set auto-fill-mode to fill to column 89 (ideal for a 90 char width).
+Set auto-fill-mode to fill to column 89 (ideal for a 90 char width):
 
 #+BEGIN_SRC emacs-lisp
   (setq default-fill-column 89)
 #+END_SRC
 
-Set tab key to two spaces.
+Set tab key to two spaces:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default c-basic-offset 4)
 #+END_SRC
 
-Tab binary character in files interpreted as mod-4.
+Tab binary character in files interpreted as mod-4:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default tab-width 4)
 #+END_SRC
 
-Show column number as well as line number.
+Show column number as well as line number:
 
 #+BEGIN_SRC emacs-lisp
   (setq column-number-mode t)
 #+END_SRC
 
-My prefered code indentation style.
+My prefered code indentation style:
 
 #+BEGIN_SRC emacs-lisp
   (setq c-set-style "k&r")
 #+END_SRC
 
 When double-clicking a file to open in Emacs, make sure it opens in a new window in the
-current frame; the default (nil) causes Emacs to create a new frame.
+current frame; the default (nil) causes Emacs to create a new frame:
 
 #+BEGIN_SRC emacs-lisp
   (setq display-buffer-reuse-frames t)
 #+END_SRC
 
 When lines wrap, `next-line' drops to the next real line, not the next
-visual line.
+visual line:
 
 #+BEGIN_SRC emacs-lisp
   (setq line-move-visual t)
 #+END_SRC
 
-From
-masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine.
+From [[http://masteringemacs.org/articles/2011/10/02/improving-performance-emacs-display-engine][masteringemacs]]:
 
 #+BEGIN_SRC emacs-lisp
   (setq redisplay-dont-pause t)
 #+END_SRC
 
 If I open a symlink file that is backed by a VC'd regular file, don't ask me if I want to
-follow the link, just do it.
+follow the link, just do it:
 
 #+BEGIN_SRC emacs-lisp
   (setq vc-follow-symlinks t)
 #+END_SRC
 
-Use hl-line mode everywhere.
+Use hl-line mode everywhere:
 
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode)
 #+END_SRC
 
-Fix scrolling when using the mouse wheel or trackpad.
+Fix scrolling when using the mouse wheel or trackpad:
 
 #+BEGIN_SRC emacs-lisp
   (setq mouse-wheel-progressive-speed nil
@@ -1952,16 +1953,17 @@ Fix scrolling when using the mouse wheel or trackpad.
         scroll-conservatively 101)
 #+END_SRC
 
-Usually suspend-frame. Annoying.
+Usually suspend-frame. Annoying:
 
 #+BEGIN_SRC emacs-lisp
   (global-unset-key (kbd "C-z"))
 #+END_SRC
 
 When running commands like =query-replace=, always keep a few lines of context when the
-current match is at the bottom of the screen. Thanks to [[https://emacs.stackexchange.com/questions/10898/query-replace-leaves-potential-match-to-be-replaced-at-bottom-of-window/10903#10903][this answer on Stack Exchange]].
+current match is at the bottom of the screen. Thanks to [[https://emacs.stackexchange.com/questions/10898/query-replace-leaves-potential-match-to-be-replaced-at-bottom-of-window/10903#10903][this answer on Stack Exchange]]:
+
 #+BEGIN_SRC emacs-lisp
-  (setq-default scroll-margin 5)
+  (setq scroll-margin 5)
 #+END_SRC
 
 Save item in clipboard to the kill ring before killing:
