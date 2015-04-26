@@ -12,7 +12,7 @@
 
 ** w3m
 
-Use 'o' in w3m buffers to open current page in default Mac browser.
+Use 'o' in w3m buffers to open current page in default Mac browser:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'w3m-mode-hook
