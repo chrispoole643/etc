@@ -75,7 +75,7 @@ Use default Mac OS X browser, and move to trash when deleting stuff.
 Ignore .DS_Store files with ido mode.
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'ido-ignore-files "\\.DS_Store")
+;  (add-to-list 'ido-ignore-files "\\.DS_Store")
 #+END_SRC
 
 I prefer cmd key for meta, and the right cmd as super. Left alt is super, but right alt
