@@ -1960,7 +1960,12 @@ Usually suspend-frame. Annoying.
 
 When running commands like =query-replace=, always keep a few lines of context when the
 current match is at the bottom of the screen. Thanks to [[https://emacs.stackexchange.com/questions/10898/query-replace-leaves-potential-match-to-be-replaced-at-bottom-of-window/10903#10903][this answer on Stack Exchange]].
+#+BEGIN_SRC emacs-lisp
+  (setq-default scroll-margin 5)
+#+END_SRC
+
+Save item in clipboard to the kill ring before killing:
 
 #+BEGIN_SRC emacs-lisp
-  (setq scroll-margin 3)
+  (setq save-interprogram-paste-before-kill t)
 #+END_SRC
