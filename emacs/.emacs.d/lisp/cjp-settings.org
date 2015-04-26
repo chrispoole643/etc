@@ -192,6 +192,7 @@ Good setup advice from https://tuhdo.github.io/helm-intro.html.
 #+BEGIN_SRC emacs-lisp
   (require 'helm-config)
   (helm-mode 1)
+  (helm-adaptive-mode 1)
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -200,11 +201,12 @@ Good setup advice from https://tuhdo.github.io/helm-intro.html.
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (setq helm-split-window-in-side-p t     ; Open helm buffer inside current window
-        helm-move-to-line-cycle-in-source t
-        helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
-        helm-scroll-amount 8         ; scroll 8 lines other window using M-<next>/M-<prior>
-        helm-ff-file-name-history-use-recentf t)
+    (setq helm-split-window-in-side-p t     ; Open helm buffer inside current window
+          helm-move-to-line-cycle-in-source t
+          helm-ff-search-library-in-sexp t ; search for library in `require' and `declare-function' sexp.
+          helm-scroll-amount 8         ; scroll 8 lines other window using M-<next>/M-<prior>
+          helm-ff-file-name-history-use-recentf t
+          helm-yank-symbol-first t)
 #+END_SRC
 
 Fuzzy match where possible.
@@ -231,10 +233,13 @@ measure, in case your finger slips).
   (global-set-key (kbd "C-x b") 'helm-mini)
   (global-set-key (kbd "C-x C-r") 'helm-recentf)
   (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-  (global-set-key (kbd "C-x C-d") 'helm-find-files) ; Replace ido-dired, too
+  (global-set-key (kbd "C-x C-d") 'helm-find-files)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
   (global-set-key (kbd "C-c C-f") 'helm-semantic-or-imenu)
-  (global-set-key (kbd "C-h SPC") 'helm-all-mark-rings)
+  (global-set-key (kbd "C-.") 'helm-all-mark-rings)
+  (global-set-key (kbd "C-,") 'helm-filtered-bookmarks)
+  (global-set-key (kbd "C-h a") 'helm-apropos)
+  (global-set-key (kbd "C-S-s") 'helm-swoop)
 
   (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
   (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
@@ -280,8 +285,7 @@ Use thing at point when invoking helm-man-woman.
   (require 'helm-swoop)
 #+END_SRC
 
-Result of a question I asked on reddit:
-https://www.reddit.com/r/emacs/comments/334a7a/binding_to_trigger_helmswoop_multiline/cqj6xqd.
+=helm-swoop-multiline-from-helm-swoop= is a result of a [[https://www.reddit.com/r/emacs/comments/334a7a/binding_to_trigger_helmswoop_multiline/cqj6xqd][question I asked on reddit]]:
 
 #+BEGIN_SRC emacs-lisp
   (defun helm-swoop-multiline-from-helm-swoop ()
@@ -1292,6 +1296,12 @@ Use better defaults when opening files.
 #+BEGIN_SRC emacs-lisp
   (define-key org-mode-map (kbd "C-c C-'") 'org-edit-special)
   (define-key org-src-mode-map (kbd "C-c C-'") 'org-edit-src-exit)
+#+END_SRC
+
+Unbind =C-,= to prevent it overriding the global value of =helm-filtered-bookmarks=:
+
+#+BEGIN_SRC emacs-lisp
+  (define-key org-mode-map (kbd "C-,") nil)
 #+END_SRC
 
 *** Structure templates
