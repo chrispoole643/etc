@@ -114,14 +114,16 @@ Make using attachments easier.
 #+BEGIN_SRC emacs-lisp
   (define-key global-map (kbd "C-;") 'iedit-mode)
   (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-  (define-key iedit-mode-keymap (kbd "M-n") 'iedit-next-occurrence)
-  (define-key iedit-mode-keymap (kbd "M-p") 'iedit-prev-occurrence)
+  (eval-after-load "iedit" '(progn
+                              (define-key iedit-mode-keymap (kbd "M-n") 'iedit-next-occurrence)
+                              (define-key iedit-mode-keymap (kbd "M-p") 'iedit-prev-occurrence)))
 #+END_SRC
 
 *** Python
 
 #+BEGIN_SRC emacs-lisp
-  (define-key python-mode-map (kbd "<s-tab>") 'elpy-company-backend)
+  (eval-after-load "python"
+    '(define-key python-mode-map (kbd "<s-tab>") 'elpy-company-backend))
 #+END_SRC
 
 *** Magit
@@ -185,7 +187,8 @@ Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had to b
 undefined before it could be made to run windmove-left.
 
 #+BEGIN_SRC emacs-lisp
-  (define-key undo-tree-map (kbd "C-x u") nil)
+  (eval-after-load "undo-tree"
+    '(define-key undo-tree-map (kbd "C-x u") nil))
   (global-set-key (kbd "C-x o") 'other-window)
 #+END_SRC
 
