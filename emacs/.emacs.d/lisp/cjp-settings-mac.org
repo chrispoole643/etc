@@ -23,7 +23,7 @@ Use 'o' in w3m buffers to open current page in default Mac browser.
 
 ** AUCTeX
 
-Functions here to pass Skim the page information for SyncTeX from [[bleedingmind.com/index.php/2010/06/17/synctex-on-linux-and-mac-os-x-with-emacs/][bleedingmind.com]].
+Functions here to pass Skim the page information for SyncTeX from [[bleedingmind.com/index.php/2010/06/17/synctex-on-linux-and-mac-os-x-with-emacs/][bleedingmind.com]]:
 
 #+BEGIN_SRC emacs-lisp
   (defun skim-make-url ()
@@ -52,34 +52,34 @@ Functions here to pass Skim the page information for SyncTeX from [[bleedingmind
 
 First few from [[http://reddit.com/r/emacs/comments/ab5m7/whats_your_emacs_23_os_x_setup/][reddit]].
 
-Set font (Menlo default).
+Set font (Menlo default):
 
 #+BEGIN_SRC emacs-lisp
   (if (display-graphic-p)
       (cjp-set-font-size "11" nil t))
 #+END_SRC
 
-Enable sRGB --- when true, powerline colors don't match.
+Enable sRGB --- when true, powerline colors don't match:
 
 #+BEGIN_SRC emacs-lisp
   (setq ns-use-srgb-colorspace nil)
 #+END_SRC
 
-Use default Mac OS X browser, and move to trash when deleting stuff.
+Use default Mac OS X browser, and move to trash when deleting stuff:
 
 #+BEGIN_SRC emacs-lisp
   (setq delete-by-moving-to-trash t
         trash-directory "~/.Trash/emacs")
 #+END_SRC
 
-Ignore .DS_Store files with ido mode.
+Ignore .DS_Store files with ido mode:
 
 #+BEGIN_SRC emacs-lisp
 ;  (add-to-list 'ido-ignore-files "\\.DS_Store")
 #+END_SRC
 
 I prefer cmd key for meta, and the right cmd as super. Left alt is super, but right alt
-is unset, allowing me to type (right) alt-3 and get a # symbol.
+is unset, allowing me to type (right) alt-3 and get a # symbol:
 
 #+BEGIN_SRC emacs-lisp
   (setq mac-option-key-is-meta nil
@@ -91,14 +91,14 @@ is unset, allowing me to type (right) alt-3 and get a # symbol.
 #+END_SRC
 
 In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not forward as is
-usual. This fixes this behaviour.
+usual. This fixes this behaviour:
 
 #+BEGIN_SRC emacs-lisp
   (if (display-graphic-p)
       (normal-erase-is-backspace-mode 1))
 #+END_SRC
 
-When dragging files onto Emacs icon in dock, don't create a new frame.
+When dragging files onto Emacs icon in dock, don't create a new frame:
 
 #+BEGIN_SRC emacs-lisp
   (setq ns-pop-up-frames nil)

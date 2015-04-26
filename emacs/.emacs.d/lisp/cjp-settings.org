@@ -126,7 +126,7 @@ System-agnostic.
 
 ** Requirements and libraries
 
-These don't require their own section with other commands.
+These don't require their own section with other commands:
 
 #+BEGIN_SRC emacs-lisp
   (require 'cl)

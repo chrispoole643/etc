@@ -4,7 +4,7 @@ General, Mac, and Linux keybindings.
 
 ** Custom Binding Prefix
 
-Use /super-SPACE/ as a prefix for more complicated stuff.
+Use /super-SPACE/ as a prefix for more complicated stuff:
 
 #+BEGIN_SRC emacs-lisp
   (mapc (lambda (arg)
@@ -55,13 +55,13 @@ Use /super-SPACE/ as a prefix for more complicated stuff.
 
 **** Miscellaneous
 
-Search for things using the refile interface.
+Search for things using the refile interface:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-s-/") (lambda () (interactive) (org-refile '(4))))
 #+END_SRC
 
-Make using attachments easier.
+Make using attachments easier:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-s-o") 'org-attach-open)
@@ -134,20 +134,20 @@ Make using attachments easier.
 
 *** Miscellaneous
 
-Swap these round from usual; I find it more logical.
+Swap these round from usual; I find it more logical:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x +") 'what-cursor-position)
   (global-set-key (kbd "C-x =") 'balance-windows)
 #+END_SRC
 
-Sets current frame or window to width of 80 characters.
+Sets current frame or window to width of 80 characters:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x W") 'fix-horizontal-size)
 #+END_SRC
 
-Dictionary lookups.
+Dictionary lookups:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c s") 'dictionary-lookup-definition)
@@ -155,7 +155,7 @@ Dictionary lookups.
   (global-set-key (kbd "C-c m") 'dictionary-match-words)
 #+END_SRC
 
-TODO: remove this --- don't think I ever use it.
+TODO: remove this --- don't think I ever use it:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
@@ -164,7 +164,7 @@ TODO: remove this --- don't think I ever use it.
 
 Default keybindings of C-c <left> and C-c <right> are annoying to type if going back more
 than one or two window configurations. Use super key for higher level Emacs command like
-these to avoid interfering with modes.
+these to avoid interfering with modes:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-s-<left>") 'winner-undo)
@@ -176,7 +176,7 @@ these to avoid interfering with modes.
   (global-set-key (kbd "s-<down>")  'windmove-down)
 #+END_SRC
 
-Make scrolling easy.
+Make scrolling easy:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-<up>") '(lambda () (interactive) (scroll-down 1)))
@@ -184,7 +184,7 @@ Make scrolling easy.
 #+END_SRC
 
 Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had to be
-undefined before it could be made to run windmove-left.
+undefined before it could be made to run windmove-left:
 
 #+BEGIN_SRC emacs-lisp
   (eval-after-load "undo-tree"
@@ -196,21 +196,21 @@ undefined before it could be made to run windmove-left.
   (global-set-key (kbd "M-g") 'goto-line)
 #+END_SRC
 
-Spell word at point (Usually M-$).
+Spell word at point (Usually M-$):
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-s") 'ispell-word)
   (global-set-key (kbd "M-S") 'dictionary-lookup-definition)
 #+END_SRC
 
-I often hit C-x s by mistaken when I want C-x C-s, so bind it to the same command.
+I often hit C-x s by mistaken when I want C-x C-s, so bind it to the same command:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x s") 'save-buffer)
 #+END_SRC
 
 Backward kill word is used so often that this is useful, but kill-region is
-still needed, so move to C-x C-k.
+still needed, so move to C-x C-k:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-w") 'backward-kill-word)
@@ -219,7 +219,7 @@ still needed, so move to C-x C-k.
 #+END_SRC
 
 Since re-mapped C-w to backward-kill-word, and moved cut option to C-\, should move copy
-command too (M-w -> M-\). Re-map old M-\ -> M-w.
+command too (M-w -> M-\). Re-map old M-\ -> M-w:
 
 #+BEGIN_SRC emacs-lisp
   ;; (global-set-key (kbd "M-w") 'delete-horizontal-space)
@@ -229,7 +229,7 @@ command too (M-w -> M-\). Re-map old M-\ -> M-w.
 
 M-/ is used often to expand words as a basic tab completion, so map command to somewhere
 easier to press quickly, M-o (previously undefined), or M-i if I miss 'o' with my
-fingers.  M-/ also now bound to undo-tree-redo.
+fingers.  M-/ also now bound to undo-tree-redo:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-o") 'dabbrev-expand)
@@ -243,7 +243,7 @@ fingers.  M-/ also now bound to undo-tree-redo.
 #+END_SRC
 
 C-h h is usually view-hello-file. Forget it, and use handy C-h C-h to lookup stuff in
-info docs.
+info docs:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-h h") 'help-for-help)
@@ -251,7 +251,7 @@ info docs.
   (global-set-key (kbd "C-h C-u") 'cjp-load-url-w3m)
 #+END_SRC
 
-Open the current buffer with privileges given by /sudo/.
+Open the current buffer with privileges given by /sudo/:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-x C-V") 'find-alternative-file-with-sudo)
