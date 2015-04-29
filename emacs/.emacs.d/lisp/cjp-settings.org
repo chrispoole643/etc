@@ -248,7 +248,6 @@ Global bindings:
 
   (global-set-key (kbd "C-c C-f") 'helm-semantic-or-imenu)
   (global-set-key (kbd "C-'") 'helm-semantic-or-imenu)
-  (global-set-key (kbd "C-\"") 'helm-semantic-or-imenu)
 
   (global-set-key (kbd "C-.") 'helm-all-mark-rings)
   (global-set-key (kbd "C-,") 'helm-filtered-bookmarks)

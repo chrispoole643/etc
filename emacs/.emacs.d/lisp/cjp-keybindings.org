@@ -236,10 +236,10 @@ fingers.  M-/ also now bound to undo-tree-redo:
   (global-set-key (kbd "M-i") 'dabbrev-expand)
 #+END_SRC
 
+C-' is bound to =helm-semantic-or-imenu=; use this instead:
+
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-'") 'other-window)
   (global-set-key (kbd "C-\"") 'other-window)
-  (global-set-key (kbd "C-x B") 'ido-switch-buffer-other-window)
 #+END_SRC
 
 C-h h is usually view-hello-file. Forget it, and use handy C-h C-h to lookup stuff in
