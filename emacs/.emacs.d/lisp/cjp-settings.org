@@ -499,9 +499,7 @@ Same as powerline-default-theme, but move some of the items about a bit:
                                        (powerline-buffer-size face1 'r))
                                      (when powerline-display-mule-info
                                        (powerline-raw mode-line-mule-info face1 'r))
-                                     (powerline-raw "%4l" face1 'l)
-                                     (powerline-raw ":" face1 'l)
-                                     (powerline-raw "%3c" face1 'r)
+                                     (powerline-raw "%4l" face1 'r)
                                      (funcall separator-right face1 mode-line height)
                                      (powerline-raw " ")
                                      (powerline-raw "%6p" nil 'r)
@@ -1904,12 +1902,6 @@ Tab binary character in files interpreted as mod-4:
 
 #+BEGIN_SRC emacs-lisp
   (setq-default tab-width 4)
-#+END_SRC
-
-Show column number as well as line number:
-
-#+BEGIN_SRC emacs-lisp
-  (setq column-number-mode t)
 #+END_SRC
 
 My prefered code indentation style:
