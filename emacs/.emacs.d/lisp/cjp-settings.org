@@ -376,6 +376,12 @@ document might have indented lines:
   (popwin-mode 1)
 #+END_SRC
 
+Fix helm mode buffers at the bottom of the frame:
+
+#+BEGIN_SRC emacs-lisp
+  (push '("^\*helm.+\*$" :regexp t :position bottom) popwin:special-display-config)
+#+END_SRC
+
 ** Persp-mode
 
 #+BEGIN_SRC emacs-lisp
