@@ -58,7 +58,8 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
 Search for things using the refile interface:
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-s-/") (lambda () (interactive) (org-refile '(4))))
+  (global-set-key (kbd "C-s-/")
+  'gtd-helm-show-org-agenda-and-reference-files-headings)
 #+END_SRC
 
 Make using attachments easier:
