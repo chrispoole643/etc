@@ -1057,7 +1057,6 @@ displays "\" at the end of lines that wrap:
   (elpy-enable)
   (when (executable-find "ipython")
     (elpy-use-ipython))
-  (elpy-use-ipython)
 #+END_SRC
 
 ** Info
