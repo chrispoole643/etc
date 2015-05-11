@@ -1307,6 +1307,15 @@ Use better defaults when opening files:
   (setq org-attach-directory (expand-file-name "~/Support/Attachments/"))
 #+END_SRC
 
+*** MobileOrg
+
+#+BEGIN_SRC emacs-lisp
+  (setq org-mobile-inbox-for-pull org-default-notes-file)
+  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg")
+  (setq org-mobile-force-id-on-agenda-items nil)
+  (setq org-mobile-files gtd-agenda-and-reference-files)
+#+END_SRC
+
 *** Capture templates
 
 #+BEGIN_SRC emacs-lisp
