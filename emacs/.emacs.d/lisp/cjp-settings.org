@@ -246,7 +246,6 @@ Global bindings:
   (global-set-key (kbd "C-x C-d") 'helm-find-files)
   (global-set-key (kbd "C-x C-f") 'helm-find-files)
 
-  (global-set-key (kbd "C-c C-f") 'helm-semantic-or-imenu)
   (global-set-key (kbd "C-'") 'helm-semantic-or-imenu)
 
   (global-set-key (kbd "C-.") 'helm-all-mark-rings)
