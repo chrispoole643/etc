@@ -279,6 +279,13 @@ If the thing at point is a directory, go into the directory (as though hitting
                                   (helm-maybe-exit-minibuffer)))))
 #+END_SRC
 
+#+BEGIN_SRC emacs-lisp
+  (define-key helm-find-files-map (kbd "C-x C-f") (lambda () (interactive)
+                                                    (let ((current-prefix-arg '(4)))
+                                                      (helm-ff-run-browse-project))))
+  (define-key helm-find-files-map (kbd "C-x C-d") 'helm-ff-run-locate)
+#+END_SRC
+
 If the first two items in helm-find-files results are '.' and '..', and point would
 usually be on the first one, move point down by two:
 
