@@ -24,6 +24,7 @@
         paredit-forward-delete
         paredit-kill
         paredit-open-round
+        set-fill-column
         ))
 
 (setq mc/cmds-to-run-once
