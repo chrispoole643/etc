@@ -116,6 +116,9 @@ x3270.menuBar: false
 ! Don't reconnect automatically
 x3270.reconnect: false
 
+! Don't allow windows to be resized
+x3270.allowResize: false
+
 ! When pasting text, treat columns to the left of the cursor as a martin to 
 ! avoid printing into
 x3270.marginedPaste: true
