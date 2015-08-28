@@ -19,12 +19,17 @@
         org-kill-line
         org-open-line
         org-self-insert-command
+        org-shiftleft
+        org-shiftright
         org-yank
         paredit-doublequote
         paredit-forward-delete
         paredit-kill
         paredit-open-round
         set-fill-column
+        sp-backward-delete-char
+        sp-backward-kill-word
+        sp-delete-char
         ))
 
 (setq mc/cmds-to-run-once
