@@ -4,7 +4,7 @@ Set the font:
 
 #+BEGIN_SRC emacs-lisp
   (if (display-graphic-p)
-      (cjp-set-font-size "12" "Inconsolata" t))
+      (cjp-set-font-size "10" "Monospace" t))
 #+END_SRC
 
 Make Super another Meta key (useful for Mac keyboard):
