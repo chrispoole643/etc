@@ -27,6 +27,7 @@
         paredit-kill
         paredit-open-round
         set-fill-column
+        sh-assignment
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
