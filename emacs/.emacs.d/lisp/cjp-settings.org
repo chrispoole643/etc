@@ -462,6 +462,13 @@ Or, to enable "superpack" (a little bit hacky improvements):
   (require 'powerline)
 #+END_SRC
 
+Apply a powerline color offset to correct for the wrong colors of the powerline separators:
+
+#+BEGIN_SRC emacs-lisp
+  (load-library "powerline-srgb-offset")
+  (powerline-srgb-offset-activate "solarized-light")
+#+END_SRC
+
 Same as powerline-default-theme, but move some of the items about a bit:
 
 #+BEGIN_SRC emacs-lisp
