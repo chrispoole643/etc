@@ -50,6 +50,7 @@ System-agnostic.
 
                                   ;; Org
                                   org
+                                  org-plus-contrib
                                   ox-reveal
 
                                   ;; HTML
@@ -107,8 +108,8 @@ System-agnostic.
   (require 'package)
 
   (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/"))
+  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
   (setq package-enable-at-startup nil)
   (setq package-load-list '(all))
   (package-initialize)
@@ -184,6 +185,33 @@ Draw the underline at the same place as the descent line: looks better:
         ace-isearch-function-from-isearch 'helm-swoop-from-isearch
         ace-isearch-submode 'ace-jump-char-mode
         ace-isearch-use-ace-jump 'printing-char)
+#+END_SRC
+
+** Deft
+
+Set up deft to work how I like it to:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'deft)
+  (setq deft-directory "~/Support/Reference/Lists"
+        deft-recursive t
+        deft-use-filename-as-title t
+        deft-default-extension "md"
+        deft-use-filter-string-for-filename t
+        deft-auto-save-interval 30)
+  (global-set-key (kbd "<f9>") 'cjp-deft-clear-if-in-buffer)
+#+END_SRC
+
+I prefer a slightly different functionality to the default. If I'm already in the deft
+buffer, hit the same key again to clear the text that's already been entered:
+
+#+BEGIN_SRC emacs-lisp
+  (defun cjp-deft-clear-if-in-buffer ()
+    (interactive)
+    (if (and (boundp 'deft-buffer)
+             (equal (buffer-name) deft-buffer))
+        (deft-filter-clear)
+        (deft)))
 #+END_SRC
 
 ** Helm
