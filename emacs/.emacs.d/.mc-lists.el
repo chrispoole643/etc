@@ -5,7 +5,9 @@
       '(
         c-electric-delete-forward
         cua-copy-region
+        cua-cut-region
         cua-paste
+        helm-all-mark-rings
         helm-mini
         isearch-abort
         isearch-backward-regexp
