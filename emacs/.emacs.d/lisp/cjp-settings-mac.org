@@ -62,7 +62,7 @@ Set font (Menlo default):
 Enable sRGB --- when true, powerline colors don't match:
 
 #+BEGIN_SRC emacs-lisp
-  (setq ns-use-srgb-colorspace nil)
+  (setq ns-use-srgb-colorspace t)
 #+END_SRC
 
 Use default Mac OS X browser, and move to trash when deleting stuff:

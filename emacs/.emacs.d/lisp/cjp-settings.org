@@ -31,7 +31,6 @@ System-agnostic.
                                   ;; Elisp
                                   elisp-slime-nav
                                   litable
-                                  paredit
 
                                   ;; Scheme
                                   geiser
@@ -93,6 +92,7 @@ System-agnostic.
                                   regex-tool
                                   restclient
                                   scpaste
+                                  smartparens
                                   smex
                                   smooth-scrolling
                                   undo-tree
@@ -415,8 +415,10 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
   (eval-after-load "elpy" '(diminish 'elpy-mode " Ⓔ"))
   (eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
   (eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
+  (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode " Ⓗ"))
+  (eval-after-load "smartparens" '(diminish 'smartparens-mode " Ⓢ"))
+  (eval-after-load "magit" '(diminish 'magit-auto-revert-mode " Ⓜ"))
   (eval-after-load "org-indent" '(diminish 'org-indent-mode " Ⓞ"))
-  (eval-after-load "paredit" '(diminish 'paredit-mode " Ⓟ"))
   (eval-after-load "undo-tree" '(diminish 'undo-tree-mode " Ⓤ"))
 #+END_SRC
 
@@ -460,6 +462,13 @@ Or, to enable "superpack" (a little bit hacky improvements):
 
 #+BEGIN_SRC emacs-lisp
   (require 'powerline)
+#+END_SRC
+
+Apply a powerline color offset to correct for the wrong colors of the powerline separators:
+
+#+BEGIN_SRC emacs-lisp
+  (load-library "powerline-srgb-offset")
+  (powerline-srgb-offset-activate "solarized-light")
 #+END_SRC
 
 Same as powerline-default-theme, but move some of the items about a bit:
@@ -573,8 +582,8 @@ cperl-mode is preferred to perl-mode:
 
 ** IELM
 
-Start ielm with AC, ElDoc, and Paredit. Make it inherit local variables from the buffer
-it was invoked from:
+Start ielm with AC, ElDoc, and smartparens. Make it inherit local variables from the
+buffer it was invoked from:
 
 #+BEGIN_SRC emacs-lisp
   (defvar ielm-invoked-from-buffer nil)
@@ -591,7 +600,7 @@ it was invoked from:
               (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
               (auto-complete-mode 1)
               (eldoc-mode 1)
-              (paredit-mode 1)
+              (smartparens-mode 1)
               (ielm-change-working-buffer ielm-invoked-from-buffer)))
 #+END_SRC
 
@@ -967,15 +976,6 @@ Yasnippet doesn't play well with ansi-term:
   (setq c-eldoc-includes "-I./ -I../ -I/usr/include/ -I/usr/local/include/ ")
 #+END_SRC
 
-Make ElDoc aware of ParEdit's most used commands (ElDoc will automatically refresh the
-minibuffer):
-
-#+BEGIN_SRC emacs-lisp
-  (eldoc-add-command
-   'paredit-backward-delete
-   'paredit-close-round)
-#+END_SRC
-
 ** Eshell
 
 #+BEGIN_SRC emacs-lisp
@@ -1166,16 +1166,24 @@ http://synthcode.com/wiki/scheme-complete:
               (setq eldoc-documentation-function 'scheme-get-current-symbol-info)))
 #+END_SRC
 
-** Paredit
+** Smartparens
+
+#+BEGIN_SRC emacs-lisp
+  (require 'smartparens-config)
+  (smartparens-global-strict-mode)
+  (show-smartparens-global-mode)
+#+END_SRC
+
+** Paredit (deprecated)
 
 Taken from http://www.emacswiki.org/emacs/ParEdit:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (autoload 'paredit-mode "paredit"
     "Minor mode for pseudo-structurally editing Lisp code." t)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
   (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
   (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
@@ -1189,7 +1197,7 @@ Taken from http://www.emacswiki.org/emacs/ParEdit:
 Use C-w to backwards kill words, consistent with global custom settings. Also undefine
 C-left and C-right, to use these with winner mode:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (add-hook 'paredit-mode-hook
             (lambda ()
               (local-set-key (kbd "C-w") 'paredit-backward-kill-word)
@@ -1199,7 +1207,7 @@ C-left and C-right, to use these with winner mode:
 
 Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '(':
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (defun override-slime-repl-bindings-with-paredit ()
     (define-key slime-repl-mode-map
       (read-kbd-macro paredit-backward-delete-key) nil))
