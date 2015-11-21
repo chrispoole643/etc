@@ -25,7 +25,7 @@ System-agnostic.
                                   ein
                                   elpy
                                   pydoc-info
-                                  python-info
+                                  python3-info
                                   pyvenv
 
                                   ;; Elisp
