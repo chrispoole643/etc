@@ -67,8 +67,10 @@ System-agnostic.
                                   ace-jump-mode
                                   anzu
                                   auto-complete
+                                  beacon
                                   bookmark+
                                   cl-lib
+                                  deft
                                   dictionary
                                   diminish
                                   dired+
@@ -172,6 +174,12 @@ Draw the underline at the same place as the descent line: looks better:
 
 #+BEGIN_SRC emacs-lisp
   (load-theme 'solarized-light t)
+#+END_SRC
+
+** Beacon
+
+#+BEGIN_SRC emacs-lisp
+  (beacon-mode 1)
 #+END_SRC
 
 ** ace-isearch
