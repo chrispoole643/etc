@@ -6,6 +6,9 @@
 ;;;; generally-required files first, then those that are platform-specific.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(package-initialize)
+(setq package-enable-at-startup nil)
+
 ;;; Check to see if running on Mac OS X or some GNU/Linux distro
 (defvar macosxp (string-match "darwin" (symbol-name system-type)))
 (defvar linuxp (string-match "gnu/linux" (symbol-name system-type)))
