@@ -31,6 +31,7 @@ System-agnostic.
                                   ;; Elisp
                                   elisp-slime-nav
                                   litable
+                                  paredit
 
                                   ;; Scheme
                                   geiser
@@ -95,7 +96,6 @@ System-agnostic.
                                   regex-tool
                                   restclient
                                   scpaste
-                                  smartparens
                                   smex
                                   smooth-scrolling
                                   undo-tree
@@ -450,8 +450,8 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
   (eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
   (eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
   (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode " Ⓗ"))
-  (eval-after-load "smartparens" '(diminish 'smartparens-mode " Ⓢ"))
   (eval-after-load "org-indent" '(diminish 'org-indent-mode " Ⓞ"))
+  (eval-after-load "paredit" '(diminish 'paredit-mode " Ⓟ"))
   (eval-after-load "undo-tree" '(diminish 'undo-tree-mode " Ⓤ"))
   (eval-after-load "beacon" '(diminish 'beacon-mode))
 #+END_SRC
@@ -616,7 +616,7 @@ cperl-mode is preferred to perl-mode:
 
 ** IELM
 
-Start ielm with AC, ElDoc, and smartparens. Make it inherit local variables from the
+Start ielm with AC, ElDoc, and paredit. Make it inherit local variables from the
 buffer it was invoked from:
 
 #+BEGIN_SRC emacs-lisp
@@ -634,7 +634,7 @@ buffer it was invoked from:
               (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
               (auto-complete-mode 1)
               (eldoc-mode 1)
-              (smartparens-mode 1)
+              (paredit-mode 1)
               (ielm-change-working-buffer ielm-invoked-from-buffer)))
 #+END_SRC
 
@@ -1200,24 +1200,16 @@ http://synthcode.com/wiki/scheme-complete:
               (setq eldoc-documentation-function 'scheme-get-current-symbol-info)))
 #+END_SRC
 
-** Smartparens
-
-#+BEGIN_SRC emacs-lisp
-  (require 'smartparens-config)
-  (smartparens-global-strict-mode)
-  (show-smartparens-global-mode)
-#+END_SRC
-
-** Paredit (deprecated)
+** Paredit
 
 Taken from http://www.emacswiki.org/emacs/ParEdit:
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (autoload 'paredit-mode "paredit"
     "Minor mode for pseudo-structurally editing Lisp code." t)
 #+END_SRC
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (add-hook 'emacs-lisp-mode-hook       (lambda () (paredit-mode +1)))
   (add-hook 'lisp-mode-hook             (lambda () (paredit-mode +1)))
   (add-hook 'lisp-interaction-mode-hook (lambda () (paredit-mode +1)))
@@ -1231,7 +1223,7 @@ Taken from http://www.emacswiki.org/emacs/ParEdit:
 Use C-w to backwards kill words, consistent with global custom settings. Also undefine
 C-left and C-right, to use these with winner mode:
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (add-hook 'paredit-mode-hook
             (lambda ()
               (local-set-key (kbd "C-w") 'paredit-backward-kill-word)
@@ -1241,7 +1233,7 @@ C-left and C-right, to use these with winner mode:
 
 Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '(':
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp
   (defun override-slime-repl-bindings-with-paredit ()
     (define-key slime-repl-mode-map
       (read-kbd-macro paredit-backward-delete-key) nil))
