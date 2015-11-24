@@ -8,7 +8,7 @@
 
 source "$HOME/.zshrc-common-head"
 
-if [[ ${OSTYPE%%.*} == "darwin13" ]] || [[ ${OSTYPE%%.*} == "darwin14" ]]; then
+if [[ ${OSTYPE%%.*} == darwin* ]]; then
     platform="mac"
     source "$HOME/.zshrc-mac"
 elif [[ "$OSTYPE" == *linux* ]]; then
