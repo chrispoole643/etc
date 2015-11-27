@@ -70,9 +70,14 @@ alias oi='fasd -iae open'
 ## Variables
 ################################################################################
 
-
-cjp_gpg_key=BAD246F9
-
+# I use different keys for personal and work use. Since Dropbox isn't allowed at
+# work, it's reasonable to assume that if I don't see the directory, this is
+# running on my work machine.
+if [[ -d "$HOME/Dropbox" ]]; then
+    cjp_gpg_key=BAD246F9
+else
+    cjp_gpg_key=1DE85A0C
+fi
 
 ################################################################################
 ## Functions
@@ -84,7 +89,8 @@ _start-gpg-agent () {
     time=${1:-'1200'}          # 1200 seconds, 20 minutes
     eval $(gpg-agent -q --daemon --write-env-file "$HOME/.gpg-agent-info" \
         --default-cache-ttl "$time" --pinentry-program /usr/local/bin/pinentry \
-        --max-cache-ttl 86400) # 24 hours
+        --max-cache-ttl 86400 \ # 24 hours
+        --use-standard-socket)
 }
 
 # tmux
