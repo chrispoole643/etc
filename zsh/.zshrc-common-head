@@ -252,6 +252,11 @@ tmux_name=main
 ################################################################################
 
 
+# Golang
+gomkdir () {
+    echo mkdir -p "$GOPATH/src/github.com/chrispoole643/$2"
+}
+
 # gpg
 inform-emacs-gpg-agent () {
     agent_id=$(env | grep GPG_AGENT_INFO | awk -F '=' '{print $2}')
