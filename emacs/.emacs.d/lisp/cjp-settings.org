@@ -205,7 +205,7 @@ Set up deft to work how I like it to:
         deft-default-extension "md"
         deft-use-filter-string-for-filename t
         deft-auto-save-interval 30)
-  (global-set-key (kbd "<f9>") 'cjp-deft-clear-if-in-buffer)
+  (global-set-key (kbd "<f12>") 'cjp-deft-clear-if-in-buffer)
 #+END_SRC
 
 I prefer a slightly different functionality to the default. If I'm already in the deft
