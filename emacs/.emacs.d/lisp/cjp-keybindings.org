@@ -385,7 +385,7 @@ Open the current buffer with privileges given by /sudo/:
 
 *** F12
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (global-set-key (kbd "<f12>") (lambda () (interactive) (org-capture nil "i")))
   (global-set-key (kbd "<C-f12>") 'gtd-open-file)
   (global-set-key (kbd "<M-f12>") 'org-agenda)
