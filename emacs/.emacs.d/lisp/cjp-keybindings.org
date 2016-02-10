@@ -372,11 +372,16 @@ Open the current buffer with privileges given by /sudo/:
 *** F10
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f10>") 'epa-sign-region)
-  (global-set-key (kbd "<C-f10>") 'epa-encrypt-region)
-  (global-set-key (kbd "<M-f10>") 'epa-decrypt-region)
+  (global-set-key (kbd "<f9>") 'epa-sign-region)
+  (global-set-key (kbd "<C-f9>") 'epa-encrypt-region)
+  (global-set-key (kbd "<M-f9>") 'epa-decrypt-region)
 #+END_SRC
 
+*** F10
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f10>") 'cjp-mac-guess-open-file)
+#+END_SRC
 *** F11
 
 #+BEGIN_SRC emacs-lisp
@@ -396,7 +401,7 @@ Open the current buffer with privileges given by /sudo/:
 
 #+BEGIN_SRC emacs-lisp
   (when macosxp
-    (global-set-key (kbd "<f13>") 'cjp-mac-guess-open-file)
+    (global-set-key (kbd "<f13>") 'cjp-deft-clear-if-in-buffer)
     (global-set-key (kbd "<f14>") 'cjp-browse-url-on-line)
     (global-set-key (kbd "<M-f14>") 'cjp-browse-buffer)
     (global-set-key (kbd "<f15>") 'cjp-find-with-google)
