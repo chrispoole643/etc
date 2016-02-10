@@ -1027,7 +1027,7 @@ Using kramdown from ruby gem:
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-  (setq markdown-command "kramdown"
+  (setq markdown-command "mmd"
         ;; Use underscores for italics
         markdown-italic-underscore t
         markdown-indent-on-enter nil
