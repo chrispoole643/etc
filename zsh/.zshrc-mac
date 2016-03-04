@@ -16,7 +16,7 @@ LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 LC_CTYPE=C
 
-export PATH="$HOME/bin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/go/libexec/bin"
+export PATH="$HOME/bin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/coreutils/libexec/gnubin:/usr/local/opt/ruby/bin:/usr/local/bin:/usr/local/sbin:$HOME/.cabal/bin:/usr/texbin:/usr/local/Cellar/git/1.8.5.2/libexec/git-core:/usr/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/usr/local/opt/go/libexec/bin:/usr/local/texlive/2015/bin/x86_64-darwin"
 
 export GOPATH="$HOME/go-workspace"
 
