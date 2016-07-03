@@ -20,6 +20,13 @@ export PATH="$HOME/bin:/usr/local/opt/gnu-sed/libexec/gnubin:/usr/local/opt/core
 
 export GOPATH="$HOME/go-workspace"
 
+# Find and set JAVA_HOME to be the latest JDK installed
+cd /Library/Java/JavaVirtualMachines/
+cd $(ls | tail -1)
+cd Contents/Home/
+export JAVA_HOME=$(pwd)
+cd $HOME
+
 ################################################################################
 ## Aliases
 ################################################################################
