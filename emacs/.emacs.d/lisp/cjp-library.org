@@ -426,7 +426,8 @@
 #+BEGIN_SRC emacs-lisp
   (defun cjp-set-font-size (&optional size font allframes)
     "Set frame font (either FONT or by default `Menlo') to SIZE. If
-  SIZE isn't specified, prompt for input (defaulting to `10')."
+  SIZE isn't specified, prompt for input (defaulting to
+  `cjp-default-font-size')."
     (interactive)
     (if (>= emacs-major-version 23)
         (set-frame-font (concat (or font (if macosxp "Menlo" "Inconsolata"))
