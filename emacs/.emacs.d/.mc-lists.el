@@ -14,6 +14,7 @@
         isearch-exit
         isearch-forward-regexp
         isearch-printing-char
+        nxml-electric-slash
         org-beginning-of-line
         org-delete-char
         org-end-of-line
