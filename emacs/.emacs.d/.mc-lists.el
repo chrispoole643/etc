@@ -38,4 +38,5 @@
 (setq mc/cmds-to-run-once
       '(
         kmacro-start-macro-or-insert-counter
+        markdown-exdent-or-delete
         ))
