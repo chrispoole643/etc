@@ -202,7 +202,7 @@ Set up deft to work how I like it to:
   (setq deft-directory "~/Support/Reference/Lists"
         deft-recursive t
         deft-use-filename-as-title t
-        deft-default-extension (if workp "org" "md")
+        deft-default-extension md
         deft-use-filter-string-for-filename t
         deft-auto-save-interval 30)
   (global-set-key (kbd "<f12>") 'cjp-deft-clear-if-in-buffer)
