@@ -1633,6 +1633,13 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 
 ** Miscellaneous
 
+Enable [[https://www.gnu.org/savannah-checkouts/gnu/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html][desktop save mode]]:
+
+#+BEGIN_SRC emacs-lisp
+  (desktop-save-mode 1)
+  (add-to-list 'desktop-path (cjp-emacs-structure-dir "data/desktop"))
+#+END_SRC
+
 Turn off the menu bar, toolbar, and scrollbar:
 
 #+BEGIN_SRC emacs-lisp
