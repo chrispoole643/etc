@@ -55,8 +55,9 @@ First few from [[http://reddit.com/r/emacs/comments/ab5m7/whats_your_emacs_23_os
 Set font (Menlo default):
 
 #+BEGIN_SRC emacs-lisp
-  (if (display-graphic-p)
-      (cjp-set-font-size "11" nil t))
+  (when (display-graphic-p)
+    (setq cjp-default-font-size "11")
+    (cjp-set-font-size cjp-default-font-size nil t))
 #+END_SRC
 
 Enable sRGB --- when true, powerline colors don't match:
