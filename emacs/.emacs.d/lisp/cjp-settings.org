@@ -61,6 +61,48 @@ Other themes I sometimes use: /color-theme/, /monokai-theme/, and /tangotango-th
 Navigation, etc.
 
 *** Navigation
+**** Window and frame moving
+
+Turn on winner mode to move back and forwards between window configurations with C-c left
+and C-c right respectively:
+
+#+BEGIN_SRC emacs-lisp
+  (winner-mode 1)
+  (use-package framemove
+  :config
+  (setq framemove-hook-into-windmove t))
+#+END_SRC
+
+**** Smex
+:PROPERTIES:
+:tangle:   no
+:END:
+
+#+BEGIN_SRC emacs-lisp
+  (require 'smex)
+#+END_SRC
+
+Start smex, saving into Emacs structure:
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smex
+  :config
+  (setq smex-save-file (cjp-emacs-structure-dir ".smex-items")))
+#+END_SRC
+
+Smex updates its list of possible commands when run; don't let it:
+
+#+BEGIN_SRC emacs-lisp
+  (setq smex-auto-update t)
+#+END_SRC
+
+Update smex when Emacs has been idle for (default 60) seconds:
+
+#+BEGIN_SRC emacs-lisp
+  (smex-auto-update)
+  (smex-initialize)
+#+END_SRC
+
 **** Ido & Flx
 
 #+BEGIN_SRC emacs-lisp
@@ -344,6 +386,19 @@ Move up and down like isearch:
   (setq helm-swoop-use-line-number-face t)
 #+END_SRC
 *** Visual Improvements
+**** Uniquify
+
+#+BEGIN_SRC emacs-lisp
+  (require 'uniquify)
+#+END_SRC
+
+Instead of <2> etc. after buffer name when opening multiple files with the same name,
+Change it to "name" : "directory name":
+
+#+BEGIN_SRC emacs-lisp
+  (setq uniquify-buffer-name-style 'forward
+        uniquify-separator ":")
+#+END_SRC
 
 **** Anzu
 
@@ -427,6 +482,8 @@ in the mode-line in various search modes.
 #+END_SRC
 
 *** General
+
+These packages have no particular configuration; I just use them:
 
 #+BEGIN_SRC emacs-lisp
   (use-package expand-region)
@@ -556,68 +613,12 @@ Enable recent files mode:
   (recentf-mode t)
 #+END_SRC
 
-**** Uniquify
-
-#+BEGIN_SRC emacs-lisp
-  (require 'uniquify)
-#+END_SRC
-
-Instead of <2> etc. after buffer name when opening multiple files with the same name,
-Change it to "name" : "directory name":
-
-#+BEGIN_SRC emacs-lisp
-  (setq uniquify-buffer-name-style 'forward
-        uniquify-separator ":")
-#+END_SRC
-
 **** Undo-tree
 
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
   :config
   (global-undo-tree-mode 1))
-#+END_SRC
-
-**** Window and frame moving
-
-Turn on winner mode to move back and forwards between window configurations with C-c left
-and C-c right respectively:
-
-#+BEGIN_SRC emacs-lisp
-  (winner-mode 1)
-  (use-package framemove
-  :config
-  (setq framemove-hook-into-windmove t))
-#+END_SRC
-
-**** Smex
-:PROPERTIES:
-:tangle:   no
-:END:
-
-#+BEGIN_SRC emacs-lisp
-  (require 'smex)
-#+END_SRC
-
-Start smex, saving into Emacs structure:
-
-#+BEGIN_SRC emacs-lisp
-  (use-package smex
-  :config
-  (setq smex-save-file (cjp-emacs-structure-dir ".smex-items")))
-#+END_SRC
-
-Smex updates its list of possible commands when run; don't let it:
-
-#+BEGIN_SRC emacs-lisp
-  (setq smex-auto-update t)
-#+END_SRC
-
-Update smex when Emacs has been idle for (default 60) seconds:
-
-#+BEGIN_SRC emacs-lisp
-  (smex-auto-update)
-  (smex-initialize)
 #+END_SRC
 
 **** CUA
@@ -722,15 +723,6 @@ in the file (not just when Emacs quits):
         bmkp-bmenu-state-file (cjp-emacs-structure-dir ".emacs-bmk-bmenu-state.el")
         bmkp-bmenu-commands-file
         (cjp-emacs-structure-dir ".emacs-bmk-bmenu-commands.el"))
-#+END_SRC
-
-**** Magit
-
-#+BEGIN_SRC emacs-lisp
-  (use-package magit
-  :config
-  (setq magit-omit-untracked-dir-contents t
-        magit-last-seen-setup-instructions "1.4.0"))
 #+END_SRC
 
 **** Auto-complete
@@ -1037,6 +1029,15 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+*** Magit
+
+#+BEGIN_SRC emacs-lisp
+  (use-package magit
+  :config
+  (setq magit-omit-untracked-dir-contents t
+        magit-last-seen-setup-instructions "1.4.0"))
+#+END_SRC
+
 *** Ibuffer
 
 Use ibuffer for my buffer menu (C-x C-b):
