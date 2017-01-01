@@ -10,17 +10,17 @@ it's not already there. Always ensure packages being loaded are there
 
 #+BEGIN_SRC emacs-lisp
   (require 'package)
-(setq package-enable-at-startup nil)
+  (setq package-enable-at-startup nil)
   (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
   (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
   (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
   (setq package-load-list '(all))
-(package-initialize)
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(eval-when-compile
-  (require 'use-package))
+  (package-initialize)
+  (unless (package-installed-p 'use-package)
+    (package-refresh-contents)
+    (package-install 'use-package))
+  (eval-when-compile
+    (require 'use-package))
   (setq use-package-always-ensure t)
   (add-hook 'package-menu-mode-hook 'hl-line-mode)
 #+END_SRC
@@ -69,8 +69,8 @@ and C-c right respectively:
 #+BEGIN_SRC emacs-lisp
   (winner-mode 1)
   (use-package framemove
-  :config
-  (setq framemove-hook-into-windmove t))
+    :config
+    (setq framemove-hook-into-windmove t))
 #+END_SRC
 
 **** Smex
@@ -86,8 +86,8 @@ Start smex, saving into Emacs structure:
 
 #+BEGIN_SRC emacs-lisp
   (use-package smex
-  :config
-  (setq smex-save-file (cjp-emacs-structure-dir ".smex-items")))
+    :config
+    (setq smex-save-file (cjp-emacs-structure-dir ".smex-items")))
 #+END_SRC
 
 Smex updates its list of possible commands when run; don't let it:
@@ -107,15 +107,15 @@ Update smex when Emacs has been idle for (default 60) seconds:
 
 #+BEGIN_SRC emacs-lisp
   (use-package ido
-  :config
-  (setq ido-save-directory-list-file (cjp-emacs-structure-dir ".ido.last"))
-  (ido-mode t)
-  (setq ido-everywhere t
-        ido-enable-flex-matching t
-        ;; If a buffer name that doesn't exist is chosen, just make a new one without prompting
-        ido-create-new-buffer 'always
-        ;; Use flx faces
-        ido-use-faces nil))
+    :config
+    (setq ido-save-directory-list-file (cjp-emacs-structure-dir ".ido.last"))
+    (ido-mode t)
+    (setq ido-everywhere t
+          ido-enable-flex-matching t
+          ;; If a buffer name that doesn't exist is chosen, just make a new one without prompting
+          ido-create-new-buffer 'always
+          ;; Use flx faces
+          ido-use-faces nil))
 
   (use-package flx-ido)
 #+END_SRC
@@ -228,22 +228,22 @@ python.el doesn't like ido-completing-read either:
 
 #+BEGIN_SRC emacs-lisp
   (use-package ace-jump-mode
-  :config
-  (setq ace-jump-mode-case-sensitive-search nil))
+    :config
+    (setq ace-jump-mode-case-sensitive-search nil))
 #+END_SRC
 
 **** ace-isearch
 
 #+BEGIN_SRC emacs-lisp
   (use-package ace-isearch
-  :config
+    :config
     (global-ace-isearch-mode t)
-
+  
     (setq ace-isearch-input-idle-delay 0.4
-	  ace-isearch-input-length 10
-	  ace-isearch-function-from-isearch 'helm-swoop-from-isearch
-	  ace-isearch-submode 'ace-jump-char-mode
-	  ace-isearch-use-ace-jump 'printing-char))
+          ace-isearch-input-length 10
+          ace-isearch-function-from-isearch 'helm-swoop-from-isearch
+          ace-isearch-submode 'ace-jump-char-mode
+          ace-isearch-use-ace-jump 'printing-char))
 #+END_SRC
 
 **** Helm
@@ -281,7 +281,7 @@ slips).
           helm-locate-fuzzy-match nil
           helm-apropos-fuzzy-match nil
           helm-lisp-fuzzy-completion nil)
-
+  
     :bind
     (("M-x" . helm-M-x)
      ("C-x m" . helm-M-x)
@@ -297,7 +297,7 @@ slips).
      ("C-," . helm-filtered-bookmarks)
      ("C-h a" . helm-apropos)
      ("C-S-s" . helm-swoop)
-
+   
      ;; :map helm-map
      ;; ("<tab>" . helm-execute-persistent-action)
      ;; ("C-i" . helm-execute-persistent-action)
@@ -318,10 +318,10 @@ If the thing at point is a directory, go into the directory (as though hitting
 #+BEGIN_SRC emacs-lisp
   (define-key helm-find-files-map (kbd "<return>")
     '(lambda () (interactive) (let ((sel (helm-get-selection)))
-                                (if (and (file-directory-p sel)
-                                         (not (helm-ff-dot-file-p sel)))
-                                    (helm-execute-persistent-action)
-                                  (helm-maybe-exit-minibuffer)))))
+                           (if (and (file-directory-p sel)
+                                    (not (helm-ff-dot-file-p sel)))
+                               (helm-execute-persistent-action)
+                             (helm-maybe-exit-minibuffer)))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -337,9 +337,9 @@ usually be on the first one, move point down by two:
 #+BEGIN_SRC emacs-lisp
   (add-hook 'helm-after-update-hook
             (lambda () (when (and (helm-file-completion-source-p)
-                                  (not (helm-empty-source-p))
-                                  (string-match "/\\.$" (helm-get-selection)))
-                         (helm-next-line 2))))
+                             (not (helm-empty-source-p))
+                             (string-match "/\\.$" (helm-get-selection)))
+                    (helm-next-line 2))))
 #+END_SRC
 
 Use thing at point when invoking helm-man-woman:
@@ -407,71 +407,71 @@ in the mode-line in various search modes.
 
 #+BEGIN_SRC emacs-lisp
   (use-package anzu
-  :config
-  (global-anzu-mode t))
+    :config
+    (global-anzu-mode t))
 #+END_SRC
 
 **** Powerline
 
 #+BEGIN_SRC emacs-lisp
   (use-package powerline
-  :config
-;; Apply a powerline color offset to correct for the wrong colors of the powerline
-;; separators
-  (load-library "powerline-srgb-offset")
-  (powerline-srgb-offset-activate "solarized-light")
-
-;; Same as powerline-default-theme, but move some of the items about a bit
-  (setq-default mode-line-format
-                '("%e"
-                  (:eval
-                   (let* ((active (powerline-selected-window-active))
-                          (mode-line (if active 'mode-line 'mode-line-inactive))
-                          (face1 (if active 'powerline-active1 'powerline-inactive1))
-                          (face2 (if active 'powerline-active2 'powerline-inactive2))
-                          (separator-left (intern (format "powerline-%s-%s"
-                                                          (powerline-current-separator)
-                                                          (car powerline-default-separator-dir))))
-                          (separator-right (intern (format "powerline-%s-%s"
-                                                           (powerline-current-separator)
-                                                           (cdr powerline-default-separator-dir))))
-                          (height (when macosxp 20))
-                          (lhs (list (powerline-raw "%*" nil 'l)
-                                     (powerline-buffer-id nil 'l)
-                                     (powerline-vc nil 'l)
-                                     (when (and (boundp 'which-func-mode) which-func-mode)
-                                       (powerline-raw which-func-format nil 'l))
-                                     (powerline-raw " ")
-                                     (funcall separator-left mode-line face1 height)
-                                     (when (boundp 'erc-modified-channels-object)
-                                       (powerline-raw erc-modified-channels-object face1 'l))
-                                     (powerline-major-mode face1 'l)
-                                     (powerline-process face1)
-                                     (powerline-minor-modes face1 'l)
-                                     (powerline-narrow face1 'l)
-                                     (powerline-raw " " face1)
-                                     (funcall separator-left face1 face2 height)
-                                     (when (bound-and-true-p nyan-mode)
-                                       (powerline-raw (list (nyan-create)) face2 'l))))
-                          (rhs (list (powerline-raw global-mode-string face2 'r)
-                                     (funcall separator-right face2 face1 height)
-                                     (powerline-raw " " face1)
-                                     (unless window-system
-                                       (powerline-raw (char-to-string #xe0a1) face1 'l))
-                                     (when powerline-display-buffer-size
-                                       (powerline-buffer-size face1 'r))
-                                     (when powerline-display-mule-info
-                                       (powerline-raw mode-line-mule-info face1 'r))
-                                     (powerline-raw "%4l" face1 'r)
-                                     (funcall separator-right face1 mode-line height)
-                                     (powerline-raw " ")
-                                     (powerline-raw "%6p" nil 'r)
-                                     (when powerline-display-hud
-                                       (powerline-hud face2 face1)))))
-                     (concat (powerline-render lhs)
-                             (powerline-fill face2 (powerline-width rhs))
-                             (powerline-render rhs))))))
-  (setq powerline-default-separator 'wave))
+    :config
+    ;; Apply a powerline color offset to correct for the wrong colors of the powerline
+    ;; separators
+    (load-library "powerline-srgb-offset")
+    (powerline-srgb-offset-activate "solarized-light")
+  
+    ;; Same as powerline-default-theme, but move some of the items about a bit
+    (setq-default mode-line-format
+                  '("%e"
+                    (:eval
+                     (let* ((active (powerline-selected-window-active))
+                            (mode-line (if active 'mode-line 'mode-line-inactive))
+                            (face1 (if active 'powerline-active1 'powerline-inactive1))
+                            (face2 (if active 'powerline-active2 'powerline-inactive2))
+                            (separator-left (intern (format "powerline-%s-%s"
+                                                            (powerline-current-separator)
+                                                            (car powerline-default-separator-dir))))
+                            (separator-right (intern (format "powerline-%s-%s"
+                                                             (powerline-current-separator)
+                                                             (cdr powerline-default-separator-dir))))
+                            (height (when macosxp 20))
+                            (lhs (list (powerline-raw "%*" nil 'l)
+                                       (powerline-buffer-id nil 'l)
+                                       (powerline-vc nil 'l)
+                                       (when (and (boundp 'which-func-mode) which-func-mode)
+                                         (powerline-raw which-func-format nil 'l))
+                                       (powerline-raw " ")
+                                       (funcall separator-left mode-line face1 height)
+                                       (when (boundp 'erc-modified-channels-object)
+                                         (powerline-raw erc-modified-channels-object face1 'l))
+                                       (powerline-major-mode face1 'l)
+                                       (powerline-process face1)
+                                       (powerline-minor-modes face1 'l)
+                                       (powerline-narrow face1 'l)
+                                       (powerline-raw " " face1)
+                                       (funcall separator-left face1 face2 height)
+                                       (when (bound-and-true-p nyan-mode)
+                                         (powerline-raw (list (nyan-create)) face2 'l))))
+                            (rhs (list (powerline-raw global-mode-string face2 'r)
+                                       (funcall separator-right face2 face1 height)
+                                       (powerline-raw " " face1)
+                                       (unless window-system
+                                         (powerline-raw (char-to-string #xe0a1) face1 'l))
+                                       (when powerline-display-buffer-size
+                                         (powerline-buffer-size face1 'r))
+                                       (when powerline-display-mule-info
+                                         (powerline-raw mode-line-mule-info face1 'r))
+                                       (powerline-raw "%4l" face1 'r)
+                                       (funcall separator-right face1 mode-line height)
+                                       (powerline-raw " ")
+                                       (powerline-raw "%6p" nil 'r)
+                                       (when powerline-display-hud
+                                         (powerline-hud face2 face1)))))
+                       (concat (powerline-render lhs)
+                               (powerline-fill face2 (powerline-width rhs))
+                               (powerline-render rhs))))))
+    (setq powerline-default-separator 'wave))
 #+END_SRC
 
 **** Beacon
@@ -549,8 +549,8 @@ Save personal dictionary in emacs structure:
 
 #+BEGIN_SRC emacs-lisp
   (use-package yasnippet
-  :config
-  (yas-global-mode 1))
+    :config
+    (yas-global-mode 1))
 #+END_SRC
 
 Store my personal snippets in ~/emacs/snippets, still load the stock ones:
@@ -617,8 +617,8 @@ Enable recent files mode:
 
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
-  :config
-  (global-undo-tree-mode 1))
+    :config
+    (global-undo-tree-mode 1))
 #+END_SRC
 
 **** CUA
@@ -635,18 +635,18 @@ Turn on for rectangle mode only:
 
 #+BEGIN_SRC emacs-lisp
   (use-package dictionary
-  :config
-  (autoload 'dictionary-search "dictionary"
-    "Ask for a word and search it in all dictionaries" t)
-  (autoload 'dictionary-match-words "dictionary"
-    "Ask for a word and search all matching words in the dictionaries" t)
-  (autoload 'dictionary-lookup-definition "dictionary"
-    "Unconditionally lookup the word at point." t)
-  (autoload 'dictionary "dictionary"
-    "Create a new dictionary buffer" t)
-
-  (setq dictionary-default-strategy "re"
-        dictionary-use-single-buffer t))
+    :config
+    (autoload 'dictionary-search "dictionary"
+      "Ask for a word and search it in all dictionaries" t)
+    (autoload 'dictionary-match-words "dictionary"
+      "Ask for a word and search all matching words in the dictionaries" t)
+    (autoload 'dictionary-lookup-definition "dictionary"
+      "Unconditionally lookup the word at point." t)
+    (autoload 'dictionary "dictionary"
+      "Create a new dictionary buffer" t)
+  
+    (setq dictionary-default-strategy "re"
+          dictionary-use-single-buffer t))
 #+END_SRC
 **** Flymake
 
@@ -667,7 +667,7 @@ Use pyflakes with flymake:
                           temp-file
                           (file-name-directory buffer-file-name))))
         (list "pyflakes" (list local-file))))
-
+  
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.py\\'" flymake-pyflakes-init)))
 #+END_SRC
@@ -682,15 +682,15 @@ Further details: http://www.emacswiki.org/emacs/Edit_with_Emacs.
 #+BEGIN_SRC emacs-lisp
   (when (display-graphic-p)
     (use-package edit-server
-    :config
-    (setq edit-server-new-frame nil)
-    (edit-server-start)
-
-    ;; Use markdown mode, but still use C-c C-c to send back to Chrome
-    (add-hook 'edit-server-start-hook
-              (lambda ()
-                (markdown-mode)
-                (local-set-key (kbd "C-c C-c") 'edit-server-done)))))
+      :config
+      (setq edit-server-new-frame nil)
+      (edit-server-start)
+    
+      ;; Use markdown mode, but still use C-c C-c to send back to Chrome
+      (add-hook 'edit-server-start-hook
+                (lambda ()
+                  (markdown-mode)
+                  (local-set-key (kbd "C-c C-c") 'edit-server-done)))))
 #+END_SRC
 
 **** DocView
@@ -729,15 +729,15 @@ in the file (not just when Emacs quits):
 
 #+BEGIN_SRC emacs-lisp
   (use-package auto-complete
-  :config
-  (require 'auto-complete-config)
-
-  (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
-        ac-fuzzy-enable t)
-
-  (add-to-list 'ac-dictionary-directories
-               (cjp-emacs-structure-dir "auto-complete/dict" "lisp"))
-  (ac-config-default))
+    :config
+    (require 'auto-complete-config)
+  
+    (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
+          ac-fuzzy-enable t)
+  
+    (add-to-list 'ac-dictionary-directories
+                 (cjp-emacs-structure-dir "auto-complete/dict" "lisp"))
+    (ac-config-default))
 #+END_SRC
 
 ** Development
@@ -748,15 +748,14 @@ in the file (not just when Emacs quits):
 
 #+BEGIN_SRC emacs-lisp
   (use-package slime
-  :config
-(setq inferior-lisp-program "/usr/local/bin/sbcl")
-  ;;(slime-setup '(slime-fancy))
-;; Auto-complete
-  (add-hook 'slime-mode-hook 'set-up-slime-ac)
-  (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-  (eval-after-load "auto-complete"
-    '(add-to-list 'ac-modes 'slime-repl-mode))
-)
+    :config
+    (setq inferior-lisp-program "/usr/local/bin/sbcl")
+    ;;(slime-setup '(slime-fancy))
+    ;; Auto-complete
+    (add-hook 'slime-mode-hook 'set-up-slime-ac)
+    (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+    (eval-after-load "auto-complete"
+      '(add-to-list 'ac-modes 'slime-repl-mode)))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
@@ -767,11 +766,11 @@ in the file (not just when Emacs quits):
 
 #+BEGIN_SRC emacs-lisp
   (use-package redshank
-  :config
-  (require 'redshank-loader)
-  (eval-after-load "redshank-loader"
-    `(redshank-setup '(lisp-mode-hook
-                       slime-repl-mode-hook) t)))
+    :config
+    (require 'redshank-loader)
+    (eval-after-load "redshank-loader"
+      `(redshank-setup '(lisp-mode-hook
+                         slime-repl-mode-hook) t)))
 #+END_SRC
 **** Clojure
 
@@ -887,17 +886,17 @@ Turn 'lambda' into the Greek letter:
 
 #+BEGIN_SRC emacs-lisp
   (use-package pretty-lambdada
-  :config
-  ;; (setq cjp-lispy-modes '(lisp-mode-hook paredit-mode-hook))
-  ;; (mapc (lambda (x) (add-hook x 'pretty-lambda)) cjp-lispy-modes)
-  (add-hook 'lisp-interaction-mode-hook 'pretty-lambda)
-  (add-hook 'emacs-lisp-mode-hook 'pretty-lambda)
-  (add-hook 'lisp-mode-hook 'pretty-lambda)
-  (add-hook 'slime-mode-hook 'pretty-lambda)
-  (add-hook 'slime-mode-hook 'pretty-lambda)
-  (add-hook 'slime-repl-mode-hook 'pretty-lambda)
-  (add-hook 'scheme-mode-hook 'pretty-lambda)
-  (add-hook 'inferior-scheme-mode-hook 'pretty-lambda))
+    :config
+    ;; (setq cjp-lispy-modes '(lisp-mode-hook paredit-mode-hook))
+    ;; (mapc (lambda (x) (add-hook x 'pretty-lambda)) cjp-lispy-modes)
+    (add-hook 'lisp-interaction-mode-hook 'pretty-lambda)
+    (add-hook 'emacs-lisp-mode-hook 'pretty-lambda)
+    (add-hook 'lisp-mode-hook 'pretty-lambda)
+    (add-hook 'slime-mode-hook 'pretty-lambda)
+    (add-hook 'slime-mode-hook 'pretty-lambda)
+    (add-hook 'slime-repl-mode-hook 'pretty-lambda)
+    (add-hook 'scheme-mode-hook 'pretty-lambda)
+    (add-hook 'inferior-scheme-mode-hook 'pretty-lambda))
 #+END_SRC
 
 ***** Paredit
@@ -990,8 +989,8 @@ displays "\" at the end of lines that wrap:
 
 #+BEGIN_SRC emacs-lisp
   (use-package ein
-  :config
-  (setq ein:use-auto-complete t))
+    :config
+    (setq ein:use-auto-complete t))
 #+END_SRC
 
 Or, to enable "superpack" (a little bit hacky improvements):
@@ -1033,9 +1032,9 @@ Or, to enable "superpack" (a little bit hacky improvements):
 
 #+BEGIN_SRC emacs-lisp
   (use-package magit
-  :config
-  (setq magit-omit-untracked-dir-contents t
-        magit-last-seen-setup-instructions "1.4.0"))
+    :config
+    (setq magit-omit-untracked-dir-contents t
+          magit-last-seen-setup-instructions "1.4.0"))
 #+END_SRC
 
 *** Ibuffer
@@ -1070,19 +1069,20 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
     :config
     ;; These allow AUCTeX to parse TeX files automatically. Creates 'auto' directory with
     ;; parse info for each TeX file, got annoying so disabled for now.
-
+  
     ;; (setq TeX-auto-save t)
-
-    (setq TeX-parse-self t
-          ;; Use pdflatex as default mode in AuCTEX, always
-          TeX-PDF-mode t
+  
+    (setq ;; Use pdflatex as default mode in AuCTEX, always
+          TeX-parse-self t
           ;; TeX-electric-sub-and-superscript nil
-          )
+          TeX-PDF-mode t)
+  
     ;; Enable math mode and auto-fill when typing LaTeX, and RefTeX:
     (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
     (add-hook 'LaTeX-mode-hook (lambda () (TeX-source-correlate-mode 1)))
+  
     ;; Use tex parser so that TeX commands aren't checked:
     (add-hook 'LaTeX-mode-hook (lambda () (setq ispell-parser 'tex)))
     (setq TeX-source-correlate-method 'synctex)
@@ -1230,17 +1230,17 @@ Unbind =C-,= to prevent it overriding the global value of =helm-filtered-bookmar
 
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
-:config
-  (setq markdown-command "mmd"
-        ;; Use underscores for italics
-        markdown-italic-underscore t
-        markdown-indent-on-enter nil
-        ;; Enable syntax highlighting (LaTeX)
-        markdown-enable-math t)
-;; Webgen uses markdown syntax in .page files
-  (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-  (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode)))
+    :config
+    (setq markdown-command "mmd"
+          ;; Use underscores for italics
+          markdown-italic-underscore t
+          markdown-indent-on-enter nil
+          ;; Enable syntax highlighting (LaTeX)
+          markdown-enable-math t)
+    ;; Webgen uses markdown syntax in .page files
+    (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+    (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode)))
 
   (use-package markdown-mode+)
 #+END_SRC
@@ -1326,17 +1326,16 @@ The default fonts don't look nice with Tango theme, at least to my eyes:
 
 #+BEGIN_SRC emacs-lisp
   (use-package irfc
-  :config
-  (setq irfc-assoc-mode t))
+    :config
+    (setq irfc-assoc-mode t))
 #+END_SRC
 
 *** Zencoding
 
 #+BEGIN_SRC emacs-lisp
   (use-package zencoding-mode
-  :config
-  (add-hook 'sgml-mode-hook 'zencoding-mode))
-  
+    :config
+    (add-hook 'sgml-mode-hook 'zencoding-mode))
 #+END_SRC
 
 *** Deft
@@ -1346,22 +1345,23 @@ functionality to the default. If I'm already in the deft buffer, hit
 the same key again to clear the text that's already been entered.
 
 #+BEGIN_SRC emacs-lisp
-(use-package deft
-:config
-  (setq deft-directory "~/Support/Reference/Lists"
-        deft-recursive t
-        deft-use-filename-as-title t
-        deft-default-extension "md"
-        deft-use-filter-string-for-filename t
-        deft-auto-save-interval 30)
-  (global-set-key (kbd "<f12>") 'cjp-deft-clear-if-in-buffer)
-  (define-key deft-mode-map (kbd "<C-return>") 'deft-new-file))
+  (use-package deft
+    :config
+    (setq deft-directory "~/Support/Reference/Lists"
+          deft-recursive t
+          deft-use-filename-as-title t
+          deft-default-extension "md"
+          deft-use-filter-string-for-filename t
+          deft-auto-save-interval 30)
+    (global-set-key (kbd "<f12>") 'cjp-deft-clear-if-in-buffer)
+    (define-key deft-mode-map (kbd "<C-return>") 'deft-new-file))
+
   (defun cjp-deft-clear-if-in-buffer ()
     (interactive)
     (if (and (boundp 'deft-buffer)
              (equal (buffer-name) deft-buffer))
         (deft-filter-clear)
-        (deft)))
+      (deft)))
 #+END_SRC
 
 *** Restclient
@@ -1370,13 +1370,12 @@ Don't change window focus to the output window when submitting a command:
 
 #+BEGIN_SRC emacs-lisp
   (use-package restclient
-  :config
-  (eval-after-load "restclient-autoloads"
-    '(add-hook 'restclient-mode-hook
-               (lambda () (local-set-key (kbd "C-c C-c")
-                                         '(lambda () (interactive)
-                                            (restclient-http-send-current nil t))))))
-)
+    :config
+    (eval-after-load "restclient-autoloads"
+      '(add-hook 'restclient-mode-hook
+                 (lambda () (local-set-key (kbd "C-c C-c")
+                                      '(lambda () (interactive)
+                                         (restclient-http-send-current nil t)))))))
 #+END_SRC
 
 *** Writeroom
@@ -1386,8 +1385,8 @@ document might have indented lines:
 
 #+BEGIN_SRC emacs-lisp
   (use-package writeroom-mode
-  :config
-  (setq writeroom-width 100))
+    :config
+    (setq writeroom-width 100))
 #+END_SRC
 
 *** Popwin
@@ -1396,9 +1395,9 @@ Fix helm mode buffers at the bottom of the frame.
 
 #+BEGIN_SRC emacs-lisp
   (use-package popwin
-  :config
-  (popwin-mode 1)
-  (push '("^\*helm.+\*$" :regexp t :position bottom) popwin:special-display-config))
+    :config
+    (popwin-mode 1)
+    (push '("^\*helm.+\*$" :regexp t :position bottom) popwin:special-display-config))
 #+END_SRC
 
 *** Persp-mode
@@ -1415,19 +1414,19 @@ Fix helm mode buffers at the bottom of the frame.
 
 #+BEGIN_SRC emacs-lisp
   (use-package diminish
-  :config
-  (eval-after-load "auto-complete" '(diminish 'auto-complete-mode " Ⓐ"))
-  (eval-after-load "abbrev" '(diminish 'abbrev-mode " Ⓐ"))
-  (eval-after-load "ace-isearch" '(diminish 'ace-isearch-mode " Ⓐ"))
-  (eval-after-load "anzu" '(diminish 'anzu-mode " Ⓐ"))
-  (eval-after-load "elpy" '(diminish 'elpy-mode " Ⓔ"))
-  (eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
-  (eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
-  (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode " Ⓗ"))
-  (eval-after-load "org-indent" '(diminish 'org-indent-mode " Ⓞ"))
-  (eval-after-load "paredit" '(diminish 'paredit-mode " Ⓟ"))
-  (eval-after-load "undo-tree" '(diminish 'undo-tree-mode " Ⓤ"))
-  (eval-after-load "beacon" '(diminish 'beacon-mode)))
+    :config
+    (eval-after-load "auto-complete" '(diminish 'auto-complete-mode " Ⓐ"))
+    (eval-after-load "abbrev" '(diminish 'abbrev-mode " Ⓐ"))
+    (eval-after-load "ace-isearch" '(diminish 'ace-isearch-mode " Ⓐ"))
+    (eval-after-load "anzu" '(diminish 'anzu-mode " Ⓐ"))
+    (eval-after-load "elpy" '(diminish 'elpy-mode " Ⓔ"))
+    (eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
+    (eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
+    (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode " Ⓗ"))
+    (eval-after-load "org-indent" '(diminish 'org-indent-mode " Ⓞ"))
+    (eval-after-load "paredit" '(diminish 'paredit-mode " Ⓟ"))
+    (eval-after-load "undo-tree" '(diminish 'undo-tree-mode " Ⓤ"))
+    (eval-after-load "beacon" '(diminish 'beacon-mode)))
 #+END_SRC
 
 Alphanumeric unicode characters with circles around them are listed on
