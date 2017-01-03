@@ -4,34 +4,12 @@ System-agnostic.
 
 ** Initial Configuration
 
-Define org and melpa as package sources, and install /use-package/ if
-it's not already there. Always ensure packages being loaded are there
-(or else it'll automatically download from melpa).
-
-#+BEGIN_SRC emacs-lisp
-  (require 'package)
-  (setq package-enable-at-startup nil)
-  (setq package-user-dir (cjp-emacs-structure-dir "elpa"))
-  (add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("org" . "http://orgmode.org/elpa/") t)
-  (setq package-load-list '(all))
-  (package-initialize)
-  (unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-  (eval-when-compile
-    (require 'use-package))
-  (setq use-package-always-ensure t)
-  (add-hook 'package-menu-mode-hook 'hl-line-mode)
-#+END_SRC
-
 *** Requirements
 
 These don't require their own section with other commands:
 
 #+BEGIN_SRC emacs-lisp
   (use-package cl-lib)
-  ;;(require 'cl) No longer required; replaced by cl-lib
   (require 'generic-x)
   (require 'smallurl)
 #+END_SRC
@@ -75,16 +53,16 @@ and C-c right respectively:
 
 **** Smex
 :PROPERTIES:
-:tangle:   no
+:tangle no
 :END:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (require 'smex)
 #+END_SRC
 
 Start smex, saving into Emacs structure:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package smex
     :config
     (setq smex-save-file (cjp-emacs-structure-dir ".smex-items")))
@@ -92,13 +70,13 @@ Start smex, saving into Emacs structure:
 
 Smex updates its list of possible commands when run; don't let it:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (setq smex-auto-update t)
 #+END_SRC
 
 Update smex when Emacs has been idle for (default 60) seconds:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (smex-auto-update)
   (smex-initialize)
 #+END_SRC
@@ -281,7 +259,7 @@ slips).
           helm-locate-fuzzy-match nil
           helm-apropos-fuzzy-match nil
           helm-lisp-fuzzy-completion nil)
-  
+
     :bind
     (("M-x" . helm-M-x)
      ("C-x m" . helm-M-x)
@@ -297,19 +275,14 @@ slips).
      ("C-," . helm-filtered-bookmarks)
      ("C-h a" . helm-apropos)
      ("C-S-s" . helm-swoop)
-   
-     ;; :map helm-map
-     ;; ("<tab>" . helm-execute-persistent-action)
-     ;; ("C-i" . helm-execute-persistent-action)
-     ;; ("C-<tab>" . helm-select-action)
-     ;; ("C-w" . backward-kill-word)
-     ;; ("M-n" . helm-next-source)
-     ;; ("M-p" . helm-previous-source)
-     ;;:map helm-find-files-map
-     ;;("C-x C-f" . (lambda () (interactive)
-     ;;                                               (let ((current-prefix-arg '(4)))
-     ;;                                                 (helm-ff-run-browse-project)))
-     ))
+
+     :map helm-map
+     ("<tab>" . helm-execute-persistent-action)
+     ("C-i" . helm-execute-persistent-action)
+     ("C-<tab>" . helm-select-action)
+     ("C-w" . backward-kill-word)
+     ("M-n" . helm-next-source)
+     ("M-p" . helm-previous-source)))
 #+END_SRC
 
 If the thing at point is a directory, go into the directory (as though hitting
@@ -766,6 +739,8 @@ in the file (not just when Emacs quits):
 
 #+BEGIN_SRC emacs-lisp
   (use-package redshank
+    :init
+    (use-package paredit)
     :config
     (require 'redshank-loader)
     (eval-after-load "redshank-loader"
@@ -944,7 +919,7 @@ Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '
 #+BEGIN_SRC emacs-lisp
   (use-package elpy)
   (use-package pydoc-info)
-  (use-package python3-info)
+  (use-package python-info)
   (use-package pyvenv)
 #+END_SRC
 
@@ -1104,10 +1079,12 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 #+END_SRC
 
 *** Org
-
 #+BEGIN_SRC emacs-lisp
-  (use-package org)
-  (use-package org-plus-contrib)
+  (use-package org-plus-contrib
+    :pin org)
+  (use-package org
+    :ensure org-plus-contrib
+    :pin org)
   (use-package ox-reveal)
 #+END_SRC
 
@@ -1119,7 +1096,6 @@ Enable the extra backends. Required to run before org is required:
 
 #+BEGIN_SRC emacs-lisp
   (require 'org-gtd)
-  (require 'ox-reveal)
   (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 #+END_SRC
 
@@ -1192,7 +1168,7 @@ Unbind =C-,= to prevent it overriding the global value of =helm-filtered-bookmar
 #+BEGIN_SRC emacs-lisp
   (setq Info-default-directory-list
         (append (cjp-get-dir-structure-in "info")
-                (cjp-get-dir-structure-in "elpa")
+                (cjp-get-dir-structure-in "packages")
                 Info-default-directory-list))
 #+END_SRC
 
