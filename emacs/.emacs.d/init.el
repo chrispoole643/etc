@@ -7,9 +7,9 @@
 ;;;; platform-specific.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Define org and melpa as package sources, and install `use-package' if it's
-;;; not already there. Always ensure packages being loaded are there (or else
-;;; it'll automatically download from melpa).
+;;; Define org and melpa as package sources, and install `use-package' if it's not
+;;; already there. Always ensure packages being loaded are there (or else it'll
+;;; automatically download from melpa)
 
 (require 'package)
 (setq user-emacs-directory "~/.emacs.d/")
@@ -33,8 +33,8 @@
 (setq use-package-always-ensure t)
 (add-hook 'package-menu-mode-hook 'hl-line-mode)
 
-;;; Load org mode early to ensure that the orgmode ELPA version gets picked up,
-;;; not the shipped version.
+;;; Load org mode early to ensure that the orgmode ELPA version gets picked up, not the
+;;; shipped version
 (use-package org-plus-contrib
   :pin org)
 (use-package org
