@@ -1,28 +1,4 @@
-* Custom Keybindings
-
-General, Mac, and Linux keybindings.
-
-** Custom Binding Prefix
-
-Use /super-SPACE/ as a prefix for more complicated stuff:
-
-#+BEGIN_SRC emacs-lisp
-  (mapc (lambda (arg)
-          (global-set-key (kbd (concat "s-SPC " (car arg))) (cadr arg)))
-        '(("l" find-library)))
-#+END_SRC
-
 ** Generic
-
-*** Highlight symbol
-
-#+BEGIN_SRC emacs-lisp
-  ;; (global-set-key [(control f3)] 'highlight-symbol-at-point)
-  ;; (global-set-key [f3] 'highlight-symbol-next)
-  ;; (global-set-key [(shift f3)] 'highlight-symbol-prev)
-  ;; (global-set-key [(meta f3)] 'highlight-symbol-prev)))
-  ;; (global-set-key [(control meta f3)] 'highlight-symbol-query-replace)
-#+END_SRC
 
 *** Org mode
 

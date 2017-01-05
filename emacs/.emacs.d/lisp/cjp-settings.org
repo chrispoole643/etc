@@ -359,6 +359,17 @@ Move up and down like isearch:
   (setq helm-swoop-use-line-number-face t)
 #+END_SRC
 *** Visual Improvements
+**** Highlight Symbol
+
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-symbol)
+  ;; (global-set-key [(control f3)] 'highlight-symbol-at-point)
+  ;; (global-set-key [f3] 'highlight-symbol-next)
+  ;; (global-set-key [(shift f3)] 'highlight-symbol-prev)
+  ;; (global-set-key [(meta f3)] 'highlight-symbol-prev)))
+  ;; (global-set-key [(control meta f3)] 'highlight-symbol-query-replace)
+#+END_SRC
+
 **** Uniquify
 
 #+BEGIN_SRC emacs-lisp
@@ -460,7 +471,6 @@ These packages have no particular configuration; I just use them:
 
 #+BEGIN_SRC emacs-lisp
   (use-package expand-region)
-  (use-package highlight-symbol)
   (use-package htmlize)
   (use-package iedit)
   (use-package multiple-cursors)
@@ -1905,4 +1915,17 @@ Save in specified file:
   (setq-default buffer-file-coding-system 'utf-8-unix)
   (set-default-coding-systems 'utf-8-unix)
   (prefer-coding-system 'utf-8-unix)
+#+END_SRC
+* Custom Keybindings
+
+General, Mac, and Linux keybindings.
+
+** Custom Binding Prefix
+
+Use /super-SPACE/ as a prefix for more complicated stuff:
+
+#+BEGIN_SRC emacs-lisp
+  (mapc (lambda (arg)
+          (global-set-key (kbd (concat "s-SPC " (car arg))) (cadr arg)))
+        '(("l" find-library)))
 #+END_SRC
