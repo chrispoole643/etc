@@ -1156,6 +1156,19 @@ My custom mode and configuration for implementing GTD with org-mode.
 #+BEGIN_SRC emacs-lisp
   (add-to-list 'org-capture-templates
                '("b" "PBC Entry" entry (file+headline "" "Inbox") "* PBC: %?"))
+A ton of keybindings. Not really worth joining with the rest of the org-mode keybindings
+as I don't really use these anymore, so may remove them.
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
+  (global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
+  (global-set-key (kbd "C-s-s") (lambda () (interactive) (org-capture nil "s")))
+  (global-set-key (kbd "C-s-a") (lambda () (interactive) (org-capture nil "a")))
+  (global-set-key (kbd "C-s-h") (lambda () (interactive) (org-capture nil "h")))
+  (global-set-key (kbd "C-s-b") (lambda () (interactive) (org-capture nil "b")))
+  (global-set-key (kbd "C-s-w") (lambda () (interactive) (org-capture nil "w")))
+  (global-set-key (kbd "C-s-l") (lambda () (interactive) (org-capture nil "l")))
+  (global-set-key (kbd "C-s-r") (lambda () (interactive) (org-capture nil "r")))
 #+END_SRC
 
 **** Structure templates
