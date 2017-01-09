@@ -16,14 +16,18 @@ These don't require their own section with other commands:
 
 *** Themes
 
-Other themes I sometimes use: /color-theme/, /monokai-theme/, and /tangotango-theme/.
+Other themes I sometimes use:
+
+- color-theme
+- monokai-theme
+- tangotango-theme
 
 #+BEGIN_SRC emacs-lisp
   (use-package solarized-theme
     :config
     ;; Treat all themes as safe:
     (setq custom-safe-themes t)
-    ;;Make the fringe stand out from the background
+    ;; Make the fringe stand out from the background
     (setq solarized-distinct-fringe-background nil)
     ;; Don't change the font for some headings and titles
     (setq solarized-use-variable-pitch nil)
@@ -1147,15 +1151,16 @@ My custom mode and configuration for implementing GTD with org-mode.
 #+BEGIN_SRC emacs-lisp
   (setq org-mobile-inbox-for-pull org-default-notes-file
         org-mobile-directory "~/Dropbox/Apps/MobileOrg"
-        org-mobile-force-id-on-agenda-items nil
-        org-mobile-files gtd-agenda-and-reference-files)
+        org-mobile-force-id-on-agenda-items nil)
 #+END_SRC
 
 **** Capture templates
 
 #+BEGIN_SRC emacs-lisp
-  (add-to-list 'org-capture-templates
-               '("b" "PBC Entry" entry (file+headline "" "Inbox") "* PBC: %?"))
+;  (add-to-list 'org-capture-templates
+;               '("b" "PBC Entry" entry (file+headline "" "Inbox") "* PBC: %?"))
+#+END_SRC
+
 A ton of keybindings. Not really worth joining with the rest of the org-mode keybindings
 as I don't really use these anymore, so may remove them.
 

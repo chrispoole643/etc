@@ -1,23 +1,5 @@
 ** Generic
 
-*** Org mode
-
-
-**** Export
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-s-e") 'gtd-export-agendas-and-calendar)
-#+END_SRC
-
-**** Miscellaneous
-
-Search for things using the refile interface:
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-s-/")
-  'gtd-helm-show-org-agenda-and-reference-files-headings)
-#+END_SRC
-
 Make using attachments easier:
 
 #+BEGIN_SRC emacs-lisp
