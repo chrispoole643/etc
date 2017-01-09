@@ -1125,8 +1125,21 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
   (use-package ox-reveal)
 #+END_SRC
 
+**** Org GTD
+
+My custom mode and configuration for implementing GTD with org-mode.
+
 #+BEGIN_SRC emacs-lisp
-  (require 'org-gtd)
+  (use-package org-gtd
+      :disabled
+      :pin manual
+      :bind
+      (("C-s-e" . gtd-export-agendas-and-calendar)
+       ("C-s-e" . gtd-export-agendas-and-calendar)
+       ;; Search for things using the refile interface:
+       ("C-s-/" . gtd-helm-show-org-agenda-and-reference-files-headings))
+      :config
+      (setq org-mobile-files gtd-agenda-and-reference-files))
 #+END_SRC
 
 **** MobileOrg
