@@ -1,15 +1,5 @@
 ** Generic
 
-*** Multiple cursors
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-M-?") 'mc/edit-lines)
-  (global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-  (global-set-key (kbd "C->") 'mc/mark-next-like-this)
-  (global-set-key (kbd "C-M-<") 'mc/mark-all-like-this)
-  (global-set-key (kbd "C-M->") 'mc/mark-all-like-this)
-#+END_SRC
-
 *** Undo-tree
 
 #+BEGIN_SRC emacs-lisp

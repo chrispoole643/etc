@@ -479,10 +479,21 @@ These packages have no particular configuration; I just use them:
 #+BEGIN_SRC emacs-lisp
   (use-package htmlize)
   (use-package iedit)
-  (use-package multiple-cursors)
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
+#+END_SRC
+
+**** Multiple Cursors
+
+#+BEGIN_SRC emacs-lisp
+  (use-package multiple-cursors
+    :bind
+    (("C-M-?" . mc/edit-lines)
+     ("C-<" . mc/mark-previous-like-this)
+     ("C->" . mc/mark-next-like-this)
+     ("C-M-<" . mc/mark-all-like-this)
+     ("C-M->" . mc/mark-all-like-this)))
 #+END_SRC
 
 **** Expand Region
