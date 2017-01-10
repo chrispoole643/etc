@@ -1,12 +1,5 @@
 ** Generic
 
-*** Python
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load "python"
-    '(define-key python-mode-map (kbd "<s-tab>") 'elpy-company-backend))
-#+END_SRC
-
 *** Magit
 
 #+BEGIN_SRC emacs-lisp

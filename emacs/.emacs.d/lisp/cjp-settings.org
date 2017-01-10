@@ -970,6 +970,13 @@ Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '
 *** Python
 
 #+BEGIN_SRC emacs-lisp
+  (use-package python
+    :bind
+    (:map python-mode-map
+          ("<s-tab>" . elpy-company-backend)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (use-package elpy)
   (use-package pydoc-info)
   (use-package python-info)
