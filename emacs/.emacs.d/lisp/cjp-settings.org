@@ -1073,8 +1073,11 @@ Or, to enable "superpack" (a little bit hacky improvements):
   (use-package magit
     :config
     (setq magit-omit-untracked-dir-contents t
-          magit-last-seen-setup-instructions "1.4.0"))
+          magit-last-seen-setup-instructions "1.4.0")
+    :bind
+    (("C-M-g" . magit-status)))
 #+END_SRC
+
 *** Ibuffer
 
 Use ibuffer for my buffer menu (C-x C-b):

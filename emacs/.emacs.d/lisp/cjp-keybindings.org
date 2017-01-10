@@ -1,11 +1,5 @@
 ** Generic
 
-*** Magit
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-M-g") 'magit-status)
-#+END_SRC
-
 *** Miscellaneous
 
 Swap these round from usual; I find it more logical:
