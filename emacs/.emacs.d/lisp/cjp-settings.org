@@ -670,9 +670,13 @@ Turn on for rectangle mode only:
       "Unconditionally lookup the word at point." t)
     (autoload 'dictionary "dictionary"
       "Create a new dictionary buffer" t)
-  
+
     (setq dictionary-default-strategy "re"
-          dictionary-use-single-buffer t))
+          dictionary-use-single-buffer t)
+    :bind
+    (("C-c s" . dictionary-lookup-definition)
+     ("C-c S" . dictionary-search)
+     ("C-c m" . dictionary-match-words)))
 #+END_SRC
 **** Flymake
 

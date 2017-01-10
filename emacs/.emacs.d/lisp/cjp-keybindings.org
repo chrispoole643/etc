@@ -15,14 +15,6 @@ Sets current frame or window to width of 80 characters:
   (global-set-key (kbd "C-x W") 'fix-horizontal-size)
 #+END_SRC
 
-Dictionary lookups:
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c s") 'dictionary-lookup-definition)
-  (global-set-key (kbd "C-c S") 'dictionary-search)
-  (global-set-key (kbd "C-c m") 'dictionary-match-words)
-#+END_SRC
-
 TODO: remove this --- don't think I ever use it:
 
 #+BEGIN_SRC emacs-lisp
