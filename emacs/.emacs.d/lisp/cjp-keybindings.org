@@ -8,16 +8,6 @@
   (global-set-key (kbd "C-M-/") 'undo-tree-visualize)
 #+END_SRC
 
-*** Iedit
-
-#+BEGIN_SRC emacs-lisp
-  (define-key global-map (kbd "C-;") 'iedit-mode)
-  (define-key isearch-mode-map (kbd "C-;") 'iedit-mode)
-  (eval-after-load "iedit" '(progn
-                              (define-key iedit-mode-keymap (kbd "M-n") 'iedit-next-occurrence)
-                              (define-key iedit-mode-keymap (kbd "M-p") 'iedit-prev-occurrence)))
-#+END_SRC
-
 *** Python
 
 #+BEGIN_SRC emacs-lisp

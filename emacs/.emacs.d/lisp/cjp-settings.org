@@ -478,10 +478,23 @@ These packages have no particular configuration; I just use them:
 
 #+BEGIN_SRC emacs-lisp
   (use-package htmlize)
-  (use-package iedit)
+
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
+#+END_SRC
+
+**** Iedit
+
+#+BEGIN_SRC emacs-lisp
+  (use-package iedit
+    :bind
+    (("C-;" . iedit-mode)
+     :map isearch-mode-map
+     ("C-;" . iedit-mode)
+     :map iedit-mode-keymap
+     ("M-n" . iedit-next-occurrence)
+     ("M-p" . iedit-prev-occurrence)))
 #+END_SRC
 
 **** Multiple Cursors
