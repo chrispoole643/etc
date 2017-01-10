@@ -640,7 +640,11 @@ Enable recent files mode:
 #+BEGIN_SRC emacs-lisp
   (use-package undo-tree
     :config
-    (global-undo-tree-mode 1))
+    (global-undo-tree-mode 1)
+    :bind
+    (("C-/" . undo-tree-undo)
+     ("M-/" . undo-tree-redo)
+     ("C-M-/" . undo-tree-visualize)))
 #+END_SRC
 
 **** CUA

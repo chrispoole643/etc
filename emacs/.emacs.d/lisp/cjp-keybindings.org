@@ -1,13 +1,5 @@
 ** Generic
 
-*** Undo-tree
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-/") 'undo-tree-undo)
-  (global-set-key (kbd "M-/") 'undo-tree-redo)
-  (global-set-key (kbd "C-M-/") 'undo-tree-visualize)
-#+END_SRC
-
 *** Python
 
 #+BEGIN_SRC emacs-lisp
