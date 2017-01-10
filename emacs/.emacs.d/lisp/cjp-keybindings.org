@@ -1,15 +1,5 @@
 ** Generic
 
-Make using attachments easier:
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-s-o") 'org-attach-open)
-  (global-set-key (kbd "C-s-d") 'org-attach-reveal-in-emacs)
-  (global-set-key (kbd "C-s-z") (lambda () (interactive) (save-excursion
-                                                      (goto-char (point-min))
-                                                      (org-attach-sync))))
-#+END_SRC
-
 *** Ace jump mode
 
 #+BEGIN_SRC emacs-lisp

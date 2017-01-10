@@ -1109,15 +1109,27 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
                                                   org-file-apps-defaults-gnu)))
 
     (setq org-attach-directory (expand-file-name "~/Support/Attachments/"))
+
+    (defun cjp-org-attach-sync ()
+      (interactive) (save-excursion
+                      (goto-char (point-min))
+                      (org-attach-sync)))
     :bind
     (("C-c l" . org-store-link)
      ("C-c c" . org-capture)
      ("C-c a" . org-agenda)
      ("C-c b" . org-iswitchb)
+
+     ;; Make using attachments easier
+     ("C-s-o" . org-attach-open)
+     ("C-s-d" . org-attach-reveal-in-emacs)
+     ("C-s-z" cjp-org-attach-sync)
+
      :map org-mode-map
      ("C-c C-'" . org-edit-special)
      ("C-'" . helm-org-headlines)
      ("M-h" . ns-do-hide-emacs)
+
      ;; Unbind `C-,' to prevent it overriding the global value of `helm-filtered-bookmarks'
      ("C-," . nil)
      :map org-src-mode-map
