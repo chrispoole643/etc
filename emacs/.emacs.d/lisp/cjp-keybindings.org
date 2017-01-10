@@ -29,15 +29,6 @@ Make scrolling easy:
   (global-set-key (kbd "C-<down>") '(lambda () (interactive) (scroll-up 1)))
 #+END_SRC
 
-Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had to be
-undefined before it could be made to run windmove-left:
-
-#+BEGIN_SRC emacs-lisp
-  (eval-after-load "undo-tree"
-    '(define-key undo-tree-map (kbd "C-x u") nil))
-  (global-set-key (kbd "C-x o") 'other-window)
-#+END_SRC
-
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "M-g") 'goto-line)
 #+END_SRC

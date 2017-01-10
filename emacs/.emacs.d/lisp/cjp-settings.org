@@ -658,7 +658,13 @@ Enable recent files mode:
     :bind
     (("C-/" . undo-tree-undo)
      ("M-/" . undo-tree-redo)
-     ("C-M-/" . undo-tree-visualize)))
+     ("C-M-/" . undo-tree-visualize)
+     ("C-x o" . other-window)
+
+     ;; Easier bindings than shift-left etc. (nearer home row). "C-x u" binding had to be
+     ;; undefined before it could be made to run windmove-left
+     :map undo-tree-map
+     ("C-x u" . nil)))
 #+END_SRC
 
 **** CUA
