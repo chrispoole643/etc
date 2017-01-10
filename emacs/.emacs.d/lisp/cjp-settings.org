@@ -969,40 +969,33 @@ Stop SLIME's REPL from grabbing DEL, which is annoying when backspacing over a '
 
 *** Python
 
+Using python.el, not python-mode.el. The latter doesn't seem to be able to send the
+contents of a buffer to the interpreter easily, as python.el can (with C-c C-c).
+
 #+BEGIN_SRC emacs-lisp
   (use-package python
+    :mode
+    (("\\.py\\'" . python-mode)
+     ("\\.pyx\\'" . python-mode))
+    :interpreter ("python" . python-mode)
     :bind
     (:map python-mode-map
           ("<s-tab>" . elpy-company-backend)))
 #+END_SRC
 
+Use these extras, too:
+
 #+BEGIN_SRC emacs-lisp
-  (use-package elpy)
+
   (use-package pydoc-info)
   (use-package python-info)
   (use-package pyvenv)
-#+END_SRC
-
-Using python.el, not python-mode.el. The latter doesn't seem to be able to send the
-contents of a buffer to the interpreter easily, as python.el can (with C-c C-c).
-
-Use python-mode with files with these extensions:
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
-  (add-to-list 'auto-mode-alist '("\\.pyx\\'" . python-mode))
 #+END_SRC
 
 Turn on auto-complete in python shells:
 
 #+BEGIN_SRC emacs-lisp
   (add-hook 'inferior-python-mode-hook (lambda () (auto-complete-mode 1)))
-#+END_SRC
-
-Use python major mode if 'python' is in hashbang:
-
-#+BEGIN_SRC emacs-lisp
-  (add-to-list 'interpreter-mode-alist '("python" . python-mode))
 #+END_SRC
 
 Check files for pep8 mistakes:
@@ -1037,9 +1030,11 @@ Or, to enable "superpack" (a little bit hacky improvements):
 **** elpy
 
 #+BEGIN_SRC emacs-lisp
-  (elpy-enable)
-  (when (executable-find "ipython")
-    (elpy-use-ipython))
+  (use-package elpy
+    :config
+    (elpy-enable)
+    (when (executable-find "ipython")
+      (elpy-use-ipython)))
 #+END_SRC
 
 *** C
