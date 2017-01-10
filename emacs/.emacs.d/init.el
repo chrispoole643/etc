@@ -73,5 +73,3 @@
 (when macosxp
   (cjp-org-load-file "cjp-library-mac")
   (cjp-org-load-file "cjp-settings-mac"))
-
-(cjp-org-load-file "cjp-keybindings")
