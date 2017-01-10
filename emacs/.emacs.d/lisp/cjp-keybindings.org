@@ -1,13 +1,5 @@
 ** Generic
 
-*** Expand region
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-=") 'er/expand-region)
-  (global-set-key (kbd "C-+") 'er/expand-region)
-  (global-set-key (kbd "M-+") 'er/expand-region)
-#+END_SRC
-
 *** Multiple cursors
 
 #+BEGIN_SRC emacs-lisp

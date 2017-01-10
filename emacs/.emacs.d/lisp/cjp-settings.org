@@ -477,13 +477,22 @@ in the mode-line in various search modes.
 These packages have no particular configuration; I just use them:
 
 #+BEGIN_SRC emacs-lisp
-  (use-package expand-region)
   (use-package htmlize)
   (use-package iedit)
   (use-package multiple-cursors)
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
+#+END_SRC
+
+**** Expand Region
+
+#+BEGIN_SRC emacs-lisp
+  (use-package expand-region
+    :bind
+    (("C-=" . er/expand-region)
+     ("C-+" . er/expand-region)
+     ("M-+" . er/expand-region)))
 #+END_SRC
 
 **** Aspell
