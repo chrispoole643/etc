@@ -55,6 +55,20 @@ and C-c right respectively:
     (setq framemove-hook-into-windmove t))
 #+END_SRC
 
+The default keybindings of C-c <left> and C-c <right> are annoying to type if going back
+more than one or two window configurations. Use super key for higher level Emacs command
+like these to avoid interfering with modes:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-s-<left>") 'winner-undo)
+  (global-set-key (kbd "C-s-<right>") 'winner-redo)
+
+  (global-set-key (kbd "s-<left>")  'windmove-left)
+  (global-set-key (kbd "s-<right>") 'windmove-right)
+  (global-set-key (kbd "s-<up>")    'windmove-up)
+  (global-set-key (kbd "s-<down>")  'windmove-down)
+#+END_SRC
+
 **** Smex
 :PROPERTIES:
 :tangle no
