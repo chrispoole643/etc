@@ -1,11 +1,5 @@
 ** Generic
 
-*** Ace jump mode
-
-#+BEGIN_SRC emacs-lisp
-  ;;(global-set-key (kbd "C-c SPC") 'ace-jump-char-mode)
-#+END_SRC
-
 *** Visual regexp
 
 #+BEGIN_SRC emacs-lisp

@@ -211,7 +211,10 @@ python.el doesn't like ido-completing-read either:
 #+BEGIN_SRC emacs-lisp
   (use-package ace-jump-mode
     :config
-    (setq ace-jump-mode-case-sensitive-search nil))
+    (setq ace-jump-mode-case-sensitive-search nil)
+    ;;:bind
+    ;;(("C-c SPC" . ace-jump-char-mode))
+    )
 #+END_SRC
 
 **** ace-isearch
