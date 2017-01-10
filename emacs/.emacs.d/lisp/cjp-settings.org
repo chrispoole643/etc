@@ -2032,7 +2032,40 @@ Save in specified file:
 
 General, Mac, and Linux keybindings.
 
-** Custom Binding Prefix
+** General
+
+Swap these round from usual; I find it more logical:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x +") 'what-cursor-position)
+  (global-set-key (kbd "C-x =") 'balance-windows)
+#+END_SRC
+
+Sets current frame or window to width of 80 characters:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-x W") 'fix-horizontal-size)
+#+END_SRC
+
+TODO: remove this --- don't think I ever use it:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+  (global-set-key (kbd "C-c C-c C-x C-m") 'execute-extended-command)
+#+END_SRC
+
+Make scrolling easy:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-<up>") '(lambda () (interactive) (scroll-down 1)))
+  (global-set-key (kbd "C-<down>") '(lambda () (interactive) (scroll-up 1)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "M-g") 'goto-line)
+#+END_SRC
+
+*** Custom Binding Prefix
 
 Use /super-SPACE/ as a prefix for more complicated stuff:
 
@@ -2040,4 +2073,154 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
   (mapc (lambda (arg)
           (global-set-key (kbd (concat "s-SPC " (car arg))) (cadr arg)))
         '(("l" find-library)))
+#+END_SRC
+
+** Mac
+
+#+BEGIN_SRC emacs-lisp
+  (when macosxp
+    ;; Toggle fullscreen as usual
+    ;; (global-set-key (kbd "C-M-f") 'toggle-frame-fullscreen)
+
+    ;; Set cmd-H to hide Emacs and cmd-shift-h to hide others, as usual in Mac OS
+    ;; X. Usually bound to mark-paragraph
+    (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
+    (global-set-key (kbd "M-H") 'ns-do-hide-others)
+    (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
+
+    ;; Easily open files with 'open' and show directories in Finder
+    (define-key dired-mode-map (kbd "o") 'cjp-mac-guess-open-file)
+    (define-key dired-mode-map (kbd "C-M-f") 'cjp-mac-show-finder)
+    (define-key dired-mode-map (kbd "e") 'cjp-mac-textedit-file)
+    (define-key dired-mode-map (kbd "q") 'cjp-mac-quicklook-file)
+    (define-key dired-mode-map (kbd "C-M-t") 'cjp-mac-open-terminal)
+
+    ;; alt key on Mac is Super, but it also lets you type foreign accents and
+    ;; other useful characters. Use self insert for these purposes.
+    (global-set-key (kbd "s-3") '(lambda () (interactive) (insert "#"))))
+#+END_SRC
+
+** Linux
+
+#+BEGIN_SRC emacs-lisp
+  (when linuxp
+    ;; Outline-minor-mode key map
+    (define-prefix-command 'cm-map nil "Outline-")
+
+    (define-key cm-map "q" 'hide-sublevels) ; Hide everything but the top-level headings
+    (define-key cm-map "t" 'hide-body)      ; Hide everything but headings (all body lines)
+    (define-key cm-map "o" 'hide-other)     ; Hide other branches
+    (define-key cm-map "c" 'hide-entry)     ; Hide this entry's body
+    (define-key cm-map "l" 'hide-leaves)    ; Hide body lines in this entry and sub-entries
+    (define-key cm-map "d" 'hide-subtree)   ; Hide everything in this entry and sub-entries
+
+    (define-key cm-map "a" 'show-all)      ; Show (expand) everything
+    (define-key cm-map "e" 'show-entry)    ; Show this heading's body
+    (define-key cm-map "i" 'show-children) ; Show this heading's immediate child sub-headings
+    (define-key cm-map "k" 'show-branches) ; Show all sub-headings under this heading
+    (define-key cm-map "s" 'show-subtree) ; Show (expand) everything in this heading & below
+
+    (define-key cm-map "u" 'outline-up-heading)               ; Up
+    (define-key cm-map "n" 'outline-next-visible-heading)     ; Next
+    (define-key cm-map "p" 'outline-previous-visible-heading) ; Previous
+    (define-key cm-map "f" 'outline-forward-same-level)       ; Forward - same level
+    (define-key cm-map "b" 'outline-backward-same-level)      ; Backward - same level
+    (global-set-key (kbd "C-c C-c") cm-map)
+
+    ;; Since C-s-f toggles fullscreen on the Mac, maxmimise Emacs' frame on Linux
+    ;; with the same binding.
+    (global-set-key (kbd "C-s-f") 'toggle-frame-maximized))
+#+END_SRC
+
+** Function keys
+
+*** F1
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f1>") 'make-frame)
+  (global-set-key (kbd "<M-f1>") 'delete-frame)
+  (global-set-key (kbd "<C-f1>") 'toggle-frame-fullscreen)
+#+END_SRC
+
+*** F2
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
+  (global-set-key (kbd "<M-f2>") 'cjp-window-setup-toggle)
+#+END_SRC
+
+*** F3 and F4 reserved for macros
+
+*** F5
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f5>") 'compile)
+  (global-set-key (kbd "<M-f5>") 'recompile)
+#+END_SRC
+
+*** F6
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f6>") 'bookmark-jump)
+  (global-set-key (kbd "<M-f6>") 'bookmark-bmenu-list)
+#+END_SRC
+
+*** F7
+
+#+BEGIN_SRC emacs-lisp
+  (cond (macosxp (global-set-key (kbd "<f7>") 'cjp-mac-show-finder)
+                 (global-set-key (kbd "<M-f7>") 'cjp-mac-open-terminal)
+                 (global-set-key (kbd "<C-M-f7>") (lambda () (interactive)
+                                                    (cjp-mac-open-terminal t))))
+        (linuxp (global-set-key (kbd "<f7>") 'cjp-linux-show-directory)))
+#+END_SRC
+
+*** F8
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f8>") 'cjp-ispell-guess-usage)
+  (global-set-key (kbd "<C-f8>") 'dictionary-search)
+  (global-set-key (kbd "<M-f8>") 'dictionary-match-words)
+#+END_SRC
+
+*** F9 reserved for Exposé (all windows)
+
+*** F10
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f9>") 'epa-sign-region)
+  (global-set-key (kbd "<C-f9>") 'epa-encrypt-region)
+  (global-set-key (kbd "<M-f9>") 'epa-decrypt-region)
+#+END_SRC
+
+*** F10
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f10>") 'cjp-mac-guess-open-file)
+#+END_SRC
+*** F11
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "<f11>") 'cjp-browse-url-on-line)
+#+END_SRC
+
+*** F12
+
+#+BEGIN_SRC
+  (global-set-key (kbd "<f12>") (lambda () (interactive) (org-capture nil "i")))
+  (global-set-key (kbd "<C-f12>") 'gtd-open-file)
+  (global-set-key (kbd "<M-f12>") 'org-agenda)
+  (global-set-key (kbd "<s-f12>") 'org-capture)
+#+END_SRC
+
+*** F13-16 (Apple extended keyboard only)
+
+#+BEGIN_SRC emacs-lisp
+  (when macosxp
+    (global-set-key (kbd "<f13>") 'cjp-deft-clear-if-in-buffer)
+    (global-set-key (kbd "<f14>") 'cjp-browse-url-on-line)
+    (global-set-key (kbd "<M-f14>") 'cjp-browse-buffer)
+    (global-set-key (kbd "<f15>") 'cjp-find-with-google)
+    (global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
+    (global-set-key (kbd "<M-f16>") (lambda () (interactive) (cjp-set-frame-uni))))
 #+END_SRC
