@@ -484,7 +484,6 @@ These packages have no particular configuration; I just use them:
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
-  (use-package visual-regexp)
 #+END_SRC
 
 **** Aspell
@@ -1020,6 +1019,15 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+*** Visual Regexp
+
+#+BEGIN_SRC emacs-lisp
+  (use-package visual-regexp
+    :bind
+    (("C-c r" . vr/replace)
+     ("C-c q" . vr/query-replace)))
+#+END_SRC
+
 *** Magit
 
 #+BEGIN_SRC emacs-lisp
@@ -1028,7 +1036,6 @@ Or, to enable "superpack" (a little bit hacky improvements):
     (setq magit-omit-untracked-dir-contents t
           magit-last-seen-setup-instructions "1.4.0"))
 #+END_SRC
-
 *** Ibuffer
 
 Use ibuffer for my buffer menu (C-x C-b):

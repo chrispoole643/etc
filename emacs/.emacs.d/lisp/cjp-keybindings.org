@@ -1,12 +1,5 @@
 ** Generic
 
-*** Visual regexp
-
-#+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "C-c r") 'vr/replace)
-  (global-set-key (kbd "C-c q") 'vr/query-replace)
-#+END_SRC
-
 *** Expand region
 
 #+BEGIN_SRC emacs-lisp
