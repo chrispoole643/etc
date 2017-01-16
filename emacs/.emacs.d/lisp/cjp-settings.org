@@ -2146,7 +2146,7 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
     ;; Set cmd-H to hide Emacs and cmd-shift-h to hide others, as usual in Mac OS
     ;; X. Usually bound to mark-paragraph
     (global-set-key (kbd "M-h") 'ns-do-hide-emacs)
-    (global-set-key (kbd "M-H") 'ns-do-hide-others)
+    (global-set-key (kbd "M-s-h") 'ns-do-hide-others)
     (global-set-key (kbd "C-s-f") 'toggle-frame-fullscreen)
 
     ;; Easily open files with 'open' and show directories in Finder
