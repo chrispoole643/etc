@@ -1341,7 +1341,11 @@ as I don't really use these anymore, so may remove them.
           markdown-italic-underscore t
           markdown-indent-on-enter nil
           ;; Enable syntax highlighting (LaTeX)
-          markdown-enable-math t)
+          markdown-enable-math t
+          markdown-asymmetric-header t
+          markdown-list-indent-width 2
+          markdown-reference-location 'end
+          markdown-footnote-location 'end)
     ;; Webgen uses markdown syntax in .page files
     (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
     (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
