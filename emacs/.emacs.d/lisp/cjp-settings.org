@@ -380,6 +380,13 @@ Move up and down like isearch:
   (setq helm-swoop-use-line-number-face t)
 #+END_SRC
 *** Visual Improvements
+**** Highlight Indentation
+
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-indentation
+    :config (highlight-indentation-mode))
+#+END_SRC
+
 **** Highlight Symbol
 
 #+BEGIN_SRC emacs-lisp
@@ -496,6 +503,13 @@ These packages have no particular configuration; I just use them:
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
+#+END_SRC
+
+**** Smart Shift
+
+#+BEGIN_SRC emacs-lisp
+  (use-package smart-shift
+    :config (global-smart-shift-mode 1))
 #+END_SRC
 
 **** Iedit
@@ -727,6 +741,14 @@ Use pyflakes with flymake:
   
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.py\\'" flymake-pyflakes-init)))
+#+END_SRC
+
+**** Flycheck
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flycheck
+    :ensure t
+    :config (global-flycheck-mode))
 #+END_SRC
 
 **** Edit Server
@@ -1089,6 +1111,14 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+*** Yaml
+
+#+BEGIN_SRC emacs-lisp
+  (use-package yaml-mode
+    :mode (("\\.yaml\\'" . yaml-mode)
+           ("\\.yml\\'" . yaml-mode)))
+#+END_SRC
+
 *** Visual Regexp
 
 #+BEGIN_SRC emacs-lisp
