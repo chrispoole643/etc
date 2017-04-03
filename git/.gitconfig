@@ -2,7 +2,7 @@
 
 [user]
     name = Chris Poole
-    email = chris@chrispoole.com
+    email = chrispoole@uk.ibm.com
 
 [alias]
     st = status
@@ -15,7 +15,7 @@
     showUntrackedFiles = no
 
 [core]
-    editor = e
+    editor = emacsclient
     quotepath = false
 
 [color]
