@@ -27,7 +27,7 @@ Other themes I sometimes use:
     :config
     ;; Treat all themes as safe:
     (setq custom-safe-themes t)
-    (load-theme 'sanityinc-tomorrow-night t))
+    (load-theme 'sanityinc-tomorrow-bright t))
 #+END_SRC
 
 Setup for solarised themes, not in use right now:
