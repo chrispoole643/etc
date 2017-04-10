@@ -227,6 +227,18 @@ python.el doesn't like ido-completing-read either:
   ;;             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
 #+END_SRC
 
+**** Sublimity
+
+This works, but not that well (at least on the Mac)... disable for now.
+
+#+BEGIN_SRC
+    (use-package sublimity
+      :config
+      (sublimity-mode 1)
+      (require 'sublimity-scroll)
+      (require 'sublimity-map))
+#+END_SRC
+
 **** Ace-jump
 
 #+BEGIN_SRC emacs-lisp
@@ -1255,11 +1267,14 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
      ("C-," . nil)
      :map org-src-mode-map
      ("C-c C-'" . org-edit-src-exit)))
+
   (use-package org
     :ensure org-plus-contrib
     :pin org)
 
   (use-package ox-reveal)
+
+
 #+END_SRC
 
 **** Org GTD
