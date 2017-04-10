@@ -1565,6 +1565,7 @@ Fix helm mode buffers at the bottom of the frame.
     (eval-after-load "abbrev" '(diminish 'abbrev-mode " Ⓐ"))
     (eval-after-load "ace-isearch" '(diminish 'ace-isearch-mode " Ⓐ"))
     (eval-after-load "anzu" '(diminish 'anzu-mode " Ⓐ"))
+    (eval-after-load "autorevert" '(diminish 'auto-revert-mode " Ⓐ"))
     (eval-after-load "elpy" '(diminish 'elpy-mode " Ⓔ"))
     (eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
     (eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
