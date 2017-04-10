@@ -1583,7 +1583,13 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 
 Broad configuration of Emacs.
 
-Switch on Semantic mode.
+Have diffs show character differences:
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default ediff-forward-word-function 'forward-char)
+#+END_SRC
+
+Switch on Semantic mode:
 
 #+BEGIN_SRC emacs-lisp
   (semantic-mode 1)
