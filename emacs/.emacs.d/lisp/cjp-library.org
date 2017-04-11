@@ -220,6 +220,13 @@
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
+  (defun cjp-data-dir (item)
+    "Return the file path for `item' in the Emacs data directory."
+    (interactive)
+    (cjp-emacs-structure-dir item "data"))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (defun cjp-emacs-structure-dir (item &optional dir)
     "Return directory path of ITEM under DIR (in emacs structure) as a string.
 
