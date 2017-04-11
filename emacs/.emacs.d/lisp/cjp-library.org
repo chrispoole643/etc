@@ -437,10 +437,16 @@
   `cjp-default-font-size')."
     (interactive)
     (if (>= emacs-major-version 23)
-        (set-frame-font (concat (or font (if macosxp "Menlo" "Inconsolata"))
-                                "-" (or size (read-string (concat "Font size (" cjp-default-font-size "): ")
-                                                          nil nil cjp-default-font-size)))
-                        t allframes)))
+      (let* ((font (or font (if macosxp "Menlo" "Inconsolata")))
+             (size (or size (read-string (concat "Font size (" cjp-default-font-size "): ")
+                                         nil nil cjp-default-font-size)))
+             (current-size (/ (face-attribute 'default :height) 10))
+             (relative-size (if (string-match "\\(\+\\|\-\\)\\([0-9]+\\)" size)
+                                (number-to-string (funcall (intern (match-string 1 size))
+                                                           current-size
+                                                           (string-to-number (match-string 2 size))))
+                              size)))
+        (set-frame-font (concat font "-" relative-size) t allframes))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
