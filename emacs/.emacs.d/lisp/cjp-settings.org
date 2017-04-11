@@ -1714,11 +1714,12 @@ cperl-mode is preferred to perl-mode:
   (defalias 'perl-mode 'cperl-mode)
 #+END_SRC
 
-Enable [[https://www.gnu.org/savannah-checkouts/gnu/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html][desktop save mode]]:
+Often I enable [[https://www.gnu.org/savannah-checkouts/gnu/emacs/manual/html_node/emacs/Saving-Emacs-Sessions.html][desktop save mode]], but it can get annoying to persist lots of buffers, so
+it's disabled here for now.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (desktop-save-mode 1)
-  (add-to-list 'desktop-path (cjp-emacs-structure-dir "data/desktop"))
+  (add-to-list 'desktop-path (cjp-data-dir "desktop"))
 #+END_SRC
 
 Turn off the menu bar, toolbar, and scrollbar:
