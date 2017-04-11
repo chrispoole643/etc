@@ -434,19 +434,20 @@
   (defun cjp-set-font-size (&optional size font allframes)
     "Set frame font (either FONT or by default `Menlo') to SIZE. If
   SIZE isn't specified, prompt for input (defaulting to
-  `cjp-default-font-size')."
+  `cjp-default-font-size'). `size' can be a relative value too,
+  e.g., `+3' or `-3'."
     (interactive)
     (if (>= emacs-major-version 23)
-      (let* ((font (or font (if macosxp "Menlo" "Inconsolata")))
-             (size (or size (read-string (concat "Font size (" cjp-default-font-size "): ")
-                                         nil nil cjp-default-font-size)))
-             (current-size (/ (face-attribute 'default :height) 10))
-             (relative-size (if (string-match "\\(\+\\|\-\\)\\([0-9]+\\)" size)
-                                (number-to-string (funcall (intern (match-string 1 size))
-                                                           current-size
-                                                           (string-to-number (match-string 2 size))))
-                              size)))
-        (set-frame-font (concat font "-" relative-size) t allframes))))
+        (let* ((font (or font (if macosxp "Menlo" "Inconsolata")))
+               (size (or size (read-string (concat "Font size (" cjp-default-font-size "): ")
+                                           nil nil cjp-default-font-size)))
+               (current-size (/ (face-attribute 'default :height) 10))
+               (relative-size (if (string-match "\\(\+\\|\-\\)\\([0-9]+\\)" size)
+                                  (number-to-string (funcall (intern (match-string 1 size))
+                                                             current-size
+                                                             (string-to-number (match-string 2 size))))
+                                size)))
+          (set-frame-font (concat font "-" relative-size) t allframes))))
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
