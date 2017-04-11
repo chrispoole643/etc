@@ -1668,7 +1668,21 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 
 ** General Configuration
 
-Broad configuration of Emacs.
+_Broad configuration of Emacs._
+
+Activate save place mode, so files being opened again will restore point to where it was
+when the file was closed.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package saveplace
+    :init
+    (setq save-place-file (cjp-data-dir "places"))
+
+    :config
+    (if (>= emacs-major-version 25)
+        (save-place-mode)
+      (setq-default save-place t)))
+#+END_SRC
 
 Highlight the expression between parentheses, not just the parens themselves:
 
