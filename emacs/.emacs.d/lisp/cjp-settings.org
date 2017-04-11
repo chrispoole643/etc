@@ -27,7 +27,7 @@ Other themes I sometimes use:
     :config
     ;; Treat all themes as safe:
     (setq custom-safe-themes t)
-    (load-theme 'sanityinc-tomorrow-bright t))
+    (load-theme 'sanityinc-tomorrow-eighties t))
 #+END_SRC
 
 Setup for solarised themes, not in use right now:
@@ -459,9 +459,15 @@ Move up and down like isearch:
 
 **** Highlight Indentation
 
+Using [[https://github.com/DarthFennec/highlight-indent-guides][this package]] to show columns, highlighting indentation.
+
 #+BEGIN_SRC emacs-lisp
-  (use-package highlight-indentation
-    :config (highlight-indentation-mode))
+  (use-package highlight-indent-guides
+    :config
+    (setq highlight-indent-guides-method 'column)
+    (setq highlight-indent-guides-auto-odd-face-perc 15)
+    (setq highlight-indent-guides-auto-even-face-perc 15)
+    (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 #+END_SRC
 
 **** Highlight Symbol
@@ -1669,6 +1675,12 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 ** General Configuration
 
 _Broad configuration of Emacs._
+
+Open the last-used file on Emacs startup:
+
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'after-init-hook (lambda () (find-file (car recentf-list))))
+#+END_SRC
 
 Activate save place mode, so files being opened again will restore point to where it was
 when the file was closed.
