@@ -108,7 +108,9 @@ Update smex when Emacs has been idle for (default 60) seconds:
 
 **** Ido & Flx
 
-#+BEGIN_SRC emacs-lisp
+_Disbled to use Ivy mode instead._
+
+#+BEGIN_SRC
   (use-package ido
     :config
     (setq ido-save-directory-list-file (cjp-emacs-structure-dir ".ido.last"))
@@ -125,40 +127,40 @@ Update smex when Emacs has been idle for (default 60) seconds:
 
 Ignore the .aux extensions that TeX programs create:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (setq completion-ignored-extensions
         (cons "*.aux" completion-ignored-extensions))
 #+END_SRC
 
 Order extensions by how I use them:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (setq ido-file-extensions-order '(".tex" ".txt" ".md" ".py" ".sh" ".el" ".xml" ".htm"))
 #+END_SRC
 
 Ignore files defined in variable completion-ignored-extensions:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (setq ido-ignore-extensions t)
 #+END_SRC
 
 Default keybinding is backspace key, but I use C-w in the non-Ido-mode minibuffers often,
 so this is more conventient for muscle memory:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (define-key ido-file-completion-map (kbd "C-w") 'ido-delete-backward-updir)
 #+END_SRC
 
 Stops Ido searching for similar-named files if I use C-x C-s to create a new
 file and buffer:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (setq ido-auto-merge-work-directories-length -1)
 #+END_SRC
 
 Keep annoying buffers out of my face:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (setq ido-ignore-buffers (list (rx (or (and bos  " ")
                                          (and bos
                                               (or "*Completions*"
@@ -169,7 +171,7 @@ Keep annoying buffers out of my face:
 
 Allow spaces when using ido-find-file:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (add-hook 'ido-make-file-list-hook
             (lambda ()
               (define-key ido-file-dir-completion-map (kbd "SPC") 'self-insert-command)))
@@ -178,7 +180,7 @@ Allow spaces when using ido-find-file:
 Use Ido for completing-read, such as describe-variable (C-h v) From
 http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   ;; (defvar ido-enable-replace-completing-read t
   ;;  "If t, use ido-completing-read instead of completing-read if possible.
 
@@ -193,7 +195,7 @@ http://www.emacswiki.org/emacs/InteractivelyDoThings#toc13:
 
 Replace completing-read wherever possible, unless directed otherwise:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   ;;(defadvice completing-read
   ;;  (around use-ido-when-possible activate)
   ;;  (if (or (not ido-enable-replace-completing-read) ; Manual override disable ido
@@ -212,7 +214,7 @@ Replace completing-read wherever possible, unless directed otherwise:
 Don't guess filenames at all when I'm in dired; it's never what I want.  Also, turn off
 ido-completing-read, as it messes up dired-do-rename, and probably other stuff too.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   ;; (add-hook 'dired-mode-hook
   ;;          (lambda ()
   ;;             (set (make-local-variable 'ido-use-filename-at-point) nil)
@@ -221,7 +223,7 @@ ido-completing-read, as it messes up dired-do-rename, and probably other stuff t
 
 python.el doesn't like ido-completing-read either:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   ;; (add-hook 'python-mode-hook
   ;;          (lambda ()
   ;;             (set (make-local-variable 'ido-enable-replace-completing-read) nil)))
@@ -266,7 +268,9 @@ This works, but not that well (at least on the Mac)... disable for now.
 
 **** Helm
 
-#+BEGIN_SRC emacs-lisp
+_Disabled for now... switching to use Ivy._
+
+#+BEGIN_SRC
   (use-package ac-helm)
   (use-package helm-dictionary)
 #+END_SRC
@@ -277,7 +281,7 @@ seems better without. M-x doesn't work with same keys on all systems,
 so bind to C-x X-m too (And C-c for good measure, in case your finger
 slips).
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (use-package helm
     :config
     (helm-mode 1)
@@ -328,7 +332,7 @@ slips).
 If the thing at point is a directory, go into the directory (as though hitting
 <tab>). Else, open it. If the directory is `.' or `..', open in dired as usual:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (define-key helm-find-files-map (kbd "<return>")
     '(lambda () (interactive) (let ((sel (helm-get-selection)))
                            (if (and (file-directory-p sel)
@@ -337,7 +341,7 @@ If the thing at point is a directory, go into the directory (as though hitting
                              (helm-maybe-exit-minibuffer)))))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (define-key helm-find-files-map (kbd "C-x C-f") (lambda () (interactive)
                                                     (let ((current-prefix-arg '(4)))
                                                       (helm-ff-run-browse-project))))
@@ -347,7 +351,7 @@ If the thing at point is a directory, go into the directory (as though hitting
 If the first two items in helm-find-files results are '.' and '..', and point would
 usually be on the first one, move point down by two:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (add-hook 'helm-after-update-hook
             (lambda () (when (and (helm-file-completion-source-p)
                              (not (helm-empty-source-p))
@@ -357,19 +361,19 @@ usually be on the first one, move point down by two:
 
 Use thing at point when invoking helm-man-woman:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-man-pages)
 #+END_SRC
 
 ***** helm-swoop
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (use-package helm-swoop)
 #+END_SRC
 
 =helm-swoop-multiline-from-helm-swoop= is a result of a [[https://www.reddit.com/r/emacs/comments/334a7a/binding_to_trigger_helmswoop_multiline/cqj6xqd][question I asked on reddit]]:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (defun helm-swoop-multiline-from-helm-swoop ()
     "Run `helm-swoop' over multiple lines, using the current
   helm-swoop pattern."
@@ -380,7 +384,7 @@ Use thing at point when invoking helm-man-woman:
     (exit-minibuffer))
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (define-key isearch-mode-map (kbd "M-s") 'helm-swoop-from-isearch)
   (define-key helm-swoop-map (kbd "M-s") 'helm-multi-swoop-all-from-helm-swoop)
   (define-key helm-multi-swoop-map (kbd "M-s") 'helm-swoop-multiline-from-helm-swoop)
@@ -388,16 +392,30 @@ Use thing at point when invoking helm-man-woman:
 
 Move up and down like isearch:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (define-key helm-swoop-map (kbd "C-r") 'helm-previous-line)
   (define-key helm-swoop-map (kbd "C-s") 'helm-next-line)
   (define-key helm-multi-swoop-map (kbd "C-r") 'helm-previous-line)
   (define-key helm-multi-swoop-map (kbd "C-s") 'helm-next-line)
 #+END_SRC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC
   (setq helm-swoop-use-line-number-face t)
 #+END_SRC
+**** Ivy mode
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ivy
+    :config
+    (ivy-mode 1)
+    (setq ivy-use-virtual-buffers t)
+    (setq enable-recursive-minibuffers t))
+
+  (use-package swiper
+    :bind (("C-s" . swiper)
+           ("C-r" . swiper)))
+#+END_SRC
+
 *** Visual Improvements
 **** Visual Bookmarks
 
