@@ -406,10 +406,23 @@ Move up and down like isearch:
 
 #+BEGIN_SRC emacs-lisp
   (use-package ivy
+    :diminish " Ⓘ"
     :config
     (ivy-mode 1)
+
+    ;; Add recentf-mode and bookmarks to ivy-switch-buffer completion candidates
     (setq ivy-use-virtual-buffers t)
-    (setq enable-recursive-minibuffers t))
+
+    ;; Allow minibuffer commands in the minibuffer
+    (setq enable-recursive-minibuffers t)
+
+    ;; I prefer to be able to match words regardless of their search order
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-ignore-order)))
+
+    ;; Set Ivy to be used by other modes that don't pick it up by default
+    (setq magit-completing-read-function 'ivy-completing-read)
+    (setq projectile-completion-system 'ivy))
 
   (use-package swiper
     :bind (("C-s" . swiper)
@@ -527,64 +540,70 @@ in the mode-line in various search modes.
 **** Powerline
 
 #+BEGIN_SRC emacs-lisp
-  (use-package powerline
-    :config
-    ;; Apply a powerline color offset to correct for the wrong colors of the powerline
-    ;; separators
-    (load-library "powerline-srgb-offset")
-    (powerline-srgb-offset-activate "solarized-light")
-  
-    ;; Same as powerline-default-theme, but move some of the items about a bit
-    (setq-default mode-line-format
-                  '("%e"
-                    (:eval
-                     (let* ((active (powerline-selected-window-active))
-                            (mode-line (if active 'mode-line 'mode-line-inactive))
-                            (face1 (if active 'powerline-active1 'powerline-inactive1))
-                            (face2 (if active 'powerline-active2 'powerline-inactive2))
-                            (separator-left (intern (format "powerline-%s-%s"
-                                                            (powerline-current-separator)
-                                                            (car powerline-default-separator-dir))))
-                            (separator-right (intern (format "powerline-%s-%s"
-                                                             (powerline-current-separator)
-                                                             (cdr powerline-default-separator-dir))))
-                            (height (when macosxp 20))
-                            (lhs (list (powerline-raw "%*" nil 'l)
-                                       (powerline-buffer-id nil 'l)
-                                       (powerline-vc nil 'l)
-                                       (when (and (boundp 'which-func-mode) which-func-mode)
-                                         (powerline-raw which-func-format nil 'l))
-                                       (powerline-raw " ")
-                                       (funcall separator-left mode-line face1 height)
-                                       (when (boundp 'erc-modified-channels-object)
-                                         (powerline-raw erc-modified-channels-object face1 'l))
-                                       (powerline-major-mode face1 'l)
-                                       (powerline-process face1)
-                                       (powerline-minor-modes face1 'l)
-                                       (powerline-narrow face1 'l)
-                                       (powerline-raw " " face1)
-                                       (funcall separator-left face1 face2 height)
-                                       (when (bound-and-true-p nyan-mode)
-                                         (powerline-raw (list (nyan-create)) face2 'l))))
-                            (rhs (list (powerline-raw global-mode-string face2 'r)
-                                       (funcall separator-right face2 face1 height)
-                                       (powerline-raw " " face1)
-                                       (unless window-system
-                                         (powerline-raw (char-to-string #xe0a1) face1 'l))
-                                       (when powerline-display-buffer-size
-                                         (powerline-buffer-size face1 'r))
-                                       (when powerline-display-mule-info
-                                         (powerline-raw mode-line-mule-info face1 'r))
-                                       (powerline-raw "%4l" face1 'r)
-                                       (funcall separator-right face1 mode-line height)
-                                       (powerline-raw " ")
-                                       (powerline-raw "%6p" nil 'r)
-                                       (when powerline-display-hud
-                                         (powerline-hud face2 face1)))))
-                       (concat (powerline-render lhs)
-                               (powerline-fill face2 (powerline-width rhs))
-                               (powerline-render rhs))))))
-    (setq powerline-default-separator 'wave))
+    (use-package powerline
+      :config
+      ;; Apply a powerline color offset to correct for the wrong colors of the powerline
+      ;; separators
+      ;(load-library "powerline-srgb-offset")
+      ;(powerline-srgb-offset-activate "solarized-light")
+
+      (setq powerline-default-separator 'wave)
+      (defface cjp-powerline-yellow '((t (:background "#ffcc66" :foreground "#2d2d2d" :inherit mode-line)))
+        "Powerline yellow face.")
+      (defface which-func '((t (:background "#ffcc66" :foreground "#2d2d2d" :weight normal)))
+        "Custom face for `which-func'.")
+
+    
+
+      ;; Same as powerline-default-theme, but move some of the items about a bit
+      (setq-default mode-line-format
+                    '("%e"
+                      (:eval
+                       (let* ((active (powerline-selected-window-active))
+                              (mode-line (if active 'mode-line 'mode-line-inactive))
+                              (face1 (if active 'powerline-active1 'powerline-inactive1))
+                              (face2 (if active 'powerline-active2 'powerline-inactive2))
+                              (face-yellow (if active 'cjp-powerline-yellow 'powerline-inactive1))
+                              (separator-left (intern (format "powerline-%s-%s"
+                                                              (powerline-current-separator)
+                                                              (car powerline-default-separator-dir))))
+                              (separator-right (intern (format "powerline-%s-%s"
+                                                               (powerline-current-separator)
+                                                               (cdr powerline-default-separator-dir))))
+                              (height (when macosxp 20))
+                              (lhs (list (powerline-raw "%*" face-yellow 'l)
+                                         (powerline-buffer-id face-yellow 'l)
+                                         (powerline-vc face-yellow 'l)
+                                         (when (and (boundp 'which-function-mode) which-function-mode)
+                                           (powerline-raw which-func-format face-yellow 'l))
+                                         (powerline-raw " " face-yellow)
+                                         (funcall separator-left face-yellow face1 height)
+                                         (when (boundp 'erc-modified-channels-object)
+                                           (powerline-raw erc-modified-channels-object face1 'l))
+                                         (powerline-major-mode face1 'l)
+                                         (powerline-process face1)
+                                         (powerline-minor-modes face1 'l)
+                                         (powerline-narrow face1 'l)
+                                         (powerline-raw " " face1)
+                                         (funcall separator-left face1 face2 height)))
+                              (rhs (list (powerline-raw global-mode-string face2 'r)
+                                         (funcall separator-right face2 face1 height)
+                                         (powerline-raw " " face1)
+                                         (unless window-system
+                                           (powerline-raw (char-to-string #xe0a1) face1 'l))
+                                         (when powerline-display-buffer-size
+                                           (powerline-buffer-size face1 'r))
+                                         (when powerline-display-mule-info
+                                           (powerline-raw mode-line-mule-info face1 'r))
+                                         (powerline-raw "%4l" face1 'r)
+                                         (funcall separator-right face1 mode-line height)
+                                         (powerline-raw " ")
+                                         (powerline-raw "%6p" nil 'r)
+                                         (when powerline-display-hud
+                                           (powerline-hud face-yellow face1)))))
+                         (concat (powerline-render lhs)
+                                 (powerline-fill face2 (powerline-width rhs))
+                                 (powerline-render rhs)))))))
 #+END_SRC
 
 **** Beacon
@@ -1358,7 +1377,8 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 
   (use-package org
     :ensure org-plus-contrib
-    :pin org)
+    :pin org
+    :diminish ('org-src . " Ⓞ"))
 
   (use-package ox-reveal)
 

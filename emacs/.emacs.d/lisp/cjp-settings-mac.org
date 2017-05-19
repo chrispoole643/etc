@@ -60,10 +60,10 @@ Set font (Menlo default):
     (cjp-set-font-size cjp-default-font-size nil t))
 #+END_SRC
 
-Enable sRGB --- when true, powerline colors don't match:
+sRGB --- when true, powerline colors don't match:
 
 #+BEGIN_SRC emacs-lisp
-  (setq ns-use-srgb-colorspace t)
+  (setq ns-use-srgb-colorspace nil)
 #+END_SRC
 
 Use default Mac OS X browser, and move to trash when deleting stuff:
