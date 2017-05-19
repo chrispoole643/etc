@@ -1222,7 +1222,8 @@ Or, to enable "superpack" (a little bit hacky improvements):
 
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
-    :mode "\\.js$")
+    :mode ("\\.js$"
+           "\\.json$"))
 #+END_SRC
 
 *** Ruby
