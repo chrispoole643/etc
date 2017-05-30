@@ -2071,8 +2071,9 @@ Let emacsclient send stuff to existing Emacs process:
 #+BEGIN_SRC emacs-lisp
   (use-package server
     :config
-    (or (server-running-p)
-        (start-server)))
+    (when (display-graphic-p)
+      (or (server-running-p)
+          (start-server))))
 #+END_SRC
 
 Don't use tabs:
