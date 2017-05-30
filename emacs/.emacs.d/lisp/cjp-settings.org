@@ -2069,8 +2069,10 @@ Stop cursor from blinking:
 Let emacsclient send stuff to existing Emacs process:
 
 #+BEGIN_SRC emacs-lisp
-  (if (display-graphic-p)
-      (server-start t t))
+  (use-package server
+    :config
+    (or (server-running-p)
+        (start-server)))
 #+END_SRC
 
 Don't use tabs:
