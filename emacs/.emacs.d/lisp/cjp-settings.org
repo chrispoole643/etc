@@ -424,6 +424,9 @@ Move up and down like isearch:
     (setq magit-completing-read-function 'ivy-completing-read)
     (setq projectile-completion-system 'ivy))
 
+  (use-package counsel
+    :bind (("C-x C-r" . counsel-recentf)))
+
   (use-package swiper
     :bind (("C-s" . swiper)
            ("C-r" . swiper)))
