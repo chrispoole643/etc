@@ -2070,7 +2070,7 @@ Let emacsclient send stuff to existing Emacs process:
 
 #+BEGIN_SRC emacs-lisp
   (if (display-graphic-p)
-      (server-start))
+      (server-start t t))
 #+END_SRC
 
 Don't use tabs:
