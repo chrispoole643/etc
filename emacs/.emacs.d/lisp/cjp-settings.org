@@ -2073,7 +2073,7 @@ Let emacsclient send stuff to existing Emacs process:
     :config
     (when (display-graphic-p)
       (or (server-running-p)
-          (start-server))))
+          (server-start))))
 #+END_SRC
 
 Don't use tabs:
