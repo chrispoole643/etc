@@ -498,9 +498,9 @@ Using [[https://github.com/DarthFennec/highlight-indent-guides][this package]] t
 #+BEGIN_SRC emacs-lisp
   (use-package highlight-indent-guides
     :config
-    (setq highlight-indent-guides-method 'column)
-    (setq highlight-indent-guides-auto-odd-face-perc 15)
-    (setq highlight-indent-guides-auto-even-face-perc 15)
+    (setq highlight-indent-guides-method 'column
+          highlight-indent-guides-auto-odd-face-perc 5
+          highlight-indent-guides-auto-even-face-perc 5)
     (add-hook 'prog-mode-hook 'highlight-indent-guides-mode))
 #+END_SRC
 
