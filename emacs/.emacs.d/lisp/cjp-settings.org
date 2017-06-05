@@ -1718,7 +1718,6 @@ Fix helm mode buffers at the bottom of the frame.
     (eval-after-load "elpy" '(diminish 'elpy-mode " Ⓔ"))
     (eval-after-load "simple" '(diminish 'auto-fill-function " Ⓕ"))
     (eval-after-load "helm" '(diminish 'helm-mode " Ⓗ"))
-    (eval-after-load "highlight-indentation" '(diminish 'highlight-indentation-mode " Ⓗ"))
     (eval-after-load "org-indent" '(diminish 'org-indent-mode " Ⓞ"))
     (eval-after-load "paredit" '(diminish 'paredit-mode " Ⓟ"))
     (eval-after-load "undo-tree" '(diminish 'undo-tree-mode " Ⓤ"))
