@@ -578,6 +578,9 @@ in the mode-line in various search modes.
                             (height (when macosxp 20))
                             (lhs (list (powerline-raw "%*" face-yellow 'l)
                                        (powerline-raw (concat "[" (projectile-project-name) "]") face-yellow 'l)
+                                       (let ((host (file-remote-p default-directory 'host)))
+                                         (when host
+                                           (powerline-raw (concat "(" host ")") face-yellow 'l)))
                                        (powerline-buffer-id face-yellow 'l)
                                        (powerline-vc face-yellow 'l)
                                        (when (and (boundp 'which-function-mode) which-function-mode)
