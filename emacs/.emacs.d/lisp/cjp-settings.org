@@ -1235,9 +1235,12 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+BEGIN_SRC emacs-lisp
   (use-package elpy
     :config
-    ;; highlight-indentation conflicts with highlight-indent-guides. Disable the former and
-    ;; the latter still works.
+    ;; `highlight-indentation' conflicts with `highlight-indent-guides'. Disable the former
+    ;; and the latter still works.
     (delete 'elpy-module-highlight-indentation elpy-modules)
+    ;; I use these keys to scroll the buffer up and down by one line
+    (define-key elpy-mode-map (kbd "<C-up>") nil)
+    (define-key elpy-mode-map (kbd "<C-down>") nil)
     (elpy-enable)
     (when (executable-find "ipython")
       (elpy-use-ipython)))
