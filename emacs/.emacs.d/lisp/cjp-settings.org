@@ -426,7 +426,8 @@ Move up and down like isearch:
 
   (use-package counsel
     :bind (("C-x C-r" . counsel-recentf)
-           ("M-y" . counsel-yank-pop)))
+           ("M-y" . counsel-yank-pop)
+           ("C-x C-d" . counsel-dired-jump)))
 
   (use-package swiper
     :bind (("C-s" . swiper)
