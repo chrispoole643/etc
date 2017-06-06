@@ -1230,6 +1230,9 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+BEGIN_SRC emacs-lisp
   (use-package elpy
     :config
+    ;; highlight-indentation conflicts with highlight-indent-guides. Disable the former and
+    ;; the latter still works.
+    (delete 'elpy-module-highlight-indentation elpy-modules)
     (elpy-enable)
     (when (executable-find "ipython")
       (elpy-use-ipython)))
