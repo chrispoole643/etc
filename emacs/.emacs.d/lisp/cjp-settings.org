@@ -427,7 +427,8 @@ Move up and down like isearch:
   (use-package counsel
     :bind (("C-x C-r" . counsel-recentf)
            ("M-y" . counsel-yank-pop)
-           ("C-x C-d" . counsel-dired-jump)))
+           ("C-x C-d" . counsel-dired-jump)
+           ("C-'" . counsel-imenu)))
 
   (use-package swiper
     :bind (("C-s" . swiper)
@@ -1397,7 +1398,6 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 
      :map org-mode-map
      ("C-c C-'" . org-edit-special)
-     ("C-'" . helm-org-headlines)
      ("M-h" . ns-do-hide-emacs)
 
      ;; Unbind `C-,' to prevent it overriding the global value of `helm-filtered-bookmarks'
@@ -2342,7 +2342,7 @@ fingers.  M-/ also now bound to undo-tree-redo:
   (global-set-key (kbd "M-i") 'dabbrev-expand)
 #+END_SRC
 
-C-' is bound to =helm-semantic-or-imenu=; use this instead:
+C-' is bound to =counsel-imenu=; use this instead:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "C-\"") 'other-window)
