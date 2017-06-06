@@ -425,7 +425,8 @@ Move up and down like isearch:
     (setq projectile-completion-system 'ivy))
 
   (use-package counsel
-    :bind (("C-x C-r" . counsel-recentf)))
+    :bind (("C-x C-r" . counsel-recentf)
+           ("M-y" . counsel-yank-pop)))
 
   (use-package swiper
     :bind (("C-s" . swiper)
