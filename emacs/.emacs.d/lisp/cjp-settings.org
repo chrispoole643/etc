@@ -422,13 +422,21 @@ Move up and down like isearch:
 
     ;; Set Ivy to be used by other modes that don't pick it up by default
     (setq magit-completing-read-function 'ivy-completing-read)
-    (setq projectile-completion-system 'ivy))
+    (setq projectile-completion-system 'ivy)
+    :bind (:map ivy-minibuffer-map
+                ;; Switch these two bindings round, as this feels more natural
+                ("C-j" . ivy-done)
+                ("<return>" . ivy-alt-done)
+                ;; This is bound to C-w too, but I have years of using this binding with
+                ;; Helm
+                ("C-l" . ivy-backward-kill-word)))
 
   (use-package counsel
     :bind (("C-x C-r" . counsel-recentf)
            ("M-y" . counsel-yank-pop)
            ("C-x C-d" . counsel-dired-jump)
-           ("C-'" . counsel-imenu)))
+           ("C-'" . counsel-imenu)
+           ("M-x" . counsel-M-x)))
 
   (use-package swiper
     :bind (("C-s" . swiper)
@@ -1743,6 +1751,7 @@ Switch on =which-function-mode=:
 
 #+BEGIN_SRC emacs-lisp
   (which-function-mode 1)
+  (setq which-func-unknown "")
 #+END_SRC
 
 Open the last-used file on Emacs startup:
