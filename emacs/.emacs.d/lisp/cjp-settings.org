@@ -1739,6 +1739,12 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 
 _Broad configuration of Emacs._
 
+Switch on =which-function-mode=:
+
+#+BEGIN_SRC emacs-lisp
+  (which-function-mode 1)
+#+END_SRC
+
 Open the last-used file on Emacs startup:
 
 #+BEGIN_SRC emacs-lisp
