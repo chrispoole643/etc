@@ -2278,6 +2278,13 @@ General, Mac, and Linux keybindings.
 
 ** General
 
+Trying to use =pop-global-mark= more often. Usually bound to =C-x C-SPC=, but that
+doesn't seem very comfortable:
+
+#+BEGIN_SRC emacs-lisp
+  (global-set-key (kbd "C-\\") 'pop-global-mark)
+#+END_SRC
+
 Swap these round from usual; I find it more logical:
 
 #+BEGIN_SRC emacs-lisp
