@@ -556,10 +556,6 @@ in the mode-line in various search modes.
     (setq powerline-default-separator 'wave)
     (defface cjp-powerline-yellow '((t (:background "#ffcc66" :foreground "#2d2d2d" :inherit mode-line)))
       "Powerline yellow face.")
-    (defface which-func '((t (:background "#ffcc66" :foreground "#2d2d2d" :weight normal)))
-      "Custom face for `which-func'.")
-
-
 
     ;; Same as powerline-default-theme, but move some of the items about a bit
     (setq-default mode-line-format
@@ -584,8 +580,6 @@ in the mode-line in various search modes.
                                            (powerline-raw (concat "(" host ")") face-yellow 'l)))
                                        (powerline-buffer-id face-yellow 'l)
                                        (powerline-vc face-yellow 'l)
-                                       (when (and (boundp 'which-function-mode) which-function-mode)
-                                         (powerline-raw which-func-format face-yellow 'l))
                                        (powerline-raw " " face-yellow)
                                        (funcall separator-left face-yellow face1 height)
                                        (when (boundp 'erc-modified-channels-object)
@@ -595,7 +589,9 @@ in the mode-line in various search modes.
                                        (powerline-minor-modes face1 'l)
                                        (powerline-narrow face1 'l)
                                        (powerline-raw " " face1)
-                                       (funcall separator-left face1 face2 height)))
+                                       (funcall separator-left face1 face2 height)
+                                       (when (and (boundp 'which-function-mode) which-function-mode)
+                                         (powerline-raw which-func-current face2 'l))))
                             (rhs (list (powerline-raw global-mode-string face2 'r)
                                        (funcall separator-right face2 face1 height)
                                        (powerline-raw " " face1)
