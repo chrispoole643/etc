@@ -2420,7 +2420,10 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
 
     ;; alt key on Mac is Super, but it also lets you type foreign accents and
     ;; other useful characters. Use self insert for these purposes.
-    (global-set-key (kbd "s-3") '(lambda () (interactive) (insert "#"))))
+    (global-set-key (kbd "s-3") '(lambda () (interactive) (insert "#")))
+
+    ;; Standard macOS behaviour
+    (global-set-key (kbd "M-`") 'other-frame))
 #+END_SRC
 
 ** Linux
