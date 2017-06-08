@@ -1776,7 +1776,9 @@ when the file was closed.
 Highlight the expression between parentheses, not just the parens themselves:
 
 #+BEGIN_SRC emacs-lisp
-  (setq show-paren-style 'expression)
+  (setq show-paren-style 'mixed
+        show-paren-when-point-inside-paren t
+        show-paren-delay 0)
 #+END_SRC
 
 Have diffs show character differences:
