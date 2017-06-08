@@ -1272,6 +1272,12 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+*** JSON
+
+#+BEGIN_SRC emacs-lisp
+  (use-package json-mode)
+#+END_SRC
+
 *** Yaml
 
 #+BEGIN_SRC emacs-lisp
