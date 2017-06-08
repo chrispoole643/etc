@@ -77,17 +77,10 @@ like these to avoid interfering with modes:
 #+END_SRC
 
 **** Smex
-:PROPERTIES:
-:tangle no
-:END:
-
-#+BEGIN_SRC emacs-lisp :tangle no
-  (require 'smex)
-#+END_SRC
 
 Start smex, saving into Emacs structure:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
   (use-package smex
     :config
     (setq smex-save-file (cjp-emacs-structure-dir ".smex-items")))
@@ -95,13 +88,13 @@ Start smex, saving into Emacs structure:
 
 Smex updates its list of possible commands when run; don't let it:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
   (setq smex-auto-update t)
 #+END_SRC
 
 Update smex when Emacs has been idle for (default 60) seconds:
 
-#+BEGIN_SRC emacs-lisp :tangle no
+#+BEGIN_SRC emacs-lisp
   (smex-auto-update)
   (smex-initialize)
 #+END_SRC
@@ -432,6 +425,7 @@ Move up and down like isearch:
                 ("C-l" . ivy-backward-kill-word)))
 
   (use-package counsel
+    :ensure smex
     :bind (("C-x C-r" . counsel-recentf)
            ("M-y" . counsel-yank-pop)
            ("C-x C-d" . counsel-dired-jump)
