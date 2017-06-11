@@ -143,6 +143,16 @@
 ** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
+  (defun cjp-grep-project-or-swiper-buffer ()
+    "If we're in a Projectile-defined project, grep it, else, show
+    the usual `swiper' interface."
+    (interactive)
+    (if (projectile-project-p)
+        (projectile-grep)
+      (swiper)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (defun cjp-org-load-file (file)
     "Load an org file under the `.emacs.d/lisp'. Appends file extension."
     (org-babel-load-file (cjp-emacs-structure-dir (concat file ".org") "lisp")))

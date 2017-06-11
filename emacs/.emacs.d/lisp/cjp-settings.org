@@ -636,6 +636,14 @@ These packages have no particular configuration; I just use them:
   (use-package smooth-scrolling)
 #+END_SRC
 
+**** Ag
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ag
+    :config
+    (setq ag-highlight-search t))
+#+END_SRC
+
 **** Projectile
 
 #+BEGIN_SRC emacs-lisp
@@ -643,7 +651,8 @@ These packages have no particular configuration; I just use them:
     :diminish " Ⓟ"
     :config
     (projectile-global-mode)
-    (setq projectile-enable-caching t))
+    (setq projectile-enable-caching t)
+    :bind (("C-x C-g" . cjp-grep-project-or-swiper-buffer)))
 
   (use-package counsel-projectile
     :config
