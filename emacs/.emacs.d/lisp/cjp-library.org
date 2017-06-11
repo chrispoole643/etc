@@ -148,7 +148,7 @@
     the usual `swiper' interface."
     (interactive)
     (if (projectile-project-p)
-        (projectile-grep)
+        (counsel-projectile-ag)
       (swiper)))
 #+END_SRC
 
