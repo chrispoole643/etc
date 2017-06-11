@@ -413,6 +413,8 @@ Move up and down like isearch:
     (setq ivy-re-builders-alist
           '((t . ivy--regex-ignore-order)))
 
+    (setq ivy-height 14)
+
     ;; Set Ivy to be used by other modes that don't pick it up by default
     (setq magit-completing-read-function 'ivy-completing-read)
     (setq projectile-completion-system 'ivy)
@@ -634,6 +636,15 @@ These packages have no particular configuration; I just use them:
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
+#+END_SRC
+
+**** IMenu
+
+#+BEGIN_SRC emacs-lisp
+  (use-package imenu-anywhere
+    :config
+    (setq imenu-anywhere-buffer-filter-functions '(imenu-anywhere-same-project-p))
+    :bind (("C-'" . ivy-imenu-anywhere)))
 #+END_SRC
 
 **** Ag
@@ -1416,6 +1427,7 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 
      :map org-mode-map
      ("C-c C-'" . org-edit-special)
+     ("C-'" . ivy-imenu-anywhere)
      ("M-h" . ns-do-hide-emacs)
 
      ;; Unbind `C-,' to prevent it overriding the global value of `helm-filtered-bookmarks'
