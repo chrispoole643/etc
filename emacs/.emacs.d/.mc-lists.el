@@ -4,6 +4,8 @@
 (setq mc/cmds-to-run-for-all
       '(
         c-electric-delete-forward
+        cperl-electric-paren
+        cperl-electric-rparen
         cua-copy-region
         cua-cut-region
         cua-paste
