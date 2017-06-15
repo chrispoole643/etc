@@ -930,7 +930,8 @@ Use pyflakes with flymake:
     :diminish " Ⓕ"
     :config
     (global-flycheck-mode)
-    (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc)))
+    (setq-default flycheck-disabled-checkers '(emacs-lisp-checkdoc))
+    (setq flycheck-display-errors-delay 0.2))
 #+END_SRC
 
 **** Edit Server
