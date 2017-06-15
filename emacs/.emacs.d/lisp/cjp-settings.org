@@ -443,6 +443,14 @@ Move up and down like isearch:
 #+END_SRC
 
 *** Visual Improvements
+**** GitGutter
+
+#+BEGIN_SRC emacs-lisp
+  (use-package git-gutter
+    :config
+    (global-git-gutter-mode 1))
+#+END_SRC
+
 **** Visual Bookmarks
 
 #+BEGIN_SRC emacs-lisp
@@ -593,7 +601,7 @@ in the mode-line in various search modes.
                                          (powerline-raw erc-modified-channels-object face1 'l))
                                        (powerline-major-mode face1 'l)
                                        (powerline-process face1)
-                                       (powerline-minor-modes face1 'l)
+                                       ;(powerline-minor-modes face1 'l)
                                        (powerline-narrow face1 'l)
                                        (powerline-raw " " face1)
                                        (funcall separator-left face1 face2 height)
