@@ -1301,6 +1301,17 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+*** Ediff
+
+Have diffs show character differences:
+
+#+BEGIN_SRC emacs-lisp
+  (setq-default ediff-forward-word-function 'forward-char)
+  (setq ediff-split-window-function (if (> (frame-width) 160)
+                                        'split-window-horizontally
+                                      'split-window-vertically))
+#+END_SRC
+
 *** JSON
 
 #+BEGIN_SRC emacs-lisp
@@ -1815,12 +1826,6 @@ Highlight the expression between parentheses, not just the parens themselves:
   (setq show-paren-style 'mixed
         show-paren-when-point-inside-paren t
         show-paren-delay 0)
-#+END_SRC
-
-Have diffs show character differences:
-
-#+BEGIN_SRC emacs-lisp
-  (setq-default ediff-forward-word-function 'forward-char)
 #+END_SRC
 
 Switch on Semantic mode:
