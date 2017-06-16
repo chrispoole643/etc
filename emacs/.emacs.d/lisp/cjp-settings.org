@@ -695,6 +695,8 @@ These packages have no particular configuration; I just use them:
 
 #+BEGIN_SRC emacs-lisp
   (use-package iedit
+    :config
+    (set-face-attribute 'iedit-occurrence nil :background "#ffcc66" :foreground "#2d2d2d")
     :bind
     (("C-;" . iedit-mode)
      :map isearch-mode-map
