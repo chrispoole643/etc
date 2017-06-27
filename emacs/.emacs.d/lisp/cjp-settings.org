@@ -989,9 +989,30 @@ in the file (not just when Emacs quits):
         (cjp-emacs-structure-dir ".emacs-bmk-bmenu-commands.el"))
 #+END_SRC
 
-**** Auto-complete
+**** Company mode
 
 #+BEGIN_SRC emacs-lisp
+  (use-package company
+    :config
+    (global-company-mode)
+    :bind (:map company-active-map
+                ("C-n" . company-select-next)
+                ("C-p" . company-select-previous)
+                ("C-w" . backward-kill-word)))
+
+  (use-package company-quickhelp
+    :init
+    (use-package pos-tip)
+    :config
+    (company-quickhelp-mode 1)
+    (setq company-quickhelp-delay 0))
+#+END_SRC
+
+**** Auto-complete
+
+     Disable for now, to use Company mode instead.
+
+#+BEGIN_SRC
   (use-package auto-complete
     :config
     (require 'auto-complete-config)
