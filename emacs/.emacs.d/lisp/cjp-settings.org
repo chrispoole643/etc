@@ -1303,6 +1303,14 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+*** Web Mode
+
+#+BEGIN_SRC emacs-lisp
+  (use-package web-mode
+    :mode ("\\.html?\\'" "\\.phtml\\'" "\\.tpl\\.php\\'" "\\.[agj]sp\\'"
+           "\\.as[cp]x\\'" "\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'"))
+#+END_SRC
+
 *** Ediff
 
 Have diffs show character differences:
