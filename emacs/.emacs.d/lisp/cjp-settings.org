@@ -1256,7 +1256,6 @@ contents of a buffer to the interpreter easily, as python.el can (with C-c C-c).
 Use these extras, too:
 
 #+BEGIN_SRC emacs-lisp
-
   (use-package pydoc-info)
   (use-package python-info)
   (use-package pyvenv)
