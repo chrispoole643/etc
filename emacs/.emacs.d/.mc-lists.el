@@ -11,6 +11,7 @@
         cua-paste
         helm-all-mark-rings
         helm-mini
+        indent-for-tab-command
         isearch-abort
         isearch-backward-regexp
         isearch-exit
