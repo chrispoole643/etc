@@ -654,7 +654,8 @@ These packages have no particular configuration; I just use them:
     (setq sr-speedbar-right-side nil)
     :bind (:map speedbar-mode-map
                 ("<tab>" . speedbar-toggle-line-expansion)
-                ("^" . speedbar-up-directory)))
+                ("^" . speedbar-up-directory)
+                ("q" . sr-speedbar-toggle)))
 #+END_SRC
 
 **** IMenu
