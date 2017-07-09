@@ -646,6 +646,15 @@ These packages have no particular configuration; I just use them:
   (use-package smooth-scrolling)
 #+END_SRC
 
+**** Neotree
+
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree
+    :ensure all-the-icons
+    :config
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
+#+END_SRC
+
 **** Sr-Speedbar
 
 #+BEGIN_SRC emacs-lisp
@@ -2540,16 +2549,15 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
 *** F1
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f1>") 'make-frame)
-  (global-set-key (kbd "<M-f1>") 'delete-frame)
-  (global-set-key (kbd "<C-f1>") 'toggle-frame-fullscreen)
+  (global-set-key (kbd "<f1>") 'neotree-toggle)
 #+END_SRC
 
 *** F2
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f2>") 'fix-horizontal-size-to-buffer)
-  (global-set-key (kbd "<M-f2>") 'cjp-window-setup-toggle)
+  (global-set-key (kbd "<f2>") 'toggle-frame-fullscreen)
+  (global-set-key (kbd "<M-f2>") 'make-frame)
+  (global-set-key (kbd "<M-S-f2>") 'delete-frame)
 #+END_SRC
 
 *** F3 and F4 reserved for macros
