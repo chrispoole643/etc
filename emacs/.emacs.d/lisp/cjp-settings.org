@@ -76,6 +76,17 @@ like these to avoid interfering with modes:
   (global-set-key (kbd "s-<down>")  'windmove-down)
 #+END_SRC
 
+**** Neotree
+
+#+BEGIN_SRC emacs-lisp
+  (use-package neotree
+    :ensure all-the-icons
+    :config
+    (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
+          projectile-switch-project-action 'neotree-projectile-action
+          neo-smart-open t))
+#+END_SRC
+
 **** Smex
 
 Start smex, saving into Emacs structure:
@@ -644,15 +655,6 @@ These packages have no particular configuration; I just use them:
   (use-package regex-tool)
   (use-package scpaste)
   (use-package smooth-scrolling)
-#+END_SRC
-
-**** Neotree
-
-#+BEGIN_SRC emacs-lisp
-  (use-package neotree
-    :ensure all-the-icons
-    :config
-    (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 #+END_SRC
 
 **** IMenu
