@@ -655,18 +655,6 @@ These packages have no particular configuration; I just use them:
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)))
 #+END_SRC
 
-**** Sr-Speedbar
-
-#+BEGIN_SRC emacs-lisp
-  (use-package sr-speedbar
-    :config
-    (setq sr-speedbar-right-side nil)
-    :bind (:map speedbar-mode-map
-                ("<tab>" . speedbar-toggle-line-expansion)
-                ("^" . speedbar-up-directory)
-                ("q" . sr-speedbar-toggle)))
-#+END_SRC
-
 **** IMenu
 
 #+BEGIN_SRC emacs-lisp
