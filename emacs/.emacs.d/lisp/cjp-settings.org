@@ -84,7 +84,8 @@ like these to avoid interfering with modes:
     :config
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
           projectile-switch-project-action 'neotree-projectile-action
-          neo-smart-open t)
+          neo-smart-open t
+          neo-show-auto-change-root t)
     (defun cjp-select-neotree-window-or-toggle ()
       (interactive)
       (if (eq major-mode 'neotree-mode)
