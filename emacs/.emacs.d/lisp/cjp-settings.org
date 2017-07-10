@@ -609,7 +609,7 @@ in the mode-line in various search modes.
                                 (lhs (list (powerline-raw "%*" face-yellow 'l)
                                            (let ((branch (mapconcat 'concat (cdr (split-string (or vc-mode " ") "[:-]")) "-")))
                                              (powerline-raw (concat "[" (projectile-project-name)
-                                                                    (when branch
+                                                                    (when (> (length branch) 0)
                                                                       (concat "|" branch))
                                                                     "]") face-yellow 'l))
                                            (let ((host (file-remote-p default-directory 'host)))
