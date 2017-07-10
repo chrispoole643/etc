@@ -268,7 +268,7 @@ This works, but not that well (at least on the Mac)... disable for now.
   (use-package ace-isearch
     :config
     (global-ace-isearch-mode t)
-  
+
     (setq ace-isearch-input-idle-delay 0.4
           ace-isearch-input-length 10
           ace-isearch-function-from-isearch 'helm-swoop-from-isearch
@@ -474,26 +474,26 @@ Move up and down like isearch:
   (use-package bm
     :ensure t
     :demand t
-  
+
     :init
     ;; restore on load (even before you require bm)
     (setq bm-restore-repository-on-load t)
-  
+
     :config
     ;; Allow cross-buffer 'next'
     (setq bm-cycle-all-buffers t)
-  
+
     ;; where to store persistant files
     (setq bm-repository-file (cjp-data-dir "bm-repository"))
-  
+
     ;; save bookmarks
     (setq-default bm-buffer-persistence t)
-  
+
     ;; Loading the repository from file when on start up.
     (add-hook' after-init-hook 'bm-repository-load)
     ;; Restoring bookmarks when on file find.
     (add-hook 'find-file-hooks 'bm-buffer-restore)
-  
+
     ;; Saving bookmarks
     (add-hook 'kill-buffer-hook #'bm-buffer-save)
 
@@ -520,7 +520,7 @@ Move up and down like isearch:
     ;; the buffer is reverted.  Make sure bookmarks is saved before check-in (and
     ;; revert-buffer)
     (add-hook 'vc-before-checkin-hook #'bm-buffer-save)
-    
+
     :bind (("<f2>" . bm-next)
            ("S-<f2>" . bm-previous)
            ("C-<f2>" . bm-toggle)))
@@ -578,70 +578,74 @@ in the mode-line in various search modes.
 **** Powerline
 
 #+BEGIN_SRC emacs-lisp
-  (use-package powerline
-    :config
-    ;; Apply a powerline color offset to correct for the wrong colors of the powerline
-    ;; separators
-    ;(load-library "powerline-srgb-offset")
-    ;(powerline-srgb-offset-activate "solarized-light")
+      (use-package powerline
+        :ensure all-the-icons
+        :config
+        ;; Apply a powerline color offset to correct for the wrong colors of the powerline
+        ;; separators
+                                            ;(load-library "powerline-srgb-offset")
+                                            ;(powerline-srgb-offset-activate "solarized-light")
 
-    (setq powerline-default-separator 'wave)
-    (defface cjp-powerline-yellow '((t (:background "#ffcc66" :foreground "#2d2d2d" :inherit mode-line)))
-      "Powerline yellow face.")
+        (setq powerline-default-separator 'wave)
+        (defface cjp-powerline-yellow '((t (:background "#ffcc66" :foreground "#2d2d2d" :inherit mode-line)))
+          "Powerline yellow face.")
 
-    ;; Same as powerline-default-theme, but move some of the items about a bit
-    (setq-default mode-line-format
-                  '("%e"
-                    (:eval
-                     (let* ((active (powerline-selected-window-active))
-                            (mode-line (if active 'mode-line 'mode-line-inactive))
-                            (face1 (if active 'powerline-active1 'powerline-inactive1))
-                            (face2 (if active 'powerline-active2 'powerline-inactive2))
-                            (face-yellow (if active 'cjp-powerline-yellow 'powerline-inactive1))
-                            (separator-left (intern (format "powerline-%s-%s"
-                                                            (powerline-current-separator)
-                                                            (car powerline-default-separator-dir))))
-                            (separator-right (intern (format "powerline-%s-%s"
-                                                             (powerline-current-separator)
-                                                             (cdr powerline-default-separator-dir))))
-                            (height (when macosxp 20))
-                            (lhs (list (powerline-raw "%*" face-yellow 'l)
-                                       (powerline-raw (concat "[" (projectile-project-name) "]") face-yellow 'l)
-                                       (let ((host (file-remote-p default-directory 'host)))
-                                         (when host
-                                           (powerline-raw (concat "(" host ")") face-yellow 'l)))
-                                       (powerline-buffer-id face-yellow 'l)
-                                       (powerline-vc face-yellow 'l)
-                                       (powerline-raw " " face-yellow)
-                                       (funcall separator-left face-yellow face1 height)
-                                       (when (boundp 'erc-modified-channels-object)
-                                         (powerline-raw erc-modified-channels-object face1 'l))
-                                       (powerline-major-mode face1 'l)
-                                       (powerline-process face1)
-                                       ;(powerline-minor-modes face1 'l)
-                                       (powerline-narrow face1 'l)
-                                       (powerline-raw " " face1)
-                                       (funcall separator-left face1 face2 height)
-                                       (when (and (boundp 'which-function-mode) which-function-mode)
-                                         (powerline-raw which-func-current face2 'l))))
-                            (rhs (list (powerline-raw global-mode-string face2 'r)
-                                       (funcall separator-right face2 face1 height)
-                                       (powerline-raw " " face1)
-                                       (unless window-system
-                                         (powerline-raw (char-to-string #xe0a1) face1 'l))
-                                       (when powerline-display-buffer-size
-                                         (powerline-buffer-size face1 'r))
-                                       (when powerline-display-mule-info
-                                         (powerline-raw mode-line-mule-info face1 'r))
-                                       (powerline-raw "%4l" face1 'r)
-                                       (funcall separator-right face1 mode-line height)
-                                       (powerline-raw " ")
-                                       (powerline-raw "%6p" nil 'r)
-                                       (when powerline-display-hud
-                                         (powerline-hud face-yellow face1)))))
-                       (concat (powerline-render lhs)
-                               (powerline-fill face2 (powerline-width rhs))
-                               (powerline-render rhs)))))))
+        ;; Same as powerline-default-theme, but move some of the items about a bit
+        (setq-default mode-line-format
+                      '("%e"
+                        (:eval
+                         (let* ((active (powerline-selected-window-active))
+                                (mode-line (if active 'mode-line 'mode-line-inactive))
+                                (face1 (if active 'powerline-active1 'powerline-inactive1))
+                                (face2 (if active 'powerline-active2 'powerline-inactive2))
+                                (face-yellow (if active 'cjp-powerline-yellow 'powerline-inactive1))
+                                (separator-left (intern (format "powerline-%s-%s"
+                                                                (powerline-current-separator)
+                                                                (car powerline-default-separator-dir))))
+                                (separator-right (intern (format "powerline-%s-%s"
+                                                                 (powerline-current-separator)
+                                                                 (cdr powerline-default-separator-dir))))
+                                (height (when macosxp 20))
+                                (lhs (list (powerline-raw "%*" face-yellow 'l)
+                                           (let ((branch (mapconcat 'concat (cdr (split-string (or vc-mode " ") "[:-]")) "-")))
+                                             (powerline-raw (concat "[" (projectile-project-name)
+                                                                    (when branch
+                                                                      (concat "|" branch))
+                                                                    "]") face-yellow 'l))
+                                           (let ((host (file-remote-p default-directory 'host)))
+                                             (when host
+                                               (powerline-raw (concat "(" host ")") face-yellow 'l)))
+                                           (powerline-buffer-id face-yellow 'l)
+                                           (powerline-raw " " face-yellow)
+                                           (funcall separator-left face-yellow face1 height)
+                                           (when (boundp 'erc-modified-channels-object)
+                                             (powerline-raw erc-modified-channels-object face1 'l))
+                                           (powerline-major-mode face1 'l)
+                                           (powerline-process face1)
+                                            ;(powerline-minor-modes face1 'l)
+                                           (powerline-narrow face1 'l)
+                                           (powerline-raw " " face1)
+                                           (funcall separator-left face1 face2 height)
+                                           (when (and (boundp 'which-function-mode) which-function-mode)
+                                             (powerline-raw which-func-current face2 'l))))
+                                (rhs (list (powerline-raw global-mode-string face2 'r)
+                                           (funcall separator-right face2 face1 height)
+                                           (powerline-raw " " face1)
+                                           (unless window-system
+                                             (powerline-raw (char-to-string #xe0a1) face1 'l))
+                                           (when powerline-display-buffer-size
+                                             (powerline-buffer-size face1 'r))
+                                           (when powerline-display-mule-info
+                                             (powerline-raw mode-line-mule-info face1 'r))
+                                           (powerline-raw "%4l" face1 'r)
+                                           (funcall separator-right face1 mode-line height)
+                                           (powerline-raw " ")
+                                           (powerline-raw "%6p" nil 'r)
+                                           (when powerline-display-hud
+                                             (powerline-hud face-yellow face1)))))
+                           (concat (powerline-render lhs)
+                                   (powerline-fill face2 (powerline-width rhs))
+                                   (powerline-render rhs)))))))
 #+END_SRC
 
 **** Beacon
@@ -936,7 +940,7 @@ Use pyflakes with flymake:
                           temp-file
                           (file-name-directory buffer-file-name))))
         (list "pyflakes" (list local-file))))
-  
+
     (add-to-list 'flymake-allowed-file-name-masks
                  '("\\.py\\'" flymake-pyflakes-init)))
 #+END_SRC
@@ -966,7 +970,7 @@ Further details: http://www.emacswiki.org/emacs/Edit_with_Emacs.
       :config
       (setq edit-server-new-frame nil)
       (edit-server-start)
-    
+
       ;; Use markdown mode, but still use C-c C-c to send back to Chrome
       (add-hook 'edit-server-start-hook
                 (lambda ()
@@ -1033,10 +1037,10 @@ in the file (not just when Emacs quits):
   (use-package auto-complete
     :config
     (require 'auto-complete-config)
-  
+
     (setq ac-comphist-file (cjp-emacs-structure-dir ".ac-comphist.dat")
           ac-fuzzy-enable t)
-  
+
     (add-to-list 'ac-dictionary-directories
                  (cjp-emacs-structure-dir "auto-complete/dict" "lisp"))
     (ac-config-default))
@@ -1425,20 +1429,20 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
     :config
     ;; These allow AUCTeX to parse TeX files automatically. Creates 'auto' directory with
     ;; parse info for each TeX file, got annoying so disabled for now.
-  
+
     ;; (setq TeX-auto-save t)
-  
+
     (setq ;; Use pdflatex as default mode in AuCTEX, always
           TeX-parse-self t
           ;; TeX-electric-sub-and-superscript nil
           TeX-PDF-mode t)
-  
+
     ;; Enable math mode and auto-fill when typing LaTeX, and RefTeX:
     (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
     (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
     (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
     (add-hook 'LaTeX-mode-hook (lambda () (TeX-source-correlate-mode 1)))
-  
+
     ;; Use tex parser so that TeX commands aren't checked:
     (add-hook 'LaTeX-mode-hook (lambda () (setq ispell-parser 'tex)))
     (setq TeX-source-correlate-method 'synctex)
