@@ -84,7 +84,12 @@ like these to avoid interfering with modes:
     :config
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
           projectile-switch-project-action 'neotree-projectile-action
-          neo-smart-open t))
+          neo-smart-open t)
+    (defun cjp-select-neotree-window-or-toggle ()
+      (interactive)
+      (if (eq major-mode 'neotree-mode)
+          (neotree-toggle)
+        (neotree-show))))
 #+END_SRC
 
 **** Smex
@@ -2539,7 +2544,7 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
 *** F1
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f1>") 'neotree-toggle)
+  (global-set-key (kbd "<f1>") 'cjp-select-neotree-window-or-toggle)
 #+END_SRC
 
 *** F2
