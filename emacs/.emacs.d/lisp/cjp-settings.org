@@ -1890,12 +1890,6 @@ Switch on Semantic mode:
   (semantic-mode 1)
 #+END_SRC
 
-I like the current line to be highlighted in all modes, if possible.
-
-#+BEGIN_SRC emacs-lisp
-  (global-hl-line-mode)
-#+END_SRC
-
 cperl-mode is preferred to perl-mode:
 
 #+BEGIN_SRC emacs-lisp
@@ -2271,6 +2265,7 @@ Use hl-line mode everywhere:
 
 #+BEGIN_SRC emacs-lisp
   (global-hl-line-mode)
+  (setq global-hl-line-sticky-flag t)
 #+END_SRC
 
 Fix scrolling when using the mouse wheel or trackpad:
