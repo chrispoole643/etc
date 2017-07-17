@@ -83,7 +83,7 @@ like these to avoid interfering with modes:
     :ensure all-the-icons
     :config
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
-          projectile-switch-project-action 'neotree-projectile-action
+          ;projectile-switch-project-action 'neotree-projectile-action
           neo-smart-open t
           neo-show-auto-change-root t
           neo-window-width 30
