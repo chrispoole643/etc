@@ -95,7 +95,9 @@ like these to avoid interfering with modes:
       (interactive)
       (if (eq major-mode 'neotree-mode)
           (neotree-toggle)
-        (neotree-show))))
+        (neotree-show)))
+    :bind (:map neotree-mode-map
+                ("^" . neotree-select-up-node)))
 #+END_SRC
 
 **** Smex
