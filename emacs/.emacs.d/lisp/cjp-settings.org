@@ -86,33 +86,25 @@ like these to avoid interfering with modes:
           treemacs-indentation                2
           treemacs-git-integration            t
           treemacs-collapse-dirs              3
-          treemacs-silent-refresh             nil
+          treemacs-silent-refresh             t
           treemacs-change-root-without-asking nil
           treemacs-sorting                    'alphabetic-desc
           treemacs-show-hidden-files          t
           treemacs-never-persist              nil
-          treemacs-is-never-other-window      nil
+          treemacs-is-never-other-window      t
           treemacs-goto-tag-strategy          'refetch-index)
-
     (treemacs-follow-mode t)
-    (treemacs-filewatch-mode t)
-    :bind
-    (:map global-map
-          ([f1]        . treemacs-toggle)
-          ;("M-0"       . treemacs-select-window)
-          ;("C-c 1"     . treemacs-delete-other-windows)
-          ;("M-m ft"    . treemacs-toggle)
-          ;("M-m fT"    . treemacs)
-          ;; ("M-m f C-t" . treemacs-find-file)
-          ))
+    (treemacs-filewatch-mode t))
 
   (use-package treemacs-projectile
     :config
-    (setq treemacs-header-function #'treemacs-projectile-create-header)
-    ;:bind (:map global-map
-    ;            ("M-m fP" . treemacs-projectile)
-    ;            ("M-m fp" . treemacs-projectile-toggle))
-)
+    (setq treemacs-header-function #'treemacs-projectile-create-header))
+
+  (defun cjp-select-treemacs-or-toggle ()
+    (interactive)
+    (if (eq major-mode 'treemacs-mode)
+        (treemacs-projectile-toggle)
+      (treemacs-projectile)))
 #+END_SRC
 
 **** Neotree
@@ -132,11 +124,6 @@ Disabled for now, while trying Treemacs...
           neo-force-change-root t
           neo-vc-integration '(face char)
           neo-default-system-application (if macosxp "open" "xdg-open"))
-    (defun cjp-select-neotree-window-or-toggle ()
-      (interactive)
-      (if (eq major-mode 'neotree-mode)
-          (neotree-toggle)
-        (neotree-show)))
     :bind (:map neotree-mode-map
                 ("^" . neotree-select-up-node)))
 #+END_SRC
@@ -744,7 +731,8 @@ These packages have no particular configuration; I just use them:
 
   (use-package counsel-projectile
     :config
-    (counsel-projectile-on))
+    (counsel-projectile-on)
+    (setq projectile-switch-project-action #'counsel-projectile-find-file))
 #+END_SRC
 
 **** Pandoc mode
@@ -2262,13 +2250,14 @@ Set auto-fill-mode to fill to column 89 (ideal for a 90 char width):
 Set tab key to two spaces:
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default c-basic-offset 4)
+  (setq-default c-basic-offset 2)
+  (setq-default js2-basic-offset 2)
 #+END_SRC
 
 Tab binary character in files interpreted as mod-4:
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default tab-width 4)
+  (setq-default tab-width 2)
 #+END_SRC
 
 My prefered code indentation style:
@@ -2592,15 +2581,13 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
 *** F1
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f1>") 'cjp-select-neotree-window-or-toggle)
+  (global-set-key (kbd "<f1>") 'cjp-select-treemacs-or-toggle)
 #+END_SRC
 
 *** F2
 
 #+BEGIN_SRC emacs-lisp
-  (global-set-key (kbd "<f2>") 'toggle-frame-fullscreen)
-  (global-set-key (kbd "<M-f2>") 'make-frame)
-  (global-set-key (kbd "<M-S-f2>") 'delete-frame)
+  (global-set-key (kbd "<f2>") 'cjp-select-neotree-window-or-toggle)
 #+END_SRC
 
 *** F3 and F4 reserved for macros
