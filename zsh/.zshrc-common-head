@@ -442,3 +442,6 @@ bz22xz () {
 # Prompt
 PURE_GIT_UNTRACKED_DIRTY=0
 source "$HOME/.zsh-prompts/prompt_pure_setup"
+
+### Added by the Bluemix CLI
+source /usr/local/Bluemix/bx/zsh_autocomplete
