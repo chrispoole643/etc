@@ -702,6 +702,12 @@ These packages have no particular configuration; I just use them:
   (use-package smooth-scrolling)
 #+END_SRC
 
+**** Hydra
+
+#+BEGIN_SRC emacs-lisp
+  (use-package hydra)
+#+END_SRC
+
 **** IMenu
 
 #+BEGIN_SRC emacs-lisp
@@ -1364,7 +1370,19 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
     :mode ("\\.js$"
-           "\\.json$"))
+           "\\.json$")
+    :config
+    (setq js2-basic-offset 2))
+#+END_SRC
+
+  * Go
+
+#+BEGIN_SRC emacs-lisp
+  (use-package go-mode)
+
+  (use-package go-eldoc)
+
+  (use-package go-autocomplete)
 #+END_SRC
 
 *** Ruby
@@ -2252,14 +2270,13 @@ Set auto-fill-mode to fill to column 89 (ideal for a 90 char width):
 Set tab key to two spaces:
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default c-basic-offset 2)
-  (setq-default js2-basic-offset 2)
+  (setq c-basic-offset 2)
 #+END_SRC
 
 Tab binary character in files interpreted as mod-4:
 
 #+BEGIN_SRC emacs-lisp
-  (setq-default tab-width 2)
+  (setq tab-width 2)
 #+END_SRC
 
 My prefered code indentation style:
@@ -2666,4 +2683,27 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
     (global-set-key (kbd "<f15>") 'cjp-find-with-google)
     (global-set-key (kbd "<f16>") (lambda () (interactive) (cjp-set-frame-uni t)))
     (global-set-key (kbd "<M-f16>") (lambda () (interactive) (cjp-set-frame-uni))))
+#+END_SRC
+* Hydras
+** Projectile
+
+#+BEGIN_SRC emacs-lisp
+  (defhydra cjp-hydra-projectile (global-map "s-p")
+    "Hydras for invoking projectile functions."
+    ("p" counsel-projectile-switch-project)
+    ("g" cjp-grep-project-or-swiper-buffer)
+    ("f" counsel-projectile-find-file))
+#+END_SRC
+
+** Window moving
+
+#+BEGIN_SRC emacs-lisp
+  (defhydra hydra-window-nav (global-map "s-w")
+    "Hydras for naviating around windows, etc."
+    ("j" windmove-down)
+    ("k" windmove-up)
+    ("h" windmove-left)
+    ("l" windmove-right)
+    ("J" winner-undo)
+    ("K" winner-redo))
 #+END_SRC
