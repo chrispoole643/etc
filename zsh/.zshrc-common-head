@@ -325,6 +325,10 @@ gman () {
     fi
 }
 
+rm-ssh-known-host () {
+    sed -i'' -e "${1}d" "$HOME/.ssh/known_hosts"
+}
+
 # Symmetric encryption
 cencrypt () {
     for i in "$@"; do
