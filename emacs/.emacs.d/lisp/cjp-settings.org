@@ -1900,6 +1900,12 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 
 _Broad configuration of Emacs._
 
+Recenter the buffer after moving to a line
+
+#+BEGIN_SRC emacs-lisp
+  (advice-add 'goto-line :after (lambda (&optional arg pred) (recenter)))
+#+END_SRC
+
 Switch on =which-function-mode=:
 
 #+BEGIN_SRC emacs-lisp
