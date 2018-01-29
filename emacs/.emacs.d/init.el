@@ -35,8 +35,6 @@
 
 ;;; Load org mode early to ensure that the orgmode ELPA version gets picked up, not the
 ;;; shipped version
-(use-package org-plus-contrib
-  :pin org)
 (use-package org
   :ensure org-plus-contrib
   :pin org)
