@@ -44,7 +44,7 @@
 ;;; Check to see if running on Mac OS X or some GNU/Linux distro
 (defvar macosxp (string-match "darwin" (symbol-name system-type)))
 (defvar linuxp (string-match "gnu/linux" (symbol-name system-type)))
-(defvar workp (string-match "ibm" system-name))
+(defvar workp (string-match "ibm" (system-name)))
 
 ;;; Bootstrap with my library functions
 (let ((file (concat user-emacs-directory "lisp/cjp-library.org")))
