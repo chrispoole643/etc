@@ -1364,6 +1364,11 @@ Or, to enable "superpack" (a little bit hacky improvements):
       (elpy-use-ipython)))
 #+END_SRC
 
+*** Swift
+
+#+BEGIN_SRC emacs-lisp
+  (use-package swift-mode)
+#+END_SRC
 *** C
 *** JavaScript
 
