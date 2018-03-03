@@ -23,3 +23,7 @@ bindkey -M emacs '^P' history-substring-search-up
 bindkey -M emacs '^N' history-substring-search-down
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
+
+# Bluemix CLI
+[[ -f /usr/local/Bluemix/bx/zsh_autocomplete ]] && \
+    source /usr/local/Bluemix/bx/zsh_autocomplete
