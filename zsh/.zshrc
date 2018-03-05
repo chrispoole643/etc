@@ -23,6 +23,3 @@ tmux list-sessions 2>&1 > /dev/null
 if [[ $? -eq 1 ]]; then
     st
 fi
-
-### Added by IBM Cloud CLI
-source /usr/local/Bluemix/bx/zsh_autocomplete

@@ -462,8 +462,9 @@ Move up and down like isearch:
     (setq enable-recursive-minibuffers t)
 
     ;; I prefer to be able to match words regardless of their search order
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-ignore-order)))
+    ;; (setq ivy-re-builders-alist
+    ;;       '((t . ivy--regex-ignore-order)))
+    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
     (setq ivy-height 14)
 
@@ -481,6 +482,9 @@ Move up and down like isearch:
   (use-package counsel
     :ensure smex
     :config
+    (use-package flx
+      :ensure t)
+
     ;; The default is to prefix the input with '^', but I dislike this behaviour
     (add-to-list 'ivy-initial-inputs-alist '(counsel-M-x . ""))
     :bind (("C-x C-r" . counsel-recentf)
