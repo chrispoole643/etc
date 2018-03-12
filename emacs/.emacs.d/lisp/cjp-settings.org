@@ -462,9 +462,10 @@ Move up and down like isearch:
     (setq enable-recursive-minibuffers t)
 
     ;; I prefer to be able to match words regardless of their search order
-    ;; (setq ivy-re-builders-alist
-    ;;       '((t . ivy--regex-ignore-order)))
-    (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+    (setq ivy-re-builders-alist
+          '((t . ivy--regex-ignore-order)))
+    ;; I tried this but found it more irritating than not...
+    ;;(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
 
     (setq ivy-height 14)
 

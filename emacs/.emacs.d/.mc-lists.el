@@ -41,10 +41,12 @@
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
+        yaml-electric-backspace
         ))
 
 (setq mc/cmds-to-run-once
       '(
+        iedit-switch-to-mc-mode
         kmacro-start-macro-or-insert-counter
         mark-whole-buffer
         markdown-exdent-or-delete
