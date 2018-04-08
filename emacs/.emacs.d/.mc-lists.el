@@ -42,11 +42,15 @@
         sp-backward-kill-word
         sp-delete-char
         yaml-electric-backspace
+        wdired-next-line
+        wdired-previous-line
         ))
 
 (setq mc/cmds-to-run-once
       '(
         iedit-switch-to-mc-mode
+        dired-toggle-read-only
+        diredp-delete-this-file
         kmacro-start-macro-or-insert-counter
         mark-whole-buffer
         markdown-exdent-or-delete
