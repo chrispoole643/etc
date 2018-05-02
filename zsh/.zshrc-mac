@@ -78,6 +78,7 @@ alias oi='fasd -iae open'
 ## Variables
 ################################################################################
 
+
 # I use different keys for personal and work use. Since Dropbox isn't allowed at
 # work, it's reasonable to assume that if I don't see the directory, this is
 # running on my work machine.
@@ -87,10 +88,21 @@ else
     cjp_gpg_key=1DE85A0C
 fi
 
+
 ################################################################################
 ## Functions
 ################################################################################
 
+
+# git
+git-sync () {
+    upstream=${1:=upstream}
+    origin=${2:=origin}
+    git checkout master && 
+        git pull "$upstream" master &&
+        git push "$origin" master &&
+        git log HEAD~3..HEAD
+}
 
 # gpg
 _start-gpg-agent () {
