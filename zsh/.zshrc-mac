@@ -95,13 +95,19 @@ fi
 
 
 # git
-git-sync () {
-    upstream=${1:=upstream}
-    origin=${2:=origin}
-    git checkout master && 
-        git pull "$upstream" master &&
-        git push "$origin" master &&
+gitsync () {
+    branch=${1:=master}
+    upstream=${2:=upstream}
+    origin=${3:=origin}
+    git checkout "$branch" && 
+        git pull "$upstream" "$branch" &&
+        git push "$origin" "$branch" &&
         git log HEAD~3..HEAD
+}
+
+gitwork () {
+    branch=${2:=master}
+    gitsync "$branch" && git checkout -b "$1"
 }
 
 # gpg
