@@ -1441,6 +1441,14 @@ Have diffs show character differences:
            ("\\.yml\\'" . yaml-mode)))
 #+END_SRC
 
+*** Groovy
+
+#+BEGIN_SRC emacs-lisp
+  (use-package groovy-mode
+    :config
+    (setq groovy-indent-offset 2))
+#+END_SRC
+
 *** Visual Regexp
 
 #+BEGIN_SRC emacs-lisp
