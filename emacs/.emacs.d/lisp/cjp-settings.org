@@ -1466,7 +1466,8 @@ Have diffs show character differences:
     (setq magit-omit-untracked-dir-contents t
           magit-last-seen-setup-instructions "1.4.0"
           git-commit-summary-max-length 50
-          git-commit-fill-column 80)
+          git-commit-fill-column 80
+          auto-revert-check-vc-info t)
     :bind
     (("C-M-g" . magit-status)))
 #+END_SRC
@@ -1918,7 +1919,13 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 
 _Broad configuration of Emacs._
 
-Recenter the buffer after moving to a line
+Automatically revert files once they change on disk:
+
+#+BEGIN_EXAMPLE
+  (global-auto-revert-mode)
+#+END_EXAMPLE
+
+Recenter the buffer after moving to a line:
 
 #+BEGIN_SRC emacs-lisp
   (advice-add 'goto-line :after (lambda (&optional arg pred) (recenter)))
