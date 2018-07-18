@@ -738,7 +738,10 @@ These packages have no particular configuration; I just use them:
     :config
     (projectile-global-mode)
     (setq projectile-enable-caching t)
-    :bind (("C-x C-g" . cjp-grep-project-or-swiper-buffer)))
+    :bind (("s-g" . cjp-grep-project-or-swiper-buffer)
+           ("s-p" . counsel-projectile-switch-project)
+           ("s-g" . cjp-grep-project-or-swiper-buffer)
+           ("s-f" . counsel-projectile-find-file)))
 
   (use-package counsel-projectile
     :config
@@ -1469,7 +1472,8 @@ Have diffs show character differences:
           git-commit-fill-column 80
           auto-revert-check-vc-info t)
     :bind
-    (("C-M-g" . magit-status)))
+    (("C-M-g" . magit-status)
+     ("s-l" . magit-log-buffer-file)))
 #+END_SRC
 
 *** Ibuffer
@@ -2716,15 +2720,6 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
     (global-set-key (kbd "<M-f16>") (lambda () (interactive) (cjp-set-frame-uni))))
 #+END_SRC
 * Hydras
-** Projectile
-
-#+BEGIN_SRC emacs-lisp
-  (defhydra cjp-hydra-projectile (global-map "s-p")
-    "Hydras for invoking projectile functions."
-    ("p" counsel-projectile-switch-project)
-    ("g" cjp-grep-project-or-swiper-buffer)
-    ("f" counsel-projectile-find-file))
-#+END_SRC
 
 ** Window moving
 
