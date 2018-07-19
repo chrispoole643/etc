@@ -1473,7 +1473,8 @@ Have diffs show character differences:
           auto-revert-check-vc-info t)
     :bind
     (("C-M-g" . magit-status)
-     ("s-l" . magit-log-buffer-file)))
+     ("s-l" . magit-log-buffer-file)
+     ("s-b" . magit-blame)))
 #+END_SRC
 
 *** Ibuffer
