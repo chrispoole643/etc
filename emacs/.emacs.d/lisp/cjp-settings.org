@@ -94,17 +94,26 @@ like these to avoid interfering with modes:
                  treemacs-is-never-other-window      t
                  treemacs-goto-tag-strategy          'refetch-index)
            (treemacs-follow-mode t)
-           (treemacs-filewatch-mode t)))
+           (treemacs-filewatch-mode t))
+    :bind
+    (("s-t" . treemacs-projectile)
+
+     :map treemacs-mode-map
+     ("r" . treemacs-remove-project)
+     ("a" . treemacs-projectile)))
 
   (use-package treemacs-projectile
+    :after treemacs projectile
+    :ensure t
     :config
     (setq treemacs-header-function #'treemacs-projectile-create-header))
 
   (defun cjp-select-treemacs-or-toggle ()
     (interactive)
     (if (eq major-mode 'treemacs-mode)
-        (treemacs-projectile-toggle)
-      (treemacs-projectile)))
+        (select-window cjp-treemacs-prior-window)
+      (setq cjp-treemacs-prior-window (selected-window))
+      (treemacs-select-window)))
 #+END_SRC
 
 **** Neotree
