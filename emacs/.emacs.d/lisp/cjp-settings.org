@@ -94,9 +94,10 @@ like these to avoid interfering with modes:
                  treemacs-is-never-other-window      t
                  treemacs-goto-tag-strategy          'refetch-index)
            (treemacs-follow-mode t)
-           (treemacs-filewatch-mode t))
+           (treemacs-filewatch-mode t)
+           (treemacs-resize-icons 11))
     :bind
-    (("s-t" . treemacs-projectile)
+    (("s-t" . cjp-add-current-project-to-treemacs)
 
      :map treemacs-mode-map
      ("r" . treemacs-remove-project)
@@ -108,7 +109,15 @@ like these to avoid interfering with modes:
     :config
     (setq treemacs-header-function #'treemacs-projectile-create-header))
 
+  (defun cjp-add-current-project-to-treemacs ()
+    ""
+    (interactive)
+    (let ((project-path (projectile-project-root)))
+      (treemacs-add-project-at project-path
+                               (file-name-base (directory-file-name project-path)))))
+
   (defun cjp-select-treemacs-or-toggle ()
+    ""
     (interactive)
     (if (eq major-mode 'treemacs-mode)
         (select-window cjp-treemacs-prior-window)
