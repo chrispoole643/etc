@@ -17,6 +17,7 @@
         isearch-exit
         isearch-forward-regexp
         isearch-printing-char
+        kmacro-end-or-call-macro
         nxml-electric-slash
         org-beginning-of-line
         org-delete-char
@@ -41,16 +42,16 @@
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
-        yaml-electric-backspace
         wdired-next-line
         wdired-previous-line
+        yaml-electric-backspace
         ))
 
 (setq mc/cmds-to-run-once
       '(
-        iedit-switch-to-mc-mode
         dired-toggle-read-only
         diredp-delete-this-file
+        iedit-switch-to-mc-mode
         kmacro-start-macro-or-insert-counter
         mark-whole-buffer
         markdown-exdent-or-delete

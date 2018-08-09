@@ -81,7 +81,8 @@ like these to avoid interfering with modes:
 #+BEGIN_SRC emacs-lisp
   (use-package treemacs
     :config
-    (progn (setq treemacs-follow-after-init          t
+    (progn ;(define-key treemacs-mode-map (kbd "C-p p") nil)
+           (setq treemacs-follow-after-init          t
                  treemacs-width                      35
                  treemacs-indentation                2
                  treemacs-git-integration            t
@@ -100,8 +101,11 @@ like these to avoid interfering with modes:
     (("s-t" . cjp-add-current-project-to-treemacs)
 
      :map treemacs-mode-map
+     ("[mouse-1]" . treemacs-single-click-expand-action)
      ("r" . treemacs-remove-project)
-     ("a" . treemacs-projectile)))
+     ("a" . treemacs-projectile)
+     ;("C-p" . previous-line)
+     ))
 
   (use-package treemacs-projectile
     :after treemacs projectile
@@ -2655,6 +2659,7 @@ Use /super-SPACE/ as a prefix for more complicated stuff:
 
 #+BEGIN_SRC emacs-lisp
   (global-set-key (kbd "<f1>") 'cjp-select-treemacs-or-toggle)
+  (define-key dired-mode-map (kbd "<f1>") 'cjp-select-treemacs-or-toggle)
 #+END_SRC
 
 *** F2
