@@ -699,7 +699,7 @@ in the mode-line in various search modes.
                                              (powerline-buffer-size face1 'r))
                                            (when powerline-display-mule-info
                                              (powerline-raw mode-line-mule-info face1 'r))
-                                           (powerline-raw "%4l" face1 'r)
+                                           (powerline-raw "%3l:%1c" face1 'r)
                                            (funcall separator-right face1 mode-line height)
                                            (powerline-raw " ")
                                            (powerline-raw "%6p" nil 'r)
@@ -1856,7 +1856,7 @@ the same key again to clear the text that's already been entered.
 #+BEGIN_SRC emacs-lisp
   (use-package deft
     :config
-    (setq deft-directory "~/Support/Reference/Lists"
+    (setq deft-directory "~/Box Sync/nvAlt/"
           deft-recursive t
           deft-use-filename-as-title t
           deft-default-extension "md"
