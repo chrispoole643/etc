@@ -232,6 +232,8 @@ alias getip='curl ifconfig.me'
 alias get='curl -C - -OL'
 alias calc='emacs -Q -nw -f full-calc'
 alias st=start-tmux
+alias ic=ibmcloud
+alias iks='ibmcloud ks'
 
 # Return a list of all sub-directories (recursively), together with how many
 # files each one contains. Sort to put directories with the most files at the
