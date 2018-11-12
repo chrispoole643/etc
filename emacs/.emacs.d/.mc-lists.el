@@ -18,6 +18,7 @@
         isearch-forward-regexp
         isearch-printing-char
         kmacro-end-or-call-macro
+        markdown-outdent-or-delete
         nxml-electric-slash
         org-beginning-of-line
         org-delete-char

@@ -18,22 +18,23 @@ These don't require their own section with other commands:
 
 Other themes I sometimes use:
 
-- color-theme
 - monokai-theme
 - tangotango-theme
+- sanityinc-tomorrow-eighties
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
   (use-package color-theme-sanityinc-tomorrow
     :config
     ;; Treat all themes as safe:
     (setq custom-safe-themes t)
-    (load-theme 'sanityinc-tomorrow-eighties t))
+    (load-theme 'sanityinc-tomorrow-night t))
 #+END_SRC
 
 Setup for solarised themes, not in use right now:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package solarized-theme
+    :config
     ;; Make the fringe stand out from the background
     (setq solarized-distinct-fringe-background nil)
     ;; Don't change the font for some headings and titles
@@ -43,6 +44,20 @@ Setup for solarised themes, not in use right now:
     ;; Draw the underline at the same place as the descent line: looks better
     (setq x-underline-at-descent-line t)
     (load-theme 'solarized-light t))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package spacemacs-theme
+    :config
+    ;; ;; Make the fringe stand out from the background
+    ;; (setq solarized-distinct-fringe-background nil)
+    ;; ;; Don't change the font for some headings and titles
+    ;; (setq solarized-use-variable-pitch nil)
+    ;; ;; Make the modeline high contrast: makes it easy to notice the current buffer
+    ;; (setq solarized-high-contrast-mode-line t)
+    ;; ;; Draw the underline at the same place as the descent line: looks better
+    ;; (setq x-underline-at-descent-line t)
+    (load-theme 'spacemacs-light t))
 #+END_SRC
 
 ** Auxiliary Packages
