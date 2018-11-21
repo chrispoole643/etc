@@ -1961,11 +1961,18 @@ https://en.wikipedia.org/wiki/Enclosed_Alphanumerics
 
 _Broad configuration of Emacs._
 
+I find I hit =C-x C-j= a lot when I want to kill the region:
+
+#+BEGIN_SRC emacs-lisp
+  (global-unset-key (kbd "C-x C-j"))
+  (global-set-key (kbd "C-x C-j") 'kill-region)
+#+END_SRC
+
 Automatically revert files once they change on disk:
 
-#+BEGIN_EXAMPLE
+#+BEGIN_SRC emacs-lisp
   (global-auto-revert-mode)
-#+END_EXAMPLE
+#+END_SRC
 
 Recenter the buffer after moving to a line:
 
