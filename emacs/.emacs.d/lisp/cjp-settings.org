@@ -114,6 +114,7 @@ like these to avoid interfering with modes:
            (treemacs-resize-icons 11))
     :bind
     (("s-t" . cjp-add-current-project-to-treemacs)
+     ("s-a" . cjp-add-current-project-to-treemacs)
 
      :map treemacs-mode-map
      ("[mouse-1]" . treemacs-single-click-expand-action)
