@@ -11,7 +11,7 @@
 ################################################################################
 
 fpath=(/Users/chris/.zsh-prompts /usr/local/share/zsh-completions $fpath)
-export PYTHONPATH="/usr/local/lib/python2.7/site-packages"
+export PYTHONPATH="/usr/local/lib/python3.7/site-packages"
 LC_ALL='en_US.UTF-8'
 LANG='en_US.UTF-8'
 LC_CTYPE=C
