@@ -94,6 +94,7 @@ like these to avoid interfering with modes:
 **** Treemacs
 
 #+BEGIN_SRC emacs-lisp
+  ; (add-hook 'treemacs-mode-hook (lambda () (setq-local no-delete-other-windows t)))
   (use-package treemacs
     :config
     (progn ;(define-key treemacs-mode-map (kbd "C-p p") nil)
@@ -115,6 +116,7 @@ like these to avoid interfering with modes:
     :bind
     (("s-t" . cjp-add-current-project-to-treemacs)
      ("s-a" . cjp-add-current-project-to-treemacs)
+     ("C-x 1" . treemacs-delete-other-windows)
 
      :map treemacs-mode-map
      ("[mouse-1]" . treemacs-single-click-expand-action)
