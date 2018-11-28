@@ -50,6 +50,7 @@
 
 (setq mc/cmds-to-run-once
       '(
+        comment-dwim
         dired-toggle-read-only
         diredp-delete-this-file
         iedit-switch-to-mc-mode
