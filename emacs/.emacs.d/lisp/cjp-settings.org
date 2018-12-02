@@ -1451,6 +1451,14 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+  * IAlign
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ialign
+    :bind
+    (("C-x l" . 'ialign)))
+#+END_SRC
+
 *** Web Mode
 
 #+BEGIN_SRC emacs-lisp
