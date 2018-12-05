@@ -1504,17 +1504,18 @@ Have diffs show character differences:
 *** Magit
 
 #+BEGIN_SRC emacs-lisp
-  (use-package magit
-    :config
-    (setq magit-omit-untracked-dir-contents t
-          magit-last-seen-setup-instructions "1.4.0"
-          git-commit-summary-max-length 50
-          git-commit-fill-column 80
-          auto-revert-check-vc-info t)
-    :bind
-    (("C-M-g" . magit-status)
-     ("s-l" . magit-log-buffer-file)
-     ("s-b" . magit-blame)))
+    (use-package magit
+      :config
+      (setq magit-omit-untracked-dir-contents t
+            magit-last-seen-setup-instructions "1.4.0"
+            git-commit-summary-max-length 50
+            git-commit-fill-column 80
+            auto-revert-check-vc-info t)
+      (add-hook 'git-commit-setup-hook 'cjp-git-commit-setup)
+      :bind
+      (("C-M-g" . magit-status)
+       ("s-l" . magit-log-buffer-file)
+       ("s-b" . magit-blame)))
 #+END_SRC
 
 *** Ibuffer

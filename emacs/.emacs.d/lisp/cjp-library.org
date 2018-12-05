@@ -143,6 +143,31 @@
 ** Miscellaneous
 
 #+BEGIN_SRC emacs-lisp
+    (defun cjp-git-commit-setup ()
+      (insert "
+
+# <type>(<scope>): <subject>
+#
+# Type:
+#
+# - feat     : A new feature
+# - fix      : A bug fix
+# - docs     : Documentation only changes
+# - refactor : A code change that neither fixes a bug nor adds a feature
+# - perf     : A code change that improves performance
+# - test     : Adding missing tests
+# - style    : Changes that do not affect the meaning of the code
+#              (white-space, formatting, missing semi-colons, etc)
+# - chore    : Changes to the build process or auxiliary tools and libraries
+#              such as documentation generation
+#
+# The scope could be anything specifying place of the commit change. For example
+# Training, StatusPage, etc.
+")
+      (goto-char (point-min)))
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp
   (defun cjp-grep-project-or-swiper-buffer ()
     "If we're in a Projectile-defined project, grep it, else, show
     the usual `swiper' interface."
