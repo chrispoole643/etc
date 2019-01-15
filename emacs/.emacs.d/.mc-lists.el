@@ -30,6 +30,7 @@
         org-shiftleft
         org-shiftright
         org-yank
+        paredit-backward-kill-word
         paredit-doublequote
         paredit-forward
         paredit-forward-delete
