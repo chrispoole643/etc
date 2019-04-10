@@ -255,6 +255,20 @@ tmux_name=main
 ################################################################################
 
 
+# Kubernetes
+kg () {
+    # E.g., `kg describe gmac` to find the first resource with `gmac` in the name and describe it
+    kubectl get all --show-all | grep -i "$2" | cut -d' ' -f1 | head -1 | xargs -I{} kubectl "$1" {}
+}
+
+kd () {
+    kg describe "$1"
+}
+
+kl () {
+    kg logs "$1"
+}
+
 # Golang
 gomkdir () {
     echo mkdir -p "$GOPATH/src/github.com/chrispoole643/$2"
