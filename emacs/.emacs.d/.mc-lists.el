@@ -9,6 +9,7 @@
         cua-copy-region
         cua-cut-region
         cua-paste
+        electric-newline-and-maybe-indent
         helm-all-mark-rings
         helm-mini
         indent-for-tab-command
@@ -44,6 +45,7 @@
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
+        swiper
         wdired-next-line
         wdired-previous-line
         yaml-electric-backspace
