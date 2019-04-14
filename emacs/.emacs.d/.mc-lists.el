@@ -9,6 +9,7 @@
         cua-copy-region
         cua-cut-region
         cua-paste
+        electric-newline-and-maybe-indent
         helm-all-mark-rings
         helm-mini
         indent-for-tab-command
@@ -30,6 +31,7 @@
         org-shiftleft
         org-shiftright
         org-yank
+        paredit-backward-kill-word
         paredit-doublequote
         paredit-forward
         paredit-forward-delete
@@ -44,6 +46,7 @@
         sp-backward-kill-word
         sp-delete-char
         wdired-finish-edit
+        swiper
         wdired-next-line
         wdired-previous-line
         yaml-electric-backspace

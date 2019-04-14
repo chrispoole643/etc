@@ -1772,7 +1772,8 @@ as I don't really use these anymore, so may remove them.
           markdown-asymmetric-header t
           markdown-list-indent-width 2
           markdown-reference-location 'end
-          markdown-footnote-location 'end)
+          markdown-footnote-location 'end
+          markdown-open-command "open")
     ;; Webgen uses markdown syntax in .page files
     (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
     (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
