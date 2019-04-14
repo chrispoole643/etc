@@ -43,6 +43,7 @@
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
+        wdired-finish-edit
         wdired-next-line
         wdired-previous-line
         yaml-electric-backspace
