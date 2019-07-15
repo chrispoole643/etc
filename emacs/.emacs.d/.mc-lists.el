@@ -45,6 +45,7 @@
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
+        wdired-finish-edit
         swiper
         wdired-next-line
         wdired-previous-line
