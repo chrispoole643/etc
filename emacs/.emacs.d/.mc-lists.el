@@ -10,6 +10,7 @@
         cua-cut-region
         cua-paste
         electric-newline-and-maybe-indent
+        forward-sexp
         helm-all-mark-rings
         helm-mini
         indent-for-tab-command
@@ -19,6 +20,7 @@
         isearch-forward-regexp
         isearch-printing-char
         kmacro-end-or-call-macro
+        markdown-cycle
         markdown-outdent-or-delete
         nxml-electric-slash
         org-beginning-of-line
@@ -45,8 +47,8 @@
         sp-backward-delete-char
         sp-backward-kill-word
         sp-delete-char
-        wdired-finish-edit
         swiper
+        wdired-finish-edit
         wdired-next-line
         wdired-previous-line
         yaml-electric-backspace
@@ -57,6 +59,7 @@
         comment-dwim
         dired-toggle-read-only
         diredp-delete-this-file
+        iedit-mode
         iedit-switch-to-mc-mode
         kmacro-start-macro-or-insert-counter
         mark-whole-buffer
