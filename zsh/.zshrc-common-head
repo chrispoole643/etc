@@ -257,16 +257,16 @@ tmux_name=main
 
 # Kubernetes
 kg () {
-    # E.g., `kg describe gmac` to find the first resource with `gmac` in the name and describe it
-    kubectl get all --show-all | grep -i "$2" | cut -d' ' -f1 | head -1 | xargs -I{} kubectl "$1" {}
+    # E.g., `kg gmac` to find the first resource with `gmac` in the name and describe it
+    kubectl get all --show-all | grep -i "$1" | cut -d' ' -f1 | head -1
 }
 
 kd () {
-    kg describe "$1"
+    k describe $(kg "$1")
 }
 
 kl () {
-    kg logs "$1"
+    k logs $(kg "$1")
 }
 
 # Golang

@@ -1451,6 +1451,18 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
+  * LSP
+
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-mode
+    :hook (prog-mode . lsp))
+  (use-package lsp-ui)
+  (use-package lsp-treemacs)
+  (use-package dap-mode)
+  (use-package lsp-java
+    :hook (java-mode . lsp))
+#+END_SRC
+
   * IAlign
 
 #+BEGIN_SRC emacs-lisp
