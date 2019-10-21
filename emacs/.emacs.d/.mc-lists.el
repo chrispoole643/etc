@@ -10,6 +10,7 @@
         cua-cut-region
         cua-paste
         electric-newline-and-maybe-indent
+        end-of-buffer
         forward-sexp
         helm-all-mark-rings
         helm-mini
