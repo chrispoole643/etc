@@ -7,37 +7,29 @@
 ;;;; platform-specific.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;;; Define org and melpa as package sources, and install `use-package' if it's not
-;;; already there. Always ensure packages being loaded are there (or else it'll
-;;; automatically download from melpa)
+;;; Use straight.el instead of the packages system
+(defvar bootstrap-version)
+(let ((bootstrap-file
+       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
+      (bootstrap-version 5))
+  (unless (file-exists-p bootstrap-file)
+    (with-current-buffer
+        (url-retrieve-synchronously
+         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         'silent 'inhibit-cookies)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  (load bootstrap-file nil 'nomessage))
 
-(require 'package)
-(setq user-emacs-directory "~/.emacs.d/")
-(setq package-user-dir (concat user-emacs-directory "packages"))
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives '("org" . "https://orgmode.org/elpa/") t)
-(when (>= emacs-major-version 25) (setq package-archive-priorities '(("org" . 3)
-								     ("melpa" . 2)
-								     ("gnu" . 1))))
-(setq package-load-list '(all))
-(package-initialize)
-(setq package-enable-at-startup nil)
+;;; Load and configure use-package to use straight.el
+(straight-use-package 'use-package)
+(setq straight-use-package-by-default t)
 
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-
-(eval-when-compile
-  (require 'use-package))
-
-(setq use-package-always-ensure t)
 (add-hook 'package-menu-mode-hook 'hl-line-mode)
 
 ;;; Load org mode early to ensure that the orgmode ELPA version gets picked up, not the
 ;;; shipped version
-(use-package org
-  :ensure org-plus-contrib
-  :pin org)
+(use-package org)
 
 ;;; Check to see if running on Mac OS X or some GNU/Linux distro
 (defvar macosxp (string-match "darwin" (symbol-name system-type)))

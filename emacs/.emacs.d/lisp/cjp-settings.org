@@ -127,7 +127,6 @@ like these to avoid interfering with modes:
 
   (use-package treemacs-projectile
     :after treemacs projectile
-    :ensure t
     :config
     (setq treemacs-header-function #'treemacs-projectile-create-header))
 
@@ -152,8 +151,8 @@ like these to avoid interfering with modes:
 Disabled for now, while trying Treemacs...
 
 #+BEGIN_SRC emacs-lisp :tangle no
+  (use-package all-the-icons)
   (use-package neotree
-    :ensure all-the-icons
     :config
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
           ;projectile-switch-project-action 'neotree-projectile-action
@@ -337,20 +336,6 @@ This works, but not that well (at least on the Mac)... disable for now.
     )
 #+END_SRC
 
-**** ace-isearch
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ace-isearch
-    :config
-    (global-ace-isearch-mode t)
-
-    (setq ace-isearch-input-idle-delay 0.4
-          ace-isearch-input-length 10
-          ace-isearch-function-from-isearch 'helm-swoop-from-isearch
-          ace-isearch-submode 'ace-jump-char-mode
-          ace-isearch-use-ace-jump 'printing-char))
-#+END_SRC
-
 **** Helm
 
 _Disabled for now... switching to use Ivy._
@@ -487,6 +472,7 @@ Move up and down like isearch:
 #+BEGIN_SRC emacs-lisp :tangle no
   (setq helm-swoop-use-line-number-face t)
 #+END_SRC
+
 **** Ivy mode
 
 #+BEGIN_SRC emacs-lisp
@@ -520,12 +506,10 @@ Move up and down like isearch:
                 ;; Helm
                 ("C-l" . ivy-backward-kill-word)))
 
+  (use-package smex)
+  (use-package flx)
   (use-package counsel
-    :ensure smex
     :config
-    (use-package flx
-      :ensure t)
-
     ;; The default is to prefix the input with '^', but I dislike this behaviour
     (add-to-list 'ivy-initial-inputs-alist '(counsel-M-x . ""))
     :bind (("C-x C-r" . counsel-recentf)
@@ -537,6 +521,20 @@ Move up and down like isearch:
   (use-package swiper
     :bind (("C-s" . swiper)
            ("C-r" . swiper)))
+#+END_SRC
+
+**** ace-isearch
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-isearch
+    :config
+    (global-ace-isearch-mode t)
+
+    (setq ace-isearch-input-idle-delay 0.4
+          ace-isearch-input-length 10
+          ace-isearch-function-from-isearch 'helm-swoop-from-isearch
+          ace-isearch-submode 'ace-jump-char-mode
+          ace-isearch-use-ace-jump 'printing-char))
 #+END_SRC
 
 *** Visual Improvements
@@ -552,9 +550,6 @@ Move up and down like isearch:
 
 #+BEGIN_SRC emacs-lisp
   (use-package bm
-    :ensure t
-    :demand t
-
     :init
     ;; restore on load (even before you require bm)
     (setq bm-restore-repository-on-load t)
@@ -659,7 +654,6 @@ in the mode-line in various search modes.
 
 #+BEGIN_SRC emacs-lisp
       (use-package powerline
-        :ensure all-the-icons
         :config
         ;; Apply a powerline color offset to correct for the wrong colors of the powerline
         ;; separators
@@ -1039,7 +1033,6 @@ Use pyflakes with flymake:
 
 #+BEGIN_SRC emacs-lisp
   (use-package flycheck
-    :ensure t
     :diminish " Ⓕ"
     :config
     (global-flycheck-mode)
@@ -1086,7 +1079,8 @@ Higher quality PDFs please:
 **** Bookmarks
 
 #+BEGIN_SRC emacs-lisp
-  (use-package bookmark+)
+  (straight-use-package
+    '(bookmark-plus :type git :host github :repo "emacsmirror/bookmark-plus"))
 #+END_SRC
 
 Choose a location of bookmarks file. Save bookmarks file every time I put a new bookmark
@@ -1123,7 +1117,7 @@ in the file (not just when Emacs quits):
 
      Disable for now, to use Company mode instead.
 
-#+BEGIN_SRC
+#+BEGIN_SRC emacs-lisp :toggle no
   (use-package auto-complete
     :config
     (require 'auto-complete-config)
@@ -1565,50 +1559,49 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 *** AUCTeX
 
 #+BEGIN_SRC emacs-lisp
-  (use-package tex
-    :ensure auctex
-    :config
-    ;; These allow AUCTeX to parse TeX files automatically. Creates 'auto' directory with
-    ;; parse info for each TeX file, got annoying so disabled for now.
-
-    ;; (setq TeX-auto-save t)
-
-    (setq ;; Use pdflatex as default mode in AuCTEX, always
-          TeX-parse-self t
-          ;; TeX-electric-sub-and-superscript nil
-          TeX-PDF-mode t)
-
-    ;; Enable math mode and auto-fill when typing LaTeX, and RefTeX:
-    (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
-    (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-    (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-    (add-hook 'LaTeX-mode-hook (lambda () (TeX-source-correlate-mode 1)))
-
-    ;; Use tex parser so that TeX commands aren't checked:
-    (add-hook 'LaTeX-mode-hook (lambda () (setq ispell-parser 'tex)))
-    (setq TeX-source-correlate-method 'synctex)
-    (setq ;; Setup RefTeX with AUCTeX automatically
-     reftex-plug-into-AUCTeX t
-     ;; Use `-', not `:'
-     reftex-section-prefixes '((0 . "part-")
-                               (1 . "cha-")
-                               (t . "sec-"))
-     ;; Change citation format to natbib (\citet format)
-     reftex-cite-format "\\citet[][]{%l}")
-    ;; Highlight keywords from the natbib package:
-    (setq font-latex-match-reference-keywords
-          '(("citet" "[{")))
-    ;; Have AUCTeX ask which is master file for multi-document TeX:
-    (setq-default TeX-master nil))
-
+  (straight-use-package
+    '(auctex :type git :host github :repo "emacs-straight/auctex"))
   (use-package reftex)
+  (require 'tex)
+
+  ;; These allow AUCTeX to parse TeX files automatically. Creates 'auto' directory with
+  ;; parse info for each TeX file, got annoying so disabled for now.
+
+  ;; (setq TeX-auto-save t)
+
+  (setq ;; Use pdflatex as default mode in AuCTEX, always
+   TeX-parse-self t
+   ;; TeX-electric-sub-and-superscript nil
+   TeX-PDF-mode t)
+
+  ;; Enable math mode and auto-fill when typing LaTeX, and RefTeX:
+  (add-hook 'LaTeX-mode-hook 'turn-on-auto-fill)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+  (add-hook 'LaTeX-mode-hook (lambda () (TeX-source-correlate-mode 1)))
+
+  ;; Use tex parser so that TeX commands aren't checked:
+  (add-hook 'LaTeX-mode-hook (lambda () (setq ispell-parser 'tex)))
+  (setq TeX-source-correlate-method 'synctex)
+  (setq ;; Setup RefTeX with AUCTeX automatically
+   reftex-plug-into-AUCTeX t
+   ;; Use `-', not `:'
+   reftex-section-prefixes '((0 . "part-")
+                             (1 . "cha-")
+                             (t . "sec-"))
+   ;; Change citation format to natbib (\citet format)
+   reftex-cite-format "\\citet[][]{%l}")
+  ;; Highlight keywords from the natbib package:
+  (setq font-latex-match-reference-keywords
+        '(("citet" "[{")))
+  ;; Have AUCTeX ask which is master file for multi-document TeX:
+  (setq-default TeX-master nil)
 #+END_SRC
 
 *** Org
 
 #+BEGIN_SRC emacs-lisp
   (use-package org-plus-contrib
-    :pin org
     :mode ("\\.org\\'" . org-mode)
     :config
 
@@ -1648,14 +1641,11 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
      ("C-c C-'" . org-edit-src-exit)))
 
   (use-package org
-    :ensure org-plus-contrib
-    :pin org
     :diminish ('org-src . " Ⓞ"))
 
   (use-package ox-reveal)
 
   (use-package org-bullets
-    :ensure t
     :init
     (setq org-bullets-bullet-list
           '("◉" "◎" "⚫" "○" "►" "◇"))
@@ -1804,14 +1794,17 @@ as I don't really use these anymore, so may remove them.
 *** Dired
 
 #+BEGIN_SRC emacs-lisp
-  (use-package dired+)
-  (use-package dired-details+)
-  (use-package dired-subtree)
-#+END_SRC
+  (straight-use-package
+    '(dired-plus :type git :host github :repo "emacsmirror/dired-plus"))
+  (straight-use-package
+    '(dired-details-plus :type git :host github :repo "emacsmirror/dired-details-plus"))
+  (straight-use-package
+    '(dired-subtree :type git :flavor melpa :files ("dired-subtree.el" "dired-subtree-pkg.el") :host github :repo "Fuco1/dired-hacks"))
 
-Hide and show details (`ls -l` stuff) with '(' and ')':
+  ; `dired-omit-files' is from here
+  (require 'dired-x)
 
-#+BEGIN_SRC emacs-lisp
+  ; Hide and show details (`ls -l` stuff) with '(' and ')':
   (setq dired-details-hidden-string ""
         dired-details-initially-hide nil
         ;; dired-omit-mode, ignore dotfiles
@@ -1873,7 +1866,7 @@ The default fonts don't look nice with Tango theme, at least to my eyes:
 
 *** RFC
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package irfc
     :config
     (setq irfc-assoc-mode t))
