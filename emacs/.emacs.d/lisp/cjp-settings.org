@@ -1726,7 +1726,6 @@ as I don't really use these anymore, so may remove them.
 #+BEGIN_SRC emacs-lisp
   (setq Info-default-directory-list
         (append (cjp-get-dir-structure-in "info")
-                (cjp-get-dir-structure-in "packages")
                 Info-default-directory-list))
 #+END_SRC
 
