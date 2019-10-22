@@ -130,6 +130,10 @@ like these to avoid interfering with modes:
     :config
     (setq treemacs-header-function #'treemacs-projectile-create-header))
 
+  (use-package treemacs-icons-dired
+    :after treemacs dired
+    :config (treemacs-icons-dired-mode))
+
   (defun cjp-add-current-project-to-treemacs ()
     ""
     (interactive)
