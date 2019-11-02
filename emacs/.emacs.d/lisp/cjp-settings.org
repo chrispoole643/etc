@@ -537,6 +537,9 @@ Move up and down like isearch:
   (use-package swiper
     :bind (("C-s" . swiper)
            ("C-r" . swiper)))
+
+  (use-package avy
+    :bind (("C-'" . avy-goto-line)))
 #+END_SRC
 
 *** Visual Improvements
@@ -759,7 +762,7 @@ These packages have no particular configuration; I just use them:
   (use-package imenu-anywhere
     :config
     (setq imenu-anywhere-buffer-filter-functions '(imenu-anywhere-same-project-p))
-    :bind (("C-'" . ivy-imenu-anywhere)))
+    :bind (("M-'" . ivy-imenu-anywhere)))
 #+END_SRC
 
 **** Ag
