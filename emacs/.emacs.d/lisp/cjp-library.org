@@ -467,13 +467,13 @@
 
 #+BEGIN_SRC emacs-lisp
   (defun cjp-set-font-size (&optional size font allframes)
-    "Set frame font (either FONT or by default `Menlo') to SIZE. If
-  SIZE isn't specified, prompt for input (defaulting to
+    "Set frame font (either FONT or by default `DejaVu Sans Mono')
+  to SIZE. If SIZE isn't specified, prompt for input (defaulting to
   `cjp-default-font-size'). `size' can be a relative value too,
   e.g., `+3' or `-3'."
     (interactive)
     (if (>= emacs-major-version 23)
-        (let* ((font (or font (if macosxp "Menlo" "Inconsolata")))
+        (let* ((font (or font "DejaVu Sans Mono"))
                (size (or size (read-string (concat "Font size (" cjp-default-font-size "): ")
                                            nil nil cjp-default-font-size)))
                (current-size (/ (face-attribute 'default :height) 10))

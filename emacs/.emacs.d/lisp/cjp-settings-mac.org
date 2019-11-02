@@ -52,7 +52,7 @@ Functions here to pass Skim the page information for SyncTeX from [[bleedingmind
 
 First few from [[http://reddit.com/r/emacs/comments/ab5m7/whats_your_emacs_23_os_x_setup/][reddit]].
 
-Set font (Menlo default):
+Set font (DejaVu Sans Mono default):
 
 #+BEGIN_SRC emacs-lisp
   (when (display-graphic-p)
