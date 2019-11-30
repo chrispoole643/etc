@@ -873,9 +873,7 @@ Spell word at point (Usually M-$):
 
 #+BEGIN_SRC emacs-lisp
   (use-package c-eldoc)
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (mapc (lambda (x) (add-hook x 'turn-on-eldoc-mode))
         '(python-mode-hook
           inferior-python-mode
@@ -888,9 +886,7 @@ Spell word at point (Usually M-$):
           slime-repl-mode-hook
           lisp-interaction-mode-hook
           c-mode-hook))
-#+END_SRC
 
-#+BEGIN_SRC emacs-lisp
   (setq c-eldoc-includes "-I./ -I../ -I/usr/include/ -I/usr/local/include/ ")
 #+END_SRC
 
@@ -1016,13 +1012,23 @@ Turn on for rectangle mode only:
 
 Show error messages in minibuffer, not as a GUI menu:
 
-#+BEGIN_SRC emacs-lisp
-  (use-package flymake-cursor)
+#+BEGIN_SRC emacs-lisp :tangle no
+  (load "flymake")
+
+  (straight-use-package
+   '(flymake-cursor :type git :host github
+                    :repo "akash-akya/emacs-flymake-cursor"))
+
+  (use-package flymake
+    :config
+    (progn (flymake-cursor-mode)
+           (setq flymake-cursor-number-of-errors-to-display t
+                 flymake-cursor-error-display-delay 0.2)))
 #+END_SRC
 
 Use pyflakes with flymake:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (when (load "flymake" t)
     (defun flymake-pyflakes-init ()
       (let* ((temp-file (flymake-init-create-temp-buffer-copy
@@ -1118,6 +1124,9 @@ in the file (not just when Emacs quits):
     :config
     (company-quickhelp-mode 1)
     (setq company-quickhelp-delay 0))
+
+  (use-package company-box
+    :hook (company-mode . company-box-mode))
 #+END_SRC
 
 **** Auto-complete
@@ -1344,19 +1353,20 @@ Using python.el, not python-mode.el. The latter doesn't seem to be able to send 
 contents of a buffer to the interpreter easily, as python.el can (with C-c C-c).
 
 #+BEGIN_SRC emacs-lisp
-  (use-package python
-    :mode
-    (("\\.py\\'" . python-mode)
-     ("\\.pyx\\'" . python-mode))
-    :interpreter ("python" . python-mode)
-    :bind
-    (:map python-mode-map
-          ("<s-tab>" . elpy-company-backend)))
+    (use-package python
+      :mode
+      (("\\.py\\'" . python-mode)
+       ("\\.pyx\\'" . python-mode))
+      :interpreter ("python" . python-mode)
+      :bind
+      ;; (:map python-mode-map
+      ;;       ("<s-tab>" . elpy-company-backend))
+      )
 #+END_SRC
 
 Use these extras, too:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package pydoc-info)
   (use-package python-info)
   (use-package pyvenv)
@@ -1364,13 +1374,13 @@ Use these extras, too:
 
 Turn on auto-complete in python shells:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (add-hook 'inferior-python-mode-hook (lambda () (auto-complete-mode 1)))
 #+END_SRC
 
 Check files for pep8 mistakes:
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (autoload 'python-pep8 "python-pep8")
   (autoload 'pep8 "python-pep8")
 #+END_SRC
@@ -1385,7 +1395,7 @@ displays "\" at the end of lines that wrap:
 
 [[https://github.com/tkf/emacs-ipython-notebook][Emacs IPython Notebook]].
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package ein
     :config
     (setq ein:use-auto-complete t))
@@ -1393,13 +1403,13 @@ displays "\" at the end of lines that wrap:
 
 Or, to enable "superpack" (a little bit hacky improvements):
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   ;; (setq ein:use-auto-complete-superpack t)
 #+END_SRC
 
 **** elpy
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package elpy
     :config
     ;; `highlight-indentation' conflicts with `highlight-indent-guides'. Disable the former
@@ -1452,16 +1462,28 @@ Or, to enable "superpack" (a little bit hacky improvements):
 #+END_SRC
 
 ** Discrete Modes
-  * LSP
+  * LSP (or Elgot)
 
 #+BEGIN_SRC emacs-lisp
   (use-package lsp-mode
-    :hook (prog-mode . lsp))
+    :hook (prog-mode . lsp)
+    :commands lsp)
   (use-package lsp-ui)
+  (use-package company-lsp)
   (use-package lsp-treemacs)
   (use-package dap-mode)
   (use-package lsp-java
     :hook (java-mode . lsp))
+#+END_SRC
+
+Use lsp-mode for now... Eglot is an alternative:
+
+#+BEGIN_SRC emacs-lisp :tangle no
+  (use-package eglot
+    :hook (prog-mode . eglot-ensure)
+    ;; :config
+    ;; (setq eglot-ignored-server-capabilites (quote (:documentHighlightProvider))))
+    )
 #+END_SRC
 
   * IAlign
