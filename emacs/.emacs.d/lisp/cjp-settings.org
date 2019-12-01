@@ -1158,10 +1158,11 @@ in the file (not just when Emacs quits):
     (setq inferior-lisp-program "/usr/local/bin/sbcl")
     ;;(slime-setup '(slime-fancy))
     ;; Auto-complete
-    (add-hook 'slime-mode-hook 'set-up-slime-ac)
-    (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
-    (eval-after-load "auto-complete"
-      '(add-to-list 'ac-modes 'slime-repl-mode)))
+    ;; (add-hook 'slime-mode-hook 'set-up-slime-ac)
+    ;; (add-hook 'slime-repl-mode-hook 'set-up-slime-ac)
+    ;; (eval-after-load "auto-complete"
+    ;;   '(add-to-list 'ac-modes 'slime-repl-mode))
+    )
 #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
