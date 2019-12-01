@@ -1282,7 +1282,7 @@ variables from the buffer it was invoked from:
                                  ac-source-symbols
                                  ac-source-words-in-same-mode-buffers))
               (add-to-list 'ac-modes 'inferior-emacs-lisp-mode)
-              (auto-complete-mode 1)
+              ;; (auto-complete-mode 1)
               (eldoc-mode 1)
               (paredit-mode 1)
               (ielm-change-working-buffer ielm-invoked-from-buffer)))
