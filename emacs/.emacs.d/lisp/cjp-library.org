@@ -499,3 +499,17 @@
     (interactive)
     (switch-to-buffer (get-buffer-create "*scratch*")))
 #+END_SRC
+
+#+BEGIN_SRC emacs-lisp
+  (defvar cjp-straight-repositories
+    '("melpa" "emacsmirror-mirror" "gnu-elpa-mirror")
+    "List of repositories that Straight knows about.")
+
+  (defun cjp-straight-update ()
+    "Pull the repositories Straight knows about first, and then
+  pull all packages."
+    (interactive)
+    (mapc (lambda (repo)
+            (straight-pull-package repo)) cjp-straight-repositories)
+    (straight-pull-all))
+#+END_SRC
