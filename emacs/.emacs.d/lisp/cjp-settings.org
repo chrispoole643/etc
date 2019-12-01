@@ -1451,7 +1451,7 @@ Or, to enable "superpack" (a little bit hacky improvements):
 
   (use-package go-eldoc)
 
-  (use-package go-autocomplete)
+  ;; (use-package go-autocomplete)
 #+END_SRC
 
 *** Ruby
