@@ -1990,7 +1990,7 @@ Fix helm mode buffers at the bottom of the frame.
 #+BEGIN_SRC emacs-lisp
   (use-package diminish
     :config
-    (eval-after-load "auto-complete" '(diminish 'auto-complete-mode " Ⓐ"))
+    ;; (eval-after-load "auto-complete" '(diminish 'auto-complete-mode " Ⓐ"))
     (eval-after-load "abbrev" '(diminish 'abbrev-mode " Ⓐ"))
     (eval-after-load "ace-isearch" '(diminish 'ace-isearch-mode " Ⓐ"))
     (eval-after-load "anzu" '(diminish 'anzu-mode " Ⓐ"))
