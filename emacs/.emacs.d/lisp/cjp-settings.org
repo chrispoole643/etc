@@ -1113,6 +1113,10 @@ in the file (not just when Emacs quits):
   (use-package company
     :config
     (global-company-mode)
+    (setq company-idle-delay 0)
+    ;; Disable auto-complete mode
+    :hook (company-mode . (lambda () (when (fboundp 'auto-complete-mode)
+                                  (auto-complete-mode -1))))
     :bind (:map company-active-map
                 ("C-n" . company-select-next)
                 ("C-p" . company-select-previous)
