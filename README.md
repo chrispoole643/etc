@@ -14,6 +14,6 @@ you run Emacs for the first time with this confirguration, it'll fetch
 packages from [melpa][], so may take a while to load.
 
 
-stow: https://www.gnu.org/software/stow/
-straight: https://github.com/raxod502/straight.el
-melpa: https://melpa.org/
+[stow]: https://www.gnu.org/software/stow/
+[straight]: https://github.com/raxod502/straight.el
+[melpa]: https://melpa.org/
