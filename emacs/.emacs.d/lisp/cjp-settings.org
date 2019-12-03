@@ -763,6 +763,19 @@ These packages have no particular configuration; I just use them:
     :bind (("M-'" . ivy-imenu-anywhere)))
 #+END_SRC
 
+   * Poporg
+
+When in a comment field, switch to a temp buffer to edit more easily,
+before inserting back into the comment area.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package poporg
+    :config (setq poporg-edit-hook '(markdown-mode))
+    :bind (("C-c \"" . poporg-dwim)
+           :map poporg-mode-map
+           ("C-c \"" . poporg-dwim)))
+#+END_SRC
+
 **** Ag
 
 #+BEGIN_SRC emacs-lisp
