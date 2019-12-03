@@ -1565,6 +1565,11 @@ Have diffs show character differences:
      ("s-l" . magit-log-buffer-file)
      ("s-b" . magit-blame)))
 #+END_SRC
+
+*** Git Timemachine
+
+#+BEGIN_SRC emacs-lisp
+  (use-package git-timemachine)
 #+END_SRC
 
 *** Ibuffer
