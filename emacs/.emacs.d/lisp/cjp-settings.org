@@ -2380,10 +2380,11 @@ True by default in Carbon Emacs. Set here for Aquamacs and other distros:
   (setq x-select-enable-clipboard t)
 #+END_SRC
 
-Mute annoying beep:
+Mute annoying beep and stop the annoying flashing thing:
 
 #+BEGIN_SRC emacs-lisp
-  (setq visible-bell t)
+  (setq visible-bell nil)
+  (setq ring-bell-function 'ignore)
 #+END_SRC
 
 Stop cursor from blinking:
