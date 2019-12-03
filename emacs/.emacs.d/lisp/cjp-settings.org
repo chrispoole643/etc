@@ -1499,6 +1499,16 @@ Use lsp-mode for now... Eglot is an alternative:
     (("C-x l" . 'ialign)))
 #+END_SRC
 
+  * Polymode
+
+#+BEGIN_SRC emacs-lisp
+  (use-package polymode)
+  (use-package poly-markdown
+    :hook (markdown-mode . poly-markdown-mode))
+  (use-package poly-org
+    :hook (org-mode . poly-org-mode))
+#+END_SRC
+
 *** Web Mode
 
 #+BEGIN_SRC emacs-lisp
