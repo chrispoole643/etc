@@ -1481,6 +1481,16 @@ This hook config taken from [[https://emacs.cafe/emacs/javascript/setup/2017/04/
     (define-key js-mode-map (kbd "M-.") nil))
 #+END_SRC
 
+   * Indium
+
+Can connect to a node or Chrome process for a better JS IDE
+experience, with debugger, REPL, etc. Requires a server to be
+installed and running, with =npm install -g indium=.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package indium)
+#+END_SRC
+
   * Go
 
 #+BEGIN_SRC emacs-lisp
