@@ -3,10 +3,9 @@
 ** Path and proxy changes
 
 #+BEGIN_SRC emacs-lisp
-  (setenv "PATH" (cjp-get-zsh-env-var "PATH"))
-  (setq exec-path (split-string (getenv "PATH") ":"))
-  (add-to-list 'exec-path "/Applications/Emacs.app/Contents/MacOS/bin" t)
-
+  (use-package exec-path-from-shell
+    :config
+    (exec-path-from-shell-initialize))
   (setenv "PYTHONPATH" (cjp-get-zsh-env-var "PYTHONPATH"))
 #+END_SRC
 
