@@ -1449,6 +1449,10 @@ Or, to enable "superpack" (a little bit hacky improvements):
 *** C
 *** JavaScript
 
+   * js2-mode
+
+Gives an AST for JS languages, basic refactoring support etc.
+
 #+BEGIN_SRC emacs-lisp
   (use-package js2-mode
     :mode ("\\.js$"
