@@ -65,6 +65,7 @@
  ("json-snatcher" . "c4cecc0a5051bd364373aa499c47a1bb7a5ac51c")
  ("let-alist" . "57561d7d9267da48e8b7ab1f3bd45c9d05951289")
  ("litable" . "b0278f3f8dcff424bfbdfdefb545b1fbff33206f")
+ ("lsp-ivy" . "78c1429c62c19006058b89d462657e1448d1e595")
  ("lsp-java" . "df90761021e856ee40574601498afd0b4d478d66")
  ("lsp-mode" . "7c85138211b109652ba842a41d78c8883fee4033")
  ("lsp-treemacs" . "7511e94c74b143301f6cb590ea21d8b13a597553")
