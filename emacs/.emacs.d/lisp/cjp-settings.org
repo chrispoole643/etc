@@ -1583,7 +1583,7 @@ Have diffs show character differences:
 #+BEGIN_SRC emacs-lisp
   (use-package json-mode)
   (use-package json-navigator
-    :bind (:map hierarchy-tabulated-mode-map
+    :bind (:map json-navigator-mode-map
                 ("C-n" . widget-forward)
                 ("C-p" . widget-backward)
                 ("<tab>" . widget-button-press)))
