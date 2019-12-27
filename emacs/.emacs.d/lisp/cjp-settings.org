@@ -1886,6 +1886,10 @@ as I don't really use these anymore, so may remove them.
     (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode)))
 
   (use-package markdown-mode+)
+
+  (use-package grip-mode
+  :bind (:map markdown-mode-command-map
+         ("g" . grip-mode)))
 #+END_SRC
 
 *** Eshell
