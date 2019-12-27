@@ -1881,6 +1881,8 @@ as I don't really use these anymore, so may remove them.
 
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
+    ;; Webgen uses markdown syntax in .page files
+    :mode ("\\.page\\'" "\\.text\\'" "\\.mark\\'")
     :config
     (setq markdown-command "mmd"
           ;; Use underscores for italics
@@ -1892,11 +1894,7 @@ as I don't really use these anymore, so may remove them.
           markdown-list-indent-width 2
           markdown-reference-location 'end
           markdown-footnote-location 'end
-          markdown-open-command "open")
-    ;; Webgen uses markdown syntax in .page files
-    (add-to-list 'auto-mode-alist '("\\.page\\'" . markdown-mode))
-    (add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-    (add-to-list 'auto-mode-alist '("\\.mark\\'" . markdown-mode)))
+          markdown-open-command "open"))
 
   (use-package markdown-mode+)
 
