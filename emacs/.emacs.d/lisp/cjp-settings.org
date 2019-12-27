@@ -794,7 +794,7 @@ before inserting back into the comment area.
     (setq projectile-enable-caching t)
     :bind (("s-g" . cjp-grep-project-or-swiper-buffer)
            ("s-p" . counsel-projectile-switch-project)
-           ("s-g" . cjp-grep-project-or-swiper-buffer)
+           ("C-s-s" . cjp-grep-project-or-swiper-buffer)
            ("s-f" . counsel-projectile-find-file)))
 
   (use-package counsel-projectile
