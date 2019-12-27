@@ -1627,14 +1627,27 @@ Have diffs show character differences:
     (add-hook 'git-commit-setup-hook 'cjp-git-commit-setup)
     :bind
     (("C-M-g" . magit-status)
-     ("s-l" . magit-log-buffer-file)
-     ("s-b" . magit-blame)))
+     ("s-l" . magit-log-buffer-file)))
 #+END_SRC
 
 *** Git Timemachine
 
+Lets you quickly view a file as it existed in prior commits.
+
 #+BEGIN_SRC emacs-lisp
   (use-package git-timemachine)
+#+END_SRC
+
+*** Git Messenger
+
+Show the (effectively, git blame) message for a given line, as a
+popup.
+
+#+BEGIN_SRC emacs-lisp
+(use-package git-messenger
+  :config
+  (setq git-messenger:use-magit-popup t
+        git-messenger:show-detail t))
 #+END_SRC
 
 *** Ibuffer
