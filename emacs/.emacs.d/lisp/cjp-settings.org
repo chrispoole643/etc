@@ -23,14 +23,30 @@ Other themes I sometimes use:
 - sanityinc-tomorrow-eighties
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package doom-themes
+  :config
+  (setq doom-themes-enable-bold t
+        doom-themes-enable-italic t
+        ;; use the colorful treemacs theme
+        doom-themes-treemacs-theme "doom-colors")
+  (load-theme 'doom-molokai t)
+  ;; Enable flashing mode-line on errors
+  (doom-themes-visual-bell-config) 
+  ;; Make treemacs nicer
+  (doom-themes-treemacs-config)
+  ;; Corrects (and improves) org-mode's native fontification
+  (doom-themes-org-config))
+#+END_SRC
+
+Other theme setups, not in use right now:
+
+#+BEGIN_SRC emacs-lisp :tangle no
   (use-package color-theme-sanityinc-tomorrow
     :config
     ;; Treat all themes as safe:
     (setq custom-safe-themes t)
     (load-theme 'sanityinc-tomorrow-night t))
 #+END_SRC
-
-Setup for solarised themes, not in use right now:
 
 #+BEGIN_SRC emacs-lisp :tangle no
   (use-package solarized-theme
