@@ -29,7 +29,7 @@ Other themes I sometimes use:
         doom-themes-enable-italic t
         ;; use the colorful treemacs theme
         doom-themes-treemacs-theme "doom-colors")
-  (load-theme 'doom-molokai t)
+  (load-theme 'doom-one t)
   ;; Enable flashing mode-line on errors
   (doom-themes-visual-bell-config) 
   ;; Make treemacs nicer
