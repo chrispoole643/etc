@@ -155,7 +155,6 @@ like these to avoid interfering with modes:
 Disabled for now, while trying Treemacs...
 
 #+BEGIN_SRC emacs-lisp :tangle no
-  (use-package all-the-icons)
   (use-package neotree
     :config
     (setq neo-theme (if (display-graphic-p) 'icons 'arrow)
@@ -529,6 +528,11 @@ Move up and down like isearch:
             (internal-border-width . 8))
           ivy-posframe-height-alist '((t . 24)))
     (ivy-posframe-mode 1))
+
+  (use-package all-the-icons-ivy
+    :ensure t
+    :config
+    (all-the-icons-ivy-setup))
 
   (use-package ivy-rich
     :config
