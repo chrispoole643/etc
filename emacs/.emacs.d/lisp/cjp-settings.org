@@ -484,24 +484,15 @@ Move up and down like isearch:
     :diminish " Ⓘ"
     :config
     (ivy-mode 1)
-
-    ;; Add recentf-mode and bookmarks to ivy-switch-buffer completion candidates
-    (setq ivy-use-virtual-buffers t)
-
-    ;; Allow minibuffer commands in the minibuffer
-    (setq enable-recursive-minibuffers t)
-
-    ;; I prefer to be able to match words regardless of their search order
-    (setq ivy-re-builders-alist
-          '((t . ivy--regex-ignore-order)))
-    ;; I tried this but found it more irritating than not...
-    ;;(setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
-
-    (setq ivy-height 14)
-
-    ;; Set Ivy to be used by other modes that don't pick it up by default
-    (setq magit-completing-read-function 'ivy-completing-read)
-    (setq projectile-completion-system 'ivy)
+    (setq ivy-use-virtual-buffers t ; Add recentf-mode and bookmarks to ivy-switch-buffer completion candidates
+          ivy-display-style 'fancy  ; Highlight matches more like Swiper
+          enable-recursive-minibuffers t ; Allow minibuffer commands in the minibuffer
+          ivy-re-builders-alist
+          '((t . ivy--regex-ignore-order)) ; I prefer to be able to match words regardless of their search order
+          ivy-re-builders-alist '((t . ivy--regex-fuzzy)) ; I tried this but found it more irritating than not...
+          ivy-height 14
+          magit-completing-read-function 'ivy-completing-read ; Set Ivy to be used by other modes that don't pick it up by default
+          projectile-completion-system 'ivy)
     :bind (:map ivy-minibuffer-map
                 ;; Switch these two bindings round, as this feels more natural
                 ("C-j" . ivy-done)
