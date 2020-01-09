@@ -536,6 +536,7 @@ Move up and down like isearch:
 
   (use-package ivy-rich
     :config
+    (setq ivy-rich-path-style 'abbrev) ; Change `/home/blah' to `~'
     (ivy-rich-mode 1)
     (setcdr (assq t ivy-format-functions-alist) #'ivy-format-function-line))
 #+END_SRC
