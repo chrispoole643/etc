@@ -113,22 +113,21 @@ like these to avoid interfering with modes:
   ; (add-hook 'treemacs-mode-hook (lambda () (setq-local no-delete-other-windows t)))
   (use-package treemacs
     :config
-    (progn ;(define-key treemacs-mode-map (kbd "C-p p") nil)
-           (setq treemacs-follow-after-init          t
-                 treemacs-width                      35
-                 treemacs-indentation                2
-                 treemacs-git-integration            t
-                 treemacs-collapse-dirs              3
-                 treemacs-silent-refresh             t
-                 treemacs-change-root-without-asking nil
-                 treemacs-sorting                    'alphabetic-desc
-                 treemacs-show-hidden-files          t
-                 treemacs-never-persist              nil
-                 treemacs-is-never-other-window      t
-                 treemacs-goto-tag-strategy          'refetch-index)
-           (treemacs-follow-mode t)
-           (treemacs-filewatch-mode t)
-           (treemacs-resize-icons 11))
+    (setq treemacs-follow-after-init        t
+          treemacs-width                    24
+        treemacs-indentation                2
+        treemacs-git-integration            t
+        treemacs-collapse-dirs              3
+        treemacs-silent-refresh             t
+        treemacs-change-root-without-asking nil
+        treemacs-sorting                    'alphabetic-desc
+        treemacs-show-hidden-files          t
+        treemacs-never-persist              nil
+        treemacs-is-never-other-window      t
+        treemacs-goto-tag-strategy          'refetch-index)
+    (treemacs-follow-mode t)
+    (treemacs-filewatch-mode t)
+    ;;(treemacs-resize-icons 11) ; Commented out as seems to conflict with doom-themes-treemacs-theme
     :bind
     (("s-t" . cjp-add-current-project-to-treemacs)
      ("s-a" . cjp-add-current-project-to-treemacs)
