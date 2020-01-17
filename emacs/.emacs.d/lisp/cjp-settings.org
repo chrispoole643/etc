@@ -711,7 +711,7 @@ in the mode-line in various search modes.
                                 (separator-right (intern (format "powerline-%s-%s"
                                                                  (powerline-current-separator)
                                                                  (cdr powerline-default-separator-dir))))
-                                (height (when macosxp 20))
+                                (height (when macosxp 16))
                                 (lhs (list (powerline-raw "%*" face-yellow 'l)
                                            (let ((branch (mapconcat 'concat (cdr (split-string (or vc-mode " ") "[:-]")) "-")))
                                              (powerline-raw (concat "[" (projectile-project-name)
