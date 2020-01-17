@@ -1588,7 +1588,7 @@ Use lsp-mode for now... Eglot is an alternative:
 
 #+BEGIN_SRC emacs-lisp
   (use-package web-mode
-    :mode ("\\.html?\\'" "\\.phtml\\'" "\\.tpl\\.php\\'" "\\.[agj]sp\\'"
+    :mode ("\\.html?\\'" "\\.phtml\\'" "\\.hbs\\'" "\\.tpl\\.php\\'" "\\.[agj]sp\\'"
            "\\.as[cp]x\\'" "\\.erb\\'" "\\.mustache\\'" "\\.djhtml\\'"))
 #+END_SRC
 
