@@ -1955,6 +1955,15 @@ as I don't really use these anymore, so may remove them.
         dired-omit-files (concat dired-omit-files "\\|^\\..+$"))
 #+END_SRC
 
+Allow for git info to be shown in dired buffers
+
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-git-info
+    :config (setq dgi-auto-hide-details-p nil)
+    :bind (:map dired-mode-map
+		(")" . dired-git-info-mode)))
+#+END_SRC
+
 This is buffer-local variable:
 
 #+BEGIN_SRC emacs-lisp
