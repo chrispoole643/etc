@@ -1923,9 +1923,12 @@ as I don't really use these anymore, so may remove them.
 
   (use-package markdown-mode+)
 
+  ;; Set my password in a private file
   (use-package grip-mode
-  :bind (:map markdown-mode-command-map
-         ("g" . grip-mode)))
+    :config (setq grip-github-user "chrispoole643"
+                  grip-github-password "")
+    :bind (:map markdown-mode-command-map
+                ("g" . grip-mode)))
 #+END_SRC
 
 *** Eshell
