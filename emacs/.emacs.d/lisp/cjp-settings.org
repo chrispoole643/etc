@@ -1745,58 +1745,65 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
 *** Org
 
 #+BEGIN_SRC emacs-lisp
-  (use-package org-plus-contrib
-    :mode ("\\.org\\'" . org-mode)
-    :config
+    (use-package org-plus-contrib
+      :mode ("\\.org\\'" . org-mode)
+      :config
+    
+      ;; Brings back the easy templating system (i.e., `<q[tab]`) that
+      ;; was changed from Org
+      ;; 9.2. See https://emacs.stackexchange.com/a/46992
+      (add-to-list 'org-structure-template-alist '("el" . "src emacs-lisp"))
+      (add-to-list 'org-structure-template-alist '("sh" . "src sh"))
+      (require 'org-tempo)
 
-    ;; Enable the extra backends. Required to run before org is required
-    (setq org-export-backends '(beamer man md odt org texinfo ascii html icalendar latex))
+      ;; Enable the extra backends. Required to run before org is required
+      (setq org-export-backends '(beamer man md odt org texinfo ascii html icalendar latex))
 
-    ;; Use better defaults when opening files
-    (eval-after-load "org" '(setq org-file-apps (if macosxp
-                                                    org-file-apps-defaults-macosx
-                                                  org-file-apps-defaults-gnu)))
+      ;; Use better defaults when opening files
+      (eval-after-load "org" '(setq org-file-apps (if macosxp
+                                                      org-file-apps-defaults-macosx
+                                                    org-file-apps-defaults-gnu)))
 
-    (setq org-attach-directory (expand-file-name "~/Support/Attachments/"))
+      (setq org-attach-directory (expand-file-name "~/Support/Attachments/"))
 
-    (defun cjp-org-attach-sync ()
-      (interactive) (save-excursion
-                      (goto-char (point-min))
-                      (org-attach-sync)))
-    :bind
-    (("C-c l" . org-store-link)
-     ("C-c c" . org-capture)
-     ("C-c a" . org-agenda)
-     ("C-c b" . org-iswitchb)
+      (defun cjp-org-attach-sync ()
+        (interactive) (save-excursion
+                        (goto-char (point-min))
+                        (org-attach-sync)))
+      :bind
+      (("C-c l" . org-store-link)
+       ("C-c c" . org-capture)
+       ("C-c a" . org-agenda)
+       ("C-c b" . org-iswitchb)
 
-     ;; Make using attachments easier
-     ("C-s-o" . org-attach-open)
-     ("C-s-d" . org-attach-reveal-in-emacs)
-     ("C-s-z" . cjp-org-attach-sync)
+       ;; Make using attachments easier
+       ("C-s-o" . org-attach-open)
+       ("C-s-d" . org-attach-reveal-in-emacs)
+       ("C-s-z" . cjp-org-attach-sync)
 
-     :map org-mode-map
-     ("C-c C-'" . org-edit-special)
-     ("C-'" . ivy-imenu-anywhere)
-     ("M-h" . ns-do-hide-emacs)
-
-     ;; Unbind `C-,' to prevent it overriding the global value of `helm-filtered-bookmarks'
-     ("C-," . nil)
-     :map org-src-mode-map
-     ("C-c C-'" . org-edit-src-exit)))
-
-  (use-package org
-    :diminish ('org-src . " Ⓞ"))
-
-  (use-package ox-reveal)
-
-  (use-package org-bullets
-    :init
-    (setq org-bullets-bullet-list
-          '("◉" "◎" "⚫" "○" "►" "◇"))
-    :config
-    (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+       :map org-mode-map
+       ("C-c C-'" . org-edit-special)
+       ("C-'" . ivy-imenu-anywhere)
+       ("M-h" . ns-do-hide-emacs)
        ("<S-up>" . org-shiftright)
        ("<S-down>" . org-shiftleft)
+
+       ;; Unbind `C-,' to prevent it overriding the global value of `helm-filtered-bookmarks'
+       ("C-," . nil)
+       :map org-src-mode-map
+       ("C-c C-'" . org-edit-src-exit)))
+
+    (use-package org
+      :diminish ('org-src . " Ⓞ"))
+
+    (use-package ox-reveal)
+
+    (use-package org-bullets
+      :init
+      (setq org-bullets-bullet-list
+            '("◉" "◎" "⚫" "○" "►" "◇"))
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
 **** Org GTD
