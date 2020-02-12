@@ -1939,11 +1939,9 @@ This is kept as-is, but only works with Org mode prior to 9.1...
           markdown-footnote-location 'end
           markdown-open-command "open"))
 
-
-  ;; Set my password in a private file
+  ;; Set my password in a private file: `grip-github-user' and
+  ;; `grip-github-password`
   (use-package grip-mode
-    :config (setq grip-github-user "chrispoole643"
-                  grip-github-password "")
     :bind (:map markdown-mode-command-map
                 ("g" . grip-mode)))
 #+END_SRC
