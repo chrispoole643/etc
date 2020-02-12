@@ -1547,7 +1547,7 @@ installed and running, with =npm install -g indium=.
     :commands lsp)
   (use-package lsp-ui)
   (use-package lsp-ivy)
-  (use-package company-lsp)
+  ;(use-package company-lsp)
   (use-package lsp-treemacs
     :config
     (lsp-treemacs-sync-mode 1))
