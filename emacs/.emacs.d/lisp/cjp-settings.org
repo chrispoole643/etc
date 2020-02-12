@@ -2102,7 +2102,8 @@ document might have indented lines:
 #+BEGIN_SRC emacs-lisp
   (use-package writeroom-mode
     :config
-    (setq writeroom-width 100))
+    (setq writeroom-width 100
+          writeroom-fullscreen-effect "maximized"))
 #+END_SRC
 
 *** Popwin
