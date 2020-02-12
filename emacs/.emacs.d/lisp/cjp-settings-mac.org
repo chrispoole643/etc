@@ -87,7 +87,7 @@ is unset, allowing me to type (right) alt-3 and get a # symbol:
         mac-command-modifier 'meta
         mac-option-modifier 'super
         mac-right-command-modifier 'super
-        ns-right-alternate-modifier 'none)
+        ns-right-alternate-modifier 'left)
 #+END_SRC
 
 In Emacs 23 (Cocoa) in Snow Leopard, Apple delete key deletes backward, not forward as is
