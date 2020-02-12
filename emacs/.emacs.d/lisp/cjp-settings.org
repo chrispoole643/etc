@@ -1841,7 +1841,7 @@ My custom mode and configuration for implementing GTD with org-mode.
 A ton of keybindings. Not really worth joining with the rest of the org-mode keybindings
 as I don't really use these anymore, so may remove them.
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (global-set-key (kbd "C-s-i") (lambda () (interactive) (org-capture nil "i")))
   (global-set-key (kbd "C-s-p") (lambda () (interactive) (org-capture nil "p")))
   (global-set-key (kbd "C-s-s") (lambda () (interactive) (org-capture nil "s")))
@@ -1855,7 +1855,9 @@ as I don't really use these anymore, so may remove them.
 
 **** Structure templates
 
-#+BEGIN_SRC emacs-lisp
+This is kept as-is, but only works with Org mode prior to 9.1...
+
+#+BEGIN_SRC emacs-lisp :tangle no
   (setq org-structure-template-alist
         (append '(("l" "#+BEGIN_SRC emacs-lisp\n?\n#+END_SRC" "<src lang=\"emacs-lisp\">\n?\n</src>")
                   ("L" "#+BEGIN_LaTeX\n?\n#+END_LaTeX" "<literal style=\"latex\">\n?\n</literal>"))
