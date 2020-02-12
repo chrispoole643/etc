@@ -255,6 +255,12 @@ tmux_name=main
 ################################################################################
 
 
+#git
+# From https://twitter.com/oldmanuk/status/1171080513127407616
+gcd() {
+  cd "$(git rev-parse --show-toplevel || echo ".")/$1"
+}
+
 # Kubernetes
 kg () {
     # E.g., `kg gmac` to find the first resource with `gmac` in the name and describe it
