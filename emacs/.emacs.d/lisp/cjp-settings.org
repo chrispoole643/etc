@@ -1918,8 +1918,14 @@ This is kept as-is, but only works with Org mode prior to 9.1...
 
 #+BEGIN_SRC emacs-lisp
   (use-package markdown-mode
+    :commands (markdown-mode gfm-mode)
     ;; Webgen uses markdown syntax in .page files
-    :mode ("\\.page\\'" "\\.text\\'" "\\.mark\\'")
+    :mode (("README\\.md\\'" . gfm-mode)
+          ("\\.md\\'" . markdown-mode)
+          ("\\.markdown\\'" . markdown-mode)
+          ("\\.page\\'" . markdown-mode)
+          ("\\.text\\'" . markdown-mode)
+          ("\\.mark\\'" . markdown-mode))
     :config
     (setq markdown-command "mmd"
           ;; Use underscores for italics
