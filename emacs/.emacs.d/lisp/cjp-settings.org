@@ -2079,7 +2079,10 @@ the same key again to clear the text that's already been entered.
 
 *** Restclient
 
-Don't change window focus to the output window when submitting a command:
+Simple Postman-like REST client for driving APIs. Lets you build up a
+literate programming type of model by having one document that holds
+all these calls. Only change from defaults: don't change window focus
+to the output window when submitting a command:
 
 #+BEGIN_SRC emacs-lisp
   (use-package restclient
