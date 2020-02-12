@@ -124,6 +124,7 @@ like these to avoid interfering with modes:
         treemacs-show-hidden-files          t
         treemacs-never-persist              nil
         treemacs-is-never-other-window      t
+        treemacs-python-executable          "python"
         treemacs-goto-tag-strategy          'refetch-index)
     (treemacs-follow-mode t)
     (treemacs-filewatch-mode t)
