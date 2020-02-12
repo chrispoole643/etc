@@ -1577,12 +1577,12 @@ Use lsp-mode for now... Eglot is an alternative:
 
   * Polymode
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
   (use-package polymode)
-  (use-package poly-markdown
-    :hook (markdown-mode . poly-markdown-mode))
-  (use-package poly-org
-    :hook (org-mode . poly-org-mode))
+  ;; (use-package poly-markdown
+  ;;   :hook (markdown-mode . poly-markdown-mode))
+  ;; (use-package poly-org
+  ;;   :hook (org-mode . poly-org-mode))
 #+END_SRC
 
 *** Web Mode
