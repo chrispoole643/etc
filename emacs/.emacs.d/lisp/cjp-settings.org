@@ -1939,7 +1939,6 @@ This is kept as-is, but only works with Org mode prior to 9.1...
           markdown-footnote-location 'end
           markdown-open-command "open"))
 
-  (use-package markdown-mode+)
 
   ;; Set my password in a private file
   (use-package grip-mode
