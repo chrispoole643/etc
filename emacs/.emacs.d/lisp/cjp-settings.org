@@ -1795,6 +1795,8 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
           '("◉" "◎" "⚫" "○" "►" "◇"))
     :config
     (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+       ("<S-up>" . org-shiftright)
+       ("<S-down>" . org-shiftleft)
 #+END_SRC
 
 **** Org GTD
