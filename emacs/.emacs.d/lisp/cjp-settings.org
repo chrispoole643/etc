@@ -1825,7 +1825,7 @@ My custom mode and configuration for implementing GTD with org-mode.
 
 **** MobileOrg
 
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle no
   (setq org-mobile-inbox-for-pull org-default-notes-file
         org-mobile-directory "~/Dropbox/Apps/MobileOrg"
         org-mobile-force-id-on-agenda-items nil)
