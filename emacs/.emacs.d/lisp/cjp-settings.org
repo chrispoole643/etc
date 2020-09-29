@@ -1742,6 +1742,79 @@ ibuffer defaults to opening files with ibuffer-find-file; I prefer ido:
   (setq-default TeX-master nil)
 #+END_SRC
 
+*** Deft
+
+nvAlt type functionaliy of having a directory of notes (zettels) that
+can quickly be searched.
+
+Set up deft to work how I like it to. I prefer a slightly different
+functionality to the default. If I'm already in the deft buffer, hit
+the same key again to clear the text that's already been entered.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package deft
+    :config
+    (setq deft-directory "~/Box Sync/Zettelkasten/"
+          deft-recursive t
+          deft-use-filename-as-title t
+          deft-default-extension "org"
+          deft-use-filter-string-for-filename t
+          deft-auto-save-interval 30)
+    (global-set-key (kbd "<f12>") 'cjp-deft-clear-if-in-buffer)
+    (define-key deft-mode-map (kbd "<C-return>") 'deft-new-file))
+
+  (defun cjp-deft-clear-if-in-buffer ()
+    (interactive)
+    (if (and (boundp 'deft-buffer)
+             (equal (buffer-name) deft-buffer))
+        (deft-filter-clear)
+      (deft)))
+#+END_SRC
+
+*** Org-roam
+
+Trying out =org-roam= to create a Zettelkasten system, along with Deft
+(previous section).
+
+The keymapping is designed to work hand in hand with the projectile
+mapping I use:
+
+f: projectile find file
+g: grep in project
+i: insert org link
+t: goto today's zettel
+p: goto project
+r: roam
+z: open zettel
+l: ace-link-org
+
+#+BEGIN_SRC emacs-lisp
+  (use-package org-roam
+    :after org
+    :hook (org-mode . org-roam-mode)
+    :straight (:host github :repo "jethrokuan/org-roam")
+    :custom
+    (org-roam-directory deft-directory)
+    (org-roam-link-representation 'title) ;; or keep it as 'id
+    :bind
+    ("s-r" . org-roam)
+    ("s-t" . org-roam-today)
+    ("s-z" . org-roam-find-file)
+    ("s-i" . org-roam-insert))
+#+END_SRC
+
+*** Ace-link
+
+Quickly open a link that's shown in the current buffer. If only one
+link (http etc.) is visible, open it. If not, select from the usual
+method of first letter of word...
+
+#+BEGIN_SRC emacs-lisp
+  (use-package ace-link
+    :config (ace-link-setup-default)
+    :bind (("s-l" . ace-link-org)))
+#+END_SRC
+
 *** Org
 
 #+BEGIN_SRC emacs-lisp
@@ -2049,79 +2122,6 @@ The default fonts don't look nice with Tango theme, at least to my eyes:
   (use-package zencoding-mode
     :config
     (add-hook 'sgml-mode-hook 'zencoding-mode))
-#+END_SRC
-
-*** Deft
-
-nvAlt type functionaliy of having a directory of notes (zettels) that
-can quickly be searched.
-
-Set up deft to work how I like it to. I prefer a slightly different
-functionality to the default. If I'm already in the deft buffer, hit
-the same key again to clear the text that's already been entered.
-
-#+BEGIN_SRC emacs-lisp
-  (use-package deft
-    :config
-    (setq deft-directory "~/Box Sync/Zettelkasten/"
-          deft-recursive t
-          deft-use-filename-as-title t
-          deft-default-extension "org"
-          deft-use-filter-string-for-filename t
-          deft-auto-save-interval 30)
-    (global-set-key (kbd "<f12>") 'cjp-deft-clear-if-in-buffer)
-    (define-key deft-mode-map (kbd "<C-return>") 'deft-new-file))
-
-  (defun cjp-deft-clear-if-in-buffer ()
-    (interactive)
-    (if (and (boundp 'deft-buffer)
-             (equal (buffer-name) deft-buffer))
-        (deft-filter-clear)
-      (deft)))
-#+END_SRC
-
-*** Org-roam
-
-Trying out =org-roam= to create a Zettelkasten system, along with Deft
-(previous section).
-
-The keymapping is designed to work hand in hand with the projectile
-mapping I use:
-
-f: projectile find file
-g: grep in project
-i: insert org link
-t: goto today's zettel
-p: goto project
-r: roam
-z: open zettel
-l: ace-link-org
-
-#+BEGIN_SRC emacs-lisp
-  (use-package org-roam
-    :after org
-    :hook (org-mode . org-roam-mode)
-    :straight (:host github :repo "jethrokuan/org-roam")
-    :custom
-    (org-roam-directory deft-directory)
-    (org-roam-link-representation 'title) ;; or keep it as 'id
-    :bind
-    ("s-r" . org-roam)
-    ("s-t" . org-roam-today)
-    ("s-z" . org-roam-find-file)
-    ("s-i" . org-roam-insert))
-#+END_SRC
-
-*** Ace-link
-
-Quickly open a link that's shown in the current buffer. If only one
-link (http etc.) is visible, open it. If not, select from the usual
-method of first letter of word...
-
-#+BEGIN_SRC emacs-lisp
-  (use-package ace-link
-    :config (ace-link-setup-default)
-    :bind (("s-l" . ace-link-org)))
 #+END_SRC
 
 *** Restclient
