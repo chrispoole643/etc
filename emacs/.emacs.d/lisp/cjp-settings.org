@@ -1879,6 +1879,17 @@ method of first letter of word...
       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+END_SRC
 
+**** Org-ref
+
+#+begin_src emacs-lisp
+  (use-package org-ref
+    :config
+    (setq reftex-default-bibliography '((concat deft-directory "references.bib"))
+          org-ref-bibliography-notes (concat deft-directory "bib-notes.org")
+          org-ref-default-bibliography reftex-default-bibliography
+          org-ref-pdf-directory (concat deft-directory "bibtex-pdfs/")))
+#+end_src
+
 **** Org GTD
 
 My custom mode and configuration for implementing GTD with org-mode.
